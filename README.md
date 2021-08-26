@@ -1,4 +1,5 @@
 # SoKa
-Social Fitness &amp; Networking
 
+Social Fitness &amp; Networking
+Welcome!
 -Daniel Naranjo
