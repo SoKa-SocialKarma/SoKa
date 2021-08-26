@@ -3,4 +3,6 @@
 Social Fitness &amp; Networking
 Welcome!
 -Daniel Naranjo
-Esay Hernandez
+-Esay Hernandez
+-Yesenia Lopez 
+
