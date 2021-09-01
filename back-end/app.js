@@ -15,6 +15,7 @@ app.use(express.json()) // Parse incoming JSON
 // ROUTES
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, '/doc.html'))
+  res.status(200).send("Welcome to the SoKA API")
 })
 
 app.use('/users', usersController)
