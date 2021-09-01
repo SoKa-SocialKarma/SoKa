@@ -5,8 +5,8 @@
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
-    "db_seed": "psql -U postgres -f db/seed.sql",
-    "db_init": "psql -U postgres -f db/schema.sql"
+    "db_seed": "psql -U postgres -f database/seed.sql",
+    "db_init": "psql -U postgres -f database/schema.sql"
   },
   "author": "\"SoKa-SocialKarma\"",
   "license": "MIT",
@@ -15,6 +15,7 @@
     "cors": "^2.8.5",
     "dotenv": "^10.0.0",
     "express": "^4.17.1",
+    "nodemon": "^2.0.12",
     "passport": "^0.4.1",
     "pg-promise": "^10.11.0"
   }
