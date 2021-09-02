@@ -18,8 +18,8 @@ function App() {
             <Route exact path="/">
               <Home />
             </Route>
-            <Route exact path="/hidden">
-              <h2>You've found a hidden route!</h2>
+            <Route exact path="/demo">
+              <Index />
             </Route>
             <Route exact path="/users">
               <Index />
