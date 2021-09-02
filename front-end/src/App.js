@@ -1,30 +1,38 @@
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import React from "react";
 // import Login from "./Pages/Login";
-// import FourOFour from "./Pages/FourOFour";
+import FourOFour from "./Pages/FourOFour";
 import Home from "./Pages/Home";
-// import Index from "./Pages/Index";
+import Index from "./Pages/Index";
 // import Questionaire from "./Pages/Questionare";
 // import Show from "./Pages/Show";
 //import Navbar from "./Components/Navbar"
 
-function App(){
+function App() {
   return (
     <div>
       <Router>
         {/* <Navbar /> */}
         <main>
           <Switch>
-            <Route exact path="/" >
+            <Route exact path="/">
               <Home />
             </Route>
-            
+            <Route exact path="/hidden">
+              <h2>You've found a hidden route!</h2>
+            </Route>
+            <Route exact path="/users">
+              <Index />
+            </Route>
+            <Route path="*">
+              <FourOFour />
+            </Route>
           </Switch>
         </main>
       </Router>
     </div>
   );
-};
+}
 
 export default App;
 //routes
@@ -35,7 +43,6 @@ export default App;
 // CREATE /users/new
 // SHOW/relevant
 // SHOW/users/:id/matches/
-
 
 // <Route exact path="/demo">
 // <Index/>
