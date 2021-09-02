@@ -3,28 +3,33 @@ import React from "react";
 // import Login from "./Pages/Login";
 // import FourOFour from "./Pages/FourOFour";
 import Home from "./Pages/Home";
-// import Index from "./Pages/Index";
+import Index from "./Pages/Index";
 // import Questionaire from "./Pages/Questionare";
 // import Show from "./Pages/Show";
 //import Navbar from "./Components/Navbar"
 
-function App(){
+function App() {
   return (
     <div>
       <Router>
         {/* <Navbar /> */}
         <main>
           <Switch>
-            <Route exact path="/" >
+            <Route exact path="/">
               <Home />
-            </Route>
-            
+                </Route>
+                 <Route exact path="/demo">
+                 <Index />
+                 </Route>
+                  <Route path="*">
+                <h1>Page not Found</h1>
+              </Route>
           </Switch>
         </main>
       </Router>
     </div>
   );
-};
+}
 
 export default App;
 //routes
@@ -35,7 +40,6 @@ export default App;
 // CREATE /users/new
 // SHOW/relevant
 // SHOW/users/:id/matches/
-
 
 // <Route exact path="/demo">
 // <Index/>
