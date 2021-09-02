@@ -1,17 +1,29 @@
-const express = require("express");
-const cors = require("cors");
+// DEPENDENCIES
+const cors = require('cors')
+const express = require('express')
+const path = require('path')
 
-const app = express();
+// CONFIGURATION
+const app = express()
+const usersController = require('./controllers/usersController')
+const feedController = require('./controllers/feedController')
 
-app.use(express.json());
-app.use(cors());
+// MIDDLEWARE
+app.use(cors())
+app.use(express.json()) // Parse incoming JSON
 
-app.get("/", (req, res) => {
-    res.status(200).send("Welcome to the SoKA API")
+// ROUTES
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, '/doc.html'))
+  res.status(200).send("Welcome to the SoKA API")
 })
 
-app.get("*", (req, res) => {
-    res.status(404).send("Page not found")
+app.use('/users', usersController)
+app.use('/feed', feedController)
+
+app.get('*', (req, res) => {
+  res.status(404).send('Page not found.')
 })
 
-module.exports = app;
+// EXPORT
+module.exports = app

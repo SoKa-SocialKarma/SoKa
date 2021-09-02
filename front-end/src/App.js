@@ -1,7 +1,7 @@
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import React from "react";
 // import Login from "./Pages/Login";
-// import FourOFour from "./Pages/FourOFour";
+import FourOFour from "./Pages/FourOFour";
 import Home from "./Pages/Home";
 import Index from "./Pages/Index";
 // import Questionaire from "./Pages/Questionare";
@@ -17,13 +17,16 @@ function App() {
           <Switch>
             <Route exact path="/">
               <Home />
-                </Route>
-                 <Route exact path="/demo">
-                 <Index />
-                 </Route>
-                  <Route path="*">
-                <h1>Page not Found</h1>
-              </Route>
+            </Route>
+            <Route exact path="/demo">
+              <Index />
+            </Route>
+            <Route exact path="/users">
+              <Index />
+            </Route>
+            <Route path="*">
+              <FourOFour />
+            </Route>
           </Switch>
         </main>
       </Router>
