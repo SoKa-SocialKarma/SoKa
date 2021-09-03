@@ -1,11 +1,11 @@
 \c soka;
 
 INSERT INTO users
-(name, lastname, email, username, pw_hsp, location, gender, karma, badges, interests, requests, goals)
+(name, lastname, email, username, pw_hsp, location, gender, image, karma, badges, interests, requests, goals)
 VALUES
 ('Daniel', 'Naranjo', 'pompadonpa@4tomik.io', 'PompaDonpa-ETH',
 'fff5839d388c6eaa20306d67b0eb7f6527876b4dc6156501135d50dfc5f74149', 
-'Glendale, NY', 'Male', 4.52, true,
+'Glendale, NY', 'Male', 'https://www.placeholder.com/img.png',4.52, true,
 '{"activities": ["Power Lifting", "Body Building", "Weigth Lifting", "Cycling"], "skills": ["Web Developing","Trading"]}',
 '{"pending": 2, "accepted": 5}',
 '{"shortTerm": ["Endurance", "Spot Matching", "Weigth Gain"], "longTerm": ["Motivation", "Competing"]}');
