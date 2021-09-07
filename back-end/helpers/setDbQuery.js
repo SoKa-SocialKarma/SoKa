@@ -1,5 +1,5 @@
 const getAllUsersQuery = ({ search, location, badges, sortBy, order }) => {
-    let qString = "SELECT * FROM users";
+    let qString = "SELECT * FROM users"
     const qParams = [];
 
     if (search) {

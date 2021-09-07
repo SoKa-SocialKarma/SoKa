@@ -7,8 +7,11 @@ const {
 const getAllUsers = async frontQuery => {
   try {
     const dbQuery = getAllUsersQuery(frontQuery)
-    if (!dbQuery.qParams.length) return await db.any(dbQuery.qString)
-        return await db.any(dbQuery.qString, dbQuery.qParams)
+    if (!dbQuery.qParams.length){
+      let newuser = await db.any(dbQuery.qString)
+      console.log(newuser)
+    } 
+      return await db.any(dbQuery.qString, dbQuery.qParams)
   } catch (err) {
     return 'error'
   }

@@ -12,10 +12,11 @@ CREATE TABLE users (
     pw_hsp VARCHAR(64) NOT NULL,
     location TEXT NOT NULL,
     gender TEXT NOT NULL,
+    image TEXT NOT NULL,
     interests JSONB NOT NULL,
     requests JSONB NOT NULL,
     goals JSONB NOT NULL,
-    karma DECIMAL(5,2) DEFAULT 5,
+    karma DECIMAL(10,2) DEFAULT 5,
     CHECK (karma >=1 AND karma <=5),
     badges BOOLEAN NOT NULL
 );
