@@ -1,17 +1,18 @@
 \c soka;
 
 INSERT INTO users
-(name, lastname, email, username, pw_hsp, location, gender, image, karma, badges, interests, requests, goals)
+(name, lastname, username, location, gender, radius, karma, badges, goals, experience, availability, matchRequests, pendingReview)
 VALUES
-('Daniel', 'Naranjo', 'pompadonpa@4tomik.io', 'PompaDonpa-ETH',
-'fff5839d388c6eaa20306d67b0eb7f6527876b4dc6156501135d50dfc5f74149', 
-'Glendale, NY', 'Male', 'https://www.placeholder.com/img.png',4.52, true,
-'{"activities": ["Power Lifting", "Body Building", "Weigth Lifting", "Cycling"], "skills": ["Web Developing","Trading"]}',
-'{"pending": 2, "accepted": 5}',
-'{"shortTerm": ["Endurance", "Spot Matching", "Weigth Gain"], "longTerm": ["Motivation", "Competing"]}');
+('Daniel', 'Naranjo', 'PompaDonpa-ETH',
+'Glendale, NY', 'Male', 10, 4.52, true,
+'{"goals": ["Endurance", "Spot Matching", "Weigth Gain", "Motivation", "Competing"]}',
+'{"experience": ["Power Lifting", "Body Building", "Weigth Lifting"]',
+'{"days":["9/15/21","12/1/21"]}',
+'{"matchRequests": 2, "acceptedMatch": 5}',
+'{"pendingReview":true,"reviewing":"${username}"}');
 
 INSERT INTO activities
-(name, is_outdoor, pairable, data)
+(name, is_outdoor, pairable, details)
 VALUES
 ('Cycling', true, true,
-'{"description": "Cycling, also called bicycling or biking, is the use of bicycles for transport, recreation, exercise or sport. People engaged in cycling are referred to as cyclists, bicyclists, or bikers", "endurance": 9.63, "equipment": ["Bike", "Helmet"]}');
+'{"endurance": 9.63}');
