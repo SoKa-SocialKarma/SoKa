@@ -4,15 +4,19 @@ import React from "react";
 import FourOFour from "./Pages/FourOFour";
 import Home from "./Pages/Home";
 import Index from "./Pages/Index";
-// import Questionaire from "./Pages/Questionare";
+import Show from "./Pages/Show"
+import Profile from "./Pages/Profile"
+ import Questionnaire from "./Pages/Questionnaire";
 // import Show from "./Pages/Show";
-//import Navbar from "./Components/Navbar"
+import Navbar from "./Components/Navbar"
+import 'bootstrap/dist/css/bootstrap.min.css';
+import "./App.css";
 
 function App() {
   return (
-    <div>
+    <div className="body">
       <Router>
-        {/* <Navbar /> */}
+        <Navbar />
         <main>
           <Switch>
             <Route exact path="/">
@@ -23,6 +27,15 @@ function App() {
             </Route>
             <Route exact path="/users">
               <Index />
+            </Route>
+            <Route path="/messages">
+              <Show/>
+            </Route>
+            <Route path="/profile">
+              <Profile/>
+            </Route>
+            <Route path="/search">
+              <Questionnaire/>
             </Route>
             <Route path="*">
               <FourOFour />
