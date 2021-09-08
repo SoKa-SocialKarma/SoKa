@@ -1,13 +1,15 @@
-const feed = require('express').Router()
-const { getAllPossibleMatches } = ('../queries/feed.js')
+const feed = require('express').Router({ mergeParams: true })
+const { getAllPossibleMatches } = require('../queries/feed.js')
 
-feed.get('/', (req, res) => {
-  const { userId } = req.params
+
+feed.get('/', async (req, res) => {
+  const  {id}  = req.params
+  
   try {
-    const allMatches = await getAllPossibleMatches(userId)
+    const allMatches = await getAllPossibleMatches(id)
     res.status(200).json(allMatches)
   } catch (err) {
-    res.status(404).statusMessage(err)
+    res.status(404).send("Error")
   }
 });
 
