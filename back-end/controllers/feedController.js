@@ -1,10 +1,10 @@
 const feed = require('express').Router()
-const { getAllPosibleMatches } = ('../queries/feed.js')
+const { getAllPossibleMatches } = ('../queries/feed.js')
 
 feed.get('/', (req, res) => {
   const { userId } = req.params
   try {
-    const allMatches = await getAllPosibleMatches(userId)
+    const allMatches = await getAllPossibleMatches(userId)
     res.status(200).json(allMatches)
   } catch (err) {
     res.status(404).statusMessage(err)
@@ -21,15 +21,14 @@ feed.get('/goals', (req, res) => {
   }
 });
 
-
 feed.get('/radius', (req, res) => {
-  const { userId } = req.params
+  const { userId } = req.params;
   try {
-    
-  } catch (error) {
-    
+    const filteredRadius = getFilteredRadius(userId)
+    res.status(200).json(filteredRadius);
+  } catch (err) {
+    res.status(404).statusMessage(err)
   }
-  res.send('SHOW /user/:id/feed/radius')
 });
 
 
@@ -38,11 +37,23 @@ feed.get('/friends', (req, res) => {
 });
 
 feed.get('/matches', (req, res) => {
-  res.send('SHOW /user/:id/feed/matches')
+  const { userId } = req.params;
+  try {
+    const filteredMatches = getFilteredMatches(userId)
+    res.status(200).json(filteredMatches);
+  } catch (err) {
+    res.status(404).statusMessage(err)
+  }
 });
 
 feed.get('/availability', (req, res) => {
-  res.send('SHOW /user/:id/feed/availability')
+  const { userId } = req.params;
+  try {
+    const filteredAvailability = getFilteredAvailability(userId)
+    res.status(200).json(filteredAvailability)
+  } catch (err) {
+    res.status(404).statusMessage(err)
+  }
 });
 
 module.exports = feed
