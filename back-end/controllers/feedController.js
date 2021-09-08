@@ -11,25 +11,37 @@ feed.get('/', (req, res) => {
   }
 });
 
-feed.get('/users/:id/feed/goals', (req, res) => {
-  res.send('SHOW /user/:id/feed/goals')
+feed.get('/goals', (req, res) => {
+  const { userId } = req.params;
+  try {
+    const filteredGoals = getFilteredGoals(userId)
+    res.status(200).json(filteredGoals)
+  } catch (err) {
+    res.status(404).statusMessage(err)
+  }
 });
 
 
-feed.get('/users/:id/feed/radius', (req, res) => {
+feed.get('/radius', (req, res) => {
+  const { userId } = req.params
+  try {
+    
+  } catch (error) {
+    
+  }
   res.send('SHOW /user/:id/feed/radius')
 });
 
 
-feed.get('/users/:id/feed/friends', (req, res) => {
+feed.get('/friends', (req, res) => {
   res.send('SHOW /user/:id/feed/friends')
 });
 
-feed.get('/users/:id/feed/matches', (req, res) => {
+feed.get('/matches', (req, res) => {
   res.send('SHOW /user/:id/feed/matches')
 });
 
-feed.get('/users/:id/feed/availability', (req, res) => {
+feed.get('/availability', (req, res) => {
   res.send('SHOW /user/:id/feed/availability')
 });
 
