@@ -1,14 +1,14 @@
 const feed = require('express').Router({ mergeParams: true })
 const { getAllPossibleMatches } = require('../queries/feed.js')
 
-feed.get('/', async (req, res) => {
 
+feed.get('/', async (req, res) => {
   const  {id}  = req.params
+  
   try {
     const allMatches = await getAllPossibleMatches(id)
     res.status(200).json(allMatches)
   } catch (err) {
-    // res.status(404).statusMessage(err)
     res.status(404).send("Error")
   }
 });
@@ -22,7 +22,6 @@ feed.get('/goals', (req, res) => {
     res.status(404).statusMessage(err)
   }
 });
-
 
 feed.get('/radius', (req, res) => {
   const { userId } = req.params;
