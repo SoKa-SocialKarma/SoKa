@@ -8,7 +8,6 @@ CREATE TABLE users (
     name TEXT NOT NULL,
     lastname TEXT NOT NULL,
     username VARCHAR(16) UNIQUE NOT NULL,
-    image TEXT NOT NULL,
     location TEXT NOT NULL,
     gender TEXT,
     radius INT,
@@ -44,7 +43,7 @@ CREATE TABLE badges (
 
 DROP TABLE IF EXISTS username_badges;
 CREATE TABLE username_badges (
-    username INT NOT NULL,
+    username TEXT NOT NULL,
     badges JSONB NOT NULL
 );
 

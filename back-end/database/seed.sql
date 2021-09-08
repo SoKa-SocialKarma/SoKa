@@ -5,27 +5,25 @@ INSERT INTO users
 VALUES
 ('Daniel', 'Naranjo', 'PompaDonpa-ETH',
 'Glendale, NY', 'Male', 10, 4.52, true,
-'{"goals": ["Chest", "Legs", "Back", "Arms & Shoulders", "Abs"]}',
-'{"experience": ["Power Lifting", "Body Building", "Weigth Lifting"]',
+'{"goals":["Chest","Legs","Back","Arms & Shoulders","Abs"]}',
+'{"experience":["Power Lifting","Body Building","Weigth Lifting"]}',
 '{"days":["9/15/21","12/1/21"]}',
-'{"matchRequests": 2, "acceptedMatch": 5}',
-'{"pendingReview":true,"reviewing":"${username}"}'),
+'{"matchRequests":2,"acceptedMatch":5}',
+'{"pendingReview":true,"reviewing":""}'),
 ('Talia','Pichardo','T-money',
 'New York, NY','Female', 10, 5.0, true,
 '{"goals":["HIIT Cardio","Abs"]}',
 '{"experience":["Weigth Lifting"]}',
 '{"days":["9/15/21","12/1/21"]}',
-'{"matchRequests": 12, "acceptedMatch": 7}',
-'{"pendingReview":false,"reviewing":""}'
-),
+'{"matchRequests":12,"acceptedMatch":7}',
+'{"pendingReview":false,"reviewing":""}'),
 ('Esay', 'Hernandez', 'EZ',
 'Bronx, NY', 'Male', 7, 4.97, true,
-'{"goals": ["Chest", "Legs", "Back", "Arms & Shoulders", "Abs"]}',
-'{"experience": ["Body Building", "Weigth Lifting"]',
+'{"goals":["Chest","Legs","Back","Arms & Shoulders","Abs"]}',
+'{"experience":["Body Building","Weigth Lifting"]}',
 '{"days":["9/15/21","10/1/21","10/08/21"]}',
-'{"matchRequests": 3, "acceptedMatch": 4}',
-'{"pendingReview":false,"reviewing":""}')
-;
+'{"matchRequests":3,"acceptedMatch":4}',
+'{"pendingReview":false,"reviewing":""}');
 
 INSERT INTO activities
 (name, is_outdoor, pairable, details)
@@ -39,7 +37,7 @@ VALUES
 ('Great Motivator','http://soka-album.firebase.com/badges/great-motivator.png',
 '{"recap":"Enthusiastic"}'),
 ('Spot On','http://soka-album.firebase.com/badges/spot-on.png',
-'{"recap":"Assisted in lifting heavy weights safely"}');
+'{"recap":"Assisted in lifting heavy weights safely"}'),
 ('Mobility Master','http://soka-album.firebase.com/badges/mobility-master.png',
 '{"recap":"Helped stretch tighten muscles before workout"}');
 
@@ -47,8 +45,8 @@ INSERT INTO username_badges
 (username, badges)
 VALUES
 ('PompaDonpa-ETH', '{"badges":["Great Motivator","Spot On"]}'),
-('T-money', '{"badges":["Mobility Master"]}'),
-('EZ', '{"badges":["Great Motivator","Spot On"]}');
+('T-money','{"badges":["Mobility Master"]}'),
+('EZ', '{ "badges":["Great Motivator","Spot On"]}');
 
 INSERT INTO username_friends
 (username, friends)
