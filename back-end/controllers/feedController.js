@@ -21,15 +21,14 @@ feed.get('/goals', (req, res) => {
   }
 });
 
-
 feed.get('/radius', (req, res) => {
-  const { userId } = req.params
+  const { userId } = req.params;
   try {
-    
-  } catch (error) {
-    
+    const filteredRadius = getFilteredRadius(userId)
+    res.status(200).json(filteredRadius);
+  } catch (err) {
+    res.status(404).statusMessage(err)
   }
-  res.send('SHOW /user/:id/feed/radius')
 });
 
 
@@ -38,7 +37,13 @@ feed.get('/friends', (req, res) => {
 });
 
 feed.get('/matches', (req, res) => {
-  res.send('SHOW /user/:id/feed/matches')
+  const { userId } = req.params;
+  try {
+    const filteredMatches = getFilteredMatches(userId)
+    res.status(200).json(filteredMatches);
+  } catch (err) {
+    res.status(404).statusMessage(err)
+  }
 });
 
 feed.get('/availability', (req, res) => {
