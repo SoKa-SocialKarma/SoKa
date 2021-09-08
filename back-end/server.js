@@ -9,5 +9,5 @@ const PORT = process.env.PORT;
 
 // LISTEN
 app.listen(PORT, () => {
-	console.log('🎧 Listening on port : '.trap.yellow +`${PORT} `.cyan + '🎧')
+	console.log('🎧 Listening on port : '.trap.yellow + `${PORT} `.cyan + '🎧')
 })
