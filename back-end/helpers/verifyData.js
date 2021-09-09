@@ -66,8 +66,7 @@ const goalsCheckFailed = goals => {
 }
 const karmaCheckFailed = karma => {
   return (
-    typeof karma !== 'string' ||
-    !karma.trim() ||
+    typeof karma !== 'number' ||
     isNaN(karma) ||
     Number(karma) <= 0 ||
     Number(karma) > 5
@@ -83,7 +82,7 @@ const postCheck = (req, res, next) => {
     lastname,
     email,
     username,
-    password,
+    pw_hsp,
     location,
     gender,
     image,
@@ -93,20 +92,19 @@ const postCheck = (req, res, next) => {
     karma,
     badges
   }) => {
-    if (nameCheckFailed(name)) return notPass('name')
-    if (lastnameCheckFailed(lastname)) return notPass('lastname')
-    if (emailCheckFailed(email)) return notPass('email')
-    if (usernameCheckFailed(username)) return notPass('username')
-    if (passwordCheckFailed(password)) return notPass('password')
-    if (locationCheckFailed(location)) return notPass('location')
-    if (genderCheckFailed(gender)) return notPass('gender')
-    if (imageCheckFailed(image))
-      return notPass('image link, it should begin with http:// or https://')
-    if (interestsCheckFailed(interests)) return notPass('interests')
-    if (requestsCheckFailed(requests)) return notPass('requests')
-    if (goalsCheckFailed(goals)) return notPass('goals')
-    if (karmaCheckFailed(karma)) return notPass('karma')
-    if (badgesCheckFailed(badges)) return notPass('type, badges')
+    if (nameCheckFailed(name)) return notPass(name? 'name' : 'name not found!')
+    if (lastnameCheckFailed(lastname)) return notPass(lastname? 'lastname' : 'lastname not found!')
+    if (emailCheckFailed(email)) return notPass(email? 'email, it must contain one @' : 'email not found!')
+    if (usernameCheckFailed(username)) return notPass(username? 'username' : 'username not found!')
+    if (passwordCheckFailed(pw_hsp)) return notPass(password? 'password' : 'password not found!')
+    if (locationCheckFailed(location)) return notPass(location? 'location' : 'location not found!')
+    if (genderCheckFailed(gender)) return notPass(gender? 'gender' : 'gender not found!')
+    if (imageCheckFailed(image)) return notPass(image? 'image link, it must begin with http:// or https://' : 'image not found!')
+    if (interestsCheckFailed(interests)) return notPass(interests? 'interests it must be type JSON' : 'interests not found!')
+    if (requestsCheckFailed(requests)) return notPass(requests? 'requests it must be type JSON' : 'requests not found!')
+    if (goalsCheckFailed(goals)) return notPass(goals? 'goals it must be type JSON' : 'goals not found!')
+    if (karmaCheckFailed(karma)) return notPass(karma? 'karma it must be a number' : 'karma not found!')
+    if (badgesCheckFailed(badges)) return notPass(badges? 'badges it must be type Boolean' : 'badges not found!')
 
     return pass
   }
@@ -132,7 +130,7 @@ const putCheck = (req, res, next) => {
       lastname,
       email,
       username,
-      password,
+      pw_hsp,
       location,
       gender,
       image,
@@ -142,11 +140,11 @@ const putCheck = (req, res, next) => {
     } = user
     const keys = Object.keys(user)
     let count = 0
+
     if (keys.includes('name')) {
       if (nameCheckFailed(name)) return notPass('name')
       count++
     }
-
     if (keys.includes('lastname')) {
       if (priceCheckFailed(lastname)) return notPass('lastname')
       count++
@@ -159,8 +157,8 @@ const putCheck = (req, res, next) => {
       if (priceCheckFailed(username)) return notPass('username')
       count++
     }
-    if (keys.includes('password')) {
-      if (priceCheckFailed(password)) return notPass('password')
+    if (keys.includes('pw_hsp')) {
+      if (priceCheckFailed(pw_hsp)) return notPass('password')
       count++
     }
     if (keys.includes('location')) {
@@ -171,13 +169,11 @@ const putCheck = (req, res, next) => {
       if (priceCheckFailed(gender)) return notPass('gender')
       count++
     }
-
     if (keys.includes('image')) {
       if (imageCheckFailed(image))
         return notPass('image link, it should begin with http:// or https://')
       count++
     }
-
     if (keys.includes('interests')) {
       if (categoryCheckFailed(interests)) return notPass('interests')
       count++
@@ -186,12 +182,10 @@ const putCheck = (req, res, next) => {
       if (categoryCheckFailed(requests)) return notPass('requests')
       count++
     }
-
     if (keys.includes('goals')) {
       if (categoryCheckFailed(goals)) return notPass('goals')
       count++
     }
-
     return count > 0
       ? pass
       : notPass('Missing data, required data not found :(')
