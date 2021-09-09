@@ -21,8 +21,17 @@ import MailIcon from '@material-ui/icons/Mail';
 import Index from '../Pages/Index';
 import Show from '../Pages/Show';
 import Profile from '../Pages/Profile';
-import Search from '../Pages/Questionnaire';
-
+import Search from '../Pages/Questionnaire'
+import Icon from '@material-ui/core/Icon';
+import HomeTwoToneIcon from '@material-ui/icons/HomeTwoTone';
+import ChatIcon from '@material-ui/icons/Chat';
+import AccountBoxTwoToneIcon from '@material-ui/icons/AccountBoxTwoTone';
+import SearchTwoToneIcon from '@material-ui/icons/SearchTwoTone';
+import EmojiEmotionsIcon from '@material-ui/icons/EmojiEmotions';
+import { EmojiFlagsOutlined } from '@material-ui/icons';
+ import SearchForm from './SearchForm';
+ import Button from '@material-ui/core/Button';
+// import Button from '@material-ui/icons/Button'
 const drawerWidth = 240;
 
 const useStyles = makeStyles((theme) => ({
@@ -100,91 +109,103 @@ export default function Navbar() {
 		setOpen(false);
 	};
 
-	return (
-		<div className={classes.root}>
-			<CssBaseline />
-			<AppBar
-				position="fixed"
-				className={clsx(classes.appBar, {
-					[classes.appBarShift]: open,
-				})}
-			>
-				<Toolbar>
-					<IconButton
-						color="inherit"
-						aria-label="open drawer"
-						onClick={handleDrawerOpen}
-						edge="start"
-						className={clsx(classes.menuButton, {
-							[classes.hide]: open,
-						})}
-					>
-						<MenuIcon />
-					</IconButton>
-					<Typography variant="h6" noWrap>
-						Soka (Social Karma)
-					</Typography>
-				</Toolbar>
-			</AppBar>
-			<Drawer
-				variant="permanent"
-				className={clsx(classes.drawer, {
-					[classes.drawerOpen]: open,
-					[classes.drawerClose]: !open,
-				})}
-				classes={{
-					paper: clsx({
-						[classes.drawerOpen]: open,
-						[classes.drawerClose]: !open,
-					}),
-				}}
-			>
-				<div className={classes.toolbar}>
-					<IconButton onClick={handleDrawerClose}>{theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />}</IconButton>
-				</div>
-				<Divider />
-				<List>
-					<ListItem component={Link} to="/demo" onClick={Index}>
-						<ListItemIcon>
-							<InboxIcon />
-						</ListItemIcon>
-						<ListItemText primary="Matches" />
-					</ListItem>
+  return (
+    <div className={classes.root}>
+      <CssBaseline />
+      <AppBar
+        position="fixed"
+        className={clsx(classes.appBar, {
+          [classes.appBarShift]: open,
+        })}
+      >
+        <Toolbar>
+          <IconButton
+            color="inherit"
+            aria-label="open drawer"
+            onClick={handleDrawerOpen}
+            edge="start"
+            className={clsx(classes.menuButton, {
+              [classes.hide]: open,
+            })}
+          >
+            <MenuIcon />
 
-					<ListItem component={Link} to="/messages" onClick={Show}>
-						<ListItemIcon>
-							<InboxIcon />
-						</ListItemIcon>
-						<ListItemText primary="Inbox" />
-					</ListItem>
+          </IconButton>
+          <Typography variant="h6" noWrap>
+           Soka 
+          </Typography>
 
-					<ListItem component={Link} to="/profile" onClick={Profile}>
-						<ListItemIcon>
-							<InboxIcon />
-						</ListItemIcon>
-						<ListItemText primary="Profile" />
-					</ListItem>
+          <span>
+          <Button variant="contained" color="primary">
+            Login
+        </Button>
+          </span>
+<span>
+    <SearchForm/>
+</span>
+        </Toolbar>
+      </AppBar>
+      <Drawer
+        variant="permanent"
+        className={clsx(classes.drawer, {
+          [classes.drawerOpen]: open,
+          [classes.drawerClose]: !open,
+        })}
+        classes={{
+          paper: clsx({
+            [classes.drawerOpen]: open,
+            [classes.drawerClose]: !open,
+          }),
+        }}
+      >
+        <div className={classes.toolbar}>
+          <IconButton onClick={handleDrawerClose}>
+            {theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
+          </IconButton>
+        </div>
+        <Divider />
+        <List>
+<ListItem  component={Link} to="/demo" onClick={Index}>
+<ListItemIcon>
+<EmojiEmotionsIcon style={{ color: "purple"}}/>
+</ListItemIcon>
+<ListItemText primary="Matches"/>
+</ListItem>
 
-					<ListItem component={Link} to="/search" onClick={Search}>
-						<ListItemIcon>
-							<InboxIcon />
-						</ListItemIcon>
-						<ListItemText primary="New Search" />
-					</ListItem>
-				</List>
-				<Divider />
-				<List>
-					{['Edit Profile', 'Settings', 'Log out'].map((text, index) => (
-						<ListItem button key={text}>
-							<ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-							<ListItemText primary={text} />
-						</ListItem>
-					))}
-				</List>
-			</Drawer>
-			<main className={classes.content}>
-				<div className={classes.toolbar} />
-			</main>
-		</div>
-	);
+<ListItem component={Link} to="/messages" onClick={Show}>
+<ListItemIcon>
+<ChatIcon style={{ color: "purple"}}/>
+</ListItemIcon>
+<ListItemText primary="Inbox"/>
+</ListItem>
+
+<ListItem component={Link} to="/profile" onClick={Profile}>
+<ListItemIcon>
+<AccountBoxTwoToneIcon style={{ color: "purple"}}/>
+</ListItemIcon>
+<ListItemText primary="Profile"/>
+</ListItem>
+
+<ListItem component={Link} to="/search" onClick={Search}>
+<ListItemIcon>
+<SearchTwoToneIcon style={{ color: "purple"}}/>
+</ListItemIcon>
+<ListItemText primary="New Search"/>
+</ListItem>
+        </List>
+        <Divider />
+        <List>
+          {['Edit Profile', 'Settings', 'Log out'].map((text, index) => (
+            <ListItem button key={text} >
+              <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
+              <ListItemText primary={text} />
+            </ListItem>
+          ))}
+        </List>
+      </Drawer>
+      <main className={classes.content} style={{ color: "purple"}} >
+        <div className={classes.toolbar} />
+      </main>
+    </div>
+  );
 }
