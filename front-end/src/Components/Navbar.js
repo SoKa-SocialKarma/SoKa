@@ -22,8 +22,16 @@ import Index from '../Pages/Index';
 import Show from '../Pages/Show';
 import Profile from '../Pages/Profile';
 import Search from '../Pages/Questionnaire'
-
-
+import Icon from '@material-ui/core/Icon';
+import HomeTwoToneIcon from '@material-ui/icons/HomeTwoTone';
+import ChatIcon from '@material-ui/icons/Chat';
+import AccountBoxTwoToneIcon from '@material-ui/icons/AccountBoxTwoTone';
+import SearchTwoToneIcon from '@material-ui/icons/SearchTwoTone';
+import EmojiEmotionsIcon from '@material-ui/icons/EmojiEmotions';
+import { EmojiFlagsOutlined } from '@material-ui/icons';
+ import SearchForm from './SearchForm';
+ import Button from '@material-ui/core/Button';
+// import Button from '@material-ui/icons/Button'
 const drawerWidth = 240;
 
 const useStyles = makeStyles((theme) => ({
@@ -121,10 +129,20 @@ export default function Navbar() {
             })}
           >
             <MenuIcon />
+
           </IconButton>
           <Typography variant="h6" noWrap>
-           Soka (Social Karma)
+           Soka 
           </Typography>
+
+          <span>
+          <Button variant="contained" color="primary">
+            Login
+        </Button>
+          </span>
+<span>
+    <SearchForm/>
+</span>
         </Toolbar>
       </AppBar>
       <Drawer
@@ -149,28 +167,28 @@ export default function Navbar() {
         <List>
 <ListItem  component={Link} to="/demo" onClick={Index}>
 <ListItemIcon>
-<InboxIcon/> 
+<EmojiEmotionsIcon style={{ color: "purple"}}/>
 </ListItemIcon>
 <ListItemText primary="Matches"/>
 </ListItem>
 
 <ListItem component={Link} to="/messages" onClick={Show}>
 <ListItemIcon>
-<InboxIcon/> 
+<ChatIcon style={{ color: "purple"}}/>
 </ListItemIcon>
 <ListItemText primary="Inbox"/>
 </ListItem>
 
 <ListItem component={Link} to="/profile" onClick={Profile}>
 <ListItemIcon>
-<InboxIcon/> 
+<AccountBoxTwoToneIcon style={{ color: "purple"}}/>
 </ListItemIcon>
 <ListItemText primary="Profile"/>
 </ListItem>
 
 <ListItem component={Link} to="/search" onClick={Search}>
 <ListItemIcon>
-<InboxIcon/> 
+<SearchTwoToneIcon style={{ color: "purple"}}/>
 </ListItemIcon>
 <ListItemText primary="New Search"/>
 </ListItem>
@@ -185,7 +203,7 @@ export default function Navbar() {
           ))}
         </List>
       </Drawer>
-      <main className={classes.content}>
+      <main className={classes.content} style={{ color: "purple"}} >
         <div className={classes.toolbar} />
       </main>
     </div>
