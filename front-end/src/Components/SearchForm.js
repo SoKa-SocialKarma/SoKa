@@ -1,8 +1,28 @@
-export default function SearchForm() {
-return (
 
-    <div>    
- <form type="onsubmit">
+export default function SearchForm() {
+
+    // function closeForm () {
+
+    //     this.state = {
+    //         show: false
+    //     }
+    // }
+    // function openForm() {
+    //     document.getElementById("myForm").style.display = "block";
+    //   }
+      
+    //   function closeForm() {
+    //     document.getElementById("myForm").style.display = "none";
+    //   }
+
+return (
+<div>
+
+<button className="open-button" >New Search</button>
+
+    <div className="form-popup" id="myForm">    
+    
+ <form type="onsubmit"  action="/action_page.php" class="form-container">
      <h2>
         Who are you looking for today?
      </h2>
@@ -34,10 +54,11 @@ return (
 </span>
 <br />
 <span>
-<button>Submit</button>
+<button type="submit">Submit</button>
+<button type="button" className="btn cancel" >Close</button>
 </span>
  </form>
 </div>
-
+</div>
 )
 }
