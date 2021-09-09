@@ -1,13 +1,17 @@
 const db = require('../database/dbConfig');
 
-const { getAllPosibleMatchesQuery} = require('../helpers/feedQuery')
+const { getAllPossibleMatchesQuery} = require('../helpers/feedQuery')
 
 const getAllPossibleMatches = async (id) => {
-  console.log("USER ID: ", id)
   try {
-    return {"message":"success"}
+    const dbFeedQuery = getAllPossibleMatchesQuery(id)
+    // if (!dbFeedQuery.qParams.length){
+    // }
+
+    const possibleMatches = await db.any(dbFeedQuery.qString)
+    return possibleMatches
 } catch (err) {
-  return 'error'
+  return 'Error query not returned'
 }
 };
 const getFilteredGoals = async (id) => {
