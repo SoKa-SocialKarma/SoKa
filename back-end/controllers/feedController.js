@@ -6,7 +6,9 @@ feed.get('/', async (req, res) => {
   const  {id}  = req.params
   
   try {
-    const allMatches = await getAllPossibleMatches(id)
+    const frontFeedQuery = Object.assign({"id": id}, req.query)
+    console.log(frontFeedQuery)
+    const allMatches = await getAllPossibleMatches(frontFeedQuery)
     res.status(200).json(allMatches)
   } catch (err) {
     res.status(404).send("Error")
