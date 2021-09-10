@@ -6,41 +6,48 @@ import Grid from "@material-ui/core/Grid";
 import Paper from "@material-ui/core/Paper";
 
 function Index() {
-  // const [users, setUsers] = useState([])
-
   return (
-    <div className="index">
-      <h1>Matches</h1>
-      {/* <UserMatches /> */}
+    <div className="match">
+      {/* <span>
+      <h1 id="matches">Matches</h1>
+      </span> */}
+
+      <div className="cards">
       <Container>
-        <Grid container spacing={1}>
-          <Grid item xs={12} md={3}>
+        <Grid container spacing={4}>
+        <Grid item xs={8} sm={4}>
             <Paper>
               <Users />
             </Paper>
           </Grid>
-          <Grid item xs={12} md={3}>
+          <Grid item xs={8} sm={4}>
             <Paper>
               <Users />
             </Paper>
           </Grid>
-          <Grid item xs={12} md={3}>
+          <Grid item xs={8} sm={4}>
             <Paper>
               <Users />
             </Paper>
           </Grid>
-          <Grid item xs={12} md={3}>
+          <Grid item xs={8} sm={4}>
             <Paper>
               <Users />
             </Paper>
           </Grid>
-          <Grid item xs={12} sm={6} md={3}>
+          <Grid item xs={8} sm={4}>
+            <Paper>
+              <Users />
+            </Paper>
+          </Grid>
+          <Grid item xs={8} sm={4}>
             <Paper>
               <Users />
             </Paper>
           </Grid>
         </Grid>
       </Container>
+      </div>
     </div>
   );
 }

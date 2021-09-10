@@ -188,12 +188,12 @@ export default function Navbar() {
 <ListItemText primary="Profile"/>
 </ListItem>
 
-<ListItem component={Link} to="/search" onClick={Search}>
+{/* <ListItem component={Link} to="/search" onClick={Search}>
 <ListItemIcon>
 <SearchTwoToneIcon style={{ color: "purple"}}/>
 </ListItemIcon>
 <ListItemText primary="New Search"/>
-</ListItem>
+</ListItem> */}
         </List>
         <Divider />
         {/* <List>

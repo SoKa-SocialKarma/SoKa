@@ -1,15 +1,14 @@
 body {
-    display: flex;
-    justify-content: center;
-    background-color: darkblue;
-
+  display: flex;
+  justify-content: center;
+  background-color: darkblue;
 }
 #main {
   display: flex;
   justify-content: center;
 }
 #name {
-  display:flex;
+  display: flex;
   justify-content: center;
 }
 
@@ -18,68 +17,76 @@ body {
   justify-content: space-between;
 }
 
-  
-  /* Style page content */
-  .main {
-    margin-left: 160px; /* Same as the width of the sidebar */
-    padding: 0px 10px;
-  
-  }
+/* Style page content */
+.main {
+  margin-left: 160px; /* Same as the width of the sidebar */
+  padding: 0px 10px;
+}
 
-  /* Container holding the image and the text */
+/* Container holding the image and the text */
 .container {
-    margin-top: 10px;
-    position: relative;
-    text-align: center;
-    color: rgb(45, 112, 133);
-  }
-  
-  /* Bottom left text */
-  .bottom-left {
-    position: absolute;
-    bottom: 8px;
-    left: 16px;
-  }
+  margin-top: 10px;
+  position: relative;
+  text-align: center;
+  color: rgb(45, 112, 133);
+  padding-right: 20px;
+  padding-left: 60px;
+}
 
-  .top-left {
-    position: absolute;
-    top: 8px;
-    left: 16px;
-  }
+/* Bottom left text */
+.bottom-left {
+  position: absolute;
+  bottom: 8px;
+  left: 16px;
+}
 
-  .bottom-center {
-    position: absolute;
-    /* bottom: 5%; */
-    /* top: 50%; */
-    left: 50%;
-    transform: translate(-50%, -50%);
-  }
+.bottom-center {
+  position: absolute;
+  bottom: 15%;
+  text-align: center;
+  /* top: 50%; */
+  /* left: 50%; */
+  /* transform: translate(-50%, -50%); */
+}
 
-  .index {
-      text-align: center;
-  }
+.index {
+  text-align: center;
+}
 
-  .messages {
-    text-align: center;
-    position: relative;
+.messages {
+  text-align: center;
+  position: relative;
   margin: 15px;
-  }
+}
 
+/* {box-sizing: border-box;} */
 
+.search-form {
+  width: 110%;
+  display: flex;
+  justify-content: space-between;
+  margin: auto;
+  align-items: center;
+  padding-left: 70px;
+  padding-right: 130px;
+  flex-wrap: wrap;
+}
+.topBar {
+  color: #44cceb;
+  width: 100%;
+}
 
-  /* {box-sizing: border-box;} */
+.cards {
+  padding-left: 8%;
+  display: flex;
+  justify-content: center;
+  /* background-color: blue; */
+}
 
-  .search-form{
-    width: 110%;
-    display: flex;
-    justify-content: space-between;
-    margin: auto;
-    align-items: center;
-    padding-left: 70px;
-    padding-right: 130px;
-    flex-wrap: wrap;
-  }
-  .topBar {
-    color: #44cceb;
-    width: 100%;
-  }
+#matches {
+  text-align: center;
+}
+
+.match {
+  background-color: rgb(143, 227, 255, 0.6);
+}

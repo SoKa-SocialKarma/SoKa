@@ -1,5 +1,5 @@
 
-// import Users from "../Components/Users"
+import Users from "../Components/Users"
 function Home() {
     return (
       <body>

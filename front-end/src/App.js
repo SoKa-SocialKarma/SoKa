@@ -6,7 +6,7 @@ import Home from "./Pages/Home";
 import Index from "./Pages/Index";
 import Show from "./Pages/Show"
 import Profile from "./Pages/Profile"
- import Questionnaire from "./Pages/Questionnaire";
+//  import Questionnaire from "./Pages/Questionnaire";
 // import Show from "./Pages/Show";
 import Navbar from "./Components/Navbar"
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -37,9 +37,9 @@ function App() {
             <Route path="/profile">
               <Profile/>
             </Route>
-            <Route path="/search">
+            {/* <Route path="/search">
               <Questionnaire/>
-            </Route>
+            </Route> */}
             <Route path="*">
               <FourOFour />
             </Route>
