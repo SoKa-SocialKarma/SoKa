@@ -21,6 +21,7 @@ import MailIcon from '@material-ui/icons/Mail';
 import Index from '../Pages/Index';
 import Show from '../Pages/Show';
 import Profile from '../Pages/Profile';
+import Home from "../Pages/Home"
 import Search from '../Pages/Questionnaire'
 import Icon from '@material-ui/core/Icon';
 import HomeTwoToneIcon from '@material-ui/icons/HomeTwoTone';
@@ -131,18 +132,19 @@ export default function Navbar() {
             <MenuIcon />
 
           </IconButton>
-          <Typography variant="h6" noWrap>
+          <Typography variant="h6" noWrap   component={Link} to="/" onClick={Home}>   
            Soka 
           </Typography>
 
           <span>
+          <SearchForm/>
+          </span>
           <Button variant="contained" color="primary">
             Login
         </Button>
-          </span>
-<span>
+{/* <span>
     <SearchForm/>
-</span>
+</span> */}
         </Toolbar>
       </AppBar>
       <Drawer
@@ -194,14 +196,14 @@ export default function Navbar() {
 </ListItem>
         </List>
         <Divider />
-        <List>
+        {/* <List>
           {['Edit Profile', 'Settings', 'Log out'].map((text, index) => (
             <ListItem button key={text} >
               <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
               <ListItemText primary={text} />
             </ListItem>
           ))}
-        </List>
+        </List> */}
       </Drawer>
       <main className={classes.content} style={{ color: "purple"}} >
         <div className={classes.toolbar} />

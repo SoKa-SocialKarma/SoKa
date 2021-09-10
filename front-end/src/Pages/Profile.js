@@ -3,8 +3,11 @@ function Profile () {
 
 return (
     <div>
-    <h1>Hi my name is....</h1>
+        <span>
+    {/* <h1>Hi my name is@</h1> */}
+
     <UserProfile/>
+        </span>
     </div>
 )
 }

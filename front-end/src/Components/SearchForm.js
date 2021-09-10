@@ -16,34 +16,28 @@ export default function SearchForm() {
     //   }
 
 return (
-<div>
 
-<button className="open-button" >New Search</button>
-
-    <div className="form-popup" id="myForm">    
-    
- <form type="onsubmit"  action="/action_page.php" class="form-container">
-     <h2>
-        Who are you looking for today?
-     </h2>
-     <span>
+ <div className="topBar">
+ <form className="search-form">
+   
+     {/* <span> */}
 
 <label htmlFor="">Goals:</label>
 <input type="text" activity="activity"/>
-     </span>
-     <span>
+     {/* </span>
+     <span> */}
 
 <label htmlFor="">Availability:</label>
 <input type="date" />
-     </span>
+     {/* </span>
 <br />
-<span>
+<span> */}
 
 <label htmlFor="location">Location:</label>
 <input type="text" />
-</span>
+{/* </span> */}
 
-<span>
+{/* <span> */}
 
 <label htmlFor="Activity">Activity:</label>
 <select name="acitvity" id="activity">
@@ -51,14 +45,13 @@ return (
     <option value="hiking">hiking</option>
     <option value="virtual">virtual</option>
 </select>
-</span>
+{/* </span>
 <br />
-<span>
+<span> */}
 <button type="submit">Submit</button>
-<button type="button" className="btn cancel" >Close</button>
-</span>
+{/* </span> */}
  </form>
-</div>
+
 </div>
 )
 }
