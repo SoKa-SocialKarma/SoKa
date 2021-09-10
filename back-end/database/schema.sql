@@ -43,6 +43,7 @@ CREATE TABLE badges (
 
 DROP TABLE IF EXISTS username_badges;
 CREATE TABLE username_badges (
+    id INTEGER REFERENCES users (id) ON DELETE CASCADE,
     username TEXT NOT NULL,
     badges JSONB NOT NULL
 );
@@ -50,15 +51,17 @@ CREATE TABLE username_badges (
 
 DROP TABLE IF EXISTS username_friends CASCADE;
 CREATE TABLE username_friends (
-    username VARCHAR(16) REFERENCES users (username) ON DELETE CASCADE,
+    id INTEGER REFERENCES users (id) ON DELETE CASCADE,
+    username VARCHAR(16) ,
     friends JSONB NOT NULL
 );
 
-DROP TABLE IF EXISTS username_matches CASCADE;
-CREATE TABLE username_matches (
-    username VARCHAR(16) REFERENCES users (username) ON DELETE CASCADE,
-    matches JSONB NOT NULL
-);
+-- DROP TABLE IF EXISTS username_matches CASCADE;
+-- CREATE TABLE username_matches (
+--     userid  REFERENCES users (id) ON DELETE CASCADE,
+--     username VARCHAR(16),
+--     matches JSONB NOT NULL
+-- );
 
 
 -- DROP TABLE IF EXISTS chats_record;
