@@ -2,16 +2,12 @@ const db = require('../database/dbConfig')
 const {
   getAllUsersQuery,
   updateUsersQuery
-} = require('../helpers/setDbQuery.js')
+} = require('../helpers/usersQuery.js')
 
-const getAllUsers = async frontQuery => {
+const getAllUsers = async sokaQuery => {
   try {
-    const dbQuery = getAllUsersQuery(frontQuery)
-    if (!dbQuery.qParams.length){
-      let newuser = await db.any(dbQuery.qString)
-      console.log(newuser)
-    } 
-      return await db.any(dbQuery.qString, dbQuery.qParams)
+    const dbQuery = await getAllUsersQuery(sokaQuery)
+    return await db.any(dbQuery)
   } catch (err) {
     return 'error'
   }
@@ -19,8 +15,9 @@ const getAllUsers = async frontQuery => {
 
 const getUsers = async ids => {
   try {
-    if (!ids.includes(','))
+    if (!ids.includes(',')) {
       return await db.one('SELECT * FROM users WHERE id=$1', ids)
+    }
 
     return await db.tx(t => {
       const queries = ids
@@ -35,44 +32,49 @@ const getUsers = async ids => {
 
 const createUsers = async users => {
   try {
-    if (!users.length)
+    if (!users.length) {
       return await db.one(
-        'INSERT INTO users (name, lastname, email, username, pw_hsp, location, gender, image, karma, badges, interests, requests, goals) VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13) RETURNING *',
+        `INSERT INTO users \n
+        (name, lastname, username, location, gender, karma, badges, image, goals, experience, availability, matchRequests, pendingReview) \n
+        VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13) RETURNING *`,
         [
           users.name,
           users.lastname,
-          users.email,
           users.username,
-          users.pw_hsp,
           users.location,
           users.gender,
-          users.image,
           users.karma,
           users.badges,
-          users.interests,
-          users.requests,
-          users.goals
+          users.image,
+          users.goals,
+          users.experience,
+          users.availability,
+          users.matchRequests,
+          users.pendingReview
         ]
       )
+    }
 
     return await db.tx(t => {
       const queries = users.map(user =>
         db.one(
-          'INSERT INTO users (name, lastname, email, username, pw_hsp, location, gender, karma, image, badges, interests, requests, goals) VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13) RETURNING *',
+          `INSERT INTO users \n
+          (name, lastname, username, location, gender, karma, badges, image, goals, experience, availability, matchRequests, pendingReview) \n
+          VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13) RETURNING *`,
           [
-            users.name,
-            users.lastname,
-            users.email,
-            users.username,
-            users.pw_hsp,
-            users.location,
-            users.gender,
-            users.karma,
-            users.image,
-            users.badges,
-            users.interests,
-            users.requests,
-            users.goals
+            user.name,
+            user.lastname,
+            user.username,
+            user.location,
+            user.gender,
+            user.karma,
+            user.badges,
+            user.image,
+            user.goals,
+            user.experience,
+            user.availability,
+            user.matchRequests,
+            user.pendingReview
           ]
         )
       )
@@ -86,8 +88,9 @@ const createUsers = async users => {
 const updateUsers = async (ids, users) => {
   try {
     const dbQuery = updateUsersQuery(ids, users)
-    if (!ids.includes(','))
+    if (!ids.includes(',')) {
       return await db.one(dbQuery.qString, dbQuery.qParams)
+    }
 
     return await db.tx(t => {
       const queries = dbQuery.map(q => db.one(q.qString, q.qParams))
@@ -100,14 +103,10 @@ const updateUsers = async (ids, users) => {
 
 const deleteUsers = async ids => {
   try {
-    if (!ids.includes(','))
-      return await db.one('DELETE FROM users WHERE id=$1 RETURNING *', ids)
-
-    return await db.any(`DELETE FROM users WHERE id IN (${ids}) RETURNING *`)
-    // return await db.tx(t => {
-    //     const queries = ids.split(",").map(id => db.one("DELETE FROM users WHERE id=$1 RETURNING *", id));
-    //     return t.batch(queries);
-    // })
+    if (!ids.includes(',')) {
+      return await db.one('DELETE FROM users WHERE id=$1 RETURNING *;', ids)
+    }
+    return await db.any(`DELETE FROM users WHERE id IN (${ids}) RETURNING *;`)
   } catch (err) {
     return 'error'
   }
