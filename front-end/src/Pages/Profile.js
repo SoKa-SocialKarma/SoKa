@@ -1,4 +1,5 @@
 import UserProfile from "../Components/UserProfile"
+// import EditForm from "../Components/EditForm";
 function Profile () {
 
 return (
@@ -7,6 +8,7 @@ return (
     {/* <h1>Hi my name is@</h1> */}
 
     <UserProfile/>
+    {/* <EditForm/> */}
         </span>
     </div>
 )

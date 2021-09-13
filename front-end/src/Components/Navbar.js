@@ -167,7 +167,7 @@ export default function Navbar() {
         </div>
         <Divider />
         <List>
-<ListItem  component={Link} to="/demo" onClick={Index}>
+<ListItem  component={Link} to="/matches" onClick={Index}>
 <ListItemIcon>
 <EmojiEmotionsIcon style={{ color: "purple"}}/>
 </ListItemIcon>
