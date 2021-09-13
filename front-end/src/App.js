@@ -6,16 +6,25 @@ import Home from "./Pages/Home";
 import Index from "./Pages/Index";
 import Show from "./Pages/Show"
 import Profile from "./Pages/Profile"
- import Questionnaire from "./Pages/Questionnaire";
-// import Show from "./Pages/Show";
+ import EditForm from "./Components/EditForm";
 import Navbar from "./Components/Navbar"
 import 'bootstrap/dist/css/bootstrap.min.css';
 import "./App.css";
 
-
-
+// const API= apiURL();
 
 function App() {
+// const [matches, setMatch] = useState([]);
+
+//useEffect(() => {
+ //try{
+//axios.get(`${API}/matches`).then(
+//(response) => {
+//setMat
+//}
+//)
+// }
+//})
   return (
     <div className="body">
       <Router>
@@ -25,7 +34,7 @@ function App() {
             <Route exact path="/">
               <Home />
             </Route>
-            <Route exact path="/demo">
+            <Route exact path="/matches">
               <Index />
             </Route>
             <Route exact path="/users">
@@ -37,8 +46,8 @@ function App() {
             <Route path="/profile">
               <Profile/>
             </Route>
-            <Route path="/search">
-              <Questionnaire/>
+            <Route path="/edit">
+           <EditForm/>
             </Route>
             <Route path="*">
               <FourOFour />
@@ -60,18 +69,3 @@ export default App;
 // SHOW/relevant
 // SHOW/users/:id/matches/
 
-// <Route exact path="/demo">
-// <Index/>
-// </Route>
-// <Route>
-// <Login/>
-// </Route>
-// <Route>
-// <FourOFour/>
-// </Route>
-// <Route>
-// <Questionaire/>
-// </Route>
-// <Route>
-// <Show/>
-// </Route>

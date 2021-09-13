@@ -1,133 +1,130 @@
 body {
-    display: flex;
-    justify-content: center;
-    background-color: darkblue;
-
+  display: flex;
+  justify-content: center;
+  background-color: darkblue;
+}
+#main {
+  display: flex;
+  justify-content: center;
+}
+#name {
+  display: flex;
+  justify-content: center;
 }
 
-
-span {
-    display: flex;
-    justify-content: center;
-    margin: auto;
+#search {
+  display: flex;
+  justify-content: space-between;
 }
 
-  
-  /* Style page content */
-  .main {
-    margin-left: 160px; /* Same as the width of the sidebar */
-    padding: 0px 10px;
-  
-  }
+/* Style page content */
+.main {
+  margin-left: 160px; /* Same as the width of the sidebar */
+  padding: 0px 10px;
+}
 
-  /* Container holding the image and the text */
+/* Container holding the image and the text */
 .container {
-    margin-top: 10px;
-    position: relative;
-    text-align: center;
-    color: rgb(45, 112, 133);
-  }
-  
-  /* Bottom left text */
-  .bottom-left {
-    position: absolute;
-    bottom: 8px;
-    left: 16px;
-  }
+  margin-top: 10px;
+  position: relative;
+  text-align: center;
+  color: rgb(45, 112, 133);
+  padding-right: 20px;
+  padding-left: 60px;
+}
 
-  .top-left {
-    position: absolute;
-    top: 8px;
-    left: 16px;
-  }
+/* Bottom left text */
+.bottom-left {
+  position: absolute;
+  bottom: 8px;
+  left: 16px;
+}
 
-  .bottom-center {
-    position: absolute;
-    /* bottom: 5%; */
-    /* top: 50%; */
-    left: 50%;
-    transform: translate(-50%, -50%);
-  }
+.bottom-center {
+  position: absolute;
+  bottom: 15%;
+  text-align: center;
+  /* top: 50%; */
+  /* left: 50%; */
+  /* transform: translate(-50%, -50%); */
+}
 
-  .index {
-      text-align: center;
-  }
+.index {
+  text-align: center;
+}
 
-  .messages {
-    text-align: center;
-    position: relative;
+.messages {
+  text-align: center;
+  position: relative;
   margin: 15px;
-  }
-
-
-
-  /* {box-sizing: border-box;} */
-
-/* Button used to open the contact form - fixed at the bottom of the page */
-.open-button {
-  background-color: #2fa3d1;
-  color: white;
-  padding: 16px 20px;
-  border: none;
-  cursor: pointer;
-  opacity: 0.8;
-  position: fixed;
-  bottom: 23px;
-  right: 28px;
-  width: 280px;
 }
 
-/* The popup form - hidden by default */
-.form-popup {
-  /* display: none; */
-  position: fixed;
-  bottom: 0;
-  right: 15px;
-  border: 3px solid #f1f1f1;
-  z-index: 9;
+/* {box-sizing: border-box;} */
+
+.search-form {
+  width: 110%;
+  display: flex;
+  justify-content: space-between;
+  margin: auto;
+  align-items: center;
+  padding-left: 70px;
+  padding-right: 130px;
+  flex-wrap: wrap;
+}
+.topBar {
+  color: #44cceb;
+  width: 100%;
 }
 
-/* Add styles to the form container */
-.form-container {
+.cards {
+  padding-left: 8%;
+  display: flex;
+  justify-content: center;
+  /* background-color: blue; */
+}
+
+#matches {
+  text-align: center;
+}
+
+.match {
+  background-color: rgb(143, 227, 255, 0.6);
+}
+
+
+
+
+#card {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
   max-width: 300px;
-  padding: 10px;
-  background-color: white;
+  margin: auto; 
+  text-align: center;
 }
 
-/* Full-width input fields */
-.form-container {
-  width: 100%;
-  padding: 15px;
-  margin: 5px 0 22px 0;
+.title {
+  color: grey;
+  font-size: 18px;
+}
+
+#profile {
   border: none;
-  background: #ad4b4b;
-}
-
-/* When the inputs get focus, do something */
-.form-container {
-  background-color: rgb(30, 113, 190);
-  outline: none;
-  font-family:  'Lucida Sans Unicode';
-}
-
-/* Set a style for the submit/login button */
-.form-container .btn {
-  background-color: #04AA6D;
-  color: rgb(255, 255, 255);
-  padding: 16px 20px;
-  border: none;
+  outline: 0;
+  display: inline-block; 
+  padding: 8px;
+  color: white;
+  background-color: #000;
+  text-align: center;
   cursor: pointer;
-  width: 100%;
-  margin-bottom:10px;
-  opacity: 0.8;
+   width: 100%; 
+  font-size: 18px;
 }
 
-/* Add a red background color to the cancel button */
-.form-container .cancel {
-  background-color: rgb(24, 20, 250);
+a {
+  text-decoration: none;
+  font-size: 22px;
+  color: black;
 }
 
-/* Add some hover effects to buttons */
-.form-container .btn:hover, .open-button:hover {
-  opacity: 1;
+button:hover, a:hover {
+  opacity: 0.7;
 }
