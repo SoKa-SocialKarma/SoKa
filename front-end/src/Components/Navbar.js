@@ -6,6 +6,7 @@ import Index from '../Pages/Demo'
 import Show from '../Pages/Show'
 import Profile from '../Pages/Profile'
 import Home from '../Pages/LoginDashboard'
+import MapBox from '../Components/MapBox'
 import SearchModal from './SearchModal'
 
 import clsx from 'clsx'
@@ -89,6 +90,7 @@ const useStyles = makeStyles(theme => ({
   },
   topCenter: {
     width: '100%',
+    height: '90%',
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'space-evenly',
@@ -100,6 +102,19 @@ const useStyles = makeStyles(theme => ({
   child: {
     paddingTop: theme.spacing(12),
     paddingBottom: theme.spacing(12)
+  },
+  authContainer: {
+    width: '60%',
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'flex-end'
+  },
+  login: {
+    width: '20%'
+  },
+  menuIcon:{
+    justifySelf: 'center',
+    alignSelf: 'center',
   }
 }))
 
@@ -134,7 +149,7 @@ export default function Navbar ({ children }) {
               [classes.hide]: open
             })}
           >
-            <MenuIcon />
+            <MenuIcon className={classes.menuIcon}/>
           </IconButton>
           <div className={classes.topCenter}>
             <Typography
@@ -142,14 +157,14 @@ export default function Navbar ({ children }) {
               noWrap
               component={Link}
               to='/'
-              onClick={Home}
             >
               Soka
             </Typography>
-            <SearchModal />
-            <Button variant='contained' color='primary'>
-              Login
-            </Button>
+            <div className={classes.authContainer}>
+              <SearchModal />
+              <Button component={Link} to="/login" className={classes.login}>Login</Button>
+              <Button component={Link} to="/signup" className={classes.login}>SignUp</Button>
+            </div>
           </div>
         </Toolbar>
       </AppBar>
@@ -178,23 +193,39 @@ export default function Navbar ({ children }) {
         </div>
         <Divider />
         <List>
-          <ListItem component={Link} to='/matches' onClick={Index}>
+          <ListItem component={Link} to='/matches'>
             <ListItemIcon>
-              <EmojiEmotionsIcon style={{ color: 'purple' }} />
+              <EmojiEmotionsIcon
+                style={{ color: 'purple', width: '36px', height: '36px' }}
+              />
             </ListItemIcon>
             <ListItemText primary='Matches' />
           </ListItem>
 
-          <ListItem component={Link} to='/messages' onClick={Show}>
+          <ListItem component={Link} to='/messages'>
             <ListItemIcon>
-              <ChatIcon style={{ color: 'purple' }} />
+              <ChatIcon
+                style={{ color: 'purple', width: '36px', height: '36px' }}
+              />
             </ListItemIcon>
             <ListItemText primary='Inbox' />
           </ListItem>
 
-          <ListItem component={Link} to='/profile' onClick={Profile}>
+          <ListItem component={Link} to='/profile'>
             <ListItemIcon>
-              <AccountBoxTwoToneIcon style={{ color: 'purple' }} />
+              <AccountBoxTwoToneIcon
+                style={{ color: 'purple', width: '36px', height: '36px' }}
+              />
+            </ListItemIcon>
+            <ListItemText primary='Profile' />
+          </ListItem>
+          <ListItem component={Link} to='/map'>
+            <ListItemIcon>
+              <img
+                src='https://img.icons8.com/nolan/64/map-marker.png'
+                alt='mapbox-current-location'
+                style={{ width: '36px', height: '36px' }}
+              />
             </ListItemIcon>
             <ListItemText primary='Profile' />
           </ListItem>

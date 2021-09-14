@@ -10,6 +10,7 @@ import Login from './Pages/Login'
 import SignUp from './Pages/SignUp'
 import UpdateProfile from './Pages/UpdateProfile'
 import ForgotPassword from './Pages/ForgotPassword'
+import MapBox from './Components/MapBox'
 
 import Profile from './Pages/Profile'
 
@@ -32,6 +33,7 @@ function App () {
             <Switch>
               <Route exact path='/' component={Demo} />
               <PrivateRoute path='/update-profile' component={UpdateProfile} />
+              <Route path='/map' component={MapBox} />
               <Route path='/signup' component={SignUp} />
               <Route path='/login' component={Login} />
               <Route path='/forgot-password' component={ForgotPassword} />
@@ -49,11 +51,4 @@ function App () {
 }
 
 export default App
-//routes
-// INDEX/login
-// INDEX/signup
-// SHOW /users/:id
-// UPDATE /users/:id/edit
-// CREATE /users/new
-// SHOW/relevant
-// SHOW/users/:id/matches/
+
