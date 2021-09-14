@@ -127,12 +127,17 @@ VALUES
 INSERT INTO badges
 (id, badge_name, image, info)
 VALUES
-(1,'Great Motivator','{"name":"","url":"","album":""}',
+(1,'Great Motivator','{"name":"","url":"https://cdn-icons-png.flaticon.com/512/3996/3996549.png","album":""}',
 '{"info":"Enthusiastic"}'),
-(2,'Spot On','{"name":"","url":"","album":""}',
+(2,'Spot On','{"name":"","url":"https://cdn-icons-png.flaticon.com/512/4072/4072133.png","album":""}',
 '{"info":"Assisted in lifting heavy weights safely"}'),
-(3,'Mobility Master','{"name":"","url":"","album":""}',
-'{"info":"Helped stretch tighten muscles before workout"}');
+(3,'Mobility Master','{"name":"","url":"https://cdn-icons-png.flaticon.com/512/2617/2617912.png","album":""}',
+'{"info":"Helped stretch tightented muscles before workout"}');
+(4,'Punctual','{"name":"","url":"https://cdn-icons-png.flaticon.com/512/2843/2843559.png","album":""}',
+'{"info":"Responds to all messages and shows up on time"}');
+(5,'Cardiologist','{"name":"","url":"https://cdn-icons-png.flaticon.com/512/2231/2231087.png","album":""}',
+'{"info":"Helped increase BPM"}');
+
 
 
 INSERT INTO username_badges

@@ -50,11 +50,4 @@ function App () {
 }
 
 export default App
-//routes
-// INDEX/login
-// INDEX/signup
-// SHOW /users/:id
-// UPDATE /users/:id/edit
-// CREATE /users/new
-// SHOW/relevant
-// SHOW/users/:id/matches/
+

@@ -1,6 +1,26 @@
-import { useState } from 'react'
+import { useState, useEffect} from 'react';
+import axios from "axios";
+import {useParams, Link, useHistory} from "react-router-dom";
+import { apiURL } from "../Util/apiURL";
+const API = apiURL()
 
 export default function EditProfile () {
+  let { index } = useParams();
+  let history = useHistory();
+
+  useEffect(() => {
+    axios.get(`${API}/users/14`).then(
+      (response) => setDetails(response.data),
+      (error) => history.push(`/not-found`)
+    );
+  },[index, history]);
+
+const addDetails = (newdetails) => {
+  axios.post(`${API}/profile`, newdetails).then(() => {
+    history.push(`/profile`)
+  })
+}
+
   const [details, setDetails] = useState({
     img: '',
     Availability: '',
@@ -28,6 +48,7 @@ export default function EditProfile () {
             value={details.img}
             placeholder='http://'
             onChange={handleChange}
+            disabled
           />
         </span>
         <span>
