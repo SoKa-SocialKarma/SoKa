@@ -22,6 +22,7 @@ import Show from './Pages/Show'
 import EditProfile from './Components/EditProfile'
 
 import PrivateRoute from './Components/PrivateRoute'
+import UserMatches from './Components/UserMatches'
 
 function App () {
   return (
@@ -36,7 +37,7 @@ function App () {
               <Route path='/signup' component={SignUp} />
               <Route path='/login' component={Login} />
               <Route path='/forgot-password' component={ForgotPassword} />
-              {/* <Route exact path='/matches' component={Index} /> */}
+              <Route path='/matches' component={UserMatches} />
               <Route path='/messages' component={Show} />
               <Route path='/profile' component={Profile} />
               <Route path='/edit' component={EditProfile} />
