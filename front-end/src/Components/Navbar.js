@@ -89,6 +89,7 @@ const useStyles = makeStyles(theme => ({
   },
   topCenter: {
     width: '100%',
+    height: '90%',
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'space-evenly',
@@ -100,7 +101,16 @@ const useStyles = makeStyles(theme => ({
   child: {
     paddingTop: theme.spacing(12),
     paddingBottom: theme.spacing(12)
-  }
+  },
+  authContainer:{
+    width: '60%',
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: "flex-end"
+  },
+  login:{
+    width: "20%"
+,  }
 }))
 
 export default function Navbar ({ children }) {
@@ -146,10 +156,16 @@ export default function Navbar ({ children }) {
             >
               Soka
             </Typography>
+            <div className={classes.authContainer}>
             <SearchModal />
-            <Button variant='contained' color='primary'>
+            <Button  className={classes.login}>
               Login
             </Button>
+            <Button  className={classes.login}>
+              SignUp
+            </Button>
+            </div>
+
           </div>
         </Toolbar>
       </AppBar>
