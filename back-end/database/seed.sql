@@ -106,7 +106,15 @@ VALUES
 '{"experience":["Body Building","Weigth Lifting"]}',
 '{"days":["10/14/2021"]}',
 '{"matchRequests":[2],"acceptedMatchesHistory":[11]}',
-'{"pendingReview":true,"reviewing":{"id":11,"username":"ItsDarla"}}');
+'{"pendingReview":true,"reviewing":{"id":11,"username":"ItsDarla"}}'),
+('Jack', 'Green', 'tinygoose959',
+'New York, NY', 'Male', 10, 4.97, true,
+'{"name":"","url":"","album":""}',
+'{"goals":["Abs","Back","Chest","HIIT Cardio"]}',
+'{"experience":["Body Building","Weigth Lifting"]}',
+'{"days":["10/01/2021","10/14/2021"]}',
+'{"matchRequests":[2],"acceptedMatchesHistory":[11]}',
+'{"pendingReview":false,"reviewing":{"id":0,"username":""}}');
 
 
 INSERT INTO activities
