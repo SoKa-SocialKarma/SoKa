@@ -10,9 +10,11 @@ CREATE TABLE users (
     username VARCHAR(16) UNIQUE NOT NULL,
     location TEXT NOT NULL,
     gender TEXT,
-    radius INT,
+    radius INT DEFAULT 5,
+    CHECK (radius >=0 AND radius <=30),
     karma DECIMAL(10,2) DEFAULT 5,
     CHECK (karma >=1 AND karma <=5),
+    image JSONB,
     badges BOOLEAN DEFAULT false,
     goals JSONB NOT NULL,
     experience JSONB,
@@ -28,7 +30,7 @@ CREATE TABLE activities (
     name TEXT NOT NULL,
     is_outdoor BOOLEAN NOT NULL,
     pairable BOOLEAN NOT NULL,
-    details JSONB NOT NULL
+    goals JSONB NOT NULL
 );
 
 
@@ -36,13 +38,14 @@ DROP TABLE IF EXISTS badges;
 CREATE TABLE badges (
     id SERIAL PRIMARY KEY,
     badge_name TEXT NOT NULL,
-    image TEXT NOT NULL,
-    description JSONB NOT NULL
+    image JSONB NOT NULL,
+    info JSONB NOT NULL
 );
 
 
 DROP TABLE IF EXISTS username_badges;
 CREATE TABLE username_badges (
+    id INTEGER REFERENCES users (id) ON DELETE CASCADE,
     username TEXT NOT NULL,
     badges JSONB NOT NULL
 );
@@ -50,14 +53,9 @@ CREATE TABLE username_badges (
 
 DROP TABLE IF EXISTS username_friends CASCADE;
 CREATE TABLE username_friends (
-    username VARCHAR(16) REFERENCES users (username) ON DELETE CASCADE,
+    id INTEGER REFERENCES users (id) ON DELETE CASCADE,
+    username VARCHAR(16) ,
     friends JSONB NOT NULL
-);
-
-DROP TABLE IF EXISTS username_matches CASCADE;
-CREATE TABLE username_matches (
-    username VARCHAR(16) REFERENCES users (username) ON DELETE CASCADE,
-    matches JSONB NOT NULL
 );
 
 

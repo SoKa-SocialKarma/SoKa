@@ -1,3 +1,8 @@
+/**  =====================================================  
+*                     usersController
+*    =====================================================
+**/
+
 const users = require('express').Router()
 const {
   getAllUsers,
@@ -20,12 +25,11 @@ users.get('/', async (req, res) => {
   res.json(allUsers)
 })
 
-users.get('/:ids', async (req, res) => {
-  const { ids } = req.params
+users.get('/:id', async (req, res) => {
+  const { id } = req.params
   try {
-    const users = await getUsers(ids)
+    const users = await getUsers(id)
     if (catchError(users)) throw msgInvalidQuery()
-
     res.json(users.length ? users : [users])
   } catch (err) {
     res.status(400).json({ error: err })
@@ -43,10 +47,10 @@ users.post('/', postCheck, async (req, res) => {
   }
 })
 
-users.put('/:ids', putCheck, async (req, res) => {
-  const { ids } = req.params
+users.put('/:id', putCheck, async (req, res) => {
+  const { id } = req.params
   try {
-    const updatedUsers = await updateUsers(ids, req.body)
+    const updatedUsers = await updateUsers(id, req.body)
     if (catchError(updatedUsers)) throw msgInvalidQuery()
 
     res.json(updatedUsers.length ? updatedUsers : [updatedUsers])
@@ -55,10 +59,10 @@ users.put('/:ids', putCheck, async (req, res) => {
   }
 })
 
-users.delete('/:ids', async (req, res) => {
-  const { ids } = req.params
+users.delete('/:id', async (req, res) => {
+  const { id } = req.params
   try {
-    const deletedUsers = await deleteUsers(ids)
+    const deletedUsers = await deleteUsers(id)
     if (catchError(deletedUsers)) throw msgInvalidQuery()
     res.json(deletedUsers.length ? deletedUsers : [deletedUsers])
   } catch (err) {

@@ -1,3 +1,20 @@
+
+/**  =========================================================================  
+*                            [*]CheckFailed
+*   =========================================================================
+* 
+*   Takes in any argument and checks if it's of the expected type.
+
+*   @param   {Any} any - Object of any type to be verified.
+*   @returns {Boolean} - Returns true if the object is valid, false if not.
+
+*   @summary  Checks if the object is valid. 
+*             True continues the verification process.
+*             False calls notPass function with a message as argument, 
+*             wich returns an Object with the error message.
+**/
+
+
 const pass = { pass: true }
 const notPass = message => ({ pass: false, error: `Invalid ${message}.` })
 
@@ -10,32 +27,15 @@ const checkJSONB = obj => {
   return false
 }
 
-const checkEmail = email => {
-  return email.split('').filter(char => char === '@').length === 1
-}
-
 const nameCheckFailed = name => {
   return typeof name !== 'string' || !name.trim()
 }
 const lastnameCheckFailed = lastname => {
   return typeof lastname !== 'string' || !lastname.trim()
 }
-const emailCheckFailed = email => {
-  return (
-    typeof email !== 'string' ||
-    !email.trim() ||
-    email.length > 100 ||
-    !checkEmail(email)
-  )
-}
 const usernameCheckFailed = username => {
   return (
     typeof username !== 'string' || !username.trim() || username.length > 16
-  )
-}
-const passwordCheckFailed = password => {
-  return (
-    typeof password !== 'string' || !password.trim() || password.length > 64
   )
 }
 const locationCheckFailed = location => {
@@ -44,25 +44,13 @@ const locationCheckFailed = location => {
 const genderCheckFailed = gender => {
   return typeof gender !== 'string' || !gender.trim()
 }
-const imageCheckFailed = image => {
+const radiusCheckFailed = radius => {
   return (
-    typeof image !== 'string' ||
-    image.length < 11 ||
-    (image.slice(0, 7) !== 'http://' && image.slice(0, 8) !== 'https://')
+    typeof radius !== 'number' ||
+    isNaN(radius) ||
+    Number(radius) <= 0 ||
+    Number(radius) > 30
   )
-}
-const interestsCheckFailed = interests => {
-  return (
-    typeof interests !== 'string' || !interests.trim() || checkJSONB(interests)
-  )
-}
-const requestsCheckFailed = requests => {
-  return (
-    typeof requests !== 'string' || !requests.trim() || checkJSONB(requests)
-  )
-}
-const goalsCheckFailed = goals => {
-  return typeof goals !== 'string' || !goals.trim() || checkJSONB(goals)
 }
 const karmaCheckFailed = karma => {
   return (
@@ -72,39 +60,77 @@ const karmaCheckFailed = karma => {
     Number(karma) > 5
   )
 }
+const imageCheckFailed = image => {
+  return (
+    typeof image !== 'string' ||
+    image.length < 11 ||
+    (image.slice(0, 7) !== 'http://' && image.slice(0, 8) !== 'https://')
+  )
+}
 const badgesCheckFailed = badges => {
   return typeof badges !== 'boolean'
 }
+const goalsCheckFailed = goals => {
+  return typeof goals !== 'string' || !goals.trim() || checkJSONB(goals)
+}
+const experienceCheckFailed = experience => {
+  return typeof experience !== 'string' || !experience.trim() || checkJSONB(experience)
+}
+const availabilityCheckFailed = availability => {
+  return typeof availability !== 'string' || !availability.trim() || checkJSONB(availability)
+}
+const matchRequestsCheckFailed = mathRequests => {
+  return typeof mathRequests !== 'string' || !mathRequests.trim() || checkJSONB(mathRequests)
+}
+const pendingReviewCheckFailed = pendingReview => {
+  return typeof pendingReview !== 'string' || !pendingReview.trim() || checkJSONB(pendingReview)
+}
+
+
+/**  =========================================================================  
+*                             postCheck
+*    =========================================================================
+ 
+*    Takes in a request, response and next function.
+
+*    @param   {Object} req - An object containing the request body. 
+*    @param {Function} res - A Function that sends a response.
+*    @param {Function} next - A Function that calls the next middleware.
+*    @returns {Function} next - An error message or a call to next middleware.
+**/
+
 
 const postCheck = (req, res, next) => {
   const verifyUser = ({
     name,
     lastname,
-    email,
     username,
-    pw_hsp,
     location,
     gender,
-    image,
-    interests,
-    requests,
-    goals,
+    radius,
     karma,
-    badges
+    image,
+    badges,
+    goals,
+    experience,
+    availability,
+    matchRequests,
+    pendingReview
   }) => {
     if (nameCheckFailed(name)) return notPass(name? 'name' : 'name not found!')
     if (lastnameCheckFailed(lastname)) return notPass(lastname? 'lastname' : 'lastname not found!')
-    if (emailCheckFailed(email)) return notPass(email? 'email, it must contain one @' : 'email not found!')
     if (usernameCheckFailed(username)) return notPass(username? 'username' : 'username not found!')
-    if (passwordCheckFailed(pw_hsp)) return notPass(password? 'password' : 'password not found!')
     if (locationCheckFailed(location)) return notPass(location? 'location' : 'location not found!')
     if (genderCheckFailed(gender)) return notPass(gender? 'gender' : 'gender not found!')
-    if (imageCheckFailed(image)) return notPass(image? 'image link, it must begin with http:// or https://' : 'image not found!')
-    if (interestsCheckFailed(interests)) return notPass(interests? 'interests it must be type JSON' : 'interests not found!')
-    if (requestsCheckFailed(requests)) return notPass(requests? 'requests it must be type JSON' : 'requests not found!')
-    if (goalsCheckFailed(goals)) return notPass(goals? 'goals it must be type JSON' : 'goals not found!')
+    if (radiusCheckFailed(radius)) return notPass(radius? 'radius' : 'radius not found!')
     if (karmaCheckFailed(karma)) return notPass(karma? 'karma it must be a number' : 'karma not found!')
+    if (imageCheckFailed(image)) return notPass(image? 'image link, it must begin with http:// or https://' : 'image not found!')
     if (badgesCheckFailed(badges)) return notPass(badges? 'badges it must be type Boolean' : 'badges not found!')
+    if (goalsCheckFailed(goals)) return notPass(goals? 'goals it must be type JSON' : 'goals not found!')
+    if (experienceCheckFailed(experience)) return notPass(experience? 'experience it must be type JSON' : 'experience not found!')
+    if (availabilityCheckFailed(availability)) return notPass(availability? 'availability it must be type JSON' : 'availability not found!')
+    if (matchRequestsCheckFailed(matchRequests)) return notPass(matchRequests? 'matchRequests it must be type JSON' : 'matchRequests not found!')
+    if (pendingreviewCheckFailed(pendingReview)) return notPass(pendingReview? 'pendingReview it must be type JSON' : 'pendingReview not found!')
 
     return pass
   }
@@ -123,21 +149,38 @@ const postCheck = (req, res, next) => {
   next()
 }
 
+
+/**  =========================================================================  
+*                             putCheck
+*    =========================================================================
+ 
+*    Takes in a request, response and next function.
+
+*    @param   {Object} req - An object containing the request body. 
+*    @param {Function} res - A Function that sends a response.
+*    @param {Function} next - A Function that calls the next middleware.
+*    @returns {Function} next - An error message or a call to next middleware.
+**/
+
+
 const putCheck = (req, res, next) => {
   const verifyUser = user => {
     const {
       name,
       lastname,
-      email,
       username,
-      pw_hsp,
       location,
       gender,
+      radius,
+      karma,
       image,
-      interests,
-      requests,
-      goals
+      goals,
+      experience,
+      availability,
+      matchRequests,
+      pendingReview
     } = user
+
     const keys = Object.keys(user)
     let count = 0
 
@@ -146,27 +189,27 @@ const putCheck = (req, res, next) => {
       count++
     }
     if (keys.includes('lastname')) {
-      if (priceCheckFailed(lastname)) return notPass('lastname')
-      count++
-    }
-    if (keys.includes('email')) {
-      if (priceCheckFailed(email)) return notPass('email')
+      if (lastnameCheckFailed(lastname)) return notPass('lastname')
       count++
     }
     if (keys.includes('username')) {
-      if (priceCheckFailed(username)) return notPass('username')
-      count++
-    }
-    if (keys.includes('pw_hsp')) {
-      if (priceCheckFailed(pw_hsp)) return notPass('password')
+      if (usernameCheckFailed(username)) return notPass('username')
       count++
     }
     if (keys.includes('location')) {
-      if (priceCheckFailed(location)) return notPass('location')
+      if (locationCheckFailed(location)) return notPass('location')
       count++
     }
     if (keys.includes('gender')) {
-      if (priceCheckFailed(gender)) return notPass('gender')
+      if (genderCheckFailed(gender)) return notPass('gender')
+      count++
+    }
+    if (keys.includes('radius')) {
+      if (radiusCheckFailed(radius)) return notPass('radius')
+      count++
+    }
+    if (keys.includes('karma')) {
+      if (karmaCheckFailed(karma)) return notPass('karma')
       count++
     }
     if (keys.includes('image')) {
@@ -174,16 +217,24 @@ const putCheck = (req, res, next) => {
         return notPass('image link, it should begin with http:// or https://')
       count++
     }
-    if (keys.includes('interests')) {
-      if (categoryCheckFailed(interests)) return notPass('interests')
-      count++
-    }
-    if (keys.includes('requests')) {
-      if (categoryCheckFailed(requests)) return notPass('requests')
-      count++
-    }
     if (keys.includes('goals')) {
-      if (categoryCheckFailed(goals)) return notPass('goals')
+      if (goalsCheckFailed(goals)) return notPass('goals')
+      count++
+    }
+    if (keys.includes('experience')) {
+      if (experienceCheckFailed(experience)) return notPass('experience')
+      count++
+    }
+    if (keys.includes('availability')) {
+      if (availabilityCheckFailed(availability)) return notPass('availability')
+      count++
+    }
+    if (keys.includes('matchRequests')) {
+      if (matchRequestsCheckFailed(matchRequests)) return notPass('matchRequests')
+      count++
+    }
+    if (keys.includes('pendingReview')) {
+      if (pendingReviewCheckFailed(pendingReview)) return notPass('pendingReview')
       count++
     }
     return count > 0
@@ -192,16 +243,16 @@ const putCheck = (req, res, next) => {
   }
 
   const { ids } = req.params
+
   if (!ids.includes(',') && !req.body.length) {
     const result = verifyUser(req.body)
     return result.pass ? next() : res.status(400).json({ error: result.error })
   }
-
-  if (ids.split(',').length !== req.body.length)
+  if (ids.split(',').length !== req.body.length){
     return res
       .status(400)
       .json({ error: 'Number of ids does not match number of inputs.' })
-
+  }
   for (let i = 0; i < req.body.length; i++) {
     const result = verifyUser(req.body[i])
     if (!result.pass)
