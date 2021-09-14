@@ -21,8 +21,8 @@ import MailIcon from '@material-ui/icons/Mail';
 import Index from '../Pages/Index';
 import Show from '../Pages/Show';
 import Profile from '../Pages/Profile';
-import Home from "../Pages/Home"
-import Search from '../Pages/Questionnaire'
+import Home from '../Pages/Home';
+import Search from '../Pages/Questionnaire';
 import Icon from '@material-ui/core/Icon';
 import HomeTwoToneIcon from '@material-ui/icons/HomeTwoTone';
 import ChatIcon from '@material-ui/icons/Chat';
@@ -30,8 +30,8 @@ import AccountBoxTwoToneIcon from '@material-ui/icons/AccountBoxTwoTone';
 import SearchTwoToneIcon from '@material-ui/icons/SearchTwoTone';
 import EmojiEmotionsIcon from '@material-ui/icons/EmojiEmotions';
 import { EmojiFlagsOutlined } from '@material-ui/icons';
- import SearchForm from './SearchForm';
- import Button from '@material-ui/core/Button';
+import SearchForm from './SearchForm';
+import Button from '@material-ui/core/Button';
 // import Button from '@material-ui/icons/Button'
 const drawerWidth = 240;
 
@@ -110,93 +110,90 @@ export default function Navbar() {
 		setOpen(false);
 	};
 
-  return (
-    <div className={classes.root}>
-      <CssBaseline />
-      <AppBar
-        position="fixed"
-        className={clsx(classes.appBar, {
-          [classes.appBarShift]: open,
-        })}
-      >
-        <Toolbar>
-          <IconButton
-            color="inherit"
-            aria-label="open drawer"
-            onClick={handleDrawerOpen}
-            edge="start"
-            className={clsx(classes.menuButton, {
-              [classes.hide]: open,
-            })}
-          >
-            <MenuIcon />
+	return (
+		<div className={classes.root}>
+			<CssBaseline />
+			<AppBar
+				position="fixed"
+				className={clsx(classes.appBar, {
+					[classes.appBarShift]: open,
+				})}
+			>
+				<Toolbar>
+					<IconButton
+						color="inherit"
+						aria-label="open drawer"
+						onClick={handleDrawerOpen}
+						edge="start"
+						className={clsx(classes.menuButton, {
+							[classes.hide]: open,
+						})}
+					>
+						<MenuIcon />
+					</IconButton>
+					<Typography variant="h6" noWrap component={Link} to="/" onClick={Home}>
+						Soka
+					</Typography>
 
-          </IconButton>
-          <Typography variant="h6" noWrap   component={Link} to="/" onClick={Home}>   
-           Soka 
-          </Typography>
-
-          <span>
-          <SearchForm/>
-          </span>
-          <Button variant="contained" color="primary">
-            Login
-        </Button>
-{/* <span>
+					<span>
+						<SearchForm />
+					</span>
+					<Button variant="contained" color="primary">
+						Login
+					</Button>
+					{/* <span>
     <SearchForm/>
 </span> */}
-        </Toolbar>
-      </AppBar>
-      <Drawer
-        variant="permanent"
-        className={clsx(classes.drawer, {
-          [classes.drawerOpen]: open,
-          [classes.drawerClose]: !open,
-        })}
-        classes={{
-          paper: clsx({
-            [classes.drawerOpen]: open,
-            [classes.drawerClose]: !open,
-          }),
-        }}
-      >
-        <div className={classes.toolbar}>
-          <IconButton onClick={handleDrawerClose}>
-            {theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
-          </IconButton>
-        </div>
-        <Divider />
-        <List>
-<ListItem  component={Link} to="/matches" onClick={Index}>
-<ListItemIcon>
-<EmojiEmotionsIcon style={{ color: "purple"}}/>
-</ListItemIcon>
-<ListItemText primary="Matches"/>
-</ListItem>
+				</Toolbar>
+			</AppBar>
+			<Drawer
+				variant="permanent"
+				className={clsx(classes.drawer, {
+					[classes.drawerOpen]: open,
+					[classes.drawerClose]: !open,
+				})}
+				classes={{
+					paper: clsx({
+						[classes.drawerOpen]: open,
+						[classes.drawerClose]: !open,
+					}),
+				}}
+			>
+				<div className={classes.toolbar}>
+					<IconButton onClick={handleDrawerClose}>{theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />}</IconButton>
+				</div>
+				<Divider />
+				<List>
+					<ListItem component={Link} to="/matches" onClick={Index}>
+						<ListItemIcon>
+							<EmojiEmotionsIcon style={{ color: 'purple' }} />
+						</ListItemIcon>
+						<ListItemText primary="Matches" />
+					</ListItem>
 
-<ListItem component={Link} to="/messages" onClick={Show}>
-<ListItemIcon>
-<ChatIcon style={{ color: "purple"}}/>
-</ListItemIcon>
-<ListItemText primary="Inbox"/>
-</ListItem>
+					<ListItem component={Link} to="/messages" onClick={Show}>
+						<ListItemIcon>
+							<ChatIcon style={{ color: 'purple' }} />
+						</ListItemIcon>
+						<ListItemText primary="Inbox" />
+					</ListItem>
 
-<ListItem component={Link} to="/profile" onClick={Profile}>
-<ListItemIcon>
-<AccountBoxTwoToneIcon style={{ color: "purple"}}/>
-</ListItemIcon>
-<ListItemText primary="Profile"/>
-</ListItem>
+					<ListItem component={Link} to="/profile" onClick={Profile}>
+						<ListItemIcon>
+							<AccountBoxTwoToneIcon style={{ color: 'purple' }} />
+						</ListItemIcon>
+						<ListItemText primary="Profile" />
+					</ListItem>
 
-{/* <ListItem component={Link} to="/search" onClick={Search}>
+					{/* <ListItem component={Link} to="/search" onClick={Search}>
 <ListItemIcon>
 <SearchTwoToneIcon style={{ color: "purple"}}/>
 </ListItemIcon>
 <ListItemText primary="New Search"/>
 </ListItem> */}
-        </List>
-        <Divider />
-        {/* <List>
+				</List>
+				<Divider />
+				{/* <List>
           {['Edit Profile', 'Settings', 'Log out'].map((text, index) => (
             <ListItem button key={text} >
               <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
@@ -204,10 +201,10 @@ export default function Navbar() {
             </ListItem>
           ))}
         </List> */}
-      </Drawer>
-      <main className={classes.content} style={{ color: "purple"}} >
-        <div className={classes.toolbar} />
-      </main>
-    </div>
-  );
+			</Drawer>
+			<main className={classes.content} style={{ color: 'purple' }}>
+				<div className={classes.toolbar} />
+			</main>
+		</div>
+	);
 }
