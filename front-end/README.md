@@ -68,3 +68,18 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `yarn build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+
+
+
+
+```
+App information:
+  - App ID: 1:516005359755:web:3693a3313689adf20b648e
+  - Display name: soka
+
+You can run this command to print out your new app's Google Services config:
+  firebase apps:sdkconfig WEB 1:516005359755:web:3693a3313689adf20b648e
+  ```
+
+  "1:516005359755:web:c9f2d2423df898330b648e"
