@@ -8,12 +8,25 @@ import Input from '@material-ui/core/Input'
 import Radio from '@material-ui/core/Radio'
 import RadioGroup from '@material-ui/core/RadioGroup'
 import FormControlLabel from '@material-ui/core/FormControlLabel'
+import Button from '@material-ui/core/Button'
+import Container from '@material-ui/core/Container'
 
 const useStyles = makeStyles(theme => ({
   root: {
     width: '100%',
     display: 'flex',
-    padding: '20px'
+    flexDirection: 'column',
+	padding: '20px'
+  },
+  radiosContainer:{
+	  flexDirection: 'column',
+	  justifyContent: 'space-evenly',
+  },
+  searchButton:{
+	  width: '100%',
+	  justifySelf:'center',
+	  alignSelf: 'center',
+	  padding: '10px',
   },
   bigFont: {
     fontSize: '1.85rem'
@@ -64,6 +77,11 @@ const useStyles = makeStyles(theme => ({
   }
 }))
 
+/** ================================================================
+ *            					MAIN FUNCTION
+ *   ================================================================
+ **/
+
 const SearchForm = () => {
   const classes = useStyles()
   const [value, setValue] = useState('none')
@@ -89,17 +107,34 @@ const SearchForm = () => {
     )
   }
 
+  const handleUserInput = e => {
+    e.prevent.default()
+  }
+  const handleSubmit = e => {
+    e.prevent.default()
+  }
+
+  const submitUserSearch = async e => {
+    e.preventDefault()
+    // verify If user input !== ''
+    // if true, call the api
+    // endpoint /users?
+  }
+
   return (
     <>
-      <FormControl className={classes.root}>
+      <FormControl className={classes.root} onSubmit={handleSubmit}>
         <Input
           placeholder='🔍 Search our incredible users'
           inputProps={{ 'aria-label': 'description' }}
           className={classes.bigFont}
+          onChange={handleUserInput}
+          onKeyPress={e => e.key === 'Enter' && submitUserSearch(e)}
         />
         <FormHelperText id='my-helper-text'>
           Optional search filtered by :
         </FormHelperText>
+		<Container className={classes.radiosContainer}>
         <RadioGroup
           aria-label='search-by'
           name='search-radio'
@@ -132,6 +167,8 @@ const SearchForm = () => {
             label='(None)'
           />
         </RadioGroup>
+		<Button type="submit" variant="contained" color="primary" className={classes.searchButton}>Search Now!</Button>
+		</Container>
       </FormControl>
     </>
   )

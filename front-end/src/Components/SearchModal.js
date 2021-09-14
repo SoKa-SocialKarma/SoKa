@@ -19,7 +19,7 @@ const useStyles = makeStyles(theme => ({
   },
   paper: {
     width: '100vw',
-    transform: 'translateY(60px)',
+    transform: 'translateY(70px)',
     border: '2px solid #000',
     boxShadow: theme.shadows[5],
     padding: theme.spacing(2, 4, 3)
@@ -59,7 +59,12 @@ export default function SearchModal () {
 
   return (
     <div>
-      <Button onClick={handleOpen}>Search</Button>
+      <Button onClick={handleOpen}>
+        <img
+          src='https://img.icons8.com/external-kiranshastry-gradient-kiranshastry/64/000000/external-search-fitness-kiranshastry-gradient-kiranshastry.png'
+          alt='search menu'
+        />
+      </Button>
 
       <Modal
         aria-labelledby='transition-modal-title'

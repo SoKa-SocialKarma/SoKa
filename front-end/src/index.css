@@ -12,7 +12,9 @@
 }
 
 
-
+#root > div > main > div > div > div > fieldset {
+  margin: 2px;
+}
 
 
 body{ 
@@ -132,7 +134,7 @@ body{
     background-color: #000;
     text-align: center;
     cursor: pointer;
-     width: 100%; 
+    width: 100%; 
     font-size: 18px;
   }
   

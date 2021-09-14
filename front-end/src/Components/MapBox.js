@@ -25,7 +25,7 @@ const MapBox = () => {
     }, [location])
 
     return (
-        <div>
+        <>
             <ReactMapGL
                 mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_TOKEN}
                 mapStyle="mapbox://styles/tpichardo/cktjfw1vh05kc18qq97wjjwrj"
@@ -42,7 +42,7 @@ const MapBox = () => {
                     </button>
                 </Marker>
             </ReactMapGL>
-        </div>
+        </>
     )
 }
 
