@@ -25,9 +25,9 @@ const MapBox = () => {
     }, [location])
 
     return (
-        <div>
+        <>
             <ReactMapGL
-                mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_TOKEN}
+                mapboxApiAccessToken="pk.eyJ1IjoidHBpY2hhcmRvIiwiYSI6ImNrdGkzZmtpczAzYzYyb2w1MnRjcWFkdGoifQ.AfSFO49iduml_uiIy3JHNg"
                 mapStyle="mapbox://styles/tpichardo/cktjfw1vh05kc18qq97wjjwrj"
                 {...viewport}
                 onViewportChange={nextViewport => setViewport(nextViewport)}
@@ -42,7 +42,7 @@ const MapBox = () => {
                     </button>
                 </Marker>
             </ReactMapGL>
-        </div>
+        </>
     )
 }
 
