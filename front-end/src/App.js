@@ -1,61 +1,49 @@
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import React from 'react';
-// import Login from "./Pages/Login";
-import FourOFour from './Pages/FourOFour';
-import Home from './Pages/Home';
-import Index from './Pages/Index';
-import Show from './Pages/Show';
-import Profile from './Pages/Profile';
-import EditForm from './Components/EditForm';
-import Navbar from './Components/Navbar';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import './App.css';
+import { AuthProvider } from './Context/AuthContext';
 
-// const API= apiURL();
+import PublicLayout from './Layouts/PublicLayout';
+import PrivateLayout from './Layouts/PrivateLayout';
+import RouteWithLayout from './Components/RoutewithLayout';
+
+import LoginDashboard from './Pages/LoginDashboard';
+import Login from './Pages/Login';
+import SignUp from './Pages/SignUp';
+import UpdateProfile from './Pages/UpdateProfile';
+import ForgotPassword from './Pages/ForgotPassword';
+
+import Profile from './Pages/Profile';
+
+import Demo from './Pages/Demo';
+import Navbar from './Components/Navbar';
+import FourOFour from './Pages/FourOFour';
+
+import Show from './Pages/Show';
+import EditProfile from './Components/EditProfile';
+
+import PrivateRoute from './Components/PrivateRoute';
 
 function App() {
-	// const [matches, setMatch] = useState([]);
-
-	//useEffect(() => {
-	//try{
-	//axios.get(`${API}/matches`).then(
-	//(response) => {
-	//setMat
-	//}
-	//)
-	// }
-	//})
 	return (
-		<div className="body">
+		<>
 			<Router>
-				<Navbar />
-				<main>
-					<Switch>
-						<Route exact path="/">
-							<Home />
-						</Route>
-						<Route exact path="/matches">
-							<Index />
-						</Route>
-						<Route exact path="/users">
-							<Index />
-						</Route>
-						<Route path="/messages">
-							<Show />
-						</Route>
-						<Route path="/profile">
-							<Profile />
-						</Route>
-						<Route path="/edit">
-							<EditForm />
-						</Route>
-						<Route path="*">
-							<FourOFour />
-						</Route>
-					</Switch>
-				</main>
+				<AuthProvider>
+					<Navbar>
+						<Switch>
+							<Route exact path="/" component={Demo} />
+							<PrivateRoute path="/update-profile" component={UpdateProfile} />
+							<Route path="/signup" component={SignUp} />
+							<Route path="/login" component={Login} />
+							<Route path="/forgot-password" component={ForgotPassword} />
+							{/* <Route exact path='/matches' component={Index} /> */}
+							<Route path="/messages" component={Show} />
+							<Route path="/profile" component={Profile} />
+							<Route path="/edit" component={EditProfile} />
+							<Route path="*" component={FourOFour} />
+						</Switch>
+					</Navbar>
+				</AuthProvider>
 			</Router>
-		</div>
+		</>
 	);
 }
 
