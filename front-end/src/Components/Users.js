@@ -1,6 +1,8 @@
 import Button from '@material-ui/core/Button'
 import MousePopOver from './MousePopOver'
 import { makeStyles } from '@material-ui/core/styles'
+import {Link } from "react-router-dom"
+import UserMatches from "../Components/UserMatches"
 
 const useStyles = makeStyles({
   root: {
@@ -73,7 +75,7 @@ function Users ({ profile }) {
         </MousePopOver>
       </div>
       <div className={classes.flex}>
-        <Button variant='contained' color='primary' className={classes.flex45}>
+        <Button component={Link} to="/matches" onClick={UserMatches} variant='contained' color='primary' className={classes.flex45}>
           Match
         </Button>
         <Button variant='contained' color='primary' className={classes.flex45}>
