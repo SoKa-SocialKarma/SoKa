@@ -1,7 +1,9 @@
-import { useEffect, useState } from 'react'
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 import { AuthProvider } from './Context/AuthContext'
-import { apiURL } from './Util/apiURL.js'
+
+import PublicLayout from './Layouts/PublicLayout'
+import PrivateLayout from './Layouts/PrivateLayout'
+import RouteWithLayout from './Components/RoutewithLayout'
 
 import LoginDashboard from './Pages/LoginDashboard'
 import Login from './Pages/Login'
@@ -11,68 +13,37 @@ import ForgotPassword from './Pages/ForgotPassword'
 
 import Profile from './Pages/Profile'
 
-import Index from './Pages/Index'
+import Demo from './Pages/Demo'
 import Navbar from './Components/Navbar'
 import FourOFour from './Pages/FourOFour'
 
 import Show from './Pages/Show'
 import EditProfile from './Components/EditProfile'
 
-import './App.css'
 import PrivateRoute from './Components/PrivateRoute'
-import axios from 'axios'
-
-
-const API = apiURL();
 
 function App () {
-
-
-  // const [matches, setMatch] = useState([]);
-  const [demoProfiles, setDemoProfiles ] = useState([]);
-
-  const getDemoUsers = async () =>{
-    try{
-      const {data} = await axios.get(`${API}/users?limit=6`)
-      setDemoProfiles(data)
-    }catch(err){
-      console.log(err)
-    }
-  }
-
-  useEffect(() => {
-    return getDemoUsers();
-  },[])
-
-
   return (
-    <div className='body'>
+    <>
       <Router>
-        <Navbar />
-        <main>
-          <AuthProvider>
+        <AuthProvider>
+          <Navbar>
             <Switch>
-              <Route exact path='/'>
-                <Index demoProfiles={demoProfiles}/>
-              </Route>
+              <Route exact path='/' component={Demo} />
               <PrivateRoute path='/update-profile' component={UpdateProfile} />
               <Route path='/signup' component={SignUp} />
               <Route path='/login' component={Login} />
               <Route path='/forgot-password' component={ForgotPassword} />
-              <Route exact path='/matches' component={Index} />
+              {/* <Route exact path='/matches' component={Index} /> */}
               <Route path='/messages' component={Show} />
-              <Route path='/profile' component={Profile} /> 
-              <Route path='/edit'>
-                <EditProfile />
-              </Route>
-              <Route path='*'>
-                <FourOFour />
-              </Route>
+              <Route path='/profile' component={Profile} />
+              <Route path='/edit' component={EditProfile} />
+              <Route path='*' component={FourOFour} />
             </Switch>
-          </AuthProvider>
-        </main>
+          </Navbar>
+        </AuthProvider>
       </Router>
-    </div>
+    </>
   )
 }
 
