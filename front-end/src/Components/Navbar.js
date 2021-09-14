@@ -1,7 +1,14 @@
-import React from 'react'
-import clsx from 'clsx'
+import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { makeStyles, useTheme } from '@material-ui/core/styles'
+
+import Index from '../Pages/Demo'
+import Show from '../Pages/Show'
+import Profile from '../Pages/Profile'
+import Home from '../Pages/LoginDashboard'
+import SearchModal from './SearchModal'
+
+import clsx from 'clsx'
 import Drawer from '@material-ui/core/Drawer'
 import AppBar from '@material-ui/core/AppBar'
 import Toolbar from '@material-ui/core/Toolbar'
@@ -16,25 +23,12 @@ import ChevronRightIcon from '@material-ui/icons/ChevronRight'
 import ListItem from '@material-ui/core/ListItem'
 import ListItemIcon from '@material-ui/core/ListItemIcon'
 import ListItemText from '@material-ui/core/ListItemText'
-import InboxIcon from '@material-ui/icons/MoveToInbox'
-import MailIcon from '@material-ui/icons/Mail'
-import Index from '../Pages/Index'
-import Show from '../Pages/Show'
-import Profile from '../Pages/Profile'
-import Home from '../Pages/LoginDashboard'
-import Search from '../Pages/Questionnaire'
-import Icon from '@material-ui/core/Icon'
-import HomeTwoToneIcon from '@material-ui/icons/HomeTwoTone'
 import ChatIcon from '@material-ui/icons/Chat'
-import AccountBoxTwoToneIcon from '@material-ui/icons/AccountBoxTwoTone'
-import SearchTwoToneIcon from '@material-ui/icons/SearchTwoTone'
-import EmojiEmotionsIcon from '@material-ui/icons/EmojiEmotions'
-import { EmojiFlagsOutlined } from '@material-ui/icons'
-import SearchForm from './SearchForm'
-import SearchModal from './SearchModal'
 import Button from '@material-ui/core/Button'
-// import Button from '@material-ui/icons/Button'
-const drawerWidth = 240
+import AccountBoxTwoToneIcon from '@material-ui/icons/AccountBoxTwoTone'
+import EmojiEmotionsIcon from '@material-ui/icons/EmojiEmotions'
+
+const drawerWidth = 180
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -85,6 +79,7 @@ const useStyles = makeStyles(theme => ({
     }
   },
   toolbar: {
+    width: '100%',
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'flex-end',
@@ -92,21 +87,30 @@ const useStyles = makeStyles(theme => ({
     // necessary for content to be below app bar
     ...theme.mixins.toolbar
   },
+  topCenter: {
+    width: '100%',
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-evenly',
+    alignSelf: 'center'
+  },
   content: {
-    flexGrow: 1,
-    padding: theme.spacing(3)
+    flexGrow: 1
+  },
+  child: {
+    paddingTop: theme.spacing(12),
+    paddingBottom: theme.spacing(12)
   }
 }))
 
-export default function Navbar () {
+export default function Navbar ({ children }) {
   const classes = useStyles()
   const theme = useTheme()
-  const [open, setOpen] = React.useState(false)
+  const [open, setOpen] = useState(false)
 
   const handleDrawerOpen = () => {
     setOpen(true)
   }
-
   const handleDrawerClose = () => {
     setOpen(false)
   }
@@ -120,7 +124,7 @@ export default function Navbar () {
           [classes.appBarShift]: open
         })}
       >
-        <Toolbar>
+        <Toolbar className={classes.toolbar}>
           <IconButton
             color='inherit'
             aria-label='open drawer'
@@ -132,28 +136,24 @@ export default function Navbar () {
           >
             <MenuIcon />
           </IconButton>
-          <Typography
-            variant='h6'
-            noWrap
-            component={Link}
-            to='/'
-            onClick={Home}
-          >
-            Soka
-          </Typography>
-
-          <span>
-            {/* <SearchForm /> */}
+          <div className={classes.topCenter}>
+            <Typography
+              variant='h3'
+              noWrap
+              component={Link}
+              to='/'
+              onClick={Home}
+            >
+              Soka
+            </Typography>
             <SearchModal />
-          </span>
-          <Button variant='contained' color='primary'>
-            Login
-          </Button>
-          {/* <span>
-    <SearchForm/>
-</span> */}
+            <Button variant='contained' color='primary'>
+              Login
+            </Button>
+          </div>
         </Toolbar>
       </AppBar>
+
       <Drawer
         variant='permanent'
         className={clsx(classes.drawer, {
@@ -198,26 +198,11 @@ export default function Navbar () {
             </ListItemIcon>
             <ListItemText primary='Profile' />
           </ListItem>
-
-          {/* <ListItem component={Link} to="/search" onClick={Search}>
-<ListItemIcon>
-<SearchTwoToneIcon style={{ color: "purple"}}/>
-</ListItemIcon>
-<ListItemText primary="New Search"/>
-</ListItem> */}
         </List>
         <Divider />
-        {/* <List>
-          {['Edit Profile', 'Settings', 'Log out'].map((text, index) => (
-            <ListItem button key={text} >
-              <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItem>
-          ))}
-        </List> */}
       </Drawer>
-      <main className={classes.content} style={{ color: 'purple' }}>
-        <div className={classes.toolbar} />
+      <main className={classes.content}>
+        <div className={classes.child}>{children}</div>
       </main>
     </div>
   )
