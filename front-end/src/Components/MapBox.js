@@ -23,9 +23,17 @@ const MapBox = () => {
             height: window.innerHeight
         })
     }, [location])
+
     return (
         <div>
-            <h1>Mappppp</h1>
+            <ReactMapGL
+                mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_TOKEN}
+                mapStyle="mapbox://styles/tpichardo/cktjfw1vh05kc18qq97wjjwrj"
+                {...viewport}
+                onViewportChange={nextViewport => setViewport(nextViewport)}
+
+            >
+            </ReactMapGL>
         </div>
     )
 }
