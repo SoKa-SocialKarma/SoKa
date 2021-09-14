@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import ReactMapGL from 'react-map-gl';
+import ReactMapGL, { Marker } from 'react-map-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import useGeoLocation from '../Hooks/useGeoLocation';
 
@@ -33,6 +33,14 @@ const MapBox = () => {
                 onViewportChange={nextViewport => setViewport(nextViewport)}
 
             >
+                <Marker
+                    latitude={location.coordinates.latitude || 40.7128}
+                    longitude={location.coordinates.longitude || -74.0060}
+                >
+                    <button>
+                        <img src="https://www.clipartmax.com/png/middle/191-1917225_dumbbell-icon-white-dumbbell-png.png" height={15} width={15} alt="Dumbell icon" />
+                    </button>
+                </Marker>
             </ReactMapGL>
         </div>
     )
