@@ -41,7 +41,8 @@ const getAllUsersQuery = ({
   experience,
   availability,
   sortBy,
-  order
+  order,
+  limit
 }) => {
   let qString = ''
 
@@ -90,6 +91,11 @@ const getAllUsersQuery = ({
     qString += `${
       qString.includes('WHERE') ? ' AND' : ' WHERE'
     } karma <= ${karma}`
+  }
+  if (limit){
+    qString += `${
+      qString.includes('WHERE') ? ' AND' : ''
+    } LIMIT ${limit}`
   }
 
   badges = badges?.toUpperCase()

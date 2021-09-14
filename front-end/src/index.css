@@ -1,0 +1,147 @@
+#root {
+  width: 100vw;
+  height: 100vh;
+}
+#root > div{
+  width: 100vw;
+  height: 100vh;
+}
+
+#root > div > main {
+  width: auto;
+}
+
+
+
+
+
+body{ 
+    display: flex;
+    justify-content: center;
+    background-color: darkblue;
+  }
+  #main {
+    display: flex;
+    justify-content: center;
+  }
+  #name {
+    display: flex;
+    justify-content: center;
+  }
+  
+  #search {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  /* Style page content */
+  .main {
+    margin-left: 160px; /* Same as the width of the sidebar */
+    padding: 0px 10px;
+  }
+  
+  /* Container holding the image and the text */
+  .container {
+    margin-top: 10px;
+    position: relative;
+    text-align: center;
+    color: rgb(45, 112, 133);
+    padding-right: 20px;
+    padding-left: 60px;
+  }
+  
+  /* Bottom left text */
+  .bottom-left {
+    position: absolute;
+    bottom: 8px;
+    left: 16px;
+  }
+  
+  .bottom-center {
+    position: absolute;
+    bottom: 15%;
+    text-align: center;
+    /* top: 50%; */
+    /* left: 50%; */
+    /* transform: translate(-50%, -50%); */
+  }
+  
+  .index {
+    text-align: center;
+  }
+  
+  .messages {
+    text-align: center;
+    position: relative;
+    margin: 15px;
+  }
+  
+  /* {box-sizing: border-box;} */
+  
+  .search-form {
+    width: 110%;
+    display: flex;
+    justify-content: space-between;
+    margin: auto;
+    align-items: center;
+    padding-left: 70px;
+    padding-right: 130px;
+    flex-wrap: wrap;
+  }
+  .topBar {
+    color: #44cceb;
+    width: 100%;
+  }
+  
+  .cards {
+    padding-left: 8%;
+    display: flex;
+    justify-content: center;
+    /* background-color: blue; */
+  }
+  
+  #matches {
+    text-align: center;
+  }
+  
+  .match {
+    background-color: rgb(143, 227, 255, 0.6);
+  }
+  
+  
+  
+  
+  #card {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    max-width: 300px;
+    margin: auto; 
+    text-align: center;
+  }
+  
+  .title {
+    color: grey;
+    font-size: 18px;
+  }
+  
+  #profile {
+    border: none;
+    outline: 0;
+    display: inline-block; 
+    padding: 8px;
+    color: white;
+    background-color: #000;
+    text-align: center;
+    cursor: pointer;
+     width: 100%; 
+    font-size: 18px;
+  }
+  
+  a {
+    text-decoration: none;
+    font-size: 22px;
+    color: black;
+  }
+  
+  button:hover, a:hover {
+    opacity: 0.7;
+  }

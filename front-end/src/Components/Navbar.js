@@ -16,25 +16,19 @@ import ChevronRightIcon from '@material-ui/icons/ChevronRight'
 import ListItem from '@material-ui/core/ListItem'
 import ListItemIcon from '@material-ui/core/ListItemIcon'
 import ListItemText from '@material-ui/core/ListItemText'
-import InboxIcon from '@material-ui/icons/MoveToInbox'
-import MailIcon from '@material-ui/icons/Mail'
-import Index from '../Pages/Index'
+import Index from '../Pages/Demo'
 import Show from '../Pages/Show'
 import Profile from '../Pages/Profile'
 import Home from '../Pages/LoginDashboard'
-import Search from '../Pages/Questionnaire'
-import Icon from '@material-ui/core/Icon'
-import HomeTwoToneIcon from '@material-ui/icons/HomeTwoTone'
 import ChatIcon from '@material-ui/icons/Chat'
 import AccountBoxTwoToneIcon from '@material-ui/icons/AccountBoxTwoTone'
-import SearchTwoToneIcon from '@material-ui/icons/SearchTwoTone'
 import EmojiEmotionsIcon from '@material-ui/icons/EmojiEmotions'
-import { EmojiFlagsOutlined } from '@material-ui/icons'
+
 import SearchForm from './SearchForm'
 import SearchModal from './SearchModal'
 import Button from '@material-ui/core/Button'
 // import Button from '@material-ui/icons/Button'
-const drawerWidth = 240
+const drawerWidth = 180
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -85,6 +79,7 @@ const useStyles = makeStyles(theme => ({
     }
   },
   toolbar: {
+    width: '100%',
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'flex-end',
@@ -93,12 +88,15 @@ const useStyles = makeStyles(theme => ({
     ...theme.mixins.toolbar
   },
   content: {
-    flexGrow: 1,
-    padding: theme.spacing(3)
+    flexGrow: 1
+  },
+  child: {
+    paddingTop: theme.spacing(12),
+    paddingBottom: theme.spacing(12)
   }
 }))
 
-export default function Navbar () {
+export default function Navbar ({ children }) {
   const classes = useStyles()
   const theme = useTheme()
   const [open, setOpen] = React.useState(false)
@@ -106,7 +104,6 @@ export default function Navbar () {
   const handleDrawerOpen = () => {
     setOpen(true)
   }
-
   const handleDrawerClose = () => {
     setOpen(false)
   }
@@ -216,8 +213,8 @@ export default function Navbar () {
           ))}
         </List> */}
       </Drawer>
-      <main className={classes.content} style={{ color: 'purple' }}>
-        <div className={classes.toolbar} />
+      <main className={classes.content}>
+        <div className={classes.child}>{children}</div>
       </main>
     </div>
   )
