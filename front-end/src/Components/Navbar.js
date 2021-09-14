@@ -32,6 +32,7 @@ import EmojiEmotionsIcon from '@material-ui/icons/EmojiEmotions';
 import { EmojiFlagsOutlined } from '@material-ui/icons';
  import SearchForm from './SearchForm';
  import Button from '@material-ui/core/Button';
+ import Login from '../Pages/Login'
 // import Button from '@material-ui/icons/Button'
 const drawerWidth = 240;
 
@@ -139,7 +140,7 @@ export default function Navbar() {
           <span>
           <SearchForm/>
           </span>
-          <Button variant="contained" color="primary">
+          <Button variant="contained" color="primary" component={Link} to="/login" onClick={Login}>
             Login
         </Button>
 {/* <span>

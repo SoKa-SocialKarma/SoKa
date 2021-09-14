@@ -8,6 +8,8 @@ import Show from "./Pages/Show"
 import Profile from "./Pages/Profile"
  import EditForm from "./Components/EditForm";
 import Navbar from "./Components/Navbar"
+import Login from "./Pages/Login"
+import Signup from "./Pages/Signup"
 import 'bootstrap/dist/css/bootstrap.min.css';
 import "./App.css";
 
@@ -39,6 +41,12 @@ function App() {
             </Route>
             <Route exact path="/users">
               <Index />
+            </Route>
+            <Route path="/login">
+              <Login/>
+            </Route>
+            <Route exact path="/signup">
+              <Signup/>
             </Route>
             <Route path="/messages">
               <Show/>
