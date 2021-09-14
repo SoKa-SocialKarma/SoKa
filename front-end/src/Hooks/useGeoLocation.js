@@ -24,6 +24,17 @@ const useGeoLocation = () => {
         });
     }
 
+    useEffect(() => {
+        if (!("geolocation" in navigator)) {
+            onError({
+                code: 0,
+                message: "Geolocation not supported "
+            });
+        }
+
+        navigator.geolocation.getCurrentPosition(onSuccess, onError);
+    }, [])
+
 
     return location;
 }
