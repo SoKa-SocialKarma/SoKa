@@ -9,7 +9,7 @@ const useStyles = makeStyles(theme => ({
     pointerEvents: 'none'
   },
   paper: {
-    padding: theme.spacing(4),
+    padding: theme.spacing(3),
     margin: theme.spacing(1)
   }
 }))

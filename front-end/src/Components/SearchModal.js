@@ -19,7 +19,7 @@ const useStyles = makeStyles(theme => ({
   },
   paper: {
     width: '100vw',
-    transform: 'translateY(60px)',
+    transform: 'translateY(70px)',
     border: '2px solid #000',
     boxShadow: theme.shadows[5],
     padding: theme.spacing(2, 4, 3)

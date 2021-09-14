@@ -110,7 +110,9 @@ const useStyles = makeStyles(theme => ({
     justifyContent: 'flex-end'
   },
   login: {
-    width: '20%'
+    width: '20%',
+    fontSize: '1rem',
+    color: 'white'
   },
   menuIcon:{
     justifySelf: 'center',
