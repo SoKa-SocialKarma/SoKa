@@ -4,11 +4,11 @@ import { Checkbox, FormHelperText } from '@material-ui/core';
 import clsx from 'clsx';
 
 import FormControl from '@material-ui/core/FormControl'
-import Input from '@material-ui/core/Input'
+// import Input from '@material-ui/core/Input'
 import Radio from '@material-ui/core/Radio'
 import RadioGroup from '@material-ui/core/RadioGroup'
 import FormControlLabel from '@material-ui/core/FormControlLabel'
-import Button from '@material-ui/core/Button'
+// import Button from '@material-ui/core/Button'
 import Container from '@material-ui/core/Container'
 
 const useStyles = makeStyles(theme => ({
@@ -86,7 +86,7 @@ const SearchForm = () => {
 	const classes = useStyles()
 	const [value, setValue] = useState('none')
 
-	const handleRadioChange = event => {
+	const handleCheckboxChange = event => {
 		setValue(event.target.value)
 	}
 
@@ -124,50 +124,41 @@ const SearchForm = () => {
 	return (
 		<>
 			<FormControl className={classes.root} onSubmit={handleSubmit}>
-				<Input
+				{/* <Input
 					placeholder='🔍 Search our incredible users'
 					inputProps={{ 'aria-label': 'description' }}
 					className={classes.bigFont}
 					onChange={handleUserInput}
 					onKeyPress={e => e.key === 'Enter' && submitUserSearch(e)}
-				/>
+				/> */}
 				<FormHelperText id='my-helper-text'>
 					Optional search filtered by :
 				</FormHelperText>
 				<Container className={classes.radiosContainer}>
-					<RadioGroup
+					{/* <RadioGroup
 						aria-label='search-by'
 						name='search-radio'
 						value={value}
-						onChange={handleRadioChange}
+						onChange={handleCheckboxChange}
 						className={classes.radios}
-					>
-						<FormControlLabel value='name' control={<Radio />} label='Name' />
-						<FormControlLabel
-							value='lastname'
-							control={<Radio />}
-							label='Lastname'
-						/>
-						<FormControlLabel
-							value='username'
-							control={<Radio />}
-							label='Username'
-						/>
-						<FormControlLabel
-							value='location'
-							control={<Radio />}
-							label='Location'
-						/>
-						<FormControlLabel value='gender' control={<Radio />} label='Gender' />
-						<FormControlLabel
-							value='disabled'
-							name='none'
-							disabled
-							control={<StyledRadio />}
-							label='(None)'
-						/>
-					</RadioGroup>
-					<Button type="submit" variant="contained" color="primary" className={classes.searchButton}>Search Now!</Button>
+					> */}
+					<FormControlLabel
+						value='goals'
+						control={<Checkbox />}
+						label='Goals' />
+					<FormControlLabel
+						value='experience'
+						control={<Checkbox />}
+						label='Experience'
+					/>
+					<FormControlLabel
+						value='radius'
+						control={<Checkbox />}
+						label='Radius'
+					/>
+
+					{/* </RadioGroup> */}
+					{/* <Button type="submit" variant="contained" color="primary" className={classes.searchButton}>Search Now!</Button> */}
 				</Container>
 			</FormControl>
 		</>
