@@ -1,15 +1,11 @@
 import UserProfile from "../Components/UserProfile"
-// import EditForm from "../Components/EditForm";
 function Profile () {
 
 return (
     <div>
-        <span>
-    {/* <h1>Hi my name is@</h1> */}
-
+     <span>
     <UserProfile/>
-    {/* <EditForm/> */}
-        </span>
+    </span>
     </div>
 )
 }

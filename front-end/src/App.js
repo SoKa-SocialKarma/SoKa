@@ -1,5 +1,8 @@
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
-import { AuthProvider } from './Context/AuthContext'
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+// import axios from "axios";
+// import { useState, useEffect } from "react";
+// import { useHistory } from "react-router-dom";
+import { AuthProvider } from './Context/AuthContext';
 
 import PublicLayout from './Layouts/PublicLayout'
 import PrivateLayout from './Layouts/PrivateLayout'
@@ -23,8 +26,54 @@ import EditProfile from './Components/EditProfile'
 
 import PrivateRoute from './Components/PrivateRoute'
 import UserMatches from './Components/UserMatches'
+// import { apiURL } from './Util/apiURL'
 
+// const API = apiURL()
 function App () {
+//   let history =useHistory();
+//   const [profile,setProfile] = UseState([]);
+
+//   useEffect(() => {
+//     try{
+//       axios.get(`${API}/users`).then((response) => {
+//         setProfile(response.data)
+//       },
+//       (error) => console.log("get", error)
+//       );
+//     }catch (error) {
+//       console.warn("catch", error)
+//     }
+//   },[])
+
+//   const deleteProfile = (id) => {
+//     try {
+// axios.delete(`${API}/users${id}`).then((response) => {
+//   const details = [...profile];
+//   details.splice(
+//     profile.findIndex((prfile) => prfile.id === Number(id)), 1
+//   );
+//   setProfile(details);
+//   history.push("/profile")
+// })
+//     }catch (error) {
+//       console.warn("catch", error)
+//     }
+//   }
+
+//   const updateProfile = (prof, id) => {
+//     try {
+//       axios.put(`${API}/users/${id}`, prof).then((response) => {
+//         const neuVar = [...profile];
+//         const index = neuVar.findIndex((prof) => prof.id === Number(id));
+//         neuVar[index] = prof;
+//         setProfile(neuVar);
+//         history.push(`/profile/${id}`);
+//       });
+//     } catch (error) {
+//       console.warn("catch", error);
+//     }
+//   };
+
   return (
     <>
       <Router>
@@ -40,7 +89,7 @@ function App () {
               <Route path='/matches' component={UserMatches} />
               <Route path='/messages' component={Show} />
               <Route path='/profile' component={Profile} />
-              <Route path='/edit' component={EditProfile} />
+              <Route exact path='/edit' component={EditProfile} />
               <Route path='*' component={FourOFour} />
             </Switch>
           </Navbar>
