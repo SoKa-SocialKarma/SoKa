@@ -19,7 +19,7 @@ const Login = () => {
             setError('');
             setLoading(true);
             await logIn(emailRef.current.value, passwordRef.current.value);
-            history.push('/');
+            history.push('/matches');
         }catch(error){
             const message = error.message.split(" ")
             .filter((word)=> 
@@ -33,7 +33,7 @@ const Login = () => {
 
     return (
         <>
-        <Card>
+        <Card className="loginDashboard">
             <Card.Body>
                 <h2 className="text-center mb-4" >Log In</h2>
                 {error && <Alert variant="danger">{error}</Alert>}
