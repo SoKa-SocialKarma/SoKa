@@ -28,6 +28,14 @@ const useStyles = makeStyles(theme => ({
   }
 }))
 
+
+
+/** ================================================================
+*            					MAIN FUNCTION
+*   ================================================================
+**/
+
+
 const PopularSearches = ({ today }) => {
   const classes = useStyles()
   const [userSelected, setUserSelected] = useState('')

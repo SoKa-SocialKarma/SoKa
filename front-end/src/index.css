@@ -12,7 +12,9 @@
 }
 
 
-
+#root > div > main > div > div > div > fieldset {
+  margin: 2px;
+}
 
 
 body{ 

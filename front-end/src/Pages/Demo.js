@@ -20,7 +20,7 @@ const useStyles = makeStyles({
     height: '640px',
     padding: '10px',
     display: 'grid',
-    gridTemplateRows: '10% 45% 25% 20%'
+    gridTemplateRows: '10% 40% 7% 23% 18%'
   }
 })
 
