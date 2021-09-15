@@ -1,13 +1,12 @@
-import React from 'react';
+import React from 'react'
 import NavBar from '../Components/Navbar'
 
+const PrivateLayout = ({ component }) => {
+  return (
+    <>
+      <NavBar children={component} />
+    </>
+  )
+}
 
-const PrivateLayout = ({component}) => {
-    return (
-        <>
-            <NavBar  children={component}/>
-        </>
-    );
-};
-
-export default PrivateLayout;
+export default PrivateLayout

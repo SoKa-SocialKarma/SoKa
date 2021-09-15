@@ -42,7 +42,7 @@ const useStyles = makeStyles({
   }
 })
 
-function Users ({ profile }) {
+function UserCard ({ profile }) {
   const classes = useStyles()
 
   const { name, lastname, location, karma } = profile
@@ -98,4 +98,4 @@ function Users ({ profile }) {
     </>
   )
 }
-export default Users
+export default UserCard
