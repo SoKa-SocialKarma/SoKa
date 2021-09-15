@@ -16,7 +16,7 @@ export default function EditForm() {
 		event.preventDefault();
 	};
 	return (
-		<div>
+		<div id="edit">
 			<h1>Edit page</h1>
 			{/* //avoid refreshing page  */}
 			<form onSubmit={handleSubmit}>
@@ -24,6 +24,8 @@ export default function EditForm() {
 					<label htmlFor="img">Image:</label>
 					<input type="text" id="img" value={details.img} placeholder="http://" onChange={handleChange} />
 				</span>
+				<br />
+				<br />
 				<span>
 					<label htmlFor="availability">Availability:</label>
 					<input type="date" id="availability" value={details.availability} onChange={handleChange} />

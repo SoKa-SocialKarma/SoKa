@@ -3,6 +3,7 @@ import { Container } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
 
 import Users from '../Components/Users.js'
+import UserProfile from '../Components/UserProfile.js'
 import Paper from '@material-ui/core/Paper'
 import axios from 'axios'
 import { apiURL } from '../Util/apiURL.js'

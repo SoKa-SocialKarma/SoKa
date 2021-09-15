@@ -165,3 +165,8 @@ body{
     width: 45%;
     border-radius: 10px;
   }
+
+  #edit {
+    width: 40%;
+    margin: 50px;
+  }
