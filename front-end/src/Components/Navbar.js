@@ -2,11 +2,6 @@ import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { makeStyles, useTheme } from '@material-ui/core/styles'
 
-import Index from '../Pages/Demo'
-import Show from '../Pages/Show'
-import Profile from '../Pages/Profile'
-import Home from '../Pages/LoginDashboard'
-import MapBox from '../Components/MapBox'
 import SearchModal from './SearchModal'
 
 import clsx from 'clsx'
