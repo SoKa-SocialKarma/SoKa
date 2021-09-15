@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import { FormHelperText } from '@material-ui/core';
+import { Checkbox, FormHelperText } from '@material-ui/core';
 import clsx from 'clsx';
 
 import FormControl from '@material-ui/core/FormControl';
@@ -81,12 +81,9 @@ const SearchForm = () => {
 				<Input placeholder="🔍 Search our incredible users" inputProps={{ 'aria-label': 'description' }} className={classes.bigFont} />
 				<FormHelperText id="my-helper-text">Optional search filtered by :</FormHelperText>
 				<RadioGroup aria-label="search-by" name="search-radio" value={value} onChange={handleRadioChange} className={classes.radios}>
-					<FormControlLabel value="name" control={<Radio />} label="Name" />
-					<FormControlLabel value="lastname" control={<Radio />} label="Lastname" />
-					<FormControlLabel value="username" control={<Radio />} label="Username" />
-					<FormControlLabel value="location" control={<Radio />} label="Location" />
-					<FormControlLabel value="gender" control={<Radio />} label="Gender" />
-					<FormControlLabel value="disabled" name="none" disabled control={<StyledRadio />} label="(None)" />
+					<FormControlLabel value="goals" control={<Checkbox />} label="Goals" />
+					<FormControlLabel value="experience" control={<Checkbox />} label="Experience" />
+					<FormControlLabel value="radius" control={<Checkbox />} label="Radius" />
 				</RadioGroup>
 			</FormControl>
 		</>
