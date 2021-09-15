@@ -15,11 +15,11 @@ export default function EditProfile () {
     );
   },[index, history]);
 
-const addDetails = (newdetails) => {
-  axios.post(`${API}/profile`, newdetails).then(() => {
-    history.push(`/profile`)
-  })
-}
+// const addDetails = (newdetails) => {
+//   axios.post(`${API}/profile`, newdetails).then(() => {
+//     history.push(`/profile`)
+//   })
+// }
 
   const [details, setDetails] = useState({
     img: '',

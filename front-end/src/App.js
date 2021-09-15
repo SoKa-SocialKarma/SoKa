@@ -83,13 +83,13 @@ function App () {
               <Route exact path='/' component={Demo} />
               <PrivateRoute path='/update-profile' component={UpdateProfile} />
               <Route path='/map' component={MapBox} />
+              <Route exact path='/edit' component={EditProfile} />
               <Route path='/signup' component={Signp} />
               <Route path='/login' component={Login} />
               <Route path='/forgot-password' component={ForgotPassword} />
               <Route path='/matches' component={UserMatches} />
               <Route path='/messages' component={Show} />
               <Route path='/profile' component={Profile} />
-              <Route exact path='/edit' component={EditProfile} />
               <Route path='*' component={FourOFour} />
             </Switch>
           </Navbar>
