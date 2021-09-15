@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { makeStyles, useTheme } from '@material-ui/core/styles'
+import { useAuth } from '../Context/AuthContext';
 
 import SearchModal from './SearchModal'
 
@@ -92,7 +93,7 @@ const useStyles = makeStyles(theme => ({
     alignSelf: 'center'
   },
   content: {
-    flexGrow: 1
+    flexGrow: 1,
   },
   child: {
     paddingTop: theme.spacing(12),
@@ -116,6 +117,7 @@ const useStyles = makeStyles(theme => ({
 }))
 
 export default function Navbar ({ children }) {
+  const {currentUser} = useAuth()
   const classes = useStyles()
   const theme = useTheme()
   const [open, setOpen] = useState(false)
@@ -159,8 +161,12 @@ export default function Navbar ({ children }) {
             </Typography>
             <div className={classes.authContainer}>
               <SearchModal />
-              <Button component={Link} to="/login" className={classes.login}>Login</Button>
+              {!currentUser ?
+              <Button component={Link} to="/login" className={classes.login}>Login</Button> 
+              :<Button component={Link} to="/login-dashboard" className={classes.login}>{currentUser.email}</Button>}
+              {!currentUser ?
               <Button component={Link} to="/signup" className={classes.login}>SignUp</Button>
+              : null}
             </div>
           </div>
         </Toolbar>
@@ -224,7 +230,7 @@ export default function Navbar ({ children }) {
                 style={{ width: '36px', height: '36px' }}
               />
             </ListItemIcon>
-            <ListItemText primary='Profile' />
+            <ListItemText primary='Map' />
           </ListItem>
         </List>
         <Divider />

@@ -16,6 +16,25 @@
   margin: 2px;
 }
 
+#email > input::placeholder {
+  color: rgb(169, 163, 163);
+}
+
+#password > input::placeholder {
+  color: rgb(169, 163, 163);
+}
+
+#password-confirm > input::placeholder {
+  color: rgb(169, 163, 163);
+}
+
+
+.loginDashboard{
+  width: 40%;
+  margin: 0 30% 0 30%!important;
+  
+}
+
 
 body{ 
     display: flex;

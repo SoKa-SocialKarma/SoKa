@@ -33,7 +33,7 @@ const ForgotPassword = () => {
 
   return (
     <>
-      <Card>
+      <Card className="loginDashboard">
         <Card.Body>
           <h2 className='text-center mb-4'>Password Reset</h2>
           {error && <Alert variant='danger'>{error}</Alert>}

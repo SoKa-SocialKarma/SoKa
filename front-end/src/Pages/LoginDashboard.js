@@ -13,7 +13,7 @@ const LoginDashBoard = () => {
 
         try{
             await logOut();
-            history.push('/login');
+            history.push('/');
         }catch{
             setError('Failed to log out');
         }
@@ -21,7 +21,7 @@ const LoginDashBoard = () => {
 
   return (
     <>
-      <Card>
+      <Card className="loginDashboard">
           <Card.Body>
             <h2 className="text-center mb-4">Profile</h2>
             {error && <Alert variant="danger">{error}</Alert>}

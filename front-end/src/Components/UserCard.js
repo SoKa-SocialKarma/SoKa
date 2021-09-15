@@ -62,7 +62,7 @@ function UserCard ({ profile }) {
       />
       <Box component='fieldset' mb={3} borderColor='transparent' className={classes.box}>
         <Typography component='legend' variant="h6" className={classes.box}>Social Karma</Typography>
-        <Rating name='read-only' value={Math.round(Number(karma))} readOnly />
+        <Rating name='read-only' value={Number(karma)} readOnly />
       </Box>
       <div className={classes.flex}>
         <MousePopOver prop={Object.assign({ value: days })}>

@@ -45,7 +45,7 @@ const UpdateProfile = () => {
 
     return (
         <>
-        <Card>
+        <Card className="loginDashboard">
             <Card.Body>
                 <h2 className="text-center mb-4" >Update Profile</h2>
                 {error && <Alert variant="danger">{error}</Alert>}
@@ -56,7 +56,7 @@ const UpdateProfile = () => {
                     </Form.Group>
                     <Form.Group id="password">
                         <Form.Label>Password</Form.Label>
-                        <Form.Control type="password" ref={passwordRef} placeholder="Must have at least 6 characters" />
+                        <Form.Control type="password" ref={passwordRef} placeholder="at least 6 characters" />
                     </Form.Group>
                     <Form.Group id="password-confirm">
                         <Form.Label>Password Confirmation</Form.Label>
