@@ -7,7 +7,7 @@ import RouteWithLayout from './Components/RoutewithLayout'
 
 import LoginDashboard from './Pages/LoginDashboard'
 import Login from './Pages/Login'
-import Signup from './Pages/Signup'
+import Signp from './Pages/Signp'
 import UpdateProfile from './Pages/UpdateProfile'
 import ForgotPassword from './Pages/ForgotPassword'
 import MapBox from './Components/MapBox'
@@ -34,7 +34,7 @@ function App () {
               <Route exact path='/' component={Demo} />
               <PrivateRoute path='/update-profile' component={UpdateProfile} />
               <Route path='/map' component={MapBox} />
-              <Route path='/signup' component={Signup} />
+              <Route path='/signup' component={Signp} />
               <Route path='/login' component={Login} />
               <Route path='/forgot-password' component={ForgotPassword} />
               <Route path='/matches' component={UserMatches} />
