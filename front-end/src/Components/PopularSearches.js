@@ -5,6 +5,7 @@ import { goals, experience, radius } from '../Util/searchFields'
 import FormControl from '@material-ui/core/FormControl'
 import TextField from '@material-ui/core/TextField'
 import MenuItem from '@material-ui/core/MenuItem'
+import Button from '@material-ui/core/Button'
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -102,6 +103,7 @@ const PopularSearches = ({ today }) => {
             shrink: true
           }}
         />
+        <Button type="submit" variant="contained" color="primary" className={classes.searchButton}>Search Now!</Button>
       </FormControl>
     </>
   )
