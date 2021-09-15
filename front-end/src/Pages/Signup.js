@@ -3,7 +3,7 @@ import { Form, Button, Card, Alert } from 'react-bootstrap';
 import { useAuth } from '../Context/AuthContext';
 import { Link, useHistory } from 'react-router-dom'
 
-const SignUp = () => {
+const Signup = () => {
 
     const emailRef = useRef();
     const passwordRef = useRef();
@@ -63,4 +63,4 @@ const SignUp = () => {
     );
 };
 
-export default SignUp;
+export default Signup;
