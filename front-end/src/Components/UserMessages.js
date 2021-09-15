@@ -10,9 +10,9 @@ function UserMessages() {
 			</span>
 			<span>
 			<h1>Daniel </h1>
-			<p>Daniel: Hey, Are you ready for Chest day! </p>
+			<p id="recieved">Daniel: Hey, Are you ready for Chest day! </p>
 			<p id="sent">Talia: Definately, drinking this pre-workout right now</p>
-			<p>Daniel: Ok sounds good. Let's meet at the gym near you @ 8pm.</p>
+			<p id="recieved">Daniel: Ok sounds good. Let's meet at the gym near you @ 8pm.</p>
 			<p id="sent">Talia: Perfect. Leaving my house soon, should be there in half hour. </p>
 
 			<input type="text"  placeholder="..." />
