@@ -1,111 +1,148 @@
 import { useState } from 'react'
-import { makeStyles } from '@material-ui/core/styles'
-import { goals, experience, radius } from '../Util/searchFields'
+import { gender, location, radius } from '../Util/searchFields'
 
-import FormControl from '@material-ui/core/FormControl'
-import TextField from '@material-ui/core/TextField'
-import MenuItem from '@material-ui/core/MenuItem'
-import Button from '@material-ui/core/Button'
+import {
+  FormControl,
+  FormHelperText,
+  TextField,
+  MenuItem,
+  Button,
+  Container
+} from '@material-ui/core'
+import { makeStyles } from '@material-ui/core/styles'
 
 const useStyles = makeStyles(theme => ({
   root: {
     width: '100%',
     display: 'flex',
     flexDirection: 'row',
-    justifyContent: 'space-between',
+    justifyContent: 'flex-start',
     alignItems: 'center',
-    padding: '20px'
+    padding: '16px 0px 0px 0px',
+    gap: theme.spacing(3.6)
   },
   optionMenu: {
     width: '22%'
   },
+  container: {
+    padding: '10px 20px 0px 20px!important'
+  },
   bigFont: {
     fontSize: '1.85rem'
   },
-  textField: {
-    marginLeft: theme.spacing(1),
-    marginRight: theme.spacing(1),
-    width: '22%'
+  searchButton: {
+    height: '100%'
   }
 }))
 
-
-
 /** ================================================================
-*            					MAIN FUNCTION
-*   ================================================================
-**/
+ *            					MAIN FUNCTION
+ *   ================================================================
+ **/
 
-
-const PopularSearches = ({ today }) => {
+const PopularSearches = ({ getSearchResults }) => {
   const classes = useStyles()
-  const [userSelected, setUserSelected] = useState('')
+
+  const [userSelectedGender, setUserSelectedGender] = useState('')
+  const [userSelectedLocation, setUserSelectedLocation] = useState('')
+  const [userSelectedRadius, setUserSelectedRadius] = useState('')
 
   const handleChange = event => {
-    setUserSelected(event.target.value)
+    event.preventDefault()
+    switch (event.target.name) {
+      case 'gender':
+        setUserSelectedGender(event.target.value)
+        break
+      case 'location':
+        setUserSelectedLocation(event.target.value)
+        break
+      case 'radius':
+        setUserSelectedRadius(event.target.value)
+        break
+      default:
+        break
+    }
+  }
+
+  const handleSubmit = async event => {
+    event.preventDefault()
+
+    const searchParams = {
+      gender: userSelectedGender,
+      location: userSelectedLocation,
+      radius: userSelectedRadius
+    }
+
+    await getSearchResults(searchParams)
   }
 
   return (
-    <>
-      <FormControl className={classes.root}>
-        <TextField
-          id='outlined-select-goals'
-          select
-          label='Goals'
-          value={userSelected}
-          onChange={handleChange}
-          variant='outlined'
-          className={classes.optionMenu}
+    <Container className={classes.container}>
+      <FormHelperText id='my-helper-text'>
+        Multiple options to narrow your search :
+      </FormHelperText>
+      <Container className={classes.root}>
+        <FormControl className={classes.optionMenu}>
+          <TextField
+            id='outlined-select-goals'
+            select
+            label='Gender'
+            name='gender'
+            value={userSelectedGender}
+            onChange={handleChange}
+            variant='outlined'
+          >
+            {gender.map(option => (
+              <MenuItem key={option.value} value={option.value}>
+                {option.label}
+              </MenuItem>
+            ))}
+          </TextField>
+        </FormControl>
+        <FormControl className={classes.optionMenu}>
+          <TextField
+            id='outlined-select-experience'
+            select
+            label='Borough'
+            name='location'
+            value={userSelectedLocation}
+            onChange={handleChange}
+            variant='outlined'
+          >
+            {location.map(option => (
+              <MenuItem key={option.value} value={option.value}>
+                {option.label}
+              </MenuItem>
+            ))}
+          </TextField>
+        </FormControl>
+        <FormControl className={classes.optionMenu}>
+          <TextField
+            id='outlined-select-radius'
+            select
+            label='Radius'
+            name='radius'
+            value={userSelectedRadius}
+            onChange={handleChange}
+            variant='outlined'
+          >
+            {radius.map(option => (
+              <MenuItem key={option.value} value={option.value}>
+                {option.label}
+              </MenuItem>
+            ))}
+          </TextField>
+        </FormControl>
+        <Button
+          onClick={handleSubmit}
+          variant='contained'
+          color='primary'
+          className={classes.searchButton}
         >
-          {goals.map(option => (
-            <MenuItem key={option.value} value={option.value}>
-              {option.label}
-            </MenuItem>
-          ))}
-        </TextField>
-        <TextField
-          id='outlined-select-experience'
-          select
-          label='Experience'
-          value={userSelected}
-          onChange={handleChange}
-          variant='outlined'
-          className={classes.optionMenu}
-        >
-          {experience.map(option => (
-            <MenuItem key={option.value} value={option.value}>
-              {option.label}
-            </MenuItem>
-          ))}
-        </TextField>
-        <TextField
-          id='outlined-select-radius'
-          select
-          label='Radius'
-          value={userSelected}
-          onChange={handleChange}
-          variant='outlined'
-          className={classes.optionMenu}
-        >
-          {radius.map(option => (
-            <MenuItem key={option.value} value={option.value}>
-              {option.label}
-            </MenuItem>
-          ))}
-        </TextField>
-        <TextField
-          id='datetime-local'
-          label='Day'
-          type='datetime-local'
-          defaultValue={today}
-          className={classes.textField}
-          InputLabelProps={{
-            shrink: true
-          }}
-        />
-        <Button type="submit" variant="contained" color="primary" className={classes.searchButton}>Search Now!</Button>
-      </FormControl>
-    </>
+          Search Now!
+        </Button>
+      </Container>
+    </Container>
   )
 }
 
