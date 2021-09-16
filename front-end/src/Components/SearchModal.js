@@ -1,15 +1,19 @@
 import { useState, useEffect } from 'react'
-import { makeStyles } from '@material-ui/core/styles'
+import { useHistory } from 'react-router-dom'
+import { useAuth } from '../Context/AuthContext'
 
 import PopularSearches from './PopularSearches'
-import SearchForm from './SearchForm'
+import UniqueSearchForm from './UniqueSearchForm'
 
-import Modal from '@material-ui/core/Modal'
-import Backdrop from '@material-ui/core/Backdrop'
-import Fade from '@material-ui/core/Fade'
-import Button from '@material-ui/core/Button'
-import Paper from '@material-ui/core/Paper'
-import Container from '@material-ui/core/Container'
+import { makeStyles } from '@material-ui/core/styles'
+import {
+  Container,
+  Backdrop,
+  Button,
+  Paper,
+  Fade,
+  Modal
+} from '@material-ui/core'
 
 const useStyles = makeStyles(theme => ({
   modal: {
@@ -19,8 +23,7 @@ const useStyles = makeStyles(theme => ({
   },
   paper: {
     width: '100vw',
-    transform: 'translateY(70px)',
-    border: '2px solid #000',
+    transform: 'translateY(81px)',
     boxShadow: theme.shadows[5],
     padding: theme.spacing(2, 4, 3)
   },
@@ -34,15 +37,18 @@ const useStyles = makeStyles(theme => ({
 }))
 
 export default function SearchModal () {
+  const { getSokaRequestQuery } = useAuth()
+  const history = useHistory()
+
   const classes = useStyles()
   const [open, setOpen] = useState(false)
   const [today, setToday] = useState('')
 
-  const handleOpen = () => {
+  const handleOpenSearchMenu = () => {
     setOpen(true)
   }
 
-  const handleClose = () => {
+  const handleCloseSearchMenu = () => {
     setOpen(false)
   }
 
@@ -53,16 +59,28 @@ export default function SearchModal () {
     await setToday(date)
   }
 
+  const getSearchResults = async searchParams => {
+    await getSokaRequestQuery(searchParams)
+    history.push('/search-results')
+    handleCloseSearchMenu()
+  }
+
   useEffect(() => {
-    getDate()
+    const unsubscribe = getDate()
+    return unsubscribe
   }, [])
 
   return (
     <div>
-      <Button onClick={handleOpen}>
+      <Button onClick={handleOpenSearchMenu}>
         <img
           src='https://img.icons8.com/external-kiranshastry-gradient-kiranshastry/64/000000/external-search-fitness-kiranshastry-gradient-kiranshastry.png'
           alt='search menu'
+          style={{
+            width: '56px',
+            height: '56px',
+            transform: 'translate(10px,8px)'
+          }}
         />
       </Button>
 
@@ -71,7 +89,7 @@ export default function SearchModal () {
         aria-describedby='transition-modal-description'
         className={classes.modal}
         open={open}
-        onClose={handleClose}
+        onClose={handleCloseSearchMenu}
         closeAfterTransition
         BackdropComponent={Backdrop}
         BackdropProps={{
@@ -81,8 +99,11 @@ export default function SearchModal () {
         <Fade in={open}>
           <Paper elevation={3} className={classes.paper}>
             <Container className={classes.container}>
-              <SearchForm />
-              <PopularSearches today={today} />
+              <UniqueSearchForm
+                today={today}
+                getSearchResults={getSearchResults}
+              />
+              <PopularSearches getSearchResults={getSearchResults} />
             </Container>
           </Paper>
         </Fade>

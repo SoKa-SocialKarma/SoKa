@@ -85,7 +85,7 @@ const getAllUsersQuery = ({
   if (radius) {
     qString += `${
       qString.includes('WHERE') ? ' AND' : ' WHERE'
-    } radius = '${radius}'`
+    } radius <= '${radius}'`
   }
   if (karma) {
     qString += `${

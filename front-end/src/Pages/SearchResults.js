@@ -1,13 +1,10 @@
-import { useEffect, useState } from 'react'
+import { useAuth } from '../Context/AuthContext'
 
 import UserCard from '../Components/UserCard.js'
-import { Container, Paper } from '@material-ui/core'
+import NoSearchResults from '../Components/NoSearchResults.js'
+
 import { makeStyles } from '@material-ui/core/styles'
-
-import axios from 'axios'
-import { apiURL } from '../Util/apiURL.js'
-
-const API = apiURL()
+import { Container, Paper } from '@material-ui/core'
 
 const useStyles = makeStyles({
   root: {
@@ -25,36 +22,24 @@ const useStyles = makeStyles({
   }
 })
 
-function Demo () {
+function SearchResults () {
   const classes = useStyles()
-  const [demoProfiles, setDemoProfiles] = useState([])
-
-  const getDemoUsers = async () => {
-    try {
-      const { data } = await axios.get(`${API}/users?limit=6`)
-      setDemoProfiles(data)
-    } catch (err) {
-      console.log(err)
-    }
-  }
-
-  useEffect(() => {
-    return getDemoUsers()
-  }, [])
+  const { currentSearchResults } = useAuth()
 
   return (
     <>
       <Container className={classes.root}>
-        {demoProfiles?.map(profile => {
+        {currentSearchResults?.map(profile => {
           return (
             <Paper className={classes.paper}>
               <UserCard profile={profile} key={profile.id} />
             </Paper>
           )
         })}
+        {!currentSearchResults.length && <NoSearchResults />}
       </Container>
     </>
   )
 }
 
-export default Demo
+export default SearchResults

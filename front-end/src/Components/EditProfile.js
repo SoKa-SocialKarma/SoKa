@@ -1,7 +1,9 @@
 import { useState, useEffect} from 'react';
-import axios from "axios";
-import {useParams, Link, useHistory} from "react-router-dom";
+import {useParams,  useHistory} from "react-router-dom";
+
 import { apiURL } from "../Util/apiURL";
+import axios from "axios";
+
 const API = apiURL()
 
 export default function EditProfile () {
@@ -36,10 +38,19 @@ const addDetails = (newdetails) => {
     event.preventDefault()
   }
   return (
-    <div>
-      <h1>Edit page</h1>
+    <div id="edit">
+      {/* <h3>Edit page</h3> */}
       {/* //avoid refreshing page  */}
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} id="form">
+        <br />
+        <span>
+          <h1>Jane D</h1>
+        </span>
+        <span>
+        <label htmlFor="name">Name:</label>
+        <input type="text" placeholder="name" />
+        </span>
+        <br />
         <span>
           <label htmlFor='img'>Image:</label>
           <input
@@ -51,6 +62,7 @@ const addDetails = (newdetails) => {
             disabled
           />
         </span>
+        <br />
         <span>
           <label htmlFor='availability'>Availability:</label>
           <input
@@ -60,15 +72,7 @@ const addDetails = (newdetails) => {
             onChange={handleChange}
           />
         </span>
-        <span>
-          <label htmlFor='goals'>Goals:</label>
-          <input
-            type='text'
-            id='goals'
-            value={details.goals}
-            onChange={handleChange}
-          />
-        </span>
+        <br />
         <span>
           <label htmlFor='experience'>Experience:</label>
           <input
@@ -78,6 +82,17 @@ const addDetails = (newdetails) => {
             onChange={handleChange}
           />
         </span>
+        <br />
+        <span>
+          <label htmlFor='goals'>Goals:</label>
+          <input
+            type='text'
+            id='goals'
+            value={details.goals}
+            onChange={handleChange}
+          />
+        </span>
+          <br />
         <span>
           <label htmlFor='activity'>Activity:</label>
           <input
@@ -87,7 +102,10 @@ const addDetails = (newdetails) => {
             onChange={handleChange}
           />
         </span>
+        <br />
+        <span>
         <button type='submit'>Submit</button>
+        </span>
       </form>
     </div>
   )
