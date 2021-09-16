@@ -1,7 +1,8 @@
 import { useRef, useState } from 'react'
-import { Form, Button, Card, Alert } from 'react-bootstrap'
 import { useAuth } from '../Context/AuthContext'
 import { Link, useHistory } from 'react-router-dom'
+
+import { Form, Button, Card, Alert } from 'react-bootstrap'
 
 const Signp = () => {
   const emailRef = useRef()
@@ -42,7 +43,7 @@ const Signp = () => {
 
   return (
     <>
-      <Card className="loginDashboard">
+      <Card className='loginDashboard'>
         <Card.Body>
           <h2 className='text-center mb-4'>Sign Up</h2>
           {error && <Alert variant='danger'>{error}</Alert>}

@@ -35,6 +35,16 @@
   
 }
 
+#root > div > header > div > button{
+  margin: 0 auto 0 auto;
+}
+
+
+#SokaLogo{
+  width: 100%;
+  height: 80px;
+  transform: scale(1.4)
+}
 
 body{ 
     display: flex;
