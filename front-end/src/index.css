@@ -143,10 +143,11 @@ body{
   
   
   #card {
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-    max-width: 300px;
+    box-shadow: 0 4px 8px 0 rgba(228, 20, 20, 0.2);
+    max-width: 600px;
     margin: auto; 
     text-align: center;
+    font-family: monospace;
   }
   
   .title {
@@ -208,7 +209,7 @@ body{
     width: 400px;
     /* margin: auto; */
     border-style:ridge;
-    font-family: 'Courier New', Courier, monospace;
+    font-family: monospace;
     color: blue;
     /* border:16px; */
   }

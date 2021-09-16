@@ -44,7 +44,7 @@ export default function EditProfile () {
       <form onSubmit={handleSubmit} id="form">
         <br />
         <span>
-          <h1>Jane D</h1>
+          <h1>Jack Green</h1>
         </span>
         <span>
         <label htmlFor="name">Name:</label>
