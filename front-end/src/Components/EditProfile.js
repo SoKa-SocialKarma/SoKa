@@ -1,7 +1,9 @@
 import { useState, useEffect} from 'react';
-import axios from "axios";
-import {useParams, Link, useHistory} from "react-router-dom";
+import {useParams,  useHistory} from "react-router-dom";
+
 import { apiURL } from "../Util/apiURL";
+import axios from "axios";
+
 const API = apiURL()
 
 export default function EditProfile () {
