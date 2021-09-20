@@ -4,6 +4,7 @@ import { useAuth } from "../Context/AuthContext";
 
 import SearchModal from "./SearchModal";
 import sokalsm from "../Assets/sokalsm.png";
+
 import clsx from "clsx";
 
 import { makeStyles, useTheme } from "@material-ui/core/styles";
@@ -20,7 +21,10 @@ import ChevronRightIcon from "@material-ui/icons/ChevronRight";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
+
 import Button from "@material-ui/core/Button";
+
+
 
 const drawerWidth = 180;
 
@@ -149,7 +153,9 @@ export default function Navbar({ children }) {
           </IconButton>
           <div className={classes.topCenter}>
             <Typography variant="h3" noWrap component={Link} to="/">
+
               <img src={sokalsm} alt="sokalogo" id="SokaLogo" />
+
             </Typography>
             <div className={classes.authContainer}>
               <SearchModal />
@@ -160,6 +166,7 @@ export default function Navbar({ children }) {
                 </Button>
               ) : (
                 <Button component={Link} to="/login-dashboard" className={classes.login}>
+
                   {currentUser.email}
                 </Button>
               )}
@@ -187,33 +194,43 @@ export default function Navbar({ children }) {
         }}
       >
         <div className={classes.toolbar}>
+
           <IconButton onClick={handleDrawerClose}>{theme.direction === "rtl" ? <ChevronRightIcon /> : <ChevronLeftIcon />}</IconButton>
+
         </div>
         <Divider />
         <List>
           <ListItem component={Link} to="/matches">
             <ListItemIcon>
+
               <img src="https://img.icons8.com/nolan/2x/handshake.png" alt="matches" style={{ width: "36px", height: "36px" }} />
+
             </ListItemIcon>
             <ListItemText primary="Matches" />
           </ListItem>
 
           <ListItem component={Link} to="/messages">
             <ListItemIcon>
+
               <img src="https://img.icons8.com/nolan/2x/messages-mac.png" alt="messages" style={{ width: "36px", height: "36px" }} />
+
             </ListItemIcon>
             <ListItemText primary="Inbox" />
           </ListItem>
 
           <ListItem component={Link} to="/profile">
             <ListItemIcon>
+
               <img src="https://img.icons8.com/nolan/64/lifecycle.png" alt="profile" style={{ width: "36px", height: "36px" }} />
+
             </ListItemIcon>
             <ListItemText primary="Profile" />
           </ListItem>
           <ListItem component={Link} to="/map">
             <ListItemIcon>
+
               <img src="https://img.icons8.com/nolan/64/map-marker.png" alt="mapbox-current-location" style={{ width: "36px", height: "36px" }} />
+
             </ListItemIcon>
             <ListItemText primary="Map" />
           </ListItem>
