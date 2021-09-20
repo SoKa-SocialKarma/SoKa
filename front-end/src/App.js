@@ -33,20 +33,20 @@ import PrivateRoute from './Components/PrivateRoute'
 
 // const API = apiURL()
 function App () {
-  //   let history =useHistory();
-  //   const [profile,setProfile] = UseState([]);
+    // let history =useHistory();
+    // const [profile,setProfile] = UseState([]);
 
-  //   useEffect(() => {
-  //     try{
-  //       axios.get(`${API}/users`).then((response) => {
-  //         setProfile(response.data)
-  //       },
-  //       (error) => console.log("get", error)
-  //       );
-  //     }catch (error) {
-  //       console.warn("catch", error)
-  //     }
-  //   },[])
+    // useEffect(() => {
+    //   try{
+    //     axios.get(`${API}/users/14`).then((response) => {
+    //       setProfile(response.data)
+    //     },
+    //     (error) => console.log("get", error)
+    //     );
+    //   }catch (error) {
+    //     console.warn("catch", error)
+    //   }
+    // },[])
 
   //   const deleteProfile = (id) => {
   //     try {
@@ -63,19 +63,19 @@ function App () {
   //     }
   //   }
 
-  //   const updateProfile = (prof, id) => {
-  //     try {
-  //       axios.put(`${API}/users/${id}`, prof).then((response) => {
-  //         const neuVar = [...profile];
-  //         const index = neuVar.findIndex((prof) => prof.id === Number(id));
-  //         neuVar[index] = prof;
-  //         setProfile(neuVar);
-  //         history.push(`/profile/${id}`);
-  //       });
-  //     } catch (error) {
-  //       console.warn("catch", error);
-  //     }
-  //   };
+    // const updateProfile = (profile, id) => {
+    //   try {
+    //     axios.put(`${API}/users/${id}`, prof).then((response) => {
+    //       const neuVar = [...profile];
+    //       const index = neuVar.findIndex((prof) => prof.id === Number(id));
+    //       neuVar[index] = prof;
+    //       setProfile(neuVar);
+    //       history.push(`/profile/${id}`);
+    //     });
+    //   } catch (error) {
+    //     console.warn("catch", error);
+    //   }
+    // };
 
   return (
     <>
@@ -88,7 +88,7 @@ function App () {
               <Route path='/login' component={Login} />
               <Route path='/signup' component={Signp} />
               <Route path='/search-results' component={SearchResults} />
-              <Route path='/forgot-password' component={ForgotPassword} />
+              <Route path='/forgot-password' component={ForgotPassword}  />
               <PrivateRoute
                 path='/login-dashboard'
                 component={LoginDashboard}

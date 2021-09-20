@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { useAuth } from "../Context/AuthContext";
 
 import SearchModal from "./SearchModal";
-import sokalsm from "../Assets/sokalsm.png";
+import soka from "../Assets/soka.png";
 import clsx from "clsx";
 
 import { makeStyles, useTheme } from "@material-ui/core/styles";
@@ -149,7 +149,7 @@ export default function Navbar({ children }) {
           </IconButton>
           <div className={classes.topCenter}>
             <Typography variant="h3" noWrap component={Link} to="/">
-              <img src={sokalsm} alt="sokalogo" id="SokaLogo" />
+              <img src={soka} alt="soka" id="SokaLogo" />
             </Typography>
             <div className={classes.authContainer}>
               <SearchModal />
