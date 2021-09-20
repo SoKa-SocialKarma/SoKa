@@ -15,16 +15,12 @@ import CssBaseline from "@material-ui/core/CssBaseline";
 import Typography from "@material-ui/core/Typography";
 import Divider from "@material-ui/core/Divider";
 import IconButton from "@material-ui/core/IconButton";
-import MenuIcon from "@material-ui/icons/Menu";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import ChevronRightIcon from "@material-ui/icons/ChevronRight";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
-import ChatIcon from "@material-ui/icons/Chat";
 import Button from "@material-ui/core/Button";
-import AccountBoxTwoToneIcon from "@material-ui/icons/AccountBoxTwoTone";
-import EmojiEmotionsIcon from "@material-ui/icons/EmojiEmotions";
 
 const drawerWidth = 180;
 
@@ -149,11 +145,11 @@ export default function Navbar({ children }) {
               [classes.hide]: open,
             })}
           >
-            <MenuIcon className={classes.menuIcon} />
+            <img src="https://img.icons8.com/fluency/2x/menu.png" alt="" style={{ width: "36px", height: "36px" }} />
           </IconButton>
           <div className={classes.topCenter}>
             <Typography variant="h3" noWrap component={Link} to="/">
-              <img src={soka} alt="sokalogo" id="SokaLogo" />
+              <img src={soka} alt="soka" id="SokaLogo" />
             </Typography>
             <div className={classes.authContainer}>
               <SearchModal />
@@ -163,11 +159,7 @@ export default function Navbar({ children }) {
                   Login
                 </Button>
               ) : (
-                <Button
-                  component={Link}
-                  to="/login-dashboard"
-                  className={classes.login}
-                >
+                <Button component={Link} to="/login-dashboard" className={classes.login}>
                   {currentUser.email}
                 </Button>
               )}
@@ -195,49 +187,33 @@ export default function Navbar({ children }) {
         }}
       >
         <div className={classes.toolbar}>
-          <IconButton onClick={handleDrawerClose}>
-            {theme.direction === "rtl" ? (
-              <ChevronRightIcon />
-            ) : (
-              <ChevronLeftIcon />
-            )}
-          </IconButton>
+          <IconButton onClick={handleDrawerClose}>{theme.direction === "rtl" ? <ChevronRightIcon /> : <ChevronLeftIcon />}</IconButton>
         </div>
         <Divider />
         <List>
           <ListItem component={Link} to="/matches">
             <ListItemIcon>
-              <EmojiEmotionsIcon
-                style={{ color: "purple", width: "36px", height: "36px" }}
-              />
+              <img src="https://img.icons8.com/nolan/2x/handshake.png" alt="matches" style={{ width: "36px", height: "36px" }} />
             </ListItemIcon>
             <ListItemText primary="Matches" />
           </ListItem>
 
           <ListItem component={Link} to="/messages">
             <ListItemIcon>
-              <ChatIcon
-                style={{ color: "purple", width: "36px", height: "36px" }}
-              />
+              <img src="https://img.icons8.com/nolan/2x/messages-mac.png" alt="messages" style={{ width: "36px", height: "36px" }} />
             </ListItemIcon>
             <ListItemText primary="Inbox" />
           </ListItem>
 
           <ListItem component={Link} to="/profile">
             <ListItemIcon>
-              <AccountBoxTwoToneIcon
-                style={{ color: "purple", width: "36px", height: "36px" }}
-              />
+              <img src="https://img.icons8.com/nolan/64/lifecycle.png" alt="profile" style={{ width: "36px", height: "36px" }} />
             </ListItemIcon>
             <ListItemText primary="Profile" />
           </ListItem>
           <ListItem component={Link} to="/map">
             <ListItemIcon>
-              <img
-                src="https://img.icons8.com/nolan/64/map-marker.png"
-                alt="mapbox-current-location"
-                style={{ width: "36px", height: "36px" }}
-              />
+              <img src="https://img.icons8.com/nolan/64/map-marker.png" alt="mapbox-current-location" style={{ width: "36px", height: "36px" }} />
             </ListItemIcon>
             <ListItemText primary="Map" />
           </ListItem>
