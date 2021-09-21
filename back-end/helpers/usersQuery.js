@@ -47,13 +47,13 @@ const getAllUsersQuery = ({
   let qString = ''
 
   if (goal) {
-    qString = `SELECT * FROM users WHERE EXISTS (SELECT * FROM \n
+    qString = `SELECT id FROM users WHERE EXISTS (SELECT * FROM \n
     jsonb_array_elements_Text(goals->'goals') as g(tag) WHERE g.tag ILIKE '%${goal}%') `
   } else if (experience) {
-    qString = `SELECT * FROM users WHERE EXISTS (SELECT * FROM \n
+    qString = `SELECT id FROM users WHERE EXISTS (SELECT * FROM \n
     jsonb_array_elements_Text(experience->'experience') as e(tag) WHERE e.tag ILIKE '%${experience}%') `
   } else if (availability) {
-    qString = `SELECT * FROM users WHERE EXISTS (SELECT * FROM \n
+    qString = `SELECT id FROM users WHERE EXISTS (SELECT * FROM \n
     jsonb_array_elements_Text(availability->'days') as d(tag) WHERE d.tag ILIKE '%${availability}%') `
   } else {
     qString = `SELECT * FROM users `

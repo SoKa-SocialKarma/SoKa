@@ -4,6 +4,7 @@
 **/
 
 const users = require('express').Router()
+
 const {
   getAllUsers,
   getUsers,
@@ -13,6 +14,7 @@ const {
 } = require('../queries/users')
 
 const { postCheck, putCheck } = require('../helpers/verifyData')
+const {filteredNestedDuplicates} = require('../helpers/noDuplicates')
 const feedController = require('./feedController')
 
 const msgInvalidQuery = () => 'Invalid data caused database to return an error.'
