@@ -11,7 +11,24 @@ const {
 
 const getAllPossibleMatches = async sokaQuery => {
   try {
-    return await db.any(getAllPossibleMatchesQuery(sokaQuery))
+    const usersMatchList =
+      '' + Object.values(await db.one(getAllPossibleMatchesQuery(sokaQuery)))
+    if (!usersMatchList) {
+      return []
+    }
+    if (!usersMatchList.includes(',')) {
+      return await db.many(
+        `SELECT * FROM users WHERE id = ${usersMatchList}`,
+        usersMatchList
+      )
+    }
+
+    return await db.tx(t => {
+      const queries = usersMatchList
+        .split(',')
+        .map(id => t.many(`SELECT * FROM users WHERE id = ${id}`, id))
+      return t.batch(queries)
+    })
   } catch (err) {
     return console.error(err.message)
   }
@@ -85,7 +102,7 @@ const getFilteredRadius = async id => {
 const getFilteredMatches = async id => {
   try {
     const matchesList =
-      '' + Object.values(await db.any(getFilteredMatchesQuery(id)))
+      '' + Object.values(await db.one(getFilteredMatchesQuery(id)))
     if (!matchesList) {
       return []
     }
@@ -95,7 +112,7 @@ const getFilteredMatches = async id => {
     return await db.tx(t => {
       const queries = matchesList
         .split(',')
-        .map(id => t.one('SELECT * FROM users WHERE id=$1', id))
+        .map(id => t.one('SELECT * FROM users WHERE id=$1', Number(id)))
       return t.batch(queries)
     })
   } catch (err) {
@@ -106,7 +123,7 @@ const getFilteredMatches = async id => {
 const getFilteredAvailability = async id => {
   try {
     const daysList =
-      '' + Object.values(await db.any(getFilteredAvailabilityQuery(id)))
+      '' + Object.values(await db.one(getFilteredAvailabilityQuery(id)))
     if (!daysList) {
       return []
     }
