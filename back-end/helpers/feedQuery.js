@@ -49,13 +49,13 @@ const getAllPossibleMatchesQuery = ({
 
   if (goal){
     qString += `${amIFirst ? '' : 'INTERSECT '}SELECT id FROM users WHERE EXISTS (SELECT * FROM 
-    jsonb_array_elements_Text(goals->'goals') as g(tag) WHERE g.tag ILIKE '%${goal}%' and id != ${id}) `
+    jsonb_array_elements_Text(goals->'goals') as g(tag) WHERE g.tag ILIKE '%${goal}%' AND id != ${id}) `
     amIFirst = false
   }
 
   if (experience){
     qString += `${amIFirst ? '' : 'INTERSECT '}SELECT id FROM users WHERE EXISTS (SELECT * FROM jsonb_array_elements_Text(experience->'experience') 
-    as e(tag) WHERE e.tag ILIKE '%${experience}%' and id != ${id}) `
+    as e(tag) WHERE e.tag ILIKE '%${experience}%' AND id != ${id}) `
     amIFirst = false
   }
 
