@@ -3,7 +3,6 @@ import { useHistory } from 'react-router-dom'
 import { useAuth } from '../Context/AuthContext'
 
 import PopularSearches from './PopularSearches'
-import UniqueSearchForm from './UniqueSearchForm'
 
 import { makeStyles } from '@material-ui/core/styles'
 import {
@@ -99,11 +98,7 @@ export default function SearchModal () {
         <Fade in={open}>
           <Paper elevation={3} className={classes.paper}>
             <Container className={classes.container}>
-              <UniqueSearchForm
-                today={today}
-                getSearchResults={getSearchResults}
-              />
-              <PopularSearches getSearchResults={getSearchResults} />
+              <PopularSearches today={today} getSearchResults={getSearchResults} />
             </Container>
           </Paper>
         </Fade>

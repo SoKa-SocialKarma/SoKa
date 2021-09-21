@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { gender, location, radius } from '../Util/searchFields'
+import { goals, experience } from '../Util/searchFields'
 
 import {
   FormControl,
@@ -25,7 +26,7 @@ const useStyles = makeStyles(theme => ({
     width: '22%'
   },
   container: {
-    padding: '10px 20px 0px 20px!important'
+    padding: '0px 20px 0px 20px!important'
   },
   bigFont: {
     fontSize: '1.85rem'
@@ -40,9 +41,14 @@ const useStyles = makeStyles(theme => ({
  *   ================================================================
  **/
 
-const PopularSearches = ({ getSearchResults }) => {
+const PopularSearches = ({ today, getSearchResults }) => {
   const classes = useStyles()
 
+  const [userSelectedGoal, setUserSelectedGoal] = useState('')
+  const [userSelectedExperience, setUserSelectedExperience] = useState('')
+  const [userSelectedAvailability, setUserSelectedAvailability] = useState(
+    today
+  )
   const [userSelectedGender, setUserSelectedGender] = useState('')
   const [userSelectedLocation, setUserSelectedLocation] = useState('')
   const [userSelectedRadius, setUserSelectedRadius] = useState('')
@@ -50,6 +56,15 @@ const PopularSearches = ({ getSearchResults }) => {
   const handleChange = event => {
     event.preventDefault()
     switch (event.target.name) {
+      case 'goal':
+        setUserSelectedGoal(event.target.value)
+        break
+      case 'experience':
+        setUserSelectedExperience(event.target.value)
+        break
+      case 'availability':
+        setUserSelectedAvailability(event.target.value)
+        break
       case 'gender':
         setUserSelectedGender(event.target.value)
         break
@@ -68,6 +83,9 @@ const PopularSearches = ({ getSearchResults }) => {
     event.preventDefault()
 
     const searchParams = {
+      goal: userSelectedGoal,
+      experience: userSelectedExperience,
+      availability: userSelectedAvailability,
       gender: userSelectedGender,
       location: userSelectedLocation,
       radius: userSelectedRadius
@@ -79,8 +97,54 @@ const PopularSearches = ({ getSearchResults }) => {
   return (
     <Container className={classes.container}>
       <FormHelperText id='my-helper-text'>
-        Multiple options to narrow your search :
+        Quick Search with Multiple combinations :
       </FormHelperText>
+      <FormControl className={classes.root}>
+        <TextField
+          id='outlined-select-goals'
+          select
+          label='Goals'
+          name='goal'
+          value={userSelectedGoal}
+          onChange={handleChange}
+          variant='outlined'
+          className={classes.optionMenu}
+        >
+          {goals.map(option => (
+            <MenuItem key={option.value} value={option.value}>
+              {option.label}
+            </MenuItem>
+          ))}
+        </TextField>
+        <TextField
+          id='outlined-select-experience'
+          select
+          label='Experience'
+          name='experience'
+          value={userSelectedExperience}
+          onChange={handleChange}
+          variant='outlined'
+          className={classes.optionMenu}
+        >
+          {experience.map(option => (
+            <MenuItem key={option.value} value={option.value}>
+              {option.label}
+            </MenuItem>
+          ))}
+        </TextField>
+        <TextField
+          id='datetime-local'
+          label='Day'
+          name='availability'
+          type='datetime-local'
+          className={classes.optionMenu}
+          value={userSelectedAvailability}
+          onChange={handleChange}
+          InputLabelProps={{
+            shrink: true
+          }}
+        />
+      </FormControl>
       <Container className={classes.root}>
         <FormControl className={classes.optionMenu}>
           <TextField

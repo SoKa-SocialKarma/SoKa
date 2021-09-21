@@ -6,10 +6,26 @@ const {
 
 const getAllUsers = async sokaQuery => {
   try {
-    const dbQuery = await getAllUsersQuery(sokaQuery)
-    return await db.any(dbQuery)
+    const usersSearchList =
+      '' + Object.values(await db.one(getAllUsersQuery(sokaQuery)))
+    if (!usersSearchList) {
+      return []
+    }
+    if (!usersSearchList.includes(',')) {
+      return await db.many(
+        `SELECT * FROM users WHERE id = ${usersSearchList}`,
+        usersSearchList
+      )
+    }
+
+    return await db.tx(t => {
+      const queries = usersSearchList
+        .split(',')
+        .map(id => t.many(`SELECT * FROM users WHERE id = ${id}`, id))
+      return t.batch(queries)
+    })
   } catch (err) {
-    return 'error'
+    return console.error(err.message)
   }
 }
 
