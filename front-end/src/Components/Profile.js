@@ -5,17 +5,16 @@ const API = apiURL();
 function Profile() {
   const [profile, setProfile] = useState([]);
   const [available, setAvailable] = useState([]);
-  const [experience, setExperience] = useState([]);
   const [goals, setGoals] = useState([]);
 
   const getProfile = async () => {
     try {
       const { data } = await axios.get(`${API}/users/14`);
-      console.log(data[0].name);
+      console.log(data[0]);
       setProfile(data[0]);
-      setAvailable(data[0].availability.days);
-      setExperience(data[0].experience.experience);
-      setGoals(data[0].goals.goals);
+      setAvailable(data[0].availabledays);
+    
+      setGoals(data[0].goals);
     } catch (err) {
       console.log(err);
     }
@@ -28,6 +27,7 @@ function Profile() {
     <div id="pro">
       <br />
       <h4>Profile</h4>
+   
       <p>Username:{profile.username}</p>
       <p>
         {" "}
@@ -36,14 +36,14 @@ function Profile() {
       <p>Gender: {profile.gender}</p>
       <p>Location:{profile.location}</p>
       <p>
-        Availablility: {available[0]}, {available[1]}
+        Availablility:{available[0]},{available[1]}
       </p>
       <p>
-        Experience : {experience[0]}, {experience[1]}
+        Experience : {profile.experience}
       </p>
       <p>
-        Goals: {goals[0]},{goals[1]},{goals[2]}, {goals[3]}
-      </p>
+        Goals: {goals[0]},{goals[1]}, {goals[2]}, {goals[3]}
+              </p>
       <p>Radius:{profile.radius} miles</p>
       <a href="https://www.instagram.com/">
         <img src="https://cdn2.iconfinder.com/data/icons/social-media-2285/512/1_Instagram_colored_svg_1-1024.png" alt="ig" style={{ width: "20px" }} />
