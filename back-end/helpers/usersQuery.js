@@ -30,6 +30,7 @@
 
 
 const getAllUsersQuery = ({
+  uuid,
   name,
   lastname,
   username,
@@ -42,6 +43,11 @@ const getAllUsersQuery = ({
   experience,
   availability
 }) => {
+
+  if (uuid){
+    return `SELECT id FROM users WHERE uuid = '${uuid}'`
+  }
+
   let qString = `WITH results AS (`
   let amIFirst = true
 

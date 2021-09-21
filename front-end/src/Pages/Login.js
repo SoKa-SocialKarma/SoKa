@@ -4,13 +4,37 @@ import { useAuth } from '../Context/AuthContext'
 
 import { Form, Button, Card, Alert } from 'react-bootstrap'
 
+
 const Login = () => {
   const emailRef = useRef()
   const passwordRef = useRef()
-  const { logIn } = useAuth()
+  const { logIn, currentUserId } = useAuth()
   const [error, setError] = useState('')
   const [loading, setLoading] = useState(false)
   const history = useHistory()
+
+  const goToDemo = async () =>{
+
+    try {
+      setError('')
+      setLoading(true)
+      await logIn('demo@soka.com', 'pursuit')
+      history.push('/users/14/feed')
+    } catch (error) {
+      const message = error.message
+        .split(' ')
+        .filter(word => {
+          return (
+            word !== 'Firebase:' &&
+            word !== '(auth/user-not-found).' &&
+            word !== '(auth/wrong-password).'
+          )
+        })
+        .join(' ')
+      setError(`Failed to Sign In. ${message}`)
+    }
+    setLoading(false)
+  }
 
   async function handleSubmit (e) {
     e.preventDefault()
@@ -19,7 +43,7 @@ const Login = () => {
       setError('')
       setLoading(true)
       await logIn(emailRef.current.value, passwordRef.current.value)
-      history.push('/matches')
+      history.push(`/users/${currentUserId}/feed`)
     } catch (error) {
       const message = error.message
         .split(' ')
@@ -63,6 +87,9 @@ const Login = () => {
       <div className='w100 text-center mt-2'>
         Need an account? <Link to='/signup'>Sign Up</Link>
       </div>
+      <Button disabled={loading} className='demoButton' onClick={goToDemo}>
+        Demo LogIn
+      </Button>
     </>
   )
 }

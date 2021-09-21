@@ -5,6 +5,7 @@ CREATE DATABASE soka;
 DROP TABLE IF EXISTS users CASCADE;
 CREATE TABLE users (
     id SERIAL PRIMARY KEY,
+    uuid VARCHAR(28) UNIQUE,
     name TEXT NOT NULL,
     lastname TEXT NOT NULL,
     username VARCHAR(16) UNIQUE NOT NULL,
@@ -43,7 +44,7 @@ CREATE TABLE badges (
 );
 
 
-DROP TABLE IF EXISTS username_badges;
+DROP TABLE IF EXISTS username_badges CASCADE;
 CREATE TABLE username_badges (
     id INTEGER REFERENCES users (id) ON DELETE CASCADE,
     username TEXT NOT NULL,
