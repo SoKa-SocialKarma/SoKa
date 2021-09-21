@@ -46,10 +46,7 @@ const useStyles = makeStyles({
 function UserCard ({ profile }) {
   const classes = useStyles()
 
-  const { name, lastname, location, karma } = profile
-  const { experience } = profile.experience
-  const { goals } = profile.goals
-  const { days } = profile.availability
+  const { name, lastname, location, karma, experience, goals, availabledays } = profile
 
   return (
     <>
@@ -73,7 +70,7 @@ function UserCard ({ profile }) {
         <Rating name='read-only' value={Number(karma)} readOnly />
       </Box>
       <div className={classes.flex}>
-        <MousePopOver prop={Object.assign({ value: days })}>
+        <MousePopOver prop={Object.assign({ value: availabledays })}>
           <Button variant='outlined' className={classes.button}>
             Availability
           </Button>

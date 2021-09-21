@@ -5,7 +5,7 @@ const NoSearchResults = () => {
   const { getSokaRequestQuery } = useAuth()
   const history = useHistory()
 
-  const handleBrowseAll = async () => {
+  const getSearchResults = async () => {
     await getSokaRequestQuery()
     history.push('/search-results')
   }
@@ -13,7 +13,7 @@ const NoSearchResults = () => {
   return (
     <div>
       <h1>No Results were found</h1>
-      <button onClick={handleBrowseAll}>Browse All</button>
+      <button onClick={getSearchResults}>Browse All</button>
     </div>
   )
 }

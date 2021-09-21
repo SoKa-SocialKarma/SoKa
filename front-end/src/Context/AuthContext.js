@@ -39,7 +39,7 @@ export function AuthProvider ({ children }) {
     return currentUser.updatePassword(password)
   }
 
-  async function getSokaRequestQuery (searchParams = {}) {
+  async function getSokaRequestQuery (searchParams={}) {
     let query = `${API}/users?`
     Object.keys(searchParams).forEach(k => {
       let day = ''
