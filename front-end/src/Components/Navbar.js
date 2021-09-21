@@ -148,7 +148,7 @@ export default function Navbar({ children }) {
           </IconButton>
           <div className={classes.topCenter}>
             <IconButton component={Link} to="/" >
-              <img src={soka} alt="soka" id="SokaLogo" />
+              <img src={sokablue2} alt="soka" id="SokaLogo" />
             </IconButton>
             <div className={classes.authContainer}>
               <SearchModal />

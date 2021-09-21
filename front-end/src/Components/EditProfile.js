@@ -7,35 +7,49 @@ import axios from "axios";
 const API = apiURL()
 
 export default function EditProfile () {
-  let { index } = useParams();
+  //let { index } = useParams();
   let history = useHistory();
-
-  useEffect(() => {
-    axios.get(`${API}/users/14`).then(
-      (response) => setDetails(response.data),
-      (error) => history.push(`/not-found`)
-    );
-  },[index, history]);
-
-// const addDetails = (newdetails) => {
-//   axios.post(`${API}/profile`, newdetails).then(() => {
-//     history.push(`/profile`)
-//   })
-// }
-
-  const [details, setDetails] = useState({
+  let index = 14
+  const [update, setUpdate] = useState({
+    username: "",
     img: '',
     Availability: '',
     Activity: '',
     Goal: '',
     Experience: ''
   })
+  useEffect(() => {
+    axios.get(`${API}/users/${index}`).then(
+      (response) => setUpdate(response.data[0]),
+      (error) => history.push(`/not-found`)
+    );
+  },[index, history, API]);
+
+
+
+
+  //updateprofile
+      const updateProfile = (profileinfo, index) => {
+      try {
+        axios.put(`${API}/users/${index}`, profileinfo).then(() => {
+          
+          // const updateA = [...update];
+          // update[index]= updatedA;
+          // setUpdate(updateA);
+          history.push(`/profile/${index}`);
+        });
+      } catch (error) {
+        console.warn("catch", error);
+      }
+    };
+
 
   const handleChange = event => {
-    setDetails({ ...details, [event.target.id]: event.target.value })
+    setUpdate({ ...update, [event.target.id]: event.target.value })
   }
   const handleSubmit = event => {
     event.preventDefault()
+    updateProfile(update, index)
   }
   return (
     <div id="form">
@@ -43,7 +57,7 @@ export default function EditProfile () {
         <h4>Edit</h4>
         <span>
           <label htmlFor="username">Username:</label>
-          <input type="text" />
+          <input type="text" value={update.username} id="username" onChange={handleChange}/>
         </span>
         <br />
         <span>
@@ -56,7 +70,7 @@ export default function EditProfile () {
           <input
             type='text'
             id='img'
-            value={details.img}
+            value={update.img}
             placeholder='http://'
             onChange={handleChange}
             disabled
@@ -68,7 +82,7 @@ export default function EditProfile () {
           <input
             type='date'
             id='availability'
-            value={details.availability}
+            value={update.availability}
             onChange={handleChange}
           />
         </span>
@@ -77,8 +91,8 @@ export default function EditProfile () {
           <label htmlFor="gender">Gender:</label>
         <select name="" id="">
           <option value="female">Female</option>
-          <option value="male">male</option>
-          <option value="trans">Trans</option>
+          <option value="male">Male</option>
+          <option value="other">Perferred not to answer</option>
           </select>     
           </span>
    

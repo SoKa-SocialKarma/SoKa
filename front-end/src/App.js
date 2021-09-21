@@ -29,24 +29,11 @@ import EditProfile from './Components/EditProfile'
 import PrivateRoute from './Components/PrivateRoute'
 
 // import UserMatches from './Components/UserMatches'
-// import { apiURL } from './Util/apiURL'
+import { apiURL } from './Util/apiURL'
 
-// const API = apiURL()
+const API = apiURL()
 function App () {
     // let history =useHistory();
-    // const [profile,setProfile] = UseState([]);
-
-    // useEffect(() => {
-    //   try{
-    //     axios.get(`${API}/users/14`).then((response) => {
-    //       setProfile(response.data)
-    //     },
-    //     (error) => console.log("get", error)
-    //     );
-    //   }catch (error) {
-    //     console.warn("catch", error)
-    //   }
-    // },[])
 
   //   const deleteProfile = (id) => {
   //     try {
