@@ -31,16 +31,16 @@ export const goals = [
 
 export const experience = [
   {
-    value: 'Body Building',
-    label: 'Body Building'
+    value: 'Beginner',
+    label: 'Beginner'
   },
   {
-    value: 'Power Lifting',
-    label: 'Power Lifting'
+    value: 'Intermediate',
+    label: 'Intermediate'
   },
   {
-    value: 'Weight Lifting',
-    label: 'Weight Lifting'
+    value: 'Advanced',
+    label: 'Advanced'
   }
 ]
 
