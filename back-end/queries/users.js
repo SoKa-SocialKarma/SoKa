@@ -4,6 +4,10 @@ const {
   updateUsersQuery
 } = require('../helpers/usersQuery.js')
 
+const columns = `id, name, lastname, username, location, gender, radius, 
+karma, image, badges, goals->'goals' AS goals, experience->'experience' AS experience, availability->'days' AS availableDays,
+matchrequests AS requests, pendingreview AS toDoReview`
+
 const getAllUsers = async sokaQuery => {
   try {
     const usersSearchList =
@@ -13,7 +17,7 @@ const getAllUsers = async sokaQuery => {
     }
     if (!usersSearchList.includes(',')) {
       return await db.many(
-        `SELECT * FROM users WHERE id = ${usersSearchList}`,
+        `SELECT ${columns} FROM users WHERE id = ${usersSearchList}`,
         usersSearchList
       )
     }
@@ -21,7 +25,7 @@ const getAllUsers = async sokaQuery => {
     return await db.tx(t => {
       const queries = usersSearchList
         .split(',')
-        .map(id => t.many(`SELECT * FROM users WHERE id = ${id}`, id))
+        .map(id => t.many(`SELECT ${columns} FROM users WHERE id = ${id}`, id))
       return t.batch(queries)
     })
   } catch (err) {
@@ -32,13 +36,13 @@ const getAllUsers = async sokaQuery => {
 const getUsers = async ids => {
   try {
     if (!ids.includes(',')) {
-      return await db.one('SELECT * FROM users WHERE id=$1', ids)
+      return await db.one(`SELECT ${columns} FROM users WHERE id=$1`, ids)
     }
 
     return await db.tx(t => {
       const queries = ids
         .split(',')
-        .map(id => db.one('SELECT * FROM users WHERE id=$1', id))
+        .map(id => db.one(`SELECT ${columns} FROM users WHERE id=$1`, id))
       return t.batch(queries)
     })
   } catch (err) {

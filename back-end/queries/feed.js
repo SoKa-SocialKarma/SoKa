@@ -9,6 +9,10 @@ const {
   getFilteredAvailabilityQuery
 } = require('../helpers/feedQuery')
 
+const columns = `id, name, lastname, username, location, gender, radius, 
+karma, image, badges, goals->'goals' AS goals, experience->'experience' AS experience, availability->'days' AS availableDays,
+matchrequests AS requests, pendingreview AS toDoReview`
+
 const getAllPossibleMatches = async sokaQuery => {
   try {
     const usersMatchList =
@@ -18,7 +22,7 @@ const getAllPossibleMatches = async sokaQuery => {
     }
     if (!usersMatchList.includes(',')) {
       return await db.many(
-        `SELECT * FROM users WHERE id = ${usersMatchList}`,
+        `SELECT ${columns} FROM users WHERE id = ${usersMatchList}`,
         usersMatchList
       )
     }
@@ -26,7 +30,7 @@ const getAllPossibleMatches = async sokaQuery => {
     return await db.tx(t => {
       const queries = usersMatchList
         .split(',')
-        .map(id => t.many(`SELECT * FROM users WHERE id = ${id}`, id))
+        .map(id => t.many(`SELECT ${columns} FROM users WHERE id = ${id}`, id))
       return t.batch(queries)
     })
   } catch (err) {
@@ -43,7 +47,7 @@ const getFilteredFriends = async id => {
     }
     if (!friendsList.includes(',')) {
       return await db.many(
-        `SELECT * FROM users WHERE id = ${friendsList}`,
+        `SELECT ${columns} FROM users WHERE id = ${friendsList}`,
         friendsList
       )
     }
@@ -52,7 +56,7 @@ const getFilteredFriends = async id => {
       const queries = friendsList
         .split(',')
         .map(friend =>
-          t.many(`SELECT * FROM users WHERE id = ${friend}`, friend)
+          t.many(`SELECT ${columns} FROM users WHERE id = ${friend}`, friend)
         )
       return t.batch(queries)
     })
@@ -70,7 +74,7 @@ const getFilteredGoals = async id => {
     }
     if (!goalsList.includes(',')) {
       return await db.many(
-        `SELECT id, username, goals FROM users WHERE jsonb_path_exists(goals, '$.goals[*] ? (@ == "${goalsList}")') AND id != ${id}`,
+        `SELECT ${columns} FROM users WHERE jsonb_path_exists(goals, '$.goals[*] ? (@ == "${goalsList}")') AND id != ${id}`,
         goalsList
       )
     }
@@ -80,7 +84,7 @@ const getFilteredGoals = async id => {
         .split(',')
         .map(goal =>
           t.many(
-            `SELECT id, username, goals FROM users WHERE jsonb_path_exists(goals, '$.goals[*] ? (@ == "${goal}")') AND id != ${id}`,
+            `SELECT ${columns} FROM users WHERE jsonb_path_exists(goals, '$.goals[*] ? (@ == "${goal}")') AND id != ${id}`,
             goal
           )
         )
@@ -107,12 +111,12 @@ const getFilteredMatches = async id => {
       return []
     }
     if (!matchesList.includes(',')) {
-      return await db.one('SELECT * FROM users WHERE id=$1', matchesList)
+      return await db.one(`SELECT ${columns} FROM users WHERE id=$1`, matchesList)
     }
     return await db.tx(t => {
       const queries = matchesList
         .split(',')
-        .map(id => t.one('SELECT * FROM users WHERE id=$1', Number(id)))
+        .map(id => t.one(`SELECT ${columns} FROM users WHERE id=$1`, Number(id)))
       return t.batch(queries)
     })
   } catch (err) {
@@ -129,7 +133,7 @@ const getFilteredAvailability = async id => {
     }
     if (!daysList.includes(',')) {
       return await db.many(
-        `SELECT id, username, availability FROM users WHERE jsonb_path_exists(availability, '$.days[*] ? (@ == "${daysList}")') AND id != ${id}`,
+        `SELECT ${columns} FROM users WHERE jsonb_path_exists(availability, '$.days[*] ? (@ == "${daysList}")') AND id != ${id}`,
         daysList
       )
     }
@@ -139,7 +143,7 @@ const getFilteredAvailability = async id => {
         .split(',')
         .map(day =>
           t.many(
-            `SELECT id, username, availability FROM users WHERE jsonb_path_exists(availability, '$.days[*] ? (@ == "${day}")') AND id != ${id}`,
+            `SELECT ${columns} FROM users WHERE jsonb_path_exists(availability, '$.days[*] ? (@ == "${day}")') AND id != ${id}`,
             day
           )
         )

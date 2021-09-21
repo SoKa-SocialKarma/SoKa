@@ -12,7 +12,6 @@ import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import List from "@material-ui/core/List";
 import CssBaseline from "@material-ui/core/CssBaseline";
-import Typography from "@material-ui/core/Typography";
 import Divider from "@material-ui/core/Divider";
 import IconButton from "@material-ui/core/IconButton";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
@@ -145,12 +144,12 @@ export default function Navbar({ children }) {
               [classes.hide]: open,
             })}
           >
-            <img src="https://img.icons8.com/fluency/2x/menu.png" alt="" style={{ width: "36px", height: "36px" }} />
+            <img src="https://img.icons8.com/fluency/2x/menu.png" alt="Menu" style={{ width: "36px", height: "36px" }} />
           </IconButton>
           <div className={classes.topCenter}>
-            <Typography variant="h3" noWrap component={Link} to="/">
+            <IconButton component={Link} to="/" >
               <img src={soka} alt="soka" id="SokaLogo" />
-            </Typography>
+            </IconButton>
             <div className={classes.authContainer}>
               <SearchModal />
 
