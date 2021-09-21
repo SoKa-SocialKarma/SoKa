@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { useAuth } from "../Context/AuthContext";
 
 import SearchModal from "./SearchModal";
-import soka from "../Assets/soka.png";
+import sokablue2 from "../Assets/sokablue2.png";
 import clsx from "clsx";
 
 import { makeStyles, useTheme } from "@material-ui/core/styles";
@@ -145,11 +145,15 @@ export default function Navbar({ children }) {
               [classes.hide]: open,
             })}
           >
-            <img src="https://img.icons8.com/fluency/2x/menu.png" alt="" style={{ width: "36px", height: "36px" }} />
+            <img
+              src="https://img.icons8.com/fluency/2x/menu.png"
+              alt=""
+              style={{ width: "36px", height: "36px" }}
+            />
           </IconButton>
           <div className={classes.topCenter}>
             <Typography variant="h3" noWrap component={Link} to="/">
-              <img src={soka} alt="soka" id="SokaLogo" />
+              <img src={sokablue2} alt="soka" id="SokaLogo" />
             </Typography>
             <div className={classes.authContainer}>
               <SearchModal />
@@ -159,7 +163,11 @@ export default function Navbar({ children }) {
                   Login
                 </Button>
               ) : (
-                <Button component={Link} to="/login-dashboard" className={classes.login}>
+                <Button
+                  component={Link}
+                  to="/login-dashboard"
+                  className={classes.login}
+                >
                   {currentUser.email}
                 </Button>
               )}
@@ -187,33 +195,55 @@ export default function Navbar({ children }) {
         }}
       >
         <div className={classes.toolbar}>
-          <IconButton onClick={handleDrawerClose}>{theme.direction === "rtl" ? <ChevronRightIcon /> : <ChevronLeftIcon />}</IconButton>
+          <IconButton onClick={handleDrawerClose}>
+            {theme.direction === "rtl" ? (
+              <ChevronRightIcon />
+            ) : (
+              <ChevronLeftIcon />
+            )}
+          </IconButton>
         </div>
         <Divider />
         <List>
           <ListItem component={Link} to="/matches">
             <ListItemIcon>
-              <img src="https://img.icons8.com/nolan/2x/handshake.png" alt="matches" style={{ width: "36px", height: "36px" }} />
+              <img
+                src="https://img.icons8.com/nolan/2x/handshake.png"
+                alt="matches"
+                style={{ width: "36px", height: "36px" }}
+              />
             </ListItemIcon>
             <ListItemText primary="Matches" />
           </ListItem>
 
           <ListItem component={Link} to="/messages">
             <ListItemIcon>
-              <img src="https://img.icons8.com/nolan/2x/messages-mac.png" alt="messages" style={{ width: "36px", height: "36px" }} />
+              <img
+                src="https://img.icons8.com/nolan/2x/messages-mac.png"
+                alt="messages"
+                style={{ width: "36px", height: "36px" }}
+              />
             </ListItemIcon>
             <ListItemText primary="Inbox" />
           </ListItem>
 
           <ListItem component={Link} to="/profile">
             <ListItemIcon>
-              <img src="https://img.icons8.com/nolan/64/lifecycle.png" alt="profile" style={{ width: "36px", height: "36px" }} />
+              <img
+                src="https://img.icons8.com/nolan/64/lifecycle.png"
+                alt="profile"
+                style={{ width: "36px", height: "36px" }}
+              />
             </ListItemIcon>
             <ListItemText primary="Profile" />
           </ListItem>
           <ListItem component={Link} to="/map">
             <ListItemIcon>
-              <img src="https://img.icons8.com/nolan/64/map-marker.png" alt="mapbox-current-location" style={{ width: "36px", height: "36px" }} />
+              <img
+                src="https://img.icons8.com/nolan/64/map-marker.png"
+                alt="mapbox-current-location"
+                style={{ width: "36px", height: "36px" }}
+              />
             </ListItemIcon>
             <ListItemText primary="Map" />
           </ListItem>
