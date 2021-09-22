@@ -134,7 +134,7 @@ export default function Navbar({ children }) {
           [classes.appBarShift]: open,
         })}
       >
-        <Toolbar className={classes.toolbar}>
+        <Toolbar className={classes.toolbar} style={{backgroundColor: "#10056F"}} >
           <IconButton
             color="inherit"
             aria-label="open drawer"
@@ -174,6 +174,9 @@ export default function Navbar({ children }) {
             </div>
           </div>
         </Toolbar>
+
+
+
       </AppBar>
 
       <Drawer
@@ -208,7 +211,7 @@ export default function Navbar({ children }) {
                 style={{ width: "36px", height: "36px" }}
               />
             </ListItemIcon>
-            <ListItemText primary="Matches" />
+            <ListItemText primary="Matches" style={{color:"#10056F"}}/>
           </ListItem>
 
           <ListItem component={Link} to={`/users/${currentUserId}/messages`}>
@@ -219,7 +222,7 @@ export default function Navbar({ children }) {
                 style={{ width: "36px", height: "36px" }}
               />
             </ListItemIcon>
-            <ListItemText primary="Inbox" />
+            <ListItemText primary="Inbox" style={{color:"#10056F"}}/>
           </ListItem>
 
           <ListItem component={Link} to={`/users/${currentUserId}/profile`}>
@@ -230,7 +233,7 @@ export default function Navbar({ children }) {
                 style={{ width: "36px", height: "36px" }}
               />
             </ListItemIcon>
-            <ListItemText primary="Profile" />
+            <ListItemText primary="Profile" style={{color:"#10056F"}}/>
           </ListItem>
           <ListItem component={Link} to="/map">
             <ListItemIcon>
@@ -240,7 +243,7 @@ export default function Navbar({ children }) {
                 style={{ width: "36px", height: "36px" }}
               />
             </ListItemIcon>
-            <ListItemText primary="Map" />
+            <ListItemText primary="Map" style={{color:"#10056F"}}/>
           </ListItem>
         </List>
         <Divider />

@@ -21,15 +21,15 @@ const useStyles = makeStyles({
     justifySelf: "center",
   },
   flex: {
-    margin: "0",
-    display: "flex",
-    flexDirection: "row",
-    justifyContent: "space-evenly",
-    alignItems: "center",
+     margin: '0',
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'space-evenly',
+    alignItems: 'center'
   },
   flex45: {
-    display: "flex",
-    width: "45%",
+    display: 'flex',
+    width: '45%',
   },
   button: {
     borderRadius: "40px",
@@ -46,8 +46,10 @@ const useStyles = makeStyles({
 function UserCard({ profile }) {
   const classes = useStyles();
 
-  const { name, lastname, location, karma, experience, goals, availabledays } =
-    profile;
+
+
+  const { name, lastname, location, karma, experience, goals, availabledays } = profile
+
 
   return (
     <>
@@ -65,11 +67,23 @@ function UserCard({ profile }) {
         borderColor="transparent"
         className={classes.box}
       >
-        <Typography component="legend" variant="h6" className={classes.box}>
-          Social Karma
+        <Typography component='legend' variant='h6' className={classes.box}>
+          Karma Stars
         </Typography>
-        <Rating name="read-only" value={Number(karma)} readOnly />
+
+        <Rating name='read-only' value={Number(karma)} readOnly style={{color:"rgb(139, 58, 231)"}} />
       </Box>
+
+      <div className={classes.flex} >
+        <br />
+        <br />
+        <p>Availability: {availabledays[0]}</p>
+        <p>Location : {location}</p>
+        <p>Experience: {experience}</p>
+        {/* <p>Goals: {goals}</p> */}
+      </div>
+
+{/*       
       <div className={classes.flex}>
         <MousePopOver prop={Object.assign({ value: availabledays })}>
           <Button variant="outlined" className={classes.button}>
@@ -91,15 +105,15 @@ function UserCard({ profile }) {
             Goals
           </Button>
         </MousePopOver>
-      </div>
+      </div> */}
 
       <div className={classes.flex}>
-        <Button variant="contained" color="primary" className={classes.flex45}>
+        <Button variant='contained' style={{color:"blue"}} className={classes.flex45}>
           Match
         </Button>
-        <Button variant="contained" color="primary" className={classes.flex45}>
+        {/* <Button variant='contained' color='primary' className={classes.flex45}>
           Message
-        </Button>
+        </Button> */}
       </div>
     </>
   );
