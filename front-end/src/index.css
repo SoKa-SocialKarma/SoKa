@@ -85,13 +85,13 @@ body {
   justify-content: space-between;
 }
 
-/* Style page content */
+
 .main {
-  margin-left: 160px; /* Same as the width of the sidebar */
+  margin-left: 160px;
   padding: 0px 10px;
 }
 
-/* Container holding the image and the text */
+
 .container {
   margin-top: 10px;
   position: relative;
@@ -101,7 +101,6 @@ body {
   padding-left: 60px;
 }
 
-/* Bottom left text */
 .bottom-left {
   position: absolute;
   bottom: 8px;
@@ -112,9 +111,6 @@ body {
   position: absolute;
   bottom: 15%;
   text-align: center;
-  /* top: 50%; */
-  /* left: 50%; */
-  /* transform: translate(-50%, -50%); */
 }
 
 .index {
@@ -126,8 +122,6 @@ body {
   position: relative;
   margin: 15px;
 }
-
-/* {box-sizing: border-box;} */
 
 .search-form {
   width: 110%;
@@ -148,7 +142,6 @@ body {
   padding-left: 8%;
   display: flex;
   justify-content: center;
-  /* background-color: blue; */
 }
 
 #matches {
@@ -160,13 +153,12 @@ body {
 }
 
 #card {
-  box-shadow: 0 4px 8px 0 rgba(4, 14, 41, 0.2);
-  max-width: 1500px;
   margin: auto;
   text-align: center;
   font-family: montserrat;
   color: rgb(46, 49, 216);
   border-radius: 5px;
+  padding-top: 30px;
 }
 
 #card button {
@@ -182,6 +174,9 @@ body {
 
 #prof {
   box-shadow: 0 4px 8px 0 #10056F;
+  float: left;
+  margin-left: 90px;
+  padding: 80px;
 }
 .title {
   color: grey;
@@ -262,4 +257,11 @@ font-size: larger;
 #LoginQ span {
   display: flex;
   justify-content: center;
+}
+
+#layout {
+  position: relative;
+  float: right;
+  padding: 50px;
+  margin-right: 90px;
 }

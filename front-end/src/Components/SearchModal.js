@@ -73,11 +73,11 @@ export default function SearchModal () {
     <>
       <IconButton onClick={handleOpenSearchMenu}>
         <img
-          src='https://img.icons8.com/external-kiranshastry-gradient-kiranshastry/64/000000/external-search-fitness-kiranshastry-gradient-kiranshastry.png'
+          src='https://cdn-user-icons.flaticon.com/53096/53096164/1632333864666.svg?token=exp=1632337035~hmac=00ca0db6f50ee00d906050ef859e1759'
           alt='search menu'
           style={{
-            width: '56px',
-            height: '56px'
+            width: '36px',
+            height: '36px'
           }}
         />
       </IconButton>

@@ -48,9 +48,6 @@ export default function EditProfile () {
         )
         .catch((c) => console.warn("catch", c));
     };
-  
-
-
   const handleChange = event => {
     setUpdate({ ...update, [event.target.id]: event.target.value })
   }
@@ -59,8 +56,8 @@ export default function EditProfile () {
     updateProfile(update)
   }
   return (
-    <div id="form">
-      <form onSubmit={handleSubmit} >
+    <div >
+      <form onSubmit={handleSubmit} id="form" >
         <h4>Edit</h4>
         <span>
           <label htmlFor="username">Username:</label>
@@ -102,7 +99,6 @@ export default function EditProfile () {
           <option value="other">Perferred not to answer</option>
           </select>     
           </span>
-   
         <br />
         <span>
 
@@ -124,10 +120,7 @@ export default function EditProfile () {
           <option value="back">Back</option>
           <option value="legs">Legs</option>
           </select>
-      
         </span>
-          <br />
-          <br />
         <span>
         <button type='submit'>Submit</button>
         </span>
