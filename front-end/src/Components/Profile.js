@@ -41,7 +41,7 @@ function Profile() {
       </p>
       <p>
         Goals: {goals[0]},{goals[1]}, {goals[2]}, {goals[3]}
-              </p>
+      </p>
       <p>Radius:{profile.radius} miles</p>
       <a href="https://www.instagram.com/">
         <img src="https://cdn2.iconfinder.com/data/icons/social-media-2285/512/1_Instagram_colored_svg_1-1024.png" alt="ig" style={{ width: "20px" }} />
