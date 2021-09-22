@@ -12,36 +12,43 @@ export default function EditProfile () {
   let index = 14
   const [update, setUpdate] = useState({
     username: "",
+    name:"",
     img: '',
-    Availability: '',
-    Activity: '',
-    Goal: '',
-    Experience: ''
+    availability: '',
+    goals: '',
+    experience: '',
+    gender:"",
   })
   useEffect(() => {
     axios.get(`${API}/users/${index}`).then(
       (response) => setUpdate(response.data[0]),
       (error) => history.push(`/not-found`)
     );
-  },[index, history, API]);
+  },[index, history]);
 
+    //   const updateProfile = (profileinfo, index) => {
+    //   try {
+    //     axios.put(`${API}/users/${index}`, profileinfo).then(() => {
+    //       setUpdate(update);
+    //       history.push(`/profile`);
+    //     });
+    //   } catch (error) {
+    //     console.warn("catch", error);
+    //   }
+    // };
 
-
-
-  //updateprofile
-      const updateProfile = (profileinfo, index) => {
-      try {
-        axios.put(`${API}/users/${index}`, profileinfo).then(() => {
-          
-          // const updateA = [...update];
-          // update[index]= updatedA;
-          // setUpdate(updateA);
-          history.push(`/profile/${index}`);
-        });
-      } catch (error) {
-        console.warn("catch", error);
-      }
+    const updateProfile = (profileinfo) => {
+      axios
+        .put(`${API}/users/${index}`, profileinfo)
+        .then(
+          () => {
+            history.push(`/user/${index}`);
+          },
+          (error) => console.error(error)
+        )
+        .catch((c) => console.warn("catch", c));
     };
+  
 
 
   const handleChange = event => {
@@ -49,7 +56,7 @@ export default function EditProfile () {
   }
   const handleSubmit = event => {
     event.preventDefault()
-    updateProfile(update, index)
+    updateProfile(update)
   }
   return (
     <div id="form">
@@ -62,7 +69,7 @@ export default function EditProfile () {
         <br />
         <span>
         <label htmlFor="name">Name:</label>
-        <input type="text" placeholder="name" />
+        <input type="text" placeholder="name" value={update.name} id="name" onChange={handleChange}/>
         </span>
         <br />
         <span>
@@ -97,15 +104,17 @@ export default function EditProfile () {
           </span>
    
         <br />
-       
-          {/* <input
+        <span>
+
+       <label htmlFor="experience">Experience:</label>
+          <input
             type='text'
             id='experience'
-            value={details.experience}
+            value={update.experience}
             onChange={handleChange}
-          /> */}
-        {/* </span> */}
-     
+            />
+            </span>     
+            <br />
         <span>
           <label htmlFor='goals'>Goals:</label>
           <select name="goals" id="">
@@ -115,12 +124,7 @@ export default function EditProfile () {
           <option value="back">Back</option>
           <option value="legs">Legs</option>
           </select>
-          {/* <input
-            type='text'
-            id='goals'
-            value={details.goals}
-            onChange={handleChange}
-          /> */}
+      
         </span>
           <br />
           <br />

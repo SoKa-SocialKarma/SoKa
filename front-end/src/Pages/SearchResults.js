@@ -11,14 +11,14 @@ const useStyles = makeStyles({
     display: 'flex',
     flexWrap: 'wrap',
     flexDirection: 'row',
-    gap: '20px'
+    gap: '10px'
   },
   paper: {
     width: '48%',
-    height: '640px',
-    padding: '10px',
+    height: '550px',
     display: 'grid',
-    gridTemplateRows: '10% 40% 7% 23% 18%'
+    gridTemplateRows: '5%'
+    // gridTemplateRows: '10% 40% 7% 23% 18%'
   }
 })
 

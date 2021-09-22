@@ -2,6 +2,7 @@ import {  useState } from "react";
 import EditProfile from "./EditProfile.js";
 import Profile from "./Profile"
 import Reviews from "./Notifications"
+import { Link } from "react-router-dom";
 
 
 function UserProfile() {
@@ -38,7 +39,9 @@ function UserProfile() {
 
       <div >
         <p>{user === "profile" && <Profile/>}</p>
-        <p>{user === "edit" && <EditProfile/>}</p>
+        <p>{user === 'edit' && <EditProfile/>}</p>
+
+        {/* <p>{user === "edit" && <EditProfile/>}</p> */}
         <p>{user === "notifications" && <Reviews/>} </p>
       </div>
     </div>

@@ -10,10 +10,9 @@ function Profile() {
   const getProfile = async () => {
     try {
       const { data } = await axios.get(`${API}/users/14`);
-      console.log(data[0]);
+      console.log(data[0].image);
       setProfile(data[0]);
       setAvailable(data[0].availabledays);
-    
       setGoals(data[0].goals);
     } catch (err) {
       console.log(err);
@@ -27,7 +26,6 @@ function Profile() {
     <div id="pro">
       <br />
       <h4>Profile</h4>
-   
       <p>Username:{profile.username}</p>
       <p>
         {" "}
