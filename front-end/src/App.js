@@ -17,9 +17,10 @@ import UpdateProfile from './Pages/UpdateProfile'
 import ForgotPassword from './Pages/ForgotPassword'
 import MapBox from './Components/MapBox'
 
+import UserMatches from './Pages/UserMatches'
+import UserFeed from './Pages/UserFeed'
 import Profile from './Pages/Profile'
 
-import Demo from './Pages/Demo'
 import SearchResults from './Pages/SearchResults'
 import Navbar from './Components/Navbar'
 import FourOFour from './Pages/FourOFour'
@@ -82,12 +83,12 @@ function App () {
                 path='/login-dashboard'
                 component={LoginDashboard}
               />
-              <PrivateRoute path='/matches' component={Demo} />
-              {/* <PrivateRoute path='/matches' component={UserMatches} /> */}
-              <PrivateRoute path='/messages' component={Show} />
-              <PrivateRoute path='/profile' component={Profile} />
-              <PrivateRoute path='/edit' component={EditProfile} />
-              <PrivateRoute path='/update-profile' component={UpdateProfile} />
+              <PrivateRoute path='/users/:id/messages' component={Show} />
+              <PrivateRoute path='/users/:id/profile' component={Profile} />
+              <PrivateRoute path='/users/:id/edit' component={EditProfile} />
+              <PrivateRoute path='/users/:id/update-profile' component={UpdateProfile} />
+              <PrivateRoute path='/users/:id/feed/matches' component={UserMatches} />
+              <PrivateRoute path='/users/:id/feed' component={UserFeed} />
               <Route path='*' component={FourOFour} />
             </Switch>
           </Navbar>

@@ -64,7 +64,8 @@ feed.get('/matches', async (req, res) => {
   const { id } = req.params
   try {
     const filteredMatches = await getFilteredMatches(id)
-    res.status(200).json(filteredMatches)
+    const data = await filteredNestedDuplicates(filteredMatches)
+    res.status(200).json(data)
   } catch (err) {
     res.status(404).send(err)
   }

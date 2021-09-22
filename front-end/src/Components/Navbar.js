@@ -113,7 +113,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function Navbar({ children }) {
-  const { currentUser } = useAuth();
+  const { currentUser, currentUserId } = useAuth();
   const classes = useStyles();
   const theme = useTheme();
   const [open, setOpen] = useState(false);
@@ -200,7 +200,7 @@ export default function Navbar({ children }) {
         </div>
         <Divider />
         <List>
-          <ListItem component={Link} to="/matches">
+          <ListItem component={Link} to={`/users/${currentUserId}/feed/matches`}  >
             <ListItemIcon>
               <img
                 src="https://img.icons8.com/nolan/2x/handshake.png"
@@ -211,7 +211,7 @@ export default function Navbar({ children }) {
             <ListItemText primary="Matches" />
           </ListItem>
 
-          <ListItem component={Link} to="/messages">
+          <ListItem component={Link} to={`/users/${currentUserId}/messages`}>
             <ListItemIcon>
               <img
                 src="https://img.icons8.com/nolan/2x/messages-mac.png"
@@ -222,7 +222,7 @@ export default function Navbar({ children }) {
             <ListItemText primary="Inbox" />
           </ListItem>
 
-          <ListItem component={Link} to="/profile">
+          <ListItem component={Link} to={`/users/${currentUserId}/profile`}>
             <ListItemIcon>
               <img
                 src="https://img.icons8.com/nolan/64/lifecycle.png"

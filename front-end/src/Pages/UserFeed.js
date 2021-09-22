@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+// import { useParams } from 'react-router'
 
 import UserCard from '../Components/UserCard.js'
 import { Container, Paper } from '@material-ui/core'
@@ -25,27 +26,28 @@ const useStyles = makeStyles({
   }
 })
 
-function Demo () {
+function UserFeed () {
   const classes = useStyles()
-  const [demoProfiles, setDemoProfiles] = useState([])
+  const [currentUserPotentialMatchesProfiles, setCurrentUserPotentialMatchesProfiles] = useState([])
+//   const { id } = useParams()
 
-  const getDemoUsers = async () => {
+  const getCurrentUserPotentialMatches = async () => {
     try {
       const { data } = await axios.get(`${API}/users`)
-      setDemoProfiles(data)
+      setCurrentUserPotentialMatchesProfiles(data)
     } catch (err) {
       console.log(err)
     }
   }
 
   useEffect(() => {
-    return getDemoUsers()
+    return getCurrentUserPotentialMatches()
   }, [])
 
   return (
     <>
       <Container className={classes.root}>
-        {demoProfiles?.map(profile => {
+        {currentUserPotentialMatchesProfiles?.map(profile => {
           return (
             <Paper className={classes.paper}>
               <UserCard profile={profile} key={profile.id} />
@@ -57,4 +59,4 @@ function Demo () {
   )
 }
 
-export default Demo
+export default UserFeed

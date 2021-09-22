@@ -15,15 +15,23 @@ const filteredNestedDuplicates = list => {
     return 'No data found with the current id.!'
   }
 
+  if (list.id) {
+    return [list]
+  }
+
+  if (!list.length) {
+    return []
+  }
+
   let data = {}
   let flat = []
 
-  if (list.length === 1) {
-    return list
-  }
-
   list.forEach(arr => {
-    flat = [...flat, ...arr]
+    if (!arr.length) {
+      flat = [...flat, arr]
+    } else {
+      flat = [...flat, ...arr]
+    }
   })
   flat.forEach(item => {
     if (!data[item.id]) {
@@ -33,4 +41,4 @@ const filteredNestedDuplicates = list => {
   return Object.values(data)
 }
 
-module.exports =  {filteredNestedDuplicates} 
+module.exports = { filteredNestedDuplicates }
