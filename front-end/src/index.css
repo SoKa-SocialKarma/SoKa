@@ -29,7 +29,12 @@
 
 .loginDashboard {
   width: 40%;
-  margin: 0 30% 0 30% !important;
+  margin: 10% 30% 0 30% !important;
+}
+
+.demoButton {
+  width: 12%;
+  margin: 2% 44% 0 44% !important;
 }
 
 #root > div > header > div > button {
@@ -49,6 +54,17 @@
 
 #root > div > header > div > div > div > button * {
   padding: 0px;
+}
+
+#menu-goal > div,
+#menu-experience > div{
+  top: 216px !important;
+}
+
+#menu-gender > div,
+#menu-location > div,
+#menu-radius > div {
+  top: 286px !important;
 }
 
 body {
@@ -243,3 +259,7 @@ font-size: larger;
   font-family: Arial, Helvetica, sans-serif;
   }
 
+#LoginQ span {
+  display: flex;
+  justify-content: center;
+}

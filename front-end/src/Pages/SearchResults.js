@@ -25,7 +25,6 @@ const useStyles = makeStyles({
 function SearchResults () {
   const classes = useStyles()
   const { currentSearchResults } = useAuth()
-
   return (
     <>
       <Container className={classes.root}>
