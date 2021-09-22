@@ -2,7 +2,7 @@
   width: 100vw;
   height: 100vh;
 }
-#root > div{
+#root > div {
   width: 100vw;
   height: 100vh;
 }
@@ -10,7 +10,6 @@
 #root > div > main {
   width: auto;
 }
-
 
 #root > div > main > div > div > div > fieldset {
   margin: 2px;
@@ -28,191 +27,200 @@
   color: rgb(169, 163, 163);
 }
 
-
-.loginDashboard{
+.loginDashboard {
   width: 40%;
-  margin: 0 30% 0 30%!important;
-  
+  margin: 0 30% 0 30% !important;
 }
 
-#root > div > header > div > button{
+#root > div > header > div > button {
   margin: 0 auto 0 auto;
 }
 
-
-#SokaLogo{
-  width: 100%;
+#root > div > header > div > div > a {
+  padding: 0;
+  width: 128px;
   height: 80px;
-  transform: scale(1.4)
 }
 
-body{ 
-    display: flex;
-    justify-content: center;
-  }
-  #main {
-    display: flex;
-    justify-content: center;
-  }
-  #name {
-    display: flex;
-    justify-content: center;
-  }
-  
-  #search {
-    display: flex;
-    justify-content: space-between;
-  }
-  
-  /* Style page content */
-  .main {
-    margin-left: 160px; /* Same as the width of the sidebar */
-    padding: 0px 10px;
-  }
-  
-  /* Container holding the image and the text */
-  .container {
-    margin-top: 10px;
-    position: relative;
-    text-align: center;
-    color: rgb(45, 112, 133);
-    padding-right: 20px;
-    padding-left: 60px;
-  }
-  
-  /* Bottom left text */
-  .bottom-left {
-    position: absolute;
-    bottom: 8px;
-    left: 16px;
-  }
-  
-  .bottom-center {
-    position: absolute;
-    bottom: 15%;
-    text-align: center;
-    /* top: 50%; */
-    /* left: 50%; */
-    /* transform: translate(-50%, -50%); */
-  }
-  
-  .index {
-    text-align: center;
-  }
-  
-  .messages {
-    text-align: center;
-    position: relative;
-    margin: 15px;
-  }
-  
-  /* {box-sizing: border-box;} */
-  
-  .search-form {
-    width: 110%;
-    display: flex;
-    justify-content: space-between;
-    margin: auto;
-    align-items: center;
-    padding-left: 70px;
-    padding-right: 130px;
-    flex-wrap: wrap;
-  }
-  .topBar {
-    color: #44cceb;
-    width: 100%;
-  }
-  
-  .cards {
-    padding-left: 8%;
-    display: flex;
-    justify-content: center;
-    /* background-color: blue; */
-  }
-  
-  #matches {
-    text-align: center;
-  }
-  
-  .match {
-    background-color: rgb(143, 227, 255, 0.6);
-  }
-  
-  
-  
-  
-  #card {
-    box-shadow: 0 4px 8px 0 rgba(4, 14, 41, 0.2);
-    background-color: rgb(5, 16, 107);
-    max-width: 1500px;
-    margin: auto; 
-    text-align: center;
-    font-family: montserrat;
-    color: white;
-    border-radius: 5px;
-  }
+#SokaLogo {
+  width: 100%;
+  height: 100px;
+}
 
-  #card button {
-    background-color: #36cff1;
-    border: none;
-    padding: 5px 32px;
-    display: inline-block;
-    font-size: 14px;
-    margin: 4px 5px;
-    cursor: pointer;
-    border-radius: 5px;
-  }
-  
-  #prof {
-    border-radius: 15px;
-    box-shadow: 0 4px 8px 0  rgba(42, 224, 191, 0.945);
-  }
-  .title {
-    color: grey;
-    font-size: 18px;
-  }
-  
-  #profile {
-    border: none;
-    outline: 0;
-    display: inline-block; 
-    padding: 8px;
-    color: white;
-    background-color: #000;
-    text-align: center;
-    cursor: pointer;
-    width: 100%; 
-    font-size: 18px;
-  }
-  
-  a {
-    text-decoration: none;
-    font-size: 22px;
-    color: black;
-  }
-  
-  button:hover, a:hover {
-    opacity: 0.7;
-  }
+#root > div > header > div > div > div > button * {
+  padding: 0px;
+}
 
-  #chat {
-    background-color: #60a4b3;
-    width:40%;
-    margin-left: 30%;
-    border-radius: 20px;
-  }
-  #sent {
-    background-color: rgb(154, 154, 250) ;
-   margin-left: 55%;
-  }
+body {
+  display: flex;
+  justify-content: center;
+}
+#main {
+  display: flex;
+  justify-content: center;
+}
+#name {
+  display: flex;
+  justify-content: center;
+}
+
+#search {
+  display: flex;
+  justify-content: space-between;
+}
+
+/* Style page content */
+.main {
+  margin-left: 160px; /* Same as the width of the sidebar */
+  padding: 0px 10px;
+}
+
+/* Container holding the image and the text */
+.container {
+  margin-top: 10px;
+  position: relative;
+  text-align: center;
+  color: rgb(45, 112, 133);
+  padding-right: 20px;
+  padding-left: 60px;
+}
+
+/* Bottom left text */
+.bottom-left {
+  position: absolute;
+  bottom: 8px;
+  left: 16px;
+}
+
+.bottom-center {
+  position: absolute;
+  bottom: 15%;
+  text-align: center;
+  /* top: 50%; */
+  /* left: 50%; */
+  /* transform: translate(-50%, -50%); */
+}
+
+.index {
+  text-align: center;
+}
+
+.messages {
+  text-align: center;
+  position: relative;
+  margin: 15px;
+}
+
+/* {box-sizing: border-box;} */
+
+.search-form {
+  width: 110%;
+  display: flex;
+  justify-content: space-between;
+  margin: auto;
+  align-items: center;
+  padding-left: 70px;
+  padding-right: 130px;
+  flex-wrap: wrap;
+}
+.topBar {
+  color: #44cceb;
+  width: 100%;
+}
+
+.cards {
+  padding-left: 8%;
+  display: flex;
+  justify-content: center;
+  /* background-color: blue; */
+}
+
+#matches {
+  text-align: center;
+}
+
+.match {
+  background-color: rgb(143, 227, 255, 0.6);
+}
+
+#card {
+  box-shadow: 0 4px 8px 0 rgba(4, 14, 41, 0.2);
+  background-color: rgb(5, 16, 107);
+  max-width: 1500px;
+  margin: auto;
+  text-align: center;
+  font-family: montserrat;
+  color: white;
+  border-radius: 5px;
+}
+
+#card button {
+  background-color: #36cff1;
+  border: none;
+  padding: 5px 32px;
+  display: inline-block;
+  font-size: 14px;
+  margin: 4px 5px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+#prof {
+  border-radius: 15px;
+  box-shadow: 0 4px 8px 0 rgba(42, 224, 191, 0.945);
+}
+.title {
+  color: grey;
+  font-size: 18px;
+}
+
+#profile {
+  border: none;
+  outline: 0;
+  display: inline-block;
+  padding: 8px;
+  color: white;
+  background-color: #000;
+  text-align: center;
+  cursor: pointer;
+  width: 100%;
+  font-size: 18px;
+}
+
+a {
+  text-decoration: none;
+  font-size: 22px;
+  color: black;
+}
+
+button:hover,
+a:hover {
+  opacity: 0.7;
+}
+
+#chat {
+  background-color: #60a4b3;
+  width: 40%;
+  margin-left: 30%;
+  border-radius: 20px;
+}
+#sent {
+  background-color: rgb(154, 154, 250);
+  margin-left: 55%;
+}
 
 #recieved {
-    background-color: rgb(226, 219, 219);
-    width: 45%;
-    border-radius: 10px;
-  } 
+  background-color: rgb(226, 219, 219);
+  width: 45%;
+  border-radius: 10px;
+}
 
-#form span{
-    display: flex;
-    justify-content: space-evenly;
-  }
+#form span {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+#LoginQ span {
+  display: flex;
+  justify-content: center;
+}

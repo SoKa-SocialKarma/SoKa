@@ -12,6 +12,7 @@ import Home from './Pages/Home'
 import LoginDashboard from './Pages/LoginDashboard'
 import Login from './Pages/Login'
 import Signp from './Pages/Signp'
+import LoginInfo from './Pages/LoginInfo'
 import UpdateProfile from './Pages/UpdateProfile'
 import ForgotPassword from './Pages/ForgotPassword'
 import MapBox from './Components/MapBox'
@@ -34,19 +35,6 @@ import PrivateRoute from './Components/PrivateRoute'
 // const API = apiURL()
 function App () {
     // let history =useHistory();
-    // const [profile,setProfile] = UseState([]);
-
-    // useEffect(() => {
-    //   try{
-    //     axios.get(`${API}/users/14`).then((response) => {
-    //       setProfile(response.data)
-    //     },
-    //     (error) => console.log("get", error)
-    //     );
-    //   }catch (error) {
-    //     console.warn("catch", error)
-    //   }
-    // },[])
 
   //   const deleteProfile = (id) => {
   //     try {
@@ -87,6 +75,7 @@ function App () {
               <Route path='/map' component={MapBox} />
               <Route path='/login' component={Login} />
               <Route path='/signup' component={Signp} />
+              <Route path='/login-info' component={LoginInfo} />
               <Route path='/search-results' component={SearchResults} />
               <Route path='/forgot-password' component={ForgotPassword}  />
               <PrivateRoute

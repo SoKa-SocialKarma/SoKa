@@ -3,13 +3,12 @@ import { useHistory } from 'react-router-dom'
 import { useAuth } from '../Context/AuthContext'
 
 import PopularSearches from './PopularSearches'
-import UniqueSearchForm from './UniqueSearchForm'
 
 import { makeStyles } from '@material-ui/core/styles'
 import {
   Container,
   Backdrop,
-  Button,
+  IconButton,
   Paper,
   Fade,
   Modal
@@ -71,18 +70,17 @@ export default function SearchModal () {
   }, [])
 
   return (
-    <div>
-      <Button onClick={handleOpenSearchMenu}>
+    <>
+      <IconButton onClick={handleOpenSearchMenu}>
         <img
           src='https://img.icons8.com/external-kiranshastry-gradient-kiranshastry/64/000000/external-search-fitness-kiranshastry-gradient-kiranshastry.png'
           alt='search menu'
           style={{
             width: '56px',
-            height: '56px',
-            transform: 'translate(10px,8px)'
+            height: '56px'
           }}
         />
-      </Button>
+      </IconButton>
 
       <Modal
         aria-labelledby='transition-modal-title'
@@ -99,15 +97,14 @@ export default function SearchModal () {
         <Fade in={open}>
           <Paper elevation={3} className={classes.paper}>
             <Container className={classes.container}>
-              <UniqueSearchForm
+              <PopularSearches
                 today={today}
                 getSearchResults={getSearchResults}
               />
-              <PopularSearches getSearchResults={getSearchResults} />
             </Container>
           </Paper>
         </Fade>
       </Modal>
-    </div>
+    </>
   )
 }

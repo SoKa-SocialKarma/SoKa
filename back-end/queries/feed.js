@@ -9,9 +9,30 @@ const {
   getFilteredAvailabilityQuery
 } = require('../helpers/feedQuery')
 
+const columns = `id, name, lastname, username, location, gender, radius, 
+karma, image, badges, goals->'goals' AS goals, experience->'experience' AS experience, availability->'days' AS availableDays,
+matchrequests AS requests, pendingreview AS toDoReview`
+
 const getAllPossibleMatches = async sokaQuery => {
   try {
-    return await db.any(getAllPossibleMatchesQuery(sokaQuery))
+    const usersMatchList =
+      '' + Object.values(await db.one(getAllPossibleMatchesQuery(sokaQuery)))
+    if (!usersMatchList) {
+      return []
+    }
+    if (!usersMatchList.includes(',')) {
+      return await db.many(
+        `SELECT ${columns} FROM users WHERE id = ${usersMatchList}`,
+        usersMatchList
+      )
+    }
+
+    return await db.tx(t => {
+      const queries = usersMatchList
+        .split(',')
+        .map(id => t.many(`SELECT ${columns} FROM users WHERE id = ${id}`, id))
+      return t.batch(queries)
+    })
   } catch (err) {
     return console.error(err.message)
   }
@@ -26,7 +47,7 @@ const getFilteredFriends = async id => {
     }
     if (!friendsList.includes(',')) {
       return await db.many(
-        `SELECT * FROM users WHERE id = ${friendsList}`,
+        `SELECT ${columns} FROM users WHERE id = ${friendsList}`,
         friendsList
       )
     }
@@ -35,7 +56,7 @@ const getFilteredFriends = async id => {
       const queries = friendsList
         .split(',')
         .map(friend =>
-          t.many(`SELECT * FROM users WHERE id = ${friend}`, friend)
+          t.many(`SELECT ${columns} FROM users WHERE id = ${friend}`, friend)
         )
       return t.batch(queries)
     })
@@ -53,7 +74,7 @@ const getFilteredGoals = async id => {
     }
     if (!goalsList.includes(',')) {
       return await db.many(
-        `SELECT id, username, goals FROM users WHERE jsonb_path_exists(goals, '$.goals[*] ? (@ == "${goalsList}")') AND id != ${id}`,
+        `SELECT ${columns} FROM users WHERE jsonb_path_exists(goals, '$.goals[*] ? (@ == "${goalsList}")') AND id != ${id}`,
         goalsList
       )
     }
@@ -63,7 +84,7 @@ const getFilteredGoals = async id => {
         .split(',')
         .map(goal =>
           t.many(
-            `SELECT id, username, goals FROM users WHERE jsonb_path_exists(goals, '$.goals[*] ? (@ == "${goal}")') AND id != ${id}`,
+            `SELECT ${columns} FROM users WHERE jsonb_path_exists(goals, '$.goals[*] ? (@ == "${goal}")') AND id != ${id}`,
             goal
           )
         )
@@ -85,17 +106,17 @@ const getFilteredRadius = async id => {
 const getFilteredMatches = async id => {
   try {
     const matchesList =
-      '' + Object.values(await db.any(getFilteredMatchesQuery(id)))
+      '' + Object.values(await db.one(getFilteredMatchesQuery(id)))
     if (!matchesList) {
       return []
     }
     if (!matchesList.includes(',')) {
-      return await db.one('SELECT * FROM users WHERE id=$1', matchesList)
+      return await db.one(`SELECT ${columns} FROM users WHERE id=$1`, matchesList)
     }
     return await db.tx(t => {
       const queries = matchesList
         .split(',')
-        .map(id => t.one('SELECT * FROM users WHERE id=$1', id))
+        .map(id => t.one(`SELECT ${columns} FROM users WHERE id=$1`, Number(id)))
       return t.batch(queries)
     })
   } catch (err) {
@@ -106,13 +127,13 @@ const getFilteredMatches = async id => {
 const getFilteredAvailability = async id => {
   try {
     const daysList =
-      '' + Object.values(await db.any(getFilteredAvailabilityQuery(id)))
+      '' + Object.values(await db.one(getFilteredAvailabilityQuery(id)))
     if (!daysList) {
       return []
     }
     if (!daysList.includes(',')) {
       return await db.many(
-        `SELECT id, username, availability FROM users WHERE jsonb_path_exists(availability, '$.days[*] ? (@ == "${daysList}")') AND id != ${id}`,
+        `SELECT ${columns} FROM users WHERE jsonb_path_exists(availability, '$.days[*] ? (@ == "${daysList}")') AND id != ${id}`,
         daysList
       )
     }
@@ -122,7 +143,7 @@ const getFilteredAvailability = async id => {
         .split(',')
         .map(day =>
           t.many(
-            `SELECT id, username, availability FROM users WHERE jsonb_path_exists(availability, '$.days[*] ? (@ == "${day}")') AND id != ${id}`,
+            `SELECT ${columns} FROM users WHERE jsonb_path_exists(availability, '$.days[*] ? (@ == "${day}")') AND id != ${id}`,
             day
           )
         )

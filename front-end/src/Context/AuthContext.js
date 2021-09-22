@@ -39,7 +39,7 @@ export function AuthProvider ({ children }) {
     return currentUser.updatePassword(password)
   }
 
-  async function getSokaRequestQuery (searchParams) {
+  async function getSokaRequestQuery (searchParams={}) {
     let query = `${API}/users?`
     Object.keys(searchParams).forEach(k => {
       let day = ''
@@ -62,10 +62,6 @@ export function AuthProvider ({ children }) {
         query += `${k}=${!day ? searchParams[k] : day}&`
       }
     })
-    const sokaQuery = query.slice(0, -1)
-
-    console.log('AUTH SOKA QUERY')
-    console.log(sokaQuery)
 
     const response = await axios.get(query.slice(0, -1))
     setCurrentSearchResults(response.data)
