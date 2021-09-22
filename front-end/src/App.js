@@ -12,6 +12,7 @@ import Home from './Pages/Home'
 import LoginDashboard from './Pages/LoginDashboard'
 import Login from './Pages/Login'
 import Signp from './Pages/Signp'
+import LoginInfo from './Pages/LoginInfo'
 import UpdateProfile from './Pages/UpdateProfile'
 import ForgotPassword from './Pages/ForgotPassword'
 import MapBox from './Components/MapBox'
@@ -30,9 +31,9 @@ import EditProfile from './Components/EditProfile'
 import PrivateRoute from './Components/PrivateRoute'
 
 // import UserMatches from './Components/UserMatches'
-import { apiURL } from './Util/apiURL'
+// import { apiURL } from './Util/apiURL'
 
-const API = apiURL()
+// const API = apiURL()
 function App () {
     // let history =useHistory();
 
@@ -75,6 +76,7 @@ function App () {
               <Route path='/map' component={MapBox} />
               <Route path='/login' component={Login} />
               <Route path='/signup' component={Signp} />
+              <Route path='/login-info' component={LoginInfo} />
               <Route path='/search-results' component={SearchResults} />
               <Route path='/forgot-password' component={ForgotPassword}  />
               <PrivateRoute

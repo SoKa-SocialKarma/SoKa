@@ -235,3 +235,8 @@ a:hover {
   display: flex;
   justify-content: space-evenly;
 }
+
+#LoginQ span {
+  display: flex;
+  justify-content: center;
+}
