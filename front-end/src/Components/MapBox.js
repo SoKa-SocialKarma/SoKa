@@ -2,13 +2,14 @@ import { useState, useEffect } from 'react'
 import ReactMapGL, { Source, Layer } from 'react-map-gl'
 import 'mapbox-gl/dist/mapbox-gl.css'
 import useGeoLocation from '../Hooks/useGeoLocation'
+import { useAuth } from '../Context/AuthContext'
 
 const layerStyle = {
   id: 'point',
   type: 'circle',
   paint: {
     'circle-radius': 100,
-    'circle-color': 'rgba(22, 134, 182, 0.3)'
+    'circle-color': 'rgba(79,195,247, 0.4)'
   }
 }
 
@@ -16,13 +17,14 @@ const MapBox = () => {
   const location = useGeoLocation()
   const currentLong = Number(location.coordinates.longitude)
   const currentLat = Number(location.coordinates.latitude)
+  const { mainElement } = useAuth()
 
   const [viewport, setViewport] = useState({
     latitude: location.coordinates.latitude || 40.7128,
     longitude: location.coordinates.longitude || -74.006,
-    zoom: 13,
-    width: window.innerWidth,
-    height: window.innerHeight
+    zoom: 12,
+    width: mainElement?.clientWidth,
+    height: mainElement?.clientHeight - 94
   })
 
   const geojson = {
@@ -44,10 +46,11 @@ const MapBox = () => {
       latitude: location.coordinates.latitude || 40.7128,
       longitude: location.coordinates.longitude || -74.006,
       zoom: 12,
-      width: window.innerWidth,
-      height: window.innerHeight
+      width: mainElement?.clientWidth,
+      height: mainElement?.clientHeight - 94
     })
-  }, [location])
+    mainElement?.scrollTo({ top: 20, behavior: 'smooth' })
+  }, [location, mainElement])
 
   return (
     <>

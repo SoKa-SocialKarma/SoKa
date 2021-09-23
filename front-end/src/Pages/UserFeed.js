@@ -19,10 +19,10 @@ const useStyles = makeStyles({
   },
   paper: {
     width: '48%',
-    height: '640px',
+    height: '85vh',
     padding: '10px',
     display: 'grid',
-    gridTemplateRows: '10% 40% 7% 23% 18%'
+    gridTemplateRows: '10% 38% 12% 2% 23% 13%'
   }
 })
 

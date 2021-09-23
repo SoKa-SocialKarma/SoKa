@@ -3,6 +3,7 @@ import { useHistory } from 'react-router-dom'
 import { useAuth } from '../Context/AuthContext'
 
 import PopularSearches from './PopularSearches'
+import searchLogo from '../Assets/searchLogo.svg'
 
 import { makeStyles } from '@material-ui/core/styles'
 import {
@@ -22,7 +23,7 @@ const useStyles = makeStyles(theme => ({
   },
   paper: {
     width: '100vw',
-    transform: 'translateY(81px)',
+    transform: 'translateY(10.1vh)',
     boxShadow: theme.shadows[5],
     padding: theme.spacing(2, 4, 3)
   },
@@ -32,6 +33,12 @@ const useStyles = makeStyles(theme => ({
     flexDirection: 'column',
     justifyContent: 'space-between',
     alignItems: 'center'
+  },
+  searchLogo: {
+    maxWidth: '100%',
+    maxHeight: '100%',
+    width: 'auto',
+    height: 'auto'
   }
 }))
 
@@ -71,13 +78,13 @@ export default function SearchModal () {
 
   return (
     <>
-      <IconButton onClick={handleOpenSearchMenu}>
+      <IconButton onClick={handleOpenSearchMenu} className={classes.searchLogo}>
         <img
-          src='https://cdn-user-icons.flaticon.com/53096/53096164/1632333864666.svg?token=exp=1632337035~hmac=00ca0db6f50ee00d906050ef859e1759'
+          src={searchLogo}
           alt='search menu'
           style={{
-            width: '36px',
-            height: '36px'
+            width: '60%',
+            height: '60%'
           }}
         />
       </IconButton>

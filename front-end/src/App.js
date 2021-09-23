@@ -3,6 +3,8 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 // import { useState, useEffect } from "react";
 // import { useHistory } from "react-router-dom";
 import { AuthProvider } from './Context/AuthContext'
+import { createTheme, ThemeProvider } from '@material-ui/core/styles';
+import sokaTheme from './Assets/theme.json'
 
 // import PublicLayout from './Layouts/PublicLayout'
 // import PrivateLayout from './Layouts/PrivateLayout'
@@ -65,11 +67,12 @@ function App () {
     //     console.warn("catch", error);
     //   }
     // };
-
+    const theme = createTheme(sokaTheme);
   return (
     <>
       <Router>
         <AuthProvider>
+        <ThemeProvider theme={theme}>
           <Navbar>
             <Switch>
               <Route exact path='/' component={Home} />
@@ -92,6 +95,7 @@ function App () {
               <Route path='*' component={FourOFour} />
             </Switch>
           </Navbar>
+          </ThemeProvider>
         </AuthProvider>
       </Router>
     </>
