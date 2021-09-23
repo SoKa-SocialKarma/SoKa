@@ -75,7 +75,7 @@ const Login = () => {
               <Form.Label>Password</Form.Label>
               <Form.Control type='password' ref={passwordRef} required />
             </Form.Group>
-            <Button disabled={loading} className='w-100 mt-4' type='submit'>
+            <Button disabled={loading} className='w-100 mt-4 bts-mui-bt' type='submit' color='#6C63FF'>
               Log In
             </Button>
           </Form>
@@ -87,7 +87,7 @@ const Login = () => {
       <div className='w100 text-center mt-2'>
         Need an account? <Link to='/signup'>Sign Up</Link>
       </div>
-      <Button disabled={loading} className='demoButton' onClick={goToDemo}>
+      <Button disabled={loading} className='demoButton bts-mui-bt' onClick={goToDemo}>
         Demo LogIn
       </Button>
     </>

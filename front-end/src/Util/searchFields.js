@@ -100,3 +100,14 @@ export const location = [
     label: 'Staten Island'
   }
 ]
+
+
+export const geoLocation = [
+  {
+    'NewYork' : [40.7128, -74.0060],
+    'Bronx' : [40.8448, -73.8648],
+    'Brooklyn': [40.6501, -73.9400],
+    'Queens': [40.7282, -73.7949],
+    'StatenIsland': [40.5795, -74.1589]
+  }
+]

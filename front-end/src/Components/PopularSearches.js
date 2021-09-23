@@ -200,7 +200,7 @@ const PopularSearches = ({ today, getSearchResults }) => {
         <Button
           onClick={handleSubmit}
           variant='contained'
-          color='primary'
+          color='secondary'
           className={classes.searchButton}
         >
           Search Now!

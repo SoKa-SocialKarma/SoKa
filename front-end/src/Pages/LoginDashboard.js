@@ -27,13 +27,13 @@ const LoginDashBoard = () => {
           <h2 className='text-center mb-4'>Profile</h2>
           {error && <Alert variant='danger'>{error}</Alert>}
           <strong>Email:</strong> {currentUser.email}
-          <Link to='/update-profile' className='btn btn-primary w-100 mt-3'>
+          <Link to='/update-profile' className='btn btn-primary w-100 mt-3 bts-mui-bt'>
             Update Profile
           </Link>
         </Card.Body>
       </Card>
       <div className='w100 text-center mt-2'>
-        <Button variant='link' onClick={handleLogOut}>
+        <Button variant='link' onClick={handleLogOut} style={{color:'white!important'}}>
           Log Out
         </Button>
       </div>

@@ -70,14 +70,14 @@ const Signp = () => {
               <Form.Label>Password Confirmation</Form.Label>
               <Form.Control type='password' ref={passwordConfirmRef} required />
             </Form.Group>
-            <Button disabled={loading} className='w-100 mt-4' type='submit'>
+            <Button disabled={loading} className='w-100 mt-4 bts-mui-bt' type='submit'>
               Sign Up
             </Button>
           </Form>
         </Card.Body>
       </Card>
       <div className='w100 text-center mt-2'>
-        Already have an account? <Link to='/login'>Log In</Link>
+        Already have an account? <Link to='/login' className="loginLinks">Log In</Link>
       </div>
     </>
   )

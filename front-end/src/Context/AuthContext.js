@@ -15,6 +15,7 @@ export function AuthProvider ({ children }) {
   const [currentUserId, setCurrentUserId] = useState()
   const [loading, setLoading] = useState(true)
   const [currentSearchResults, setCurrentSearchResults] = useState([])
+  const [mainElement, setMainElement] = useState()
 
   function signUp (email, password) {
     return auth.createUserWithEmailAndPassword(email, password)
@@ -38,6 +39,10 @@ export function AuthProvider ({ children }) {
 
   function updatePassword (password) {
     return currentUser.updatePassword(password)
+  }
+
+  function mainElementSetter (element) {
+    setMainElement(element)
   }
 
   async function getSokaRequestQuery (searchParams={}) {
@@ -97,7 +102,9 @@ export function AuthProvider ({ children }) {
     updateEmail,
     updatePassword,
     getSokaRequestQuery,
-    currentSearchResults
+    currentSearchResults,
+    mainElementSetter,
+    mainElement,
   }
 
   return (
