@@ -1,5 +1,4 @@
-import { useState } from "react";
-import EditProfile from "./EditProfile.js";
+import { useState } from "react"
 import Profile from "./Profile"
 import Reviews from "./Notifications"
 import { Link } from 'react-router-dom';
