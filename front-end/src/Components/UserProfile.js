@@ -1,12 +1,13 @@
-import { useState } from 'react'
-import EditProfile from './EditProfile.js'
-import Profile from './Profile'
-import Reviews from './Notifications'
-import MapBox from './MapBox'
+import { useState } from "react";
+import EditProfile from "./EditProfile.js";
+import Profile from "./Profile"
+import Reviews from "./Notifications"
 
-function UserProfile () {
-  const [user, setUser] = useState('')
-  const userView = ['profile', 'edit', 'notifications']
+
+function UserProfile() {
+  const [user, setUser] = useState("")
+  const userView = ["profile", "edit", "notifications"];
+
   return (
     <>
     <div id='card'>
@@ -42,6 +43,7 @@ function UserProfile () {
       <div>
         {userView.map(userV => (
           <button type='button' key={userV} onClick={() => setUser(userV)}>
+
             {userV.toLocaleUpperCase()}
           </button>
         ))}
@@ -49,12 +51,8 @@ function UserProfile () {
       <p>{user === 'profile' && <Profile />}</p>
       <p>{user === 'edit' && <EditProfile />}</p>
       <p>{user === 'notifications' && <Reviews />} </p>
-
     </div>
-
-
-
-      </>
+   </>
   )
 }
 export default UserProfile
