@@ -21,7 +21,7 @@ import MapBox from './Components/MapBox'
 
 import UserMatches from './Pages/UserMatches'
 import UserFeed from './Pages/UserFeed'
-import Profile from './Pages/Profile'
+import UserProfile from './Pages/UserProfile'
 
 import SearchResults from './Pages/SearchResults'
 import Navbar from './Components/Navbar'
@@ -87,7 +87,7 @@ function App () {
                 component={LoginDashboard}
               />
               <PrivateRoute path='/users/:id/messages' component={Show} />
-              <PrivateRoute path='/users/:id/profile' component={Profile} />
+              <PrivateRoute path='/users/:id/profile' component={UserProfile} />
               <PrivateRoute path='/users/:id/edit' component={EditProfile} />
               <PrivateRoute path='/users/:id/update-profile' component={UpdateProfile} />
               <PrivateRoute path='/users/:id/feed/matches' component={UserMatches} />

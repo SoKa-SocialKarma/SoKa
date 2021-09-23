@@ -1,23 +1,36 @@
 import { useState } from "react"
-import Profile from "./Profile"
-import Reviews from "./Notifications"
+import Profile from "../Components/Profile"
+import Reviews from "../Components/Notifications"
 import { Link } from 'react-router-dom';
-
+import { useAuth } from '../Context/AuthContext'
+import defaultProfileImage from '../Assets/defaultProfile.png'
 
 function UserProfile() {
-  const [user, setUser] = useState("")
-  const userView = ["profile", "edit", "notifications"];
-  let index = 14
+
+  const { currentUserData } = useAuth()
+  const user = currentUserData[0]
+  const {
+    id,
+    name,
+    lastname,
+    username,
+    image
+  } = user
+
+  // const userView = ["profile", "edit", "notifications"];
+
+  // const [user, setUser] = useState("")
+  // let index = 14
 
   return (
     <>
       <div id='card'>
-        <h2>Jack Green</h2>
+        <h2>{name} {lastname}</h2>
         <div id='prof'>
-          <h3>tinygoose9959</h3>
+          <h3>{username}</h3>
           <img
-            src='https://images.pexels.com/photos/2078265/pexels-photo-2078265.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500'
-            alt=''
+            src={image.url || defaultProfileImage}
+            alt={username}
             style={{ width: '200px', height: '180px' }}
           />
           <br />
@@ -42,7 +55,7 @@ function UserProfile() {
           </h4>
         </div>
         <div>
-          <Link to={`/users/${index}/edit`}>
+          <Link to={`/users/${id}/edit`}>
             <button>
               EDIT
             </button>

@@ -13,6 +13,7 @@ export function useAuth () {
 export function AuthProvider ({ children }) {
   const [currentUser, setCurrentUser] = useState()
   const [currentUserId, setCurrentUserId] = useState()
+  const [currentUserData, setCurrentUserData] = useState()
   const [loading, setLoading] = useState(true)
   const [currentSearchResults, setCurrentSearchResults] = useState([])
   const [mainElement, setMainElement] = useState()
@@ -83,18 +84,22 @@ export function AuthProvider ({ children }) {
   }, [])
 
   useEffect(()=>{
-    const getId = async () => {
-      const response = currentUser && await axios.get(`${API}/users?uuid=${currentUser.uid}`)
-      response && setCurrentUserId(response.data[0].id)
+    const getCurrentUserData = async () => {
+      const   data = currentUser && await axios.get(`${API}/users?uuid=${currentUser.uid}`)
+      data && await setCurrentUserData(data.data) 
+      data && await setCurrentUserId(data.data[0]['id'])
+      // const user = data && currentUserData[0]
+      // data && console.log(data.data[0]['id'])
     }
-    return getId()
-  },[currentUser])
+    return getCurrentUserData()
+  },[currentUser, loading])
 
 
 
   const value = {
     currentUser,
     currentUserId,
+    currentUserData,
     signUp,
     logIn,
     logOut,
