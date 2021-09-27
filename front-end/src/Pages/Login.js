@@ -1,15 +1,13 @@
 import { useRef, useState} from 'react'
-import { useAuth, useAPI } from '../Context/AuthContext'
-import { Link, useHistory } from 'react-router-dom'
+import { useAuth } from '../Context/AuthContext'
+import { Link } from 'react-router-dom'
 
 import { Form, Button, Card, Alert } from 'react-bootstrap'
 
 const Login = () => {
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
-  const { redirectToFeed } = useAPI()
   const { logIn } = useAuth()
-  const history = useHistory()
   const emailRef = useRef()
   const passwordRef = useRef()
 
@@ -20,7 +18,6 @@ const Login = () => {
       setError('')
       setLoading(true)
       await logIn('demo@soka.com', 'pursuit')
-      history.push('/users/14/feed')
     } catch (error) {
       const message = error.message
         .split(' ')

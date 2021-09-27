@@ -1,5 +1,5 @@
 import React, { useContext, useState, useEffect, useReducer } from 'react'
-// import { useHistory } from 'react-router-dom'
+import { useHistory } from 'react-router-dom'
 import { auth } from '../firebase'
 import { apiURL } from '../Util/apiURL'
 import axios from 'axios'
@@ -21,6 +21,15 @@ export function useElement () {
   return useContext(ElementContext)
 }
 
+
+ const queryKeys = [
+  'availability',
+  'experience',
+  'goal',
+  'radius',
+  'gender',
+  'location'
+]
 export const ACTIONS = {
   SET_CURRENT_USER: 'set-current-user',
   SET_CURRENT_USER_DATA: 'set-current-user-data',
@@ -62,7 +71,7 @@ function setGlobalState (globalState, action) {
 }
 
 export function AuthProvider ({ children }) {
-  // const history = useHistory()
+  const history = useHistory()
   const [loading, setLoading] = useState(true)
   const [globalState, dispatch] = useReducer(setGlobalState, {
     currentUser: null,
@@ -80,7 +89,7 @@ export function AuthProvider ({ children }) {
           type: ACTIONS.SET_CURRENT_USER_DATA,
           payload: { data: data }
         })
-        // history.push(`users/${data.data[0]['id']}/feed`)
+        history.push(`users/${data.data[0]['id']}/feed`)
       }
       user && getCurrentUserData(user)
       dispatch({ type: ACTIONS.SET_CURRENT_USER, payload: { user: user } })
@@ -93,50 +102,35 @@ export function AuthProvider ({ children }) {
   //     const userData = data.data[0]
   //     const result = await Promise.all([data, userData])
 
-  // Login Functions from FIREBASE
 
+  // Login Functions from FIREBASE
   function signUp (email, password) {
     return auth.createUserWithEmailAndPassword(email, password)
   }
-
   function logIn (email, password) {
     return auth.signInWithEmailAndPassword(email, password)
   }
-
   function logOut () {
     return auth.signOut()
   }
-
   function resetPassword (email) {
     return auth.sendPasswordResetEmail(email)
   }
-
   function updateEmail (email) {
     return globalState.currentUser.updateEmail(email)
   }
-
   function updatePassword (password) {
     return globalState.currentUser.updatePassword(password)
   }
-
   function elementSetter (element) {
     dispatch({ type: ACTIONS.SET_ELEMENT, payload: { element: element } })
   }
-
   function resetState () {
     dispatch({ type: ACTIONS.RESET_STATE })
   }
 
-  // API Request
-  const queryKeys = [
-    'availability',
-    'experience',
-    'goal',
-    'radius',
-    'gender',
-    'location'
-  ]
-
+ 
+ // API Request
   async function getResultsUsingSokaQuery (searchParams) {
     let query = `${API}/users?`
     let day = ''
