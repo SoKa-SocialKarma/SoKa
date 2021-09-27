@@ -5,5 +5,5 @@ export default function LoginInfo() {
     <div>
       <LoginQs />
     </div>
-  )
+  );
 }
