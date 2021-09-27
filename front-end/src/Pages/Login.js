@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react'
+import { useRef, useState} from 'react'
 import { useAuth, useAPI } from '../Context/AuthContext'
 import { Link, useHistory } from 'react-router-dom'
 
@@ -7,11 +7,13 @@ import { Form, Button, Card, Alert } from 'react-bootstrap'
 const Login = () => {
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
-  const { currentUserData } = useAPI()
+  const { redirectToFeed } = useAPI()
   const { logIn } = useAuth()
   const history = useHistory()
   const emailRef = useRef()
   const passwordRef = useRef()
+
+ 
 
   const goToDemo = async () => {
     try {
@@ -42,8 +44,6 @@ const Login = () => {
       setError('')
       setLoading(true)
       await logIn(emailRef.current.value, passwordRef.current.value)
-      // console.log("BEfore pushing After login USERID : " , currentUserData?.id)
-      history.push(`/users/${currentUserData?.id}/feed`)
     } catch (error) {
       const message = error.message
         .split(' ')

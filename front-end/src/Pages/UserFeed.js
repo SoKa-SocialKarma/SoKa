@@ -28,8 +28,11 @@ const useStyles = makeStyles({
 
 function UserFeed () {
   const classes = useStyles()
-  const [currentUserPotentialMatchesProfiles, setCurrentUserPotentialMatchesProfiles] = useState([])
-//   const { id } = useParams()
+  const [
+    currentUserPotentialMatchesProfiles,
+    setCurrentUserPotentialMatchesProfiles
+  ] = useState([])
+  //   const { id } = useParams()
 
   const getCurrentUserPotentialMatches = async () => {
     try {
@@ -41,7 +44,7 @@ function UserFeed () {
   }
 
   useEffect(() => {
-    return getCurrentUserPotentialMatches()
+      getCurrentUserPotentialMatches()
   }, [])
 
   return (
