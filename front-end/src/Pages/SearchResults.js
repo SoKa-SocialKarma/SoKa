@@ -1,4 +1,4 @@
-import { useAuth } from '../Context/AuthContext'
+import { useAPI } from '../Context/AuthContext'
 
 import UserCard from '../Components/UserCard.js'
 import NoSearchResults from '../Components/NoSearchResults.js'
@@ -24,7 +24,7 @@ const useStyles = makeStyles({
 
 function SearchResults () {
   const classes = useStyles()
-  const { currentSearchResults } = useAuth()
+  const { currentSearchResults } = useAPI()
   return (
     <>
       <Container className={classes.root}>

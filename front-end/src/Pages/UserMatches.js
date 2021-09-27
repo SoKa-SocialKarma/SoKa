@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { useParams, Redirect } from 'react-router'
-import { useAuth } from '../Context/AuthContext'
+import { useAPI } from '../Context/AuthContext'
 
 import UserCard from '../Components/UserCard.js'
 import { Container, Paper } from '@material-ui/core'
@@ -31,23 +31,23 @@ function UserMatches () {
   const classes = useStyles()
   const [currentUserMatches, setCurrentUserMatches] = useState([])
   const [sameUser, setSameUser] = useState(false)
-  const { currentUserId } = useAuth()
+  const { currentUserData } = useAPI()
   const { id } = useParams()
 
   useEffect(() => {
     const unSubscribe = async () => {
       try {
         const { data } = await axios.get(
-          `${API}/users/${currentUserId}/feed/matches`
+          `${API}/users/${currentUserData.id}/feed/matches`
         )
         setCurrentUserMatches(data)
-        setSameUser(id == currentUserId)
+        setSameUser(id == currentUserData.id)
       } catch (err) {
         console.log(err)
       }
     }
     return unSubscribe()
-  }, [currentUserId, id])
+  }, [currentUserData, id])
 
   return (
     <>
@@ -61,7 +61,7 @@ function UserMatches () {
             )
           })
         ) : (
-          <Redirect to={`/users/${currentUserId}/feed/matches`} />
+          <Redirect to={`/users/${currentUserData.id}/feed/matches`} />
         )}
       </Container>
     </>

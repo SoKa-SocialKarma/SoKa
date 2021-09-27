@@ -1,31 +1,19 @@
-import { useState } from "react"
-import Profile from "../Components/Profile"
-import Reviews from "../Components/Notifications"
-import { Link } from 'react-router-dom';
-import { useAuth } from '../Context/AuthContext'
+import { useAPI } from '../Context/AuthContext'
+import { Link } from 'react-router-dom'
+
+import Profile from '../Components/Profile'
 import defaultProfileImage from '../Assets/defaultProfile.png'
+// import Reviews from '../Components/Notifications'
 
-function UserProfile() {
-
-  const { currentUserData } = useAuth()
-  const user = currentUserData[0]
-  const {
-    id,
-    name,
-    lastname,
-    username,
-    image
-  } = user
-
-  // const userView = ["profile", "edit", "notifications"];
-
-  // const [user, setUser] = useState("")
-  // let index = 14
-
+function UserProfile () {
+  const { currentUserData } = useAPI()
+  const { id, name, lastname, username, image } = currentUserData
   return (
     <>
       <div id='card'>
-        <h2>{name} {lastname}</h2>
+        <h2>
+          {name} {lastname}
+        </h2>
         <div id='prof'>
           <h3>{username}</h3>
           <img
@@ -56,14 +44,10 @@ function UserProfile() {
         </div>
         <div>
           <Link to={`/users/${id}/edit`}>
-            <button>
-              EDIT
-            </button>
+            <button>EDIT</button>
           </Link>
 
-          <button>
-            NOTIFICATIONS
-          </button>
+          <button>NOTIFICATIONS</button>
         </div>
 
         <Profile />

@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react'
+import { useElement } from '../Context/AuthContext'
+import useGeoLocation from '../Hooks/useGeoLocation'
 import ReactMapGL, { Source, Layer } from 'react-map-gl'
 import 'mapbox-gl/dist/mapbox-gl.css'
-import useGeoLocation from '../Hooks/useGeoLocation'
-import { useAuth } from '../Context/AuthContext'
 
 const layerStyle = {
   id: 'point',
@@ -17,14 +17,14 @@ const MapBox = () => {
   const location = useGeoLocation()
   const currentLong = Number(location.coordinates.longitude)
   const currentLat = Number(location.coordinates.latitude)
-  const { mainElement } = useAuth()
+  const { element } = useElement()
 
   const [viewport, setViewport] = useState({
     latitude: location.coordinates.latitude || 40.7128,
     longitude: location.coordinates.longitude || -74.006,
     zoom: 12,
-    width: mainElement?.clientWidth,
-    height: mainElement?.clientHeight - 94
+    width: element?.clientWidth,
+    height: element?.clientHeight - 94 || 0
   })
 
   const geojson = {
@@ -46,11 +46,11 @@ const MapBox = () => {
       latitude: location.coordinates.latitude || 40.7128,
       longitude: location.coordinates.longitude || -74.006,
       zoom: 12,
-      width: mainElement?.clientWidth,
-      height: mainElement?.clientHeight - 94
+      width: element?.clientWidth,
+      height: element?.clientHeight - 94
     })
-    mainElement?.scrollTo({ top: 20, behavior: 'smooth' })
-  }, [location, mainElement])
+    element?.scrollTo({ top: 20, behavior: 'smooth' })
+  }, [location, element])
 
   return (
     <>

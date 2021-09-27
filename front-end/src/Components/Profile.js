@@ -1,9 +1,8 @@
-import { useAuth } from '../Context/AuthContext'
+import { useAPI } from '../Context/AuthContext'
 
 function Profile () {
-  const { currentUserData } = useAuth()
+  const { currentUserData } = useAPI()
 
-  const profile = currentUserData[0]
   const {
     name,
     lastname,
@@ -14,7 +13,7 @@ function Profile () {
     experience,
     goals,
     radius
-  } = profile
+  } = currentUserData
 
   return (
     <div id='pro'>

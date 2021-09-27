@@ -6,8 +6,6 @@ import './index.css'
 import '@fontsource/inter'
 // import '@fontsource/roboto/300.css'
 
-
-
 ReactDOM.render(
   <React.StrictMode>
     <App />
