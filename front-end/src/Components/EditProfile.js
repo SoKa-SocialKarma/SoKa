@@ -1,58 +1,59 @@
 import { useState, useEffect } from 'react';
-import { useHistory } from 'react-router-dom';
-import { Link } from 'react-router-dom';
+import { useParams, useHistory } from 'react-router-dom';
 import { apiURL } from '../Util/apiURL';
 import axios from 'axios';
 
 const API = apiURL();
 
-export default function EditProfile() {
+function EditProfile(props) {
+  let { id } = useParams();
+  // console.log(props)
+  // let index = 14
   let history = useHistory();
-  let index = 14
   const [update, setUpdate] = useState({
     username: "",
     name: "",
-    img: '',
+    lastname: '',
     availability: '',
     goals: '',
     experience: '',
     gender: "",
   })
-  useEffect(() => {
-    axios.get(`${API}/users/${index}`).then(
-      (response) => setUpdate(response.data[0]),
-      (error) => history.push(`/not-found`)
-    );
-  }, [index, history]);
 
-  //   const updateProfile = (profileinfo, index) => {
-  //   try {
-  //     axios.put(`${API}/users/${index}`, profileinfo).then(() => {
-  //       setUpdate(update);
-  //       history.push(`/profile`);
-  //     });
-  //   } catch (error) {
-  //     console.warn("catch", error);
-  //   }
-  // };
-
-  const updateProfile = (profileinfo) => {
+  const updateProfile = (profileInfo) => {
     axios
-      .put(`${API}/users/${index}`, profileinfo)
+      .put(`${API}/users/${id}`, profileInfo)
       .then(
         () => {
-          history.push(`/user/${index}`);
+          history.push(`/users/${id}`);
         },
         (error) => console.error(error)
       )
       .catch((c) => console.warn("catch", c));
   };
+
   const handleChange = event => {
     setUpdate({ ...update, [event.target.id]: event.target.value })
+
   }
+
+  useEffect(() => {
+    axios.get(`${API}/users/${id}`).then(
+      (response) => {
+        setUpdate(response.data[0])
+        console.log(response.data[0])
+      },
+      (error) => history.push(`/404`)
+    );
+  }, [id, history]);
+
+
   const handleSubmit = event => {
+
     event.preventDefault()
-    updateProfile(update)
+    updateProfile(update, id)
+    console.log(update)
+    history.push(`/users/${id}/profile`)
   }
   return (
     <div >
@@ -121,11 +122,11 @@ export default function EditProfile() {
           </select>
         </span>
         <span>
-          <Link to={`/users/${index}/profile`}>
-            <button type='submit'>Submit</button>
-          </Link>
+          <button type='submit'>Submit</button>
         </span>
       </form>
     </div>
   )
 }
+
+export default EditProfile;
