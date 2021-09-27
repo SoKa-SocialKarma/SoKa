@@ -49,7 +49,7 @@ function UserFeed () {
       <Container className={classes.root}>
         {currentUserPotentialMatchesProfiles?.map(profile => {
           return (
-            <Paper className={classes.paper}>
+            <Paper className={classes.paper} key={`${profile.id}-mui-paper`}>
               <UserCard profile={profile} key={profile.id} />
             </Paper>
           )

@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { useParams, useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import { apiURL } from '../Util/apiURL';
 import axios from 'axios';
@@ -7,7 +7,6 @@ import axios from 'axios';
 const API = apiURL();
 
 export default function EditProfile() {
-  //let { index } = useParams();
   let history = useHistory();
   let index = 14
   const [update, setUpdate] = useState({

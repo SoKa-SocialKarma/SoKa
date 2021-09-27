@@ -75,7 +75,6 @@ function UserCard ({ profile }) {
     location,
     karma,
     experience,
-    goals,
     availabledays
   } = profile
 
