@@ -25,7 +25,6 @@ users.use('/:id/feed', feedController)
 users.get('/', async (req, res) => {
   try {
     const allUsers = await getAllUsers(req.query)
-    console.log(allUsers)
     const data = await filteredNestedDuplicates(allUsers)
     res.status(200).json(data)
   } catch (err) {

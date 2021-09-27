@@ -1,8 +1,11 @@
+
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 // import axios from "axios";
 // import { useState, useEffect } from "react";
 // import { useHistory } from "react-router-dom";
 import { AuthProvider } from './Context/AuthContext'
+import { createTheme, ThemeProvider } from '@material-ui/core/styles';
+import sokaTheme from './Assets/theme.json'
 
 // import PublicLayout from './Layouts/PublicLayout'
 // import PrivateLayout from './Layouts/PrivateLayout'
@@ -19,7 +22,7 @@ import MapBox from './Components/MapBox'
 
 import UserMatches from './Pages/UserMatches'
 import UserFeed from './Pages/UserFeed'
-import Profile from './Pages/Profile'
+import UserProfile from './Pages/UserProfile'
 
 import SearchResults from './Pages/SearchResults'
 import Navbar from './Components/Navbar'
@@ -65,11 +68,13 @@ function App () {
     //     console.warn("catch", error);
     //   }
     // };
+    const theme = createTheme(sokaTheme);
 
   return (
     <>
       <Router>
         <AuthProvider>
+        <ThemeProvider theme={theme}>
           <Navbar>
             <Switch>
               <Route exact path='/' component={Home} />
@@ -84,7 +89,7 @@ function App () {
                 component={LoginDashboard}
               />
               <PrivateRoute path='/users/:id/messages' component={Show} />
-              <PrivateRoute path='/users/:id/profile' component={Profile} />
+              <PrivateRoute path='/users/:id/profile' component={UserProfile} />
               <PrivateRoute path='/users/:id/edit' component={EditProfile} />
               <PrivateRoute path='/users/:id/update-profile' component={UpdateProfile} />
               <PrivateRoute path='/users/:id/feed/matches' component={UserMatches} />
@@ -92,6 +97,7 @@ function App () {
               <Route path='*' component={FourOFour} />
             </Switch>
           </Navbar>
+          </ThemeProvider>
         </AuthProvider>
       </Router>
     </>

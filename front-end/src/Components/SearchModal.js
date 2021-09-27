@@ -1,8 +1,9 @@
 import { useState, useEffect } from 'react'
 import { useHistory } from 'react-router-dom'
-import { useAuth } from '../Context/AuthContext'
+import { useAPI } from '../Context/AuthContext'
 
 import PopularSearches from './PopularSearches'
+import searchLogo from '../Assets/searchLogo.svg'
 
 import { makeStyles } from '@material-ui/core/styles'
 import {
@@ -22,7 +23,7 @@ const useStyles = makeStyles(theme => ({
   },
   paper: {
     width: '100vw',
-    transform: 'translateY(81px)',
+    transform: 'translateY(10.1vh)',
     boxShadow: theme.shadows[5],
     padding: theme.spacing(2, 4, 3)
   },
@@ -32,11 +33,17 @@ const useStyles = makeStyles(theme => ({
     flexDirection: 'column',
     justifyContent: 'space-between',
     alignItems: 'center'
+  },
+  searchLogo: {
+    maxWidth: '100%',
+    maxHeight: '100%',
+    width: 'auto',
+    height: 'auto'
   }
 }))
 
 export default function SearchModal () {
-  const { getSokaRequestQuery } = useAuth()
+  const { getResultsUsingSokaQuery } = useAPI()
   const history = useHistory()
 
   const classes = useStyles()
@@ -59,7 +66,7 @@ export default function SearchModal () {
   }
 
   const getSearchResults = async searchParams => {
-    await getSokaRequestQuery(searchParams)
+    await getResultsUsingSokaQuery(searchParams)
     history.push('/search-results')
     handleCloseSearchMenu()
   }
@@ -71,13 +78,13 @@ export default function SearchModal () {
 
   return (
     <>
-      <IconButton onClick={handleOpenSearchMenu}>
+      <IconButton onClick={handleOpenSearchMenu} className={classes.searchLogo}>
         <img
-          src='https://img.icons8.com/external-kiranshastry-gradient-kiranshastry/64/000000/external-search-fitness-kiranshastry-gradient-kiranshastry.png'
+          src={searchLogo}
           alt='search menu'
           style={{
-            width: '56px',
-            height: '56px'
+            width: '60%',
+            height: '60%'
           }}
         />
       </IconButton>
