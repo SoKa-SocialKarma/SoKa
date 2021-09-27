@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { apiURL } from "../Util/apiURL.js";
+import linkedin from "../Assets/linkedin.png";
 // import { Link } from 'react-router-dom';
 import MapBox from "./MapBox";
 import purpBackground from '../Assets/purpBackground.jpg'
@@ -124,7 +125,7 @@ function Profile() {
             <img src={facebook} alt="facebook login" style={{ width: "50px" }} />
           </a>
           <a href="https://www.linkedin.com/">
-            <img src="https://cdn-user-icons.flaticon.com/53461/53461348/1632760599224.svg?token=exp=1632762134~hmac=b785d1dc4b1cf24da9e73acd4aafe620" alt="Linkedin login" style={{ width: "50px" }} />
+            <img src={linkedin} alt="Linkedin login" style={{ width: "50px" }} />
           </a>
           <a href="https://twitter.com/?lang=en" target="_blank">
             <img src={twitter} alt="Twitter login" style={{ width: "50px" }} />
