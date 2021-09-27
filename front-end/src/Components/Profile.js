@@ -115,16 +115,16 @@ function Profile() {
 
 
           <a href="https://www.instagram.com/" target="_blank">
-            <img src="https://cdn-icons-png.flaticon.com/128/1400/1400487.png" alt="ig" style={{ width: "50px" }} />
+            <img src="https://cdn-user-icons.flaticon.com/53461/53461348/1632761220231.svg?token=exp=1632762134~hmac=6e91b361f64df395df50866b9ba60242" alt="ig" style={{ width: "50px" }} />
           </a>
           <a href="https://www.facebook.com/" target="_blank">
-            <img src="https://cdn-icons-png.flaticon.com/128/1400/1400477.png" alt="ig" style={{ width: "50px" }} />
+            <img src="https://cdn-user-icons.flaticon.com/53461/53461348/1632760505015.svg?token=exp=1632762134~hmac=bc019508c4ab4b64592b362836c0ac6f" alt="ig" style={{ width: "50px" }} />
           </a>
-          <a href="https://web.whatsapp.com/">
-            <img src="https://cdn-icons-png.flaticon.com/128/3820/3820293.png" alt="ig" style={{ width: "50px" }} />
+          <a href="https://www.linkedin.com/">
+            <img src="https://cdn-user-icons.flaticon.com/53461/53461348/1632760599224.svg?token=exp=1632762134~hmac=b785d1dc4b1cf24da9e73acd4aafe620" alt="ig" style={{ width: "50px" }} />
           </a>
           <a href="https://twitter.com/?lang=en" target="_blank">
-            <img src="https://cdn-icons-png.flaticon.com/128/2525/2525779.png" alt="ig" style={{ width: "50px" }} />
+            <img src="https://cdn-user-icons.flaticon.com/53461/53461348/1632760858756.svg?token=exp=1632762001~hmac=c7cfae850bcf346cedfac5458b34e238" alt="ig" style={{ width: "50px" }} />
           </a>
 
         </div>
