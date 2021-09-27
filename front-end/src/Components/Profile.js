@@ -119,16 +119,16 @@ function Profile() {
 
 
           <a href="https://www.instagram.com/" target="_blank">
-            <img src={instagram} alt="instagram login" style={{ width: "50px" }} />
+            <img src={instagram} alt="instagram login" style={{ width: "40px" }} />
           </a>
           <a href="https://www.facebook.com/" target="_blank">
-            <img src={facebook} alt="facebook login" style={{ width: "50px" }} />
+            <img src={facebook} alt="facebook login" style={{ width: "40px" }} />
           </a>
           <a href="https://www.linkedin.com/">
-            <img src={linkedin} alt="Linkedin login" style={{ width: "50px" }} />
+            <img src={linkedin} alt="Linkedin login" style={{ width: "40px" }} />
           </a>
           <a href="https://twitter.com/?lang=en" target="_blank">
-            <img src={twitter} alt="Twitter login" style={{ width: "50px" }} />
+            <img src={twitter} alt="Twitter login" style={{ width: "40px" }} />
           </a>
 
         </div>
