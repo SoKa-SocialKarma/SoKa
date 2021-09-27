@@ -23,8 +23,8 @@ const MapBox = () => {
     latitude: location.coordinates.latitude || 40.7128,
     longitude: location.coordinates.longitude || -74.006,
     zoom: 12,
-    width: mainElement?.clientWidth,
-    height: mainElement?.clientHeight - 94
+    width: mainElement?.clientWidth - 170,
+    height: mainElement?.clientHeight - 300
   })
 
   const geojson = {
@@ -46,8 +46,8 @@ const MapBox = () => {
       latitude: location.coordinates.latitude || 40.7128,
       longitude: location.coordinates.longitude || -74.006,
       zoom: 12,
-      width: mainElement?.clientWidth,
-      height: mainElement?.clientHeight - 94
+      width: mainElement?.clientWidth - 170,
+      height: mainElement?.clientHeight - 300
     })
     mainElement?.scrollTo({ top: 20, behavior: 'smooth' })
   }, [location, mainElement])
@@ -59,6 +59,7 @@ const MapBox = () => {
         mapStyle='mapbox://styles/tpichardo/cktjfw1vh05kc18qq97wjjwrj'
         {...viewport}
         onViewportChange={nextViewport => setViewport(nextViewport)}
+        style={{ height: "50px", width: "30px" }}
       >
         <Source id='my-data' type='geojson' data={geojson}>
           <Layer {...layerStyle} />
