@@ -1,20 +1,19 @@
 import { useRef, useState } from 'react'
+import { useAuth, useAPI } from '../Context/AuthContext'
 import { Link, useHistory } from 'react-router-dom'
-import { useAuth } from '../Context/AuthContext'
 
 import { Form, Button, Card, Alert } from 'react-bootstrap'
 
-
 const Login = () => {
+  const [loading, setLoading] = useState(false)
+  const [error, setError] = useState('')
+  const { currentUserData } = useAPI()
+  const { logIn } = useAuth()
+  const history = useHistory()
   const emailRef = useRef()
   const passwordRef = useRef()
-  const { logIn, currentUserId } = useAuth()
-  const [error, setError] = useState('')
-  const [loading, setLoading] = useState(false)
-  const history = useHistory()
 
-  const goToDemo = async () =>{
-
+  const goToDemo = async () => {
     try {
       setError('')
       setLoading(true)
@@ -43,7 +42,8 @@ const Login = () => {
       setError('')
       setLoading(true)
       await logIn(emailRef.current.value, passwordRef.current.value)
-      history.push(`/users/${currentUserId}/feed`)
+      // console.log("BEfore pushing After login USERID : " , currentUserData?.id)
+      history.push(`/users/${currentUserData?.id}/feed`)
     } catch (error) {
       const message = error.message
         .split(' ')
@@ -75,7 +75,12 @@ const Login = () => {
               <Form.Label>Password</Form.Label>
               <Form.Control type='password' ref={passwordRef} required />
             </Form.Group>
-            <Button disabled={loading} className='w-100 mt-4 bts-mui-bt' type='submit' color='#6C63FF'>
+            <Button
+              disabled={loading}
+              className='w-100 mt-4 bts-mui-bt'
+              type='submit'
+              color='#6C63FF'
+            >
               Log In
             </Button>
           </Form>
@@ -87,7 +92,11 @@ const Login = () => {
       <div className='w100 text-center mt-2'>
         Need an account? <Link to='/signup'>Sign Up</Link>
       </div>
-      <Button disabled={loading} className='demoButton bts-mui-bt' onClick={goToDemo}>
+      <Button
+        disabled={loading}
+        className='demoButton bts-mui-bt'
+        onClick={goToDemo}
+      >
         Demo LogIn
       </Button>
     </>

@@ -4,28 +4,29 @@ import { apiURL } from "../Util/apiURL.js";
 // import { Link } from 'react-router-dom';
 import MapBox from "./MapBox";
 
-const API = apiURL();
+// const API = apiURL();
+
+// function Profile() {
+// let index = 14
+// const [ setProfile] = useState([]);
+// const [available, setAvailable] = useState([]);
+// const [goals, setGoals] = useState([]);
+import { useAPI } from '../Context/AuthContext'
 
 function Profile() {
-  // let index = 14
-  const [profile, setProfile] = useState([]);
-  const [available, setAvailable] = useState([]);
-  const [goals, setGoals] = useState([]);
+  const { currentUserData } = useAPI()
 
-  const getProfile = async () => {
-    try {
-      const { data } = await axios.get(`${API}/users/14`);
-      console.log(data[0].image);
-      setProfile(data[0]);
-      setAvailable(data[0].availabledays);
-      setGoals(data[0].goals);
-    } catch (err) {
-      console.log(err);
-    }
-  };
-  useEffect(() => {
-    return getProfile();
-  }, []);
+  const {
+    name,
+    lastname,
+    username,
+    gender,
+    location,
+    availabledays,
+    experience,
+    goals,
+    radius
+  } = currentUserData
 
   return (
     <div class="container">
@@ -35,20 +36,20 @@ function Profile() {
         <h2>About</h2>
         <h6>
           {" "}
-          Name: {profile.name} {profile.lastname}
+          Name: {name} {lastname}
         </h6>
-        <h6>Gender: {profile.gender}</h6>
-        <h6>Location:{profile.location}</h6>
+        <h6>Gender: {gender}</h6>
+        <h6>Location:{location}</h6>
         <h6>
-          Availablility:{available[0]},{available[1]}
+          Availablility:{availabledays[0]},{availabledays[1]}
         </h6>
         <h6>
-          Experience : {profile.experience}
+          Experience : {experience}
         </h6>
         <h6>
           Goals: {goals[0]},{goals[1]}, {goals[2]}, {goals[3]}
         </h6>
-        <h6>Radius:{profile.radius} miles</h6>
+        <h6>Radius:{radius} miles</h6>
 
       </div>
 
@@ -120,7 +121,7 @@ function Profile() {
         </div>
       </div>
     </div>
-  );
+  )
 }
 export default Profile;
 

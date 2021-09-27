@@ -1,12 +1,12 @@
 import img from '../Assets/img.svg'
-import { useAuth } from '../Context/AuthContext'
+import { useElement } from '../Context/AuthContext'
 
 function Home () {
-  const { mainElement } = useAuth()
+  const { element } = useElement()
 
   const landingImage = {
-    width: mainElement?.clientWidth,
-    height: mainElement?.clientHeight - 136
+    width: element?.clientWidth,
+    height: element?.clientHeight - 136 || 0
   }
 
   return (

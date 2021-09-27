@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { useHistory } from 'react-router-dom'
-import { useAuth } from '../Context/AuthContext'
+import { useAPI } from '../Context/AuthContext'
 
 import PopularSearches from './PopularSearches'
 import searchLogo from '../Assets/searchLogo.svg'
@@ -43,7 +43,7 @@ const useStyles = makeStyles(theme => ({
 }))
 
 export default function SearchModal () {
-  const { getSokaRequestQuery } = useAuth()
+  const { getResultsUsingSokaQuery } = useAPI()
   const history = useHistory()
 
   const classes = useStyles()
@@ -66,7 +66,7 @@ export default function SearchModal () {
   }
 
   const getSearchResults = async searchParams => {
-    await getSokaRequestQuery(searchParams)
+    await getResultsUsingSokaQuery(searchParams)
     history.push('/search-results')
     handleCloseSearchMenu()
   }

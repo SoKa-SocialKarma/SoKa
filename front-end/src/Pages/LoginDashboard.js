@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { useAuth } from '../Context/AuthContext'
+import { useAuth, useAPI } from '../Context/AuthContext'
 import { Link, useHistory } from 'react-router-dom'
 
 import { Card, Button, Alert } from 'react-bootstrap'
@@ -7,6 +7,7 @@ import { Card, Button, Alert } from 'react-bootstrap'
 const LoginDashBoard = () => {
   const [error, setError] = useState('')
   const { currentUser, logOut } = useAuth()
+  const {setCurrentUserData, setCurrentSearchResults} = useAPI() 
   const history = useHistory()
 
   async function handleLogOut () {
@@ -14,6 +15,8 @@ const LoginDashBoard = () => {
 
     try {
       await logOut()
+      setCurrentUserData({})
+      setCurrentSearchResults([])
       history.push('/')
     } catch {
       setError('Failed to log out')

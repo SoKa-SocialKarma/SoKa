@@ -1,13 +1,13 @@
-import { useState } from "react"
-import Profile from "./Profile"
 import purpBackground from '../Assets/purpBackground.jpg'
 
+import { useAPI } from '../Context/AuthContext'
 
+import Profile from '../Components/Profile'
+// import Reviews from '../Components/Notifications'
 
 function UserProfile() {
-  const [user, setUser] = useState("")
-  const userView = ["profile", "edit", "notifications"];
-
+  const { currentUserData } = useAPI()
+  const { name, lastname, image } = currentUserData
   return (
     <div>
       <div id='profHeader'>
@@ -16,7 +16,7 @@ function UserProfile() {
       </div>
       <div id='card'>
         <div id="prof">
-          <h2>Jack Green</h2>
+          <h2>{name} {lastname}</h2>
           <br />
           <br />
         </div>
