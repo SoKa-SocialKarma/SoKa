@@ -1,5 +1,4 @@
 import React, { useContext, useState, useEffect, useReducer } from 'react'
-import { useHistory } from 'react-router-dom'
 import { auth } from '../firebase'
 import { apiURL } from '../Util/apiURL'
 import axios from 'axios'
@@ -21,8 +20,7 @@ export function useElement () {
   return useContext(ElementContext)
 }
 
-
- const queryKeys = [
+const queryKeys = [
   'availability',
   'experience',
   'goal',
@@ -71,7 +69,6 @@ function setGlobalState (globalState, action) {
 }
 
 export function AuthProvider ({ children }) {
-  const history = useHistory()
   const [loading, setLoading] = useState(true)
   const [globalState, dispatch] = useReducer(setGlobalState, {
     currentUser: null,
@@ -89,7 +86,6 @@ export function AuthProvider ({ children }) {
           type: ACTIONS.SET_CURRENT_USER_DATA,
           payload: { data: data }
         })
-        history.push(`users/${data.data[0]['id']}/feed`)
       }
       user && getCurrentUserData(user)
       dispatch({ type: ACTIONS.SET_CURRENT_USER, payload: { user: user } })
@@ -101,7 +97,6 @@ export function AuthProvider ({ children }) {
   //     const data = axios.get(`${API}/users?uuid=${currentUser?.uid}`)
   //     const userData = data.data[0]
   //     const result = await Promise.all([data, userData])
-
 
   // Login Functions from FIREBASE
   function signUp (email, password) {
@@ -129,8 +124,7 @@ export function AuthProvider ({ children }) {
     dispatch({ type: ACTIONS.RESET_STATE })
   }
 
- 
- // API Request
+  // API Request
   async function getResultsUsingSokaQuery (searchParams) {
     let query = `${API}/users?`
     let day = ''

@@ -1,6 +1,6 @@
-import { useRef, useState} from 'react'
-import { useAuth } from '../Context/AuthContext'
-import { Link } from 'react-router-dom'
+import { useRef, useState, useEffect } from 'react'
+import { useAuth, useAPI } from '../Context/AuthContext'
+import { Link, Redirect } from 'react-router-dom'
 
 import { Form, Button, Card, Alert } from 'react-bootstrap'
 
@@ -8,10 +8,16 @@ const Login = () => {
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
   const { logIn } = useAuth()
+  const { currentUserData } = useAPI()
   const emailRef = useRef()
   const passwordRef = useRef()
+  const [mustRedirect, setMustRedirect] = useState(false)
 
- 
+  useEffect(() => {
+    if (currentUserData.id) {
+      setMustRedirect(true)
+    }
+  }, [currentUserData])
 
   const goToDemo = async () => {
     try {
@@ -59,6 +65,7 @@ const Login = () => {
 
   return (
     <>
+      {mustRedirect && <Redirect to={`users/${currentUserData.id}/feed`} />}
       <Card className='loginDashboard'>
         <Card.Body>
           <h2 className='text-center mb-4'>Log In</h2>
