@@ -141,6 +141,7 @@ export default function Navbar ({ children }) {
   const { elementSetter } = useElement()
   const elementRef = useRef()
 
+
   const classes = useStyles()
   const theme = useTheme()
   const [open, setOpen] = useState(false)
@@ -154,15 +155,13 @@ export default function Navbar ({ children }) {
   }
 
   useEffect(() => {
-    const updateRefElement = elementSetter(elementRef.current)
-    return updateRefElement
-  }, [elementSetter])
+    elementSetter(elementRef.current)
+  }, [])
 
   useEffect(() => {
-    currentUserData?.id && setId(currentUserData.id)
+    currentUserData.id ? setId(currentUserData.id) : setId(0)
   }, [currentUserData])
   
-
   return (
     <div className={classes.root}>
       <CssBaseline />

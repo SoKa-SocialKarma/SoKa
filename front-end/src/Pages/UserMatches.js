@@ -46,7 +46,8 @@ function UserMatches () {
         console.log(err)
       }
     }
-    return unSubscribe()
+    
+  return unSubscribe()
   }, [currentUserData, id])
 
   return (
@@ -55,7 +56,7 @@ function UserMatches () {
         {sameUser ? (
           currentUserMatches.map(profile => {
             return (
-              <Paper className={classes.paper}>
+              <Paper className={classes.paper} key={`${profile.id}-mui-matches`}>
                 <UserCard profile={profile} key={profile.id} />
               </Paper>
             )

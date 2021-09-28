@@ -42,7 +42,7 @@ function Profile() {
       </div>
       <div id='card'>
         <div id="prof">
-          <h2>{name} {lastname}</h2>
+          <h2>{name} {lastname} </h2>
           <br />
           <br />
         </div>
@@ -63,6 +63,15 @@ function Profile() {
             {/* Name: {name} {lastname} */}
             Username: {username}
           </h6>
+          <span class="span1">
+            <h2>About</h2>
+          </span>
+          <span class="span2">
+            <h6>
+              Name: {name} {lastname}
+            </h6>
+
+          </span>
           <h6>Gender: {gender}</h6>
           <h6>Location:{location}</h6>
           <h6>
@@ -114,17 +123,29 @@ function Profile() {
           </span>
         </div>
         <div id="socials" class="item3" >
-          <a href="https://www.instagram.com/" target="_blank" rel="noreferror">
-            <img src={instagram} alt="instagram login" style={{ width: "50px" }} />
+
+          {/* <Link to={`/users/${index}/edit`}>
+          <button type="button"  >
+          EDIT
+          
+          </button>
+          </Link>
+          <button>
+          NOTIFICATIONS
+        </button> */}
+
+
+          <a href="https://www.instagram.com/" target="_blank">
+            <img src={instagram} alt="instagram login" style={{ width: "40px" }} />
           </a>
           <a href="https://www.facebook.com/" target="_blank">
-            <img src={facebook} alt="facebook login" style={{ width: "50px" }} />
+            <img src={facebook} alt="facebook login" style={{ width: "40px" }} />
           </a>
           <a href="https://www.linkedin.com/">
-            <img src={linkedin} alt="Linkedin login" style={{ width: "50px" }} />
+            <img src={linkedin} alt="Linkedin login" style={{ width: "40px" }} />
           </a>
           <a href="https://twitter.com/?lang=en" target="_blank">
-            <img src={twitter} alt="Twitter login" style={{ width: "50px" }} />
+            <img src={twitter} alt="Twitter login" style={{ width: "40px" }} />
           </a>
 
         </div>

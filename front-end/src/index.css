@@ -112,14 +112,15 @@ body {
   padding: 0px 10px;
 }
 
-.container {
+/* .container {
   margin-top: 10px;
   position: relative;
   text-align: center;
   color: rgb(45, 112, 133);
+  color: black;
   padding-right: 20px;
   padding-left: 60px;
-}
+} */
 
 .bottom-left {
   position: absolute;
@@ -176,7 +177,7 @@ body {
   margin: auto;
   text-align: center;
   font-family: montserrat;
-  color: rgb(46, 49, 216);
+  /* color: rgb(46, 49, 216); */
   border-radius: 5px;
   padding-top: 30px;
 }
@@ -310,17 +311,42 @@ a:hover {
   grid-template-columns: 580px 580px 55px;
   row-gap: 15px;
   column-gap: 30px;
+  padding-left: 60px;
+  color: black;
 }
 
 .item1 {
   grid-row: 1;
-  border: 2px solid black;
+  /* border: 2px solid black; */
   border-radius: 25px;
+  width: 100%;
+  min-height: 290px;
+  margin: auto;
+  box-shadow: 0px 8px 60px -10px rgba(147, 171, 189, 0.6);
+  background: #fff;
+  border-radius: 12px;
 }
+
+/* .span1 {
+  display: flex;
+  justify-content: flex-start;
+}
+.span2 {
+  display: flex;
+  justify-content: flex-start;
+} */
+
 .item2 {
-  border: 2px solid black;
+  /* border: 2px solid black; */
   grid-row: 1/3;
   border-radius: 25px;
+  width: 100%;
+  min-height: 290px;
+  margin: auto;
+  box-shadow: 0px 8px 60px -10px rgba(147, 171, 189, 0.6);
+  background: #fff;
+  border-radius: 12px;
+  text-align: center;
 }
 
 .item3 {
@@ -329,7 +355,13 @@ a:hover {
   border-radius: 25px;
   display: flex;
   justify-content: space-around;
-  margin-top: 40px;
+  align-items: center;
+  width: 100%;
+  min-height: 110px;
+  margin: auto;
+  box-shadow: 0px 8px 60px -10px rgba(147, 171, 189, 0.6);
+  background: #fff;
+  border-radius: 12px;
 }
 
 .item4 {

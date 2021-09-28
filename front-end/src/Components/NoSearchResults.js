@@ -13,7 +13,7 @@ const NoSearchResults = () => {
 
   return (
     <section>
-      <div class='circle'></div>
+      <div className='circle'></div>
       <h1 className='sorry'>
         <span>Sorry,</span>
         <br />
@@ -25,8 +25,8 @@ const NoSearchResults = () => {
         <br />
         <span>Found</span>
       </h1>
-      <button class='pushable' onClick={getSearchResults}>
-        <span class='front'>Browse all</span>
+      <button className='pushable' onClick={getSearchResults}>
+        <span className='front'>Browse all</span>
       </button>
     </section>
   )
