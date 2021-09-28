@@ -20,14 +20,7 @@ export function useElement () {
   return useContext(ElementContext)
 }
 
-const queryKeys = [
-  'availability',
-  'experience',
-  'goal',
-  'radius',
-  'gender',
-  'location'
-]
+
 export const ACTIONS = {
   SET_CURRENT_USER: 'set-current-user',
   SET_CURRENT_USER_DATA: 'set-current-user-data',
@@ -51,7 +44,7 @@ function setGlobalState (globalState, action) {
     case ACTIONS.SET_CURRENT_SEARCH_RESULTS:
       return Object.assign(
         { ...globalState },
-        { currentSearchResults: action.payload.results }
+        { currentSearchResults: action.payload.response.data }
       )
     case ACTIONS.SET_MAIN_ELEMENT:
       return Object.assign(
@@ -73,7 +66,7 @@ export function AuthProvider ({ children }) {
   const [globalState, dispatch] = useReducer(setGlobalState, {
     currentUser: null,
     currentUserData: {},
-    currentSearchResults: [],
+    currentSearchResults: null,
     mainElement: {}
   })
 
@@ -124,8 +117,19 @@ export function AuthProvider ({ children }) {
     dispatch({ type: ACTIONS.RESET_STATE })
   }
 
+
+  const queryKeys = [
+    'availability',
+    'experience',
+    'goal',
+    'radius',
+    'gender',
+    'location'
+  ]
+
   // API Request
   async function getResultsUsingSokaQuery (searchParams) {
+  
     let query = `${API}/users?`
     let day = ''
 
@@ -141,10 +145,10 @@ export function AuthProvider ({ children }) {
       }
     })
 
-    const results = await axios.get(query.slice(0, -1))
+    const response = await axios.get(query.slice(0, -1))
     dispatch({
       type: ACTIONS.SET_CURRENT_SEARCH_RESULTS,
-      payload: { results: results.data }
+      payload: { response: response }
     })
   }
 

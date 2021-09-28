@@ -25,6 +25,7 @@ const useStyles = makeStyles({
 function SearchResults () {
   const classes = useStyles()
   const { currentSearchResults } = useAPI()
+
   return (
     <>
       <Container className={classes.root}>

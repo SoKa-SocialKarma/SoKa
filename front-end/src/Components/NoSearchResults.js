@@ -1,18 +1,25 @@
-import { useHistory } from 'react-router-dom'
-import { useAuth } from '../Context/AuthContext'
+import { useState, useEffect } from 'react'
+import { Redirect } from 'react-router-dom'
+import { useAPI } from '../Context/AuthContext'
 import '../Assets/NoSearchResults.css'
 
 const NoSearchResults = () => {
-  const { getSokaRequestQuery } = useAuth()
-  const history = useHistory()
+  const { getResultsUsingSokaQuery, currentSearchResults } = useAPI()
+  const [mustRedirect, setMustRedirect] = useState(false)
+
+  useEffect(() => {
+    if (currentSearchResults) {
+      setMustRedirect(true)
+    }
+  }, [currentSearchResults])
 
   const getSearchResults = async () => {
-    await getSokaRequestQuery()
-    history.push('/search-results')
+    await getResultsUsingSokaQuery([])
   }
 
   return (
     <section>
+      {mustRedirect && <Redirect to='/search-results' />}
       <div className='circle'></div>
       <h1 className='sorry'>
         <span>Sorry,</span>
