@@ -13,7 +13,7 @@ const layerStyle = {
   }
 }
 
-const MapBox = () => {
+const MapBox = ({adjustmentWidth, adjustmentHeight}) => {
   const location = useGeoLocation()
   const currentLong = Number(location.coordinates.longitude)
   const currentLat = Number(location.coordinates.latitude)
@@ -27,8 +27,8 @@ const MapBox = () => {
     // height: mainElement?.clientHeight - 300
     // width: element?.clientWidth,
     // height: element?.clientHeight - 94 || 0
-    width: element?.clientWidth - 170 || 0,
-    height: element?.clientHeight - 300 || 0
+    width: element?.clientWidth - adjustmentWidth || 0,
+    height: element?.clientHeight - adjustmentHeight || 0
   })
 
   const geojson = {
@@ -50,10 +50,10 @@ const MapBox = () => {
       latitude: location.coordinates.latitude || 40.7128,
       longitude: location.coordinates.longitude || -74.006,
       zoom: 12,
-      width: element?.clientWidth - 170 || 0,
-      height: element?.clientHeight - 300 || 0
+      width: element?.clientWidth - 500 || 0,
+      height: element?.clientHeight - 100 || 0
     })
-    element?.scrollTo({ top: 20, behavior: 'smooth' })
+    element && element.scrollTo({ top: 20, behavior: 'smooth' })
   }, [location, element])
 
   return (
