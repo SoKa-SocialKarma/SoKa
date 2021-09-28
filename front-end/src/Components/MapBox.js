@@ -23,8 +23,8 @@ const MapBox = ({ adjustmentHeight, adjustmentWidth }) => {
     latitude: location.coordinates.latitude || 40.7128,
     longitude: location.coordinates.longitude || -74.006,
     zoom: 12,
-    width: adjustmentWidth ? (mainElement.width - adjustmentWidth) : mainElement.width,
-    height: adjustmentHeight ? (mainElement.height - adjustmentHeight) : mainElement.height
+    width: adjustmentWidth ? (mainElement.width - (mainElement.width*adjustmentWidth)) : mainElement.width,
+    height: adjustmentHeight ? (mainElement.height - (mainElement.height*adjustmentHeight)) : mainElement.height
 
   })
 
@@ -47,8 +47,8 @@ const MapBox = ({ adjustmentHeight, adjustmentWidth }) => {
       latitude: location.coordinates.latitude || 40.7128,
       longitude: location.coordinates.longitude || -74.006,
       zoom: 12,
-      width: adjustmentWidth ? (mainElement.width - adjustmentWidth) : mainElement.width,
-      height: adjustmentHeight ? (mainElement.height - adjustmentHeight) : mainElement.height
+      width: adjustmentWidth ? (mainElement.width - (mainElement.width*adjustmentWidth)) : mainElement.width,
+      height: adjustmentHeight ? (mainElement.height - (mainElement.height*adjustmentHeight)) : mainElement.height
     })
     mainElement.element && mainElement.element.scrollTo({ top: 20, behavior: 'smooth' })
   }, [location, mainElement, adjustmentWidth, adjustmentHeight])
