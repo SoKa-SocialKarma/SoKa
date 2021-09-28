@@ -41,7 +41,7 @@ function Profile() {
       </div>
       <div id='card'>
         <div id="prof">
-          <h2>{name} {lastname}</h2>
+          <h2>{name} {lastname} </h2>
           <br />
           <br />
         </div>
@@ -49,12 +49,15 @@ function Profile() {
       <div class="container">
 
         <div id="pro" class="item1">
-          <br />
-          <h2>About</h2>
-          <h6>
-            {" "}
-            Name: {name} {lastname}
-          </h6>
+          <span class="span1">
+            <h2>About</h2>
+          </span>
+          <span class="span2">
+            <h6>
+              Name: {name} {lastname}
+            </h6>
+
+          </span>
           <h6>Gender: {gender}</h6>
           <h6>Location:{location}</h6>
           <h6>
