@@ -123,7 +123,6 @@ function Profile () {
                   <li>
                     <img src={pin} alt='location pin' />
                     {location}
-                    {location}
                   </li>
                 </ul>
               </h5>
