@@ -46,7 +46,7 @@ function Profile () {
     radius
   } = currentUserData
 
-  console.log(availabledays)
+
   return (
     <Paper className={classes.root}>
       <div id='profHeader'>
@@ -176,7 +176,7 @@ function Profile () {
         </div>
 
         <div className='item4'>
-          <MapBox adjustmentWidth={360} adjustmentHeight={300} />
+          <MapBox adjustmentWidth={480} adjustmentHeight={300} />
         </div>
       </div>
     </Paper>
