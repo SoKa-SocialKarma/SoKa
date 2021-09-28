@@ -129,7 +129,6 @@ export function AuthProvider ({ children }) {
 
   // API Request
   async function getResultsUsingSokaQuery (searchParams) {
-  
     let query = `${API}/users?`
     let day = ''
 
@@ -141,10 +140,9 @@ export function AuthProvider ({ children }) {
       }
 
       if (queryKeys.includes(k) && searchParams[k] !== '') {
-        query += `${k}=${!day ? searchParams[k] : day}&`
+        query += `${k}=${k!=='availability' ? searchParams[k] : day}&`
       }
     })
-
     const response = await axios.get(query.slice(0, -1))
     dispatch({
       type: ACTIONS.SET_CURRENT_SEARCH_RESULTS,
