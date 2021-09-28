@@ -1,13 +1,14 @@
-import { useEffect, useState } from "react";
+// import { useEffect, useState } from "react";
 import axios from "axios";
-import { apiURL } from "../Util/apiURL.js";
+ import { apiURL } from "../Util/apiURL.js";
 import linkedin from "../Assets/linkedin.png";
-// import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import MapBox from "./MapBox";
 import purpBackground from '../Assets/purpBackground.jpg'
 import facebook from '../Assets/facebook.png'
 import instagram from '../Assets/instagram.png'
 import twitter from '../Assets/twitter.png'
+import pencil from "../Assets/pencil.png"
 
 // const API = apiURL();
 
@@ -48,12 +49,19 @@ function Profile() {
       </div >
       <div class="container">
 
+
         <div id="pro" class="item1">
+  
+            <Link to="/users/14/edit" >
+           <img src={pencil} alt="editicon" style={{width:"20px"}} id="editicon" />
+            </Link>
+       
           <br />
           <h2>About</h2>
           <h6>
             {" "}
-            Name: {name} {lastname}
+            {/* Name: {name} {lastname} */}
+            Username: {username}
           </h6>
           <h6>Gender: {gender}</h6>
           <h6>Location:{location}</h6>
@@ -106,19 +114,7 @@ function Profile() {
           </span>
         </div>
         <div id="socials" class="item3" >
-
-          {/* <Link to={`/users/${index}/edit`}>
-          <button type="button"  >
-          EDIT
-          
-          </button>
-          </Link>
-          <button>
-          NOTIFICATIONS
-        </button> */}
-
-
-          <a href="https://www.instagram.com/" target="_blank">
+          <a href="https://www.instagram.com/" target="_blank" rel="noreferror">
             <img src={instagram} alt="instagram login" style={{ width: "50px" }} />
           </a>
           <a href="https://www.facebook.com/" target="_blank">
