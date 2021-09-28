@@ -308,10 +308,10 @@ a:hover {
 .container {
   display: grid;
   grid-template-rows: 300px 130px;
-  grid-template-columns: 580px 580px 55px;
+  grid-template-columns: 580px 470px 55px;
   row-gap: 15px;
   column-gap: 30px;
-  padding-left: 60px;
+  margin-left: 130px;
   color: black;
 }
 
@@ -320,7 +320,7 @@ a:hover {
   /* border: 2px solid black; */
   border-radius: 25px;
   width: 100%;
-  min-height: 290px;
+  min-height: 295px;
   margin: auto;
   box-shadow: 0px 8px 60px -10px rgba(147, 171, 189, 0.6);
   background: #fff;
@@ -338,10 +338,10 @@ a:hover {
 
 .item2 {
   /* border: 2px solid black; */
-  grid-row: 1/3;
+  grid-row: 1/2;
   border-radius: 25px;
   width: 100%;
-  min-height: 290px;
+  min-height: 445px;
   margin: auto;
   box-shadow: 0px 8px 60px -10px rgba(147, 171, 189, 0.6);
   background: #fff;
@@ -357,7 +357,7 @@ a:hover {
   justify-content: space-around;
   align-items: center;
   width: 100%;
-  min-height: 110px;
+  min-height: 130px;
   margin: auto;
   box-shadow: 0px 8px 60px -10px rgba(147, 171, 189, 0.6);
   background: #fff;
