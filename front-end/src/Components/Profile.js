@@ -1,13 +1,14 @@
-import { useEffect, useState } from "react";
+// import { useEffect, useState } from "react";
 import axios from "axios";
-import { apiURL } from "../Util/apiURL.js";
+ import { apiURL } from "../Util/apiURL.js";
 import linkedin from "../Assets/linkedin.png";
-// import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import MapBox from "./MapBox";
 import purpBackground from '../Assets/purpBackground.jpg'
 import facebook from '../Assets/facebook.png'
 import instagram from '../Assets/instagram.png'
 import twitter from '../Assets/twitter.png'
+import pencil from "../Assets/pencil.png"
 
 // const API = apiURL();
 
@@ -48,7 +49,12 @@ function Profile() {
       </div >
       <div class="container">
 
+
         <div id="pro" class="item1">
+  
+            <Link to="/users/14/edit" >
+           <img src={pencil} alt="editicon" style={{width:"20px"}} id="editicon" />
+            </Link>
           <span class="span1">
             <h2>About</h2>
           </span>
