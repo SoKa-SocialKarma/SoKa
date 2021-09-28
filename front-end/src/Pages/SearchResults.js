@@ -18,7 +18,7 @@ const useStyles = makeStyles({
     height: '85vh',
     padding: '10px',
     display: 'grid',
-    gridTemplateRows: '10% 38% 12% 2% 23% 13%'
+    gridTemplateRows: '10% 32% 13% 2% 18% 12% 8%'
   }
 })
 

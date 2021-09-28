@@ -1,26 +1,38 @@
-// import { useEffect, useState } from "react";
-import axios from "axios";
- import { apiURL } from "../Util/apiURL.js";
-import linkedin from "../Assets/linkedin.png";
-import { Link } from 'react-router-dom';
-import MapBox from "./MapBox";
+import { Paper } from '@material-ui/core'
+import { useAPI } from '../Context/AuthContext'
+
+import MapBox from './MapBox'
+
+import { makeStyles } from '@material-ui/core/styles'
+import linkedin from '../Assets/linkedin.png'
+
 import purpBackground from '../Assets/purpBackground.jpg'
 import facebook from '../Assets/facebook.png'
 import instagram from '../Assets/instagram.png'
 import twitter from '../Assets/twitter.png'
 import pencil from "../Assets/pencil.png"
 
-// const API = apiURL();
 
-// function Profile() {
-// let index = 14
-// const [ setProfile] = useState([]);
-// const [available, setAvailable] = useState([]);
-// const [goals, setGoals] = useState([]);
-import { useAPI } from '../Context/AuthContext'
+const useStyles = makeStyles({
+  root: {
+    height: 'auto',
+    width: 'auto',
+    marginTop: '-4%',
+    padding: 0,
+    display: 'grid',
+    gridTemplateRows: 'auto minmax(auto,10%) auto 1fr'
+  },
+  flexCenter: {
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'space-evenly',
+    alignItems: 'center'
+  }
+})
 
-function Profile() {
+function Profile () {
   const { currentUserData } = useAPI()
+  const classes = useStyles()
 
   const {
     name,
@@ -34,88 +46,95 @@ function Profile() {
     radius
   } = currentUserData
 
+  console.log(availabledays)
   return (
-    <div>
+    <Paper className={classes.root}>
       <div id='profHeader'>
-        <img class='profBackground' src={purpBackground} alt='Two people working out' />
-        <img class='profPic' src="https://images.pexels.com/photos/2078265/pexels-photo-2078265.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500" alt="" style={{ width: "200px", height: "180px" }} />
+        <img
+          className='profBackground'
+          src={purpBackground}
+          alt='Purple radiant background'
+        />
+        <img
+          className='profPic'
+          src='https://images.pexels.com/photos/2078265/pexels-photo-2078265.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500'
+          alt=''
+          style={{ width: '200px', height: '180px' }}
+        />
       </div>
-      <div id='card'>
-        <div id="prof">
-          <h2>{name} {lastname} </h2>
-          <br />
-          <br />
-        </div>
-      </div >
-      <div class="container">
+      <h2 id='card'>
+        {name} {lastname}
+      </h2>
 
-
-        <div id="pro" class="item1">
-  
-            <Link to="/users/14/edit" >
-           <img src={pencil} alt="editicon" style={{width:"20px"}} id="editicon" />
-            </Link>
-          <span class="span1">
+      <div className='containerGrid'>
+        <div className='item1'>
+          <div className={classes.flexCenter}>
             <h2>About</h2>
-          </span>
-          <span class="span2">
             <h6>
+              {' '}
               Name: {name} {lastname}
             </h6>
-
-          </span>
-          <h6>Gender: {gender}</h6>
-          <h6>Location:{location}</h6>
-          <h6>
-            Availablility:{availabledays[0]},{availabledays[1]}
-          </h6>
-          <h6>
-            Experience : {experience}
-          </h6>
-          <h6>
-            Goals: {goals[0]},{goals[1]}, {goals[2]}, {goals[3]}
-          </h6>
-          <h6>Radius:{radius} miles</h6>
-
+            <h6>Gender: {gender}</h6>
+            <h6>Location:{location}</h6>
+            <h6>
+              Availablility:
+              {availabledays
+                ? ` ${availabledays[0]}, ${availabledays[1]} `
+                : ''}
+            </h6>
+            <h6>Experience : {experience}</h6>
+            <h6>
+              Goals:{' '}
+              {goals
+                ? `${goals[0]}, ${goals[1]}, ${goals[2]}, ${goals[3]} `
+                : ''}
+            </h6>
+            <h6>Radius:{radius} miles</h6>
+          </div>
         </div>
+        <div id='badges' className='item2'>
+          <div className={classes.flexCenter}>
+            <h2>Badges</h2>
 
+            <img
+              src='https://cdn-icons-png.flaticon.com/512/2928/2928144.png'
+              alt=''
+              style={{ width: '40px' }}
+            />
 
-        <div id="badges" class="item2">
-          <h2>Badges</h2>
-          <span>
-            <img src="https://cdn-icons-png.flaticon.com/512/2928/2928144.png" alt="" style={{ width: "40px" }} />
-            <>
-              <h4>Great Motivator</h4>
-              {/* <h6>-Enthusiastic</h6> */}
-            </>
-          </span>
+            <h4>Great Motivator</h4>
 
-          <span>
-            <img src="https://cdn-icons-png.flaticon.com/512/4053/4053735.png" alt="" style={{ width: "40px" }} />
+            <img
+              src='https://cdn-icons-png.flaticon.com/512/4053/4053735.png'
+              alt=''
+              style={{ width: '40px' }}
+            />
             <h4>Spot On</h4>
-            {/* <h6>-Assisted in lifting heavy weights safely</h6> */}
-          </span>
 
-          <span>
-            <img src="https://cdn-icons-png.flaticon.com/512/2843/2843974.png" alt="" style={{ width: "40px" }} />
+            <img
+              src='https://cdn-icons-png.flaticon.com/512/2843/2843974.png'
+              alt=''
+              style={{ width: '40px' }}
+            />
             <h4>Mobility Master</h4>
-            {/* <h6>-Stretch tightented muscles before workout</h6> */}
-          </span>
 
-          <span>
-            <img src="https://cdn-icons-png.flaticon.com/512/2090/2090622.png" alt="" style={{ width: "40px" }} />
+            <img
+              src='https://cdn-icons-png.flaticon.com/512/2090/2090622.png'
+              alt=''
+              style={{ width: '40px' }}
+            />
             <h4>Punctuality</h4>
-            {/* <h6>-Responds on time</h6> */}
-          </span>
 
-          <span>
-            <img src="https://cdn-icons-png.flaticon.com/512/2237/2237680.png" alt="" style={{ width: "40px" }} />
+            <img
+              src='https://cdn-icons-png.flaticon.com/512/2237/2237680.png'
+              alt=''
+              style={{ width: '40px' }}
+            />
             <h4>Cardiologist</h4>
-            {/* <h6>-Increase BPM</h6> */}
-          </span>
+          </div>
         </div>
-        <div id="socials" class="item3" >
 
+        <div id='socials' class='item3'>
           {/* <Link to={`/users/${index}/edit`}>
           <button type="button"  >
           EDIT
@@ -126,31 +145,44 @@ function Profile() {
           NOTIFICATIONS
         </button> */}
 
-
-          <a href="https://www.instagram.com/" target="_blank">
-            <img src={instagram} alt="instagram login" style={{ width: "40px" }} />
+          <a href='https://www.instagram.com/' target='_blank' rel='noreferrer'>
+            <img
+              src={instagram}
+              alt='instagram login'
+              style={{ width: '40px' }}
+            />
           </a>
-          <a href="https://www.facebook.com/" target="_blank">
-            <img src={facebook} alt="facebook login" style={{ width: "40px" }} />
+          <a href='https://www.facebook.com/' target='_blank' rel='noreferrer'>
+            <img
+              src={facebook}
+              alt='facebook login'
+              style={{ width: '40px' }}
+            />
           </a>
-          <a href="https://www.linkedin.com/">
-            <img src={linkedin} alt="Linkedin login" style={{ width: "40px" }} />
+          <a href='https://www.linkedin.com/'>
+            <img
+              src={linkedin}
+              alt='Linkedin login'
+              style={{ width: '40px' }}
+            />
           </a>
-          <a href="https://twitter.com/?lang=en" target="_blank">
-            <img src={twitter} alt="Twitter login" style={{ width: "40px" }} />
+          <a
+            href='https://twitter.com/?lang=en'
+            target='_blank'
+            rel='noreferrer'
+          >
+            <img src={twitter} alt='Twitter login' style={{ width: '40px' }} />
           </a>
-
         </div>
-        <div class="item4">
-          <div id='map'>
-            <MapBox />
-          </div>
+
+        <div className='item4'>
+          <MapBox adjustmentWidth={360} adjustmentHeight={300} />
         </div>
       </div>
-    </div>
+    </Paper>
   )
 }
-export default Profile;
+export default Profile
 
 // (1,'Great Motivator','{"name":"","url":"https://cdn-icons-png.flaticon.com/512/2928/2928144.png","album":""}',
 // '{"info":"Enthusiastic"}'),
