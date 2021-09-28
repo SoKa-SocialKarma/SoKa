@@ -55,14 +55,6 @@ function Profile() {
             <Link to="/users/14/edit" >
            <img src={pencil} alt="editicon" style={{width:"20px"}} id="editicon" />
             </Link>
-       
-          <br />
-          <h2>About</h2>
-          <h6>
-            {" "}
-            {/* Name: {name} {lastname} */}
-            Username: {username}
-          </h6>
           <span class="span1">
             <h2>About</h2>
           </span>
