@@ -5,10 +5,8 @@ import axios from 'axios';
 
 const API = apiURL();
 
-function EditProfile(props) {
+function EditProfile() {
   let { id } = useParams();
-  // console.log(props)
-  // let index = 14
   let history = useHistory();
   const [update, setUpdate] = useState({
     username: "",

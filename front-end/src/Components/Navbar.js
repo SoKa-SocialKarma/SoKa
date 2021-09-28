@@ -41,7 +41,8 @@ const useStyles = makeStyles(theme => ({
     })
   },
   menuButton: {
-    marginRight: 36
+    marginRight: 36,
+    height: '100%'
   },
   hide: {
     display: 'none'
@@ -139,8 +140,7 @@ const useStyles = makeStyles(theme => ({
 export default function Navbar ({ children }) {
   const { currentUser, currentUserData } = useAPI()
   const { elementSetter } = useElement()
-  const elementRef = useRef()
-
+  const mainElementRef = useRef()
 
   const classes = useStyles()
   const theme = useTheme()
@@ -154,14 +154,30 @@ export default function Navbar ({ children }) {
     setOpen(false)
   }
 
+  const handleResize = () => {
+    elementSetter({
+      height: mainElementRef.current.clientHeight - 94,
+      width: window.innerWidth - 74,
+      element: mainElementRef.current
+    })
+  }
+
   useEffect(() => {
-    elementSetter(elementRef.current)
+    window.addEventListener('resize', handleResize)
+    elementSetter({
+      height: mainElementRef.current.clientHeight - 94,
+      width: window.innerWidth - 74,
+      element: mainElementRef.current
+    })
+    return () => {
+      window.removeEventListener('resize', handleResize)
+    }
   }, [])
 
   useEffect(() => {
     currentUserData.id ? setId(currentUserData.id) : setId(0)
   }, [currentUserData])
-  
+
   return (
     <div className={classes.root}>
       <CssBaseline />
@@ -297,7 +313,7 @@ export default function Navbar ({ children }) {
         </List>
         <Divider />
       </Drawer>
-      <main className={classes.content} ref={elementRef}>
+      <main className={classes.content} ref={mainElementRef}>
         {children}
       </main>
     </div>

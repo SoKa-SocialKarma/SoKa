@@ -32,7 +32,7 @@ export const ACTIONS = {
   SET_CURRENT_USER: 'set-current-user',
   SET_CURRENT_USER_DATA: 'set-current-user-data',
   SET_CURRENT_SEARCH_RESULTS: 'set-current-search-results',
-  SET_ELEMENT: 'set-element',
+  SET_MAIN_ELEMENT_: 'set-main-element',
   RESET_STATE: 'reset-state'
 }
 
@@ -53,10 +53,10 @@ function setGlobalState (globalState, action) {
         { ...globalState },
         { currentSearchResults: action.payload.results }
       )
-    case ACTIONS.SET_ELEMENT:
+    case ACTIONS.SET_MAIN_ELEMENT:
       return Object.assign(
         { ...globalState },
-        { element: action.payload.element }
+        { mainElement: action.payload.mainElement }
       )
     case ACTIONS.RESET_STATE:
       return Object.assign(
@@ -74,7 +74,7 @@ export function AuthProvider ({ children }) {
     currentUser: null,
     currentUserData: {},
     currentSearchResults: [],
-    element: ''
+    mainElement: {}
   })
 
   // Login at Firebase and store user data
@@ -117,8 +117,8 @@ export function AuthProvider ({ children }) {
   function updatePassword (password) {
     return globalState.currentUser.updatePassword(password)
   }
-  function elementSetter (element) {
-    dispatch({ type: ACTIONS.SET_ELEMENT, payload: { element: element } })
+  function elementSetter (mainElement) {
+    dispatch({ type: ACTIONS.SET_MAIN_ELEMENT, payload: { mainElement: mainElement } })
   }
   function resetState () {
     dispatch({ type: ACTIONS.RESET_STATE })
@@ -168,7 +168,7 @@ export function AuthProvider ({ children }) {
 
   const elementValue = {
     elementSetter,
-    element: globalState.element
+    mainElement: globalState.mainElement
   }
 
   return (
