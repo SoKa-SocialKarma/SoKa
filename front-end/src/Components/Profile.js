@@ -5,10 +5,12 @@ import MapBox from './MapBox'
 
 import { makeStyles } from '@material-ui/core/styles'
 import linkedin from '../Assets/linkedin.png'
+
 import purpBackground from '../Assets/purpBackground.jpg'
 import facebook from '../Assets/facebook.png'
 import instagram from '../Assets/instagram.png'
 import twitter from '../Assets/twitter.png'
+import pencil from "../Assets/pencil.png"
 
 
 const useStyles = makeStyles({
@@ -90,7 +92,6 @@ function Profile () {
             <h6>Radius:{radius} miles</h6>
           </div>
         </div>
-
         <div id='badges' className='item2'>
           <div className={classes.flexCenter}>
             <h2>Badges</h2>
