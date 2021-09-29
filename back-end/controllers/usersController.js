@@ -55,8 +55,6 @@ users.post('/', postCheck, async (req, res) => {
 })
 
 users.put('/:id', putCheck, async (req, res) => {
-  console.log("put route hit")
-  console.log(req.body)
   const { id } = req.params
   try {
     const updatedUsers = await updateUsers(id, req.body)

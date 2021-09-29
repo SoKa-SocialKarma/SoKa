@@ -9,32 +9,27 @@ const API = apiURL()
 
 function EditProfile () {
   const { currentUserData, getFreshUserData } = useAPI()
-  const [today, setToday] = useState(null)
-  const [uploadedImage, setUploadedImage] = useState(false)
+  const [ uploadedImage, setUploadedImage ] = useState(false)
+  const [ placeHolders, setPlaceHolders ] = useState({})
+  const [ usersChoice, setUsersChoice ] = useState('')
+  const [ today, setToday ] = useState()
+
+  const [ requestBody, setRequestBody] = useState({})
   let { id } = useParams()
   let history = useHistory()
-//TODO useeffect to set requestBody with currentUserData at mounted and clean afterwards
-  const [requestBody, setRequestBody] = useState({
-    username: currentUserData.username,
-    name: currentUserData.name,
-    lastname: currentUserData.lastname,
-    availability: currentUserData.availabledays,
-    goals: currentUserData.goals,
-    experience: currentUserData.experience,
-    gender: currentUserData.gender
-  })
 
   // Availability Setter Helpers
   useEffect(() => {
-    getDate()
-  }, [])
-
-  const getDate = async () => {
-    const date = new Date(new Date().toString().split('GMT')[0] + ' UTC')
+    const todaysDate = new Date(new Date().toString().split('GMT')[0] + ' UTC')
       .toISOString()
       .split('.')[0]
-    setToday(await formatDate(date) ) 
-  }
+    setToday(formatDate(todaysDate))
+  }, [])
+
+  useEffect(() => {
+    const unmounMe = setPlaceHolders(currentUserData)
+    return unmounMe
+  }, [currentUserData])
 
   const formatDate = target => {
     let formatted = ''
@@ -45,17 +40,17 @@ function EditProfile () {
     return formatted
   }
 
-  const removeOldDates = (today, userAvailability) => {
-    const todaySplitted = today.split('/')
-    console.log("INSIDE REMOVE OLD DATES USERAVAILABILITY :")
-    console.log(userAvailability)
+  const removeOldDates = today => {
+    const todaySplitted = today.split('/').map(num => Number(num))
 
-    return userAvailability?.filter(day => {
-      const userSplitted = day.split('/')
+    return currentUserData.availabledays.filter(day => {
+      const userSplitted = day.split('/').map(num => Number(num))
       return (
-        Number(userSplitted[0]) <= Number(todaySplitted[0]) &&
-        Number(userSplitted[1]) <= Number(todaySplitted[1]) &&
-        Number(userSplitted[2]) <= Number(todaySplitted[2])
+        userSplitted[0] >= todaySplitted[0] &&
+        ((userSplitted[0] === todaySplitted[0] &&
+          userSplitted[1] >= todaySplitted[1]) ||
+          userSplitted[0] >= todaySplitted[0]) &&
+        userSplitted[2] >= todaySplitted[2]
       )
     })
   }
@@ -65,15 +60,14 @@ function EditProfile () {
     e.preventDefault()
 
     let day = formatDate(e.target.value)
-    console.log("INSIDE SET AVAILABILITY DAY PICKED BY USER:")
-    console.log(day)
-    const oldAvailability = removeOldDates(today, requestBody.availability)
+    const oldAvailability = removeOldDates(today)
     const newAvailability = [...oldAvailability, day]
     const updatedProfile = Object.assign(
       { ...requestBody },
-      { availability: newAvailability }
+      { availability: { days: newAvailability } }
     )
     setRequestBody(updatedProfile)
+    setUsersChoice(e.target.value)
   }
 
   // Image Setter
@@ -101,9 +95,10 @@ function EditProfile () {
   const setGoals = e => {
     e.preventDefault()
 
-    const filteredDuplicates = requestBody.goals
-      .filter(goal => goal !== e.target.value)
-      .push(e.target.value)
+    const filteredDuplicates = currentUserData.goals.filter(
+      goal => goal !== e.target.value
+    )
+    filteredDuplicates.push(e.target.value)
     setRequestBody(
       Object.assign(
         { ...requestBody },
@@ -161,135 +156,127 @@ function EditProfile () {
 
   const handleSubmit = event => {
     event.preventDefault()
+
     updateProfile(requestBody, id)
   }
- 
-  console.log("CURRENT USER DATA AT EDITPROFILE : ")
-  console.log(currentUserData)
-  console.log("CURRENT DATE AT EDITPROFILE : ")
-  console.log(today)
+
 
   return (
     <div>
       <form onSubmit={handleSubmit} id='form'>
         {/* <h4>Edit</h4> */}
-        <span>
-          <label htmlFor='username'>Username:</label>
-          <input
-            type='text'
-            value={requestBody.username}
-            id='username'
-            onChange={handleChange}
-          />
-        </span>
+
+        <label htmlFor='username'>Username:</label>
+        <input
+          type='text'
+          placeholder={placeHolders.username}
+          value={requestBody.username || ''}
+          id='username'
+          onChange={handleChange}
+        />
+
         <br />
-        <span>
-          <label htmlFor='name'>Name:</label>
-          <input
-            type='text'
-            placeholder='name'
-            value={requestBody.name}
-            id='name'
-            onChange={handleChange}
-          />
-        </span>
+
+        <label htmlFor='name'>Name:</label>
+        <input
+          type='text'
+          placeholder={placeHolders.name}
+          value={requestBody.name || ''}
+          id='name'
+          onChange={handleChange}
+        />
+
         <br />
-        <span>
-          <label htmlFor='image'>Image:</label>
-          <input
-            type='text'
-            id='image'
-            value={requestBody.img}
-            placeholder='http://'
-            onChange={handleChange}
-            disabled
-          />
-        </span>
+
+        <label htmlFor='image'>Image:</label>
+        <input type='file' id='image' onChange={handleChange} disabled />
+
         <br />
-        <span>
-          <label htmlFor='availability'>Availability:</label>
-          <input
-            type='datetime-local'
-            id='availability'
-            value={requestBody.availability}
-            onChange={handleChange}
-          />
-        </span>
+
+        <label htmlFor='availability'>Availability:</label>
+        <input
+          type='datetime-local'
+          id='availability'
+          placeholder={placeHolders.availabledays}
+          value={usersChoice}
+          onChange={handleChange}
+        />
+
         <br />
-        <span>
-          <label htmlFor='gender'>Gender:</label>
-          <select name='gender' id='gender'>
-            <option value='Female'>Female</option>
-            <option value='Male'>Male</option>
-            <option value='Other'>Perferred not to answer</option>
-          </select>
-        </span>
+
+        <label htmlFor='gender'>Gender:</label>
+        <select name='gender' id='gender'>
+          <option value=''>-</option>
+          <option value='Female'>Female</option>
+          <option value='Male'>Male</option>
+          <option value='Other'>Perferred not to answer</option>
+        </select>
+
         <br />
-        <span>
-          <label htmlFor='experience'>Experience:</label>
-          <input
-            type='text'
-            id='experience'
-            value={requestBody.experience}
-            onChange={handleChange}
-          />
-        </span>
+
+        <label htmlFor='experience'>Experience:</label>
+        <select name='experience' id='experience' onChange={handleChange}>
+          <option value=''>-</option>
+          <option value='Beginner'>Beginner</option>
+          <option value='Intermediate'>Intermediate</option>
+          <option value='Advanced'>Advanced</option>
+        </select>
+
         <br />
-        <span>
-          <label htmlFor='goals'>Goals:</label>
-          <select name='goals' id='goals' onChange={handleChange}>
-            <option value='Abs'>Abs</option>
-            <option value='Chest'>Chest</option>
-            <option value='Cardio'>Cardio</option>
-            <option value='Back'>Back</option>
-            <option value='Legs'>Legs</option>
-          </select>
-        </span>
-        <span>
-          <button type='submit'>Submit</button>
-        </span>
+
+        <label htmlFor='goals'>Goals:</label>
+        <select name='goals' id='goals' onChange={handleChange}>
+          <option value=''>-</option>
+          <option value='Abs'>Abs</option>
+          <option value='Chest'>Chest</option>
+          <option value='Cardio'>Cardio</option>
+          <option value='Back'>Back</option>
+          <option value='Legs'>Legs</option>
+        </select>
+
+        <button type='submit'>Submit</button>
       </form>
     </div>
   )
 }
 
 export default EditProfile
-;<form>
-  <div class='form-group'>
-    <label for='exampleFormControlInput1'>Email address</label>
-    <input
-      type='email'
-      class='form-control'
-      id='exampleFormControlInput1'
-      placeholder='name@example.com'
-    />
-  </div>
-  <div class='form-group'>
-    <label for='exampleFormControlSelect1'>Example select</label>
-    <select class='form-control' id='exampleFormControlSelect1'>
-      <option>1</option>
-      <option>2</option>
-      <option>3</option>
-      <option>4</option>
-      <option>5</option>
-    </select>
-  </div>
-  <div class='form-group'>
-    <label for='exampleFormControlSelect2'>Example multiple select</label>
-    <select multiple class='form-control' id='exampleFormControlSelect2'>
-      <option>1</option>
-      <option>2</option>
-      <option>3</option>
-      <option>4</option>
-      <option>5</option>
-    </select>
-  </div>
-  <div class='form-group'>
-    <label for='exampleFormControlTextarea1'>Example textarea</label>
-    <textarea
-      class='form-control'
-      id='exampleFormControlTextarea1'
-      rows='3'
-    ></textarea>
-  </div>
-</form>
+// ;<form>
+//   <div class='form-group'>
+//     <label for='exampleFormControlInput1'>Email address</label>
+//     <input
+//       type='email'
+//       class='form-control'
+//       id='exampleFormControlInput1'
+//       placeholder='name@example.com'
+//     />
+//   </div>
+//   <div class='form-group'>
+//     <label for='exampleFormControlSelect1'>Example select</label>
+//     <select class='form-control' id='exampleFormControlSelect1'>
+//       <option>1</option>
+//       <option>2</option>
+//       <option>3</option>
+//       <option>4</option>
+//       <option>5</option>
+//     </select>
+//   </div>
+//   <div class='form-group'>
+//     <label for='exampleFormControlSelect2'>Example multiple select</label>
+//     <select multiple class='form-control' id='exampleFormControlSelect2'>
+//       <option>1</option>
+//       <option>2</option>
+//       <option>3</option>
+//       <option>4</option>
+//       <option>5</option>
+//     </select>
+//   </div>
+//   <div class='form-group'>
+//     <label for='exampleFormControlTextarea1'>Example textarea</label>
+//     <textarea
+//       class='form-control'
+//       id='exampleFormControlTextarea1'
+//       rows='3'
+//     ></textarea>
+//   </div>
+// </form>
