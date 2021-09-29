@@ -15,7 +15,7 @@ import pin from '../Assets/pin.png'
 import calendar from '../Assets/calendar.png'
 import certification from '../Assets/certification.png'
 import target from '../Assets/target.png'
-import map from '../Assets/map.png'
+import distance from '../Assets/distance.png'
 import linkedin from '../Assets/linkedin.png'
 
 const useStyles = makeStyles({
@@ -34,7 +34,7 @@ const useStyles = makeStyles({
   }
 })
 
-function Profile () {
+function Profile() {
   const { currentUserData } = useAPI()
   const { id } = useParams()
   const classes = useStyles()
@@ -95,7 +95,7 @@ function Profile () {
           <div className='item1'>
             <div className={classes.flexCenter}>
               <div id='editiconContainer'>
-                <h2>About</h2>
+                <h3>About</h3>
                 <div id='editicon'>
                   <Link to={`users/${id}/edit`}>
                     <img
@@ -109,70 +109,70 @@ function Profile () {
 
               <h5>
                 Gender:
-                <ul>
-                  <li>
-                    <img src={user} alt='user' />
-                    {gender}
-                  </li>
-                </ul>
               </h5>
+              <ul>
+                <li>
+                  <img src={user} alt='user' />
+                  {gender}
+                </li>
+              </ul>
 
               <h5>
                 Location:
-                <ul>
-                  <li>
-                    <img src={pin} alt='location pin' />
-                    {location}
-                  </li>
-                </ul>
               </h5>
+              <ul>
+                <li>
+                  <img src={pin} alt='location pin' />
+                  {location}
+                </li>
+              </ul>
               <h5>
                 Availablility:
-                <ul>
-                  <li>
-                    <img
-                      src={calendar}
-                      style={{ width: '25px' }}
-                      alt='calendar'
-                    />
-                    {availabledays
-                      ? `${availabledays[0]}, ${availabledays[1]}`
-                      : ''}
-                  </li>
-                </ul>
               </h5>
+              <ul>
+                <li>
+                  <img
+                    src={calendar}
+                    style={{ width: '25px' }}
+                    alt='calendar'
+                  />
+                  {availabledays
+                    ? `${availabledays[0]}, ${availabledays[1]}`
+                    : ''}
+                </li>
+              </ul>
               <h5>
                 Experience :
-                <ul>
-                  <li>
-                    <img src={certification} alt='certifications' />
-                    {experience}
-                  </li>
-                </ul>
               </h5>
+              <ul>
+                <li>
+                  <img src={certification} alt='medal' />
+                  {experience}
+                </li>
+              </ul>
 
               <h5>
                 Goals:
-                <ul>
-                  <li>
-                    <img src={target} alt='target' />
-
-                    {goals
-                      ? `${goals[0]}, ${goals[1]}, ${goals[2]}, ${goals[3]} `
-                      : ''}
-                  </li>
-                </ul>
               </h5>
+              <ul>
+                <li>
+                  <img src={target} alt='target' />
+
+                  {goals
+                    ? `${goals[0]}, ${goals[1]}, ${goals[2]}, ${goals[3]} `
+                    : ''}
+                </li>
+              </ul>
 
               <h5>
                 Radius:
-                <ul>
-                  <li>
-                    <img src={map} alt='map with location tags' />
-                    {radius} miles
-                  </li>
-                </ul>
               </h5>
+              <ul>
+                <li>
+                  <img src={distance} alt='two location tags' />
+                  {radius} miles
+                </li>
+              </ul>
             </div>
           </div>
 
