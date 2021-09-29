@@ -37,7 +37,7 @@ export function AuthProvider ({ children }) {
 
       const getCurrentUserData = async (user) => {
         const data = await axios.get(`${API}/users?uuid=${user.uid}`)
-         setCurrentUserData(data.data[0]) 
+        setCurrentUserData(data.data[0]) 
         //  console.log('AUTH USERDATA', currentUserData)
         }
         user && getCurrentUserData(user)
