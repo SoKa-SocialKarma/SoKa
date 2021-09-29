@@ -178,56 +178,80 @@ function Profile() {
 
           <div id='badges' className='item2'>
             <div className={classes.flexCenter}>
-              <h2>Badges</h2>
+              <h3>Badges</h3>
               <div>
-                <img
-                  src='https://cdn-icons-png.flaticon.com/512/2928/2928144.png'
-                  alt=''
-                  style={{ width: '30px' }}
-                />
-
-                <h4>Great Motivator</h4>
-                <h6>-Enthusiastic</h6>
+                <h5>
+                  Great Motivator
+                </h5>
+                <ul>
+                  <li>
+                    <img
+                      src='https://cdn-icons-png.flaticon.com/512/2928/2928144.png'
+                      alt=''
+                      style={{ width: '30px' }}
+                    />
+                    -Enthusiastic
+                  </li>
+                </ul>
               </div>
 
               <div>
-                <img
-                  src='https://cdn-icons-png.flaticon.com/512/4053/4053735.png'
-                  alt=''
-                  style={{ width: '30px' }}
-                />
-                <h4>Spot On</h4>
-                <h6>-Assisted in lifting heavy weights safely</h6>
+                <h5>
+                  Spot On
+                </h5>
+                <ul>
+                  <li>
+                    <img
+                      src='https://cdn-icons-png.flaticon.com/512/4053/4053735.png'
+                      alt=''
+                      style={{ width: '30px' }}
+                    />
+                    -Assisted in lifting heavy weights safely
+
+                  </li>
+                </ul>
               </div>
 
               <div>
-                <img
-                  src='https://cdn-icons-png.flaticon.com/512/2843/2843974.png'
-                  alt=''
-                  style={{ width: '30px' }}
-                />
-                <h4>Mobility Master</h4>
-                <h6>-Stretch tightented muscles before workout</h6>
+                <h5>Mobility Master</h5>
+                <ul>
+                  <li>
+                    <img
+                      src='https://cdn-icons-png.flaticon.com/512/2843/2843974.png'
+                      alt=''
+                      style={{ width: '30px' }}
+                    />
+                    -Stretch tightented muscles before workout
+                  </li>
+                </ul>
               </div>
 
               <div>
-                <img
-                  src='https://cdn-icons-png.flaticon.com/512/2090/2090622.png'
-                  alt=''
-                  style={{ width: '30px' }}
-                />
-                <h4>Punctuality</h4>
-                <h6>-Responds on time</h6>
+                <h5>Punctuality</h5>
+                <ul>
+                  <li>
+                    <img
+                      src='https://cdn-icons-png.flaticon.com/512/2090/2090622.png'
+                      alt=''
+                      style={{ width: '30px' }}
+                    />
+                    -Responds on time
+                  </li>
+                </ul>
               </div>
 
               <div>
-                <img
-                  src='https://cdn-icons-png.flaticon.com/512/2237/2237680.png'
-                  alt=''
-                  style={{ width: '30px' }}
-                />
-                <h4>Cardiologist</h4>
-                <h6>-Increase BPM</h6>
+                <h5>Cardiologist</h5>
+                <ul>
+                  <li>
+                    <img
+                      src='https://cdn-icons-png.flaticon.com/512/2237/2237680.png'
+                      alt=''
+                      style={{ width: '30px' }}
+                    />
+                    -Increase BPM
+                  </li>
+                </ul>
               </div>
             </div>
           </div>
