@@ -17,20 +17,20 @@ import InputAdornment from "@mui/material/InputAdornment";
 import user from "../Assets/user.png";
 import pin from "../Assets/pin.png";
 import calendar from "../Assets/calendar.png";
-import { styled } from "@mui/material/styles";
+// import { styled } from "@mui/material/styles";
 import IconButton from "@mui/material/IconButton";
 import PhotoCamera from "@mui/icons-material/PhotoCamera";
-import Stack from "@mui/material/Stack";
+// import Stack from "@mui/material/Stack";
 
 const API = apiURL()
 
 
 
-function EditProfile () {
-  const { currentUserData, getFreshUserData } = useAPI()
+export default function EditProfile () {
+  const { currentUser, currentUserData, getFreshUserData } = useAPI()
   const [ uploadedImage, setUploadedImage ] = useState(false)
   const [ placeHolders, setPlaceHolders ] = useState({})
-  const [ usersChoice, setUsersChoice ] = useState('')
+  // const [ usersChoice, setUsersChoice ] = useState('')
   const [ today, setToday ] = useState()
 
   const [ requestBody, setRequestBody] = useState({})
@@ -86,7 +86,7 @@ function EditProfile () {
       { availability: { days: newAvailability } }
     )
     setRequestBody(updatedProfile)
-    setUsersChoice(e.target.value)
+    // setUsersChoice(e.target.value)
   }
 
   // Image Setter
@@ -191,7 +191,7 @@ function EditProfile () {
         <Box sx={{ "& > :not(style)": { m: 1, width: "50ch" } }}>
           <div>
           
-            <FormControl variant="standard">
+            <FormControl variant="standard" onClick={handleSubmit}>
               <InputLabel htmlFor="name">Name</InputLabel>
               <Input
                 id="name"
@@ -317,12 +317,13 @@ function EditProfile () {
       </div>
 
       <div id="editlayout">
-        <Button variant="contained" color="primary" onClick={handleSubmit}
+        <Button variant="contained" color="primary" onClick={handleSubmit}>
           Update Profile
         </Button>
       </div>
 
     </div>
+  
   );
 }
 
