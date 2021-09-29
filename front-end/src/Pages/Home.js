@@ -2,11 +2,11 @@ import img from '../Assets/img.svg'
 import { useElement } from '../Context/AuthContext'
 
 function Home () {
-  const { element } = useElement()
+  const { mainElement } = useElement()
 
   const landingImage = {
-    width: element?.clientWidth,
-    height: element?.clientHeight - 136 || 0
+    width: mainElement.element?.clientWidth,
+    height: mainElement.element?.clientHeight - 136 || 0
   }
 
   return (

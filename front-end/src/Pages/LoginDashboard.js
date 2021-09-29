@@ -35,7 +35,7 @@ const LoginDashBoard = () => {
         </Card.Body>
       </Card>
       <div className='w100 text-center mt-2'>
-        <Button variant='link' onClick={handleLogOut} style={{color:'white!important'}}>
+        <Button variant='link' onClick={handleLogOut} style={{color:'white!important'}} color='#6C63FF'>
           Log Out
         </Button>
       </div>

@@ -18,13 +18,14 @@ const useStyles = makeStyles({
     height: '85vh',
     padding: '10px',
     display: 'grid',
-    gridTemplateRows: '10% 38% 12% 2% 23% 13%'
+    gridTemplateRows: '10% 32% 13% 2% 18% 12% 8%'
   }
 })
 
 function SearchResults () {
   const classes = useStyles()
   const { currentSearchResults } = useAPI()
+
   return (
     <>
       <Container className={classes.root}>

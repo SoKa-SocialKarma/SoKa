@@ -20,19 +20,13 @@ export function useElement () {
   return useContext(ElementContext)
 }
 
-const queryKeys = [
-  'availability',
-  'experience',
-  'goal',
-  'radius',
-  'gender',
-  'location'
-]
+
 export const ACTIONS = {
   SET_CURRENT_USER: 'set-current-user',
   SET_CURRENT_USER_DATA: 'set-current-user-data',
+  NEW_CURRENT_USER_DATA: 'new-current-user-data',
   SET_CURRENT_SEARCH_RESULTS: 'set-current-search-results',
-  SET_ELEMENT: 'set-element',
+  SET_MAIN_ELEMENT_: 'set-main-element',
   RESET_STATE: 'reset-state'
 }
 
@@ -48,15 +42,22 @@ function setGlobalState (globalState, action) {
         { ...globalState },
         { currentUserData: action.payload.data.data[0] }
       )
+
+      case ACTIONS.NEW_CURRENT_USER_DATA:
+        return Object.assign(
+          { ...globalState },
+          { currentUserData: action.payload.data.data[0] }
+        )
+
     case ACTIONS.SET_CURRENT_SEARCH_RESULTS:
       return Object.assign(
         { ...globalState },
-        { currentSearchResults: action.payload.results }
+        { currentSearchResults: action.payload.response.data }
       )
-    case ACTIONS.SET_ELEMENT:
+    case ACTIONS.SET_MAIN_ELEMENT:
       return Object.assign(
         { ...globalState },
-        { element: action.payload.element }
+        { mainElement: action.payload.mainElement }
       )
     case ACTIONS.RESET_STATE:
       return Object.assign(
@@ -73,8 +74,8 @@ export function AuthProvider ({ children }) {
   const [globalState, dispatch] = useReducer(setGlobalState, {
     currentUser: null,
     currentUserData: {},
-    currentSearchResults: [],
-    element: ''
+    currentSearchResults: null,
+    mainElement: {}
   })
 
   // Login at Firebase and store user data
@@ -117,14 +118,24 @@ export function AuthProvider ({ children }) {
   function updatePassword (password) {
     return globalState.currentUser.updatePassword(password)
   }
-  function elementSetter (element) {
-    dispatch({ type: ACTIONS.SET_ELEMENT, payload: { element: element } })
+  function elementSetter (mainElement) {
+    dispatch({ type: ACTIONS.SET_MAIN_ELEMENT, payload: { mainElement: mainElement } })
   }
   function resetState () {
     dispatch({ type: ACTIONS.RESET_STATE })
   }
 
-  // API Request
+
+  const queryKeys = [
+    'availability',
+    'experience',
+    'goal',
+    'radius',
+    'gender',
+    'location'
+  ]
+
+  // API Requests
   async function getResultsUsingSokaQuery (searchParams) {
     let query = `${API}/users?`
     let day = ''
@@ -137,14 +148,23 @@ export function AuthProvider ({ children }) {
       }
 
       if (queryKeys.includes(k) && searchParams[k] !== '') {
-        query += `${k}=${!day ? searchParams[k] : day}&`
+        query += `${k}=${k!=='availability' ? searchParams[k] : day}&`
       }
     })
-
-    const results = await axios.get(query.slice(0, -1))
+    const response = await axios.get(query.slice(0, -1))
     dispatch({
       type: ACTIONS.SET_CURRENT_SEARCH_RESULTS,
-      payload: { results: results.data }
+      payload: { response: response }
+    })
+  }
+
+  // Refreshing Current User Data after updating Profile
+  async function getFreshUserData (userId) {
+
+    const data = await axios.get(`${API}/users/${userId}}`)
+    dispatch({
+      type: ACTIONS.NEW_CURRENT_USER_DATA,
+      payload: { data: data }
     })
   }
 
@@ -163,12 +183,13 @@ export function AuthProvider ({ children }) {
     currentUser: globalState.currentUser,
     currentUserData: globalState.currentUserData,
     currentSearchResults: globalState.currentSearchResults,
-    getResultsUsingSokaQuery
+    getResultsUsingSokaQuery,
+    getFreshUserData
   }
 
   const elementValue = {
     elementSetter,
-    element: globalState.element
+    mainElement: globalState.mainElement
   }
 
   return (

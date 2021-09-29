@@ -22,10 +22,8 @@ const useStyles = makeStyles((theme) => ({
     padding: theme.spacing(2, 4, 3),
   },
   viewMoreC: {
-    maxWidth: "100%",
-    maxHeight: "100%",
-    width: "auto",
-    height: "auto",
+    height: "100%",
+    placeSelf: "center",
   },
 }));
 
@@ -46,7 +44,7 @@ export default function UserModal({}) {
 
   return (
     <>
-      <IconButton onClick={handleOpen}>
+      <IconButton onClick={handleOpen} className={classes.viewMoreC}>
         <img src={viewMoreC} alt="view more button" />
       </IconButton>
 

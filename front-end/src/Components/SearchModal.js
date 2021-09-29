@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { useHistory } from 'react-router-dom'
+import { Redirect } from 'react-router-dom'
 import { useAPI } from '../Context/AuthContext'
 
 import PopularSearches from './PopularSearches'
@@ -43,12 +43,22 @@ const useStyles = makeStyles(theme => ({
 }))
 
 export default function SearchModal () {
-  const { getResultsUsingSokaQuery } = useAPI()
-  const history = useHistory()
+  const { getResultsUsingSokaQuery, currentSearchResults } = useAPI()
 
   const classes = useStyles()
   const [open, setOpen] = useState(false)
   const [today, setToday] = useState('')
+  const [mustRedirect, setMustRedirect] = useState(false)
+
+  useEffect(() => {
+    if (currentSearchResults) {
+      setMustRedirect(true)
+    }
+  }, [currentSearchResults])
+
+  useEffect(() => {
+    getDate()
+  }, [])
 
   const handleOpenSearchMenu = () => {
     setOpen(true)
@@ -62,22 +72,17 @@ export default function SearchModal () {
     const date = new Date(new Date().toString().split('GMT')[0] + ' UTC')
       .toISOString()
       .split('.')[0]
-    await setToday(date)
+    setToday(await date)
   }
 
   const getSearchResults = async searchParams => {
     await getResultsUsingSokaQuery(searchParams)
-    history.push('/search-results')
     handleCloseSearchMenu()
   }
 
-  useEffect(() => {
-    const unsubscribe = getDate()
-    return unsubscribe
-  }, [])
-
   return (
     <>
+      {mustRedirect && <Redirect to='/search-results' />}
       <IconButton onClick={handleOpenSearchMenu} className={classes.searchLogo}>
         <img
           src={searchLogo}

@@ -13,7 +13,7 @@ import Show from './Pages/Show'
 import ForgotPassword from './Pages/ForgotPassword'
 import UserMatches from './Pages/UserMatches'
 import UserFeed from './Pages/UserFeed'
-import UserProfile from './Pages/UserProfile'
+import Profile from './Components/Profile'
 import SearchResults from './Pages/SearchResults'
 import FourOFour from './Pages/FourOFour'
 
@@ -46,7 +46,7 @@ function App () {
                 <PrivateRoute path='/users/:id/messages' component={Show} />
                 <PrivateRoute
                   path='/users/:id/profile'
-                  component={UserProfile}
+                  component={Profile}
                 />
                 <PrivateRoute path='/users/:id/edit' component={EditProfile} />
                 <PrivateRoute
