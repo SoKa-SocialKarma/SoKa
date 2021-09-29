@@ -1,11 +1,30 @@
 import { useState, useEffect } from 'react'
 import { useParams, useHistory } from 'react-router-dom'
 import { firestoreThisImage } from '../Util/imageStore'
+import { gender, experience, radius, goals } from '../Util/searchFields'
 import { useAPI } from '../Context/AuthContext'
 import { apiURL } from '../Util/apiURL'
 import axios from 'axios'
 
+import Box from "@mui/material/Box";
+import TextField from "@mui/material/TextField";
+import MenuItem from "@mui/material/MenuItem";
+import FormControl from "@mui/material/FormControl";
+import Input from "@mui/material/Input";
+import InputLabel from "@mui/material/InputLabel";
+import Button from "@material-ui/core/Button";
+import InputAdornment from "@mui/material/InputAdornment";
+import user from "../Assets/user.png";
+import pin from "../Assets/pin.png";
+import calendar from "../Assets/calendar.png";
+import { styled } from "@mui/material/styles";
+import IconButton from "@mui/material/IconButton";
+import PhotoCamera from "@mui/icons-material/PhotoCamera";
+import Stack from "@mui/material/Stack";
+
 const API = apiURL()
+
+
 
 function EditProfile () {
   const { currentUserData, getFreshUserData } = useAPI()
@@ -27,8 +46,8 @@ function EditProfile () {
   }, [])
 
   useEffect(() => {
-    const unmounMe = setPlaceHolders(currentUserData)
-    return unmounMe
+    const unmountMe = setPlaceHolders(currentUserData)
+    return unmountMe
   }, [currentUserData])
 
   const formatDate = target => {
@@ -74,7 +93,7 @@ function EditProfile () {
   const setImage = async e => {
     e.preventDefault()
 
-    const storedImage = await firestoreThisImage(e.target.files[0])
+    const storedImage = await firestoreThisImage(e.target.files[0], currentUser.email, currentUserData.image.album)
     setUploadedImage(true)
     uploadedImage &&
       setRequestBody(
@@ -163,120 +182,147 @@ function EditProfile () {
 
   return (
     <div>
-      <form onSubmit={handleSubmit} id='form'>
-        {/* <h4>Edit</h4> */}
+      <div id="editlayout">
+        {/* <h4>Edit Your Profile</h4> */}
+        <img src="https://images.pexels.com/photos/2078265/pexels-photo-2078265.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500" alt="" style={{ width: "180px", height: "160px", borderRadius: "80px" }} />
+      </div>
 
-        <label htmlFor='username'>Username:</label>
-        <input
-          type='text'
-          placeholder={placeHolders.username}
-          value={requestBody.username || ''}
-          id='username'
-          onChange={handleChange}
-        />
+      <div id="editf">
+        <Box sx={{ "& > :not(style)": { m: 1, width: "50ch" } }}>
+          <div>
+          
+            <FormControl variant="standard">
+              <InputLabel htmlFor="name">Name</InputLabel>
+              <Input
+                id="name"
+                placeholder={placeHolders.name}
+                value={requestBody.name || ''}
+                onChange={handleChange} 
+                startAdornment={
+                  <InputAdornment position="start">
+                    <img src={user} alt="name" style={{ width: "25px" }} />
+                  </InputAdornment>
+                }
+              />
+            </FormControl>
 
-        <br />
+            <FormControl variant="standard">
+              <InputLabel htmlFor="lastname">Last Name</InputLabel>
+              <Input
+                id="lastname"
+                placeholder={placeHolders.lastname}
+                value={requestBody.lastname || ''}
+                onChange={handleChange} 
+                startAdornment={
+                  <InputAdornment position="start">
+                    <img src={user} alt="lastname" style={{ width: "25px" }} />
+                  </InputAdornment>
+                }
+              />
+            </FormControl>
 
-        <label htmlFor='name'>Name:</label>
-        <input
-          type='text'
-          placeholder={placeHolders.name}
-          value={requestBody.name || ''}
-          id='name'
-          onChange={handleChange}
-        />
+            <FormControl variant="standard">
+              <InputLabel htmlFor="availability">Availability</InputLabel>
+              <Input
+                id="availability"
+                placeholder={placeHolders.availabledays}
+           //   value={usersChoice}
+                onChange={handleChange} 
+                startAdornment={
+                  <InputAdornment position="start">
+                    <img src={calendar} alt="calender" style={{ width: "25px" }} />
+                  </InputAdornment>
+                }
+              />
+            </FormControl>
 
-        <br />
+            <FormControl variant="standard">
+              <InputLabel htmlFor="location">Location</InputLabel>
+              <Input
+                id="location"
+                placeholder={placeHolders.location}
+                value={requestBody.location || ''}
+                onChange={handleChange} 
+                startAdornment={
+                  <InputAdornment position="start">
+                    <img src={pin} alt="location pin" style={{ width: "25px" }} />
+                  </InputAdornment>
+                }
+              />
+            </FormControl>
+          </div>
 
-        <label htmlFor='image'>Image:</label>
-        <input type='file' id='image' onChange={handleChange} disabled />
+          <label htmlFor="icon-button-file">
+            <Input accept="image/*" type="file" onChange={handleChange} id="image" />
+            <IconButton color="primary" aria-label="upload picture" component="span">
+              <PhotoCamera />
+            </IconButton>
+          </label>
 
-        <br />
+        </Box>
 
-        <label htmlFor='availability'>Availability:</label>
-        <input
-          type='datetime-local'
-          id='availability'
-          placeholder={placeHolders.availabledays}
-          value={usersChoice}
-          onChange={handleChange}
-        />
+        <Box
+          component="form"
+          sx={{
+            "& .MuiTextField-root": { m: 1, width: "40ch" },
+          }}
+          noValidate
+          autoComplete="off"
+        >
+          <div id="dropdown">
+            <TextField label="Experience Level" select variant="filled" color="primary" id="experience"
+                        placeholder={placeHolders.experience}
+                        onChange={handleChange} value={requestBody.experience || ''} focused>
+             
+              {experience.map((option) => (
+                <MenuItem key={option.value} value={option.value}>
+                  {option.label}
+                </MenuItem>
+              ))}
+            </TextField>
 
-        <br />
+            <TextField select label="Preferred Gender" variant="filled" color="primary" id="gender"
+                        placeholder={placeHolders.gender}
+                        onChange={handleChange} value={requestBody.gender || ''} focused >
+              {gender.map((option) => (
+                <MenuItem key={option.value} value={option.value}>
+                  {option.label}
+                </MenuItem>
+              ))}
+            </TextField>
 
-        <label htmlFor='gender'>Gender:</label>
-        <select name='gender' id='gender'>
-          <option value=''>-</option>
-          <option value='Female'>Female</option>
-          <option value='Male'>Male</option>
-          <option value='Other'>Perferred not to answer</option>
-        </select>
+            <TextField select label="Radius"  variant="filled" color="primary" id="radius"
+                       placeholder={placeHolders.radius}
+                       onChange={handleChange} value={requestBody.radius || ''} focused>
+              {radius.map((option) => (
+                <MenuItem key={option.value} value={option.value}>
+                  {option.label}
+                </MenuItem>
+              ))}
+            </TextField>
 
-        <br />
 
-        <label htmlFor='experience'>Experience:</label>
-        <select name='experience' id='experience' onChange={handleChange}>
-          <option value=''>-</option>
-          <option value='Beginner'>Beginner</option>
-          <option value='Intermediate'>Intermediate</option>
-          <option value='Advanced'>Advanced</option>
-        </select>
+            <TextField select label="Goals"  variant="filled" color="primary" id="goals"
+                       placeholder={placeHolders.goals}
+                       onChange={handleChange} value={requestBody.goals || ''} focused>
+              {goals.map((option) => (
+                <MenuItem key={option.value} value={option.value}>
+                  {option.label}
+                </MenuItem>
+              ))}
+            </TextField>
 
-        <br />
+          </div>
+        </Box>
+      </div>
 
-        <label htmlFor='goals'>Goals:</label>
-        <select name='goals' id='goals' onChange={handleChange}>
-          <option value=''>-</option>
-          <option value='Abs'>Abs</option>
-          <option value='Chest'>Chest</option>
-          <option value='Cardio'>Cardio</option>
-          <option value='Back'>Back</option>
-          <option value='Legs'>Legs</option>
-        </select>
+      <div id="editlayout">
+        <Button variant="contained" color="primary" onClick={handleSubmit}
+          Update Profile
+        </Button>
+      </div>
 
-        <button type='submit'>Submit</button>
-      </form>
     </div>
-  )
+  );
 }
 
-export default EditProfile
-// ;<form>
-//   <div class='form-group'>
-//     <label for='exampleFormControlInput1'>Email address</label>
-//     <input
-//       type='email'
-//       class='form-control'
-//       id='exampleFormControlInput1'
-//       placeholder='name@example.com'
-//     />
-//   </div>
-//   <div class='form-group'>
-//     <label for='exampleFormControlSelect1'>Example select</label>
-//     <select class='form-control' id='exampleFormControlSelect1'>
-//       <option>1</option>
-//       <option>2</option>
-//       <option>3</option>
-//       <option>4</option>
-//       <option>5</option>
-//     </select>
-//   </div>
-//   <div class='form-group'>
-//     <label for='exampleFormControlSelect2'>Example multiple select</label>
-//     <select multiple class='form-control' id='exampleFormControlSelect2'>
-//       <option>1</option>
-//       <option>2</option>
-//       <option>3</option>
-//       <option>4</option>
-//       <option>5</option>
-//     </select>
-//   </div>
-//   <div class='form-group'>
-//     <label for='exampleFormControlTextarea1'>Example textarea</label>
-//     <textarea
-//       class='form-control'
-//       id='exampleFormControlTextarea1'
-//       rows='3'
-//     ></textarea>
-//   </div>
-// </form>
