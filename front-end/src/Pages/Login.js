@@ -1,24 +1,29 @@
-import { useRef, useState } from 'react'
+import { useRef, useState, useEffect } from 'react'
 import { useAuth, useAPI } from '../Context/AuthContext'
-import { Link, useHistory } from 'react-router-dom'
+import { Link, Redirect } from 'react-router-dom'
 
 import { Form, Button, Card, Alert } from 'react-bootstrap'
 
 const Login = () => {
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
-  const { currentUserData } = useAPI()
   const { logIn } = useAuth()
-  const history = useHistory()
+  const { currentUserData } = useAPI()
   const emailRef = useRef()
   const passwordRef = useRef()
+  const [mustRedirect, setMustRedirect] = useState(false)
+
+  useEffect(() => {
+    if (currentUserData.id) {
+      setMustRedirect(true)
+    }
+  }, [currentUserData])
 
   const goToDemo = async () => {
     try {
       setError('')
       setLoading(true)
       await logIn('demo@soka.com', 'pursuit')
-      history.push('/users/14/feed')
     } catch (error) {
       const message = error.message
         .split(' ')
@@ -42,8 +47,6 @@ const Login = () => {
       setError('')
       setLoading(true)
       await logIn(emailRef.current.value, passwordRef.current.value)
-      // console.log("BEfore pushing After login USERID : " , currentUserData?.id)
-      history.push(`/users/${currentUserData?.id}/feed`)
     } catch (error) {
       const message = error.message
         .split(' ')
@@ -62,6 +65,7 @@ const Login = () => {
 
   return (
     <>
+      {mustRedirect && <Redirect to={`users/${currentUserData.id}/feed`} />}
       <Card className='loginDashboard'>
         <Card.Body>
           <h2 className='text-center mb-4'>Log In</h2>

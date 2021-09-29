@@ -7,10 +7,6 @@
   height: 100vh;
 }
 
-/* #root > div > main {
-  width: auto;
-} */
-
 #root > div > main > div > div > div > fieldset {
   margin: 2px;
 }
@@ -112,14 +108,15 @@ body {
   padding: 0px 10px;
 }
 
-.container {
+/* .container {
   margin-top: 10px;
   position: relative;
   text-align: center;
   color: rgb(45, 112, 133);
+  color: black;
   padding-right: 20px;
   padding-left: 60px;
-}
+} */
 
 .bottom-left {
   position: absolute;
@@ -172,32 +169,36 @@ body {
   background-color: rgb(143, 227, 255, 0.6);
 }
 
+#cardContainer {
+  grid-row: 2 / 3;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
 #card {
-  margin: auto;
+  margin: 0;
+  grid-row: 2/3;
+  place-self: center;
   text-align: center;
   font-family: montserrat;
-  color: rgb(46, 49, 216);
-  border-radius: 5px;
-  padding-top: 30px;
+  padding: 2% 0 0 0;
 }
 
-#card button {
-  background-color: #36cff1;
-  border: none;
-  padding: 5px 32px;
-  display: inline-block;
-  font-size: 14px;
-  margin: 4px 5px;
-  cursor: pointer;
-  border-radius: 5px;
+#socials {
+  width: 100%;
+  display: flex;
+  align-self: center;
+  padding: 1% 40% 2% 40%;
+  justify-content: space-evenly;
 }
 
-#prof {
-  box-shadow: 0 4px 8px 0 #10056f;
-  float: left;
-  margin-left: 90px;
-  padding: 80px;
+.socialImage {
+  width: 30px;
+  height: 30px;
 }
+
 .title {
   color: grey;
   font-size: 18px;
@@ -256,13 +257,11 @@ a:hover {
   left: 50%;
   transform: translate(-50%, -50%);
   color: rgb(48, 209, 245);
-  /* -webkit-text-stroke: 1px black; */
-   /* text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black; */
-  text-shadow: 0px 0px 6px rgba(255,255,255,0.7);
 
+  text-shadow: 0px 0px 6px rgba(255, 255, 255, 0.7);
 
   font-size: larger;
-  /* font-size: large ; */
+
   font-family: Arial, Helvetica, sans-serif;
 }
 
@@ -276,4 +275,102 @@ a:hover {
   float: right;
   padding: 50px;
   margin-right: 90px;
+}
+
+#profHeader {
+  position: relative;
+  top: 0;
+  left: 0;
+}
+
+.profBackground {
+  position: relative;
+  top: 0;
+  left: 0;
+  height: 165px;
+  width: 100%;
+  background-color: rgb(107, 98, 255);
+  /* background-color: rgb(15, 4, 111); */
+}
+
+.profPic {
+  position: absolute;
+  top: 100px;
+  left: 40px;
+  border: solid 0.37em white;
+  border-radius: 50%;
+}
+
+.containerGrid {
+  padding: 1% 10% 1% 10%;
+  display: grid;
+  grid-template-columns: minmax(39%, 1fr) minmax(39%, 1fr);
+  column-gap: 2%;
+  color: black;
+}
+
+.item1,
+.item2 {
+  width: 100%;
+  height: 60vh;
+  margin: 0;
+  padding: 20px 30px 20px 30px;
+  box-shadow: 0px 8px 60px -10px rgba(147, 171, 189, 0.6);
+  background: #fff;
+  border-radius: 12px;
+  color: black;
+  font-family: montserrat;
+}
+
+/* .item1 > div * {
+  padding: 1% 1% 1% 5%;
+  margin: 0;
+  color: grey;
+} */
+
+.item1 > div > ul {
+  margin: 0 0 0 0 !important;
+  padding: 0.5% 0 0 0 !important;
+}
+
+.item1 li {
+  list-style: none;
+}
+
+.item1 > div > ul > li > img {
+  padding: 0 0 0 0 !important;
+  width: 25px;
+  margin: 0 3% 0 1% !important;
+}
+
+.item1 li {
+  padding-bottom: 7px;
+}
+
+#editiconContainer {
+  display: flex;
+  justify-content: space-between;
+}
+
+#editicon > a > img {
+  transform: scale(01);
+}
+
+.item4 {
+  width: 100%;
+  padding: 2% 10% 2% 10%;
+}
+
+/* h2 {
+  color: black;
+} */
+
+/* .item2 {
+  display: flex;
+  justify-content: center;
+  align-self: center;
+} */
+
+#badges li {
+  list-style: none;
 }

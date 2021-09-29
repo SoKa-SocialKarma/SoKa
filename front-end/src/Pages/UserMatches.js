@@ -23,7 +23,7 @@ const useStyles = makeStyles({
     height: '85vh',
     padding: '10px',
     display: 'grid',
-    gridTemplateRows: '10% 38% 12% 2% 23% 13%'
+    gridTemplateRows: '10% 32% 13% 2% 18% 12% 8%'
   }
 })
 
@@ -46,7 +46,8 @@ function UserMatches () {
         console.log(err)
       }
     }
-    return unSubscribe()
+    
+  return unSubscribe()
   }, [currentUserData, id])
 
   return (
@@ -55,7 +56,7 @@ function UserMatches () {
         {sameUser ? (
           currentUserMatches.map(profile => {
             return (
-              <Paper className={classes.paper}>
+              <Paper className={classes.paper} key={`${profile.id}-mui-matches`}>
                 <UserCard profile={profile} key={profile.id} />
               </Paper>
             )

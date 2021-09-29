@@ -22,14 +22,17 @@ const useStyles = makeStyles({
     height: '85vh',
     padding: '10px',
     display: 'grid',
-    gridTemplateRows: '10% 38% 12% 2% 23% 13%'
+    gridTemplateRows: '10% 32% 13% 2% 18% 12% 8%'
   }
 })
 
 function UserFeed () {
   const classes = useStyles()
-  const [currentUserPotentialMatchesProfiles, setCurrentUserPotentialMatchesProfiles] = useState([])
-//   const { id } = useParams()
+  const [
+    currentUserPotentialMatchesProfiles,
+    setCurrentUserPotentialMatchesProfiles
+  ] = useState([])
+  //   const { id } = useParams()
 
   const getCurrentUserPotentialMatches = async () => {
     try {
@@ -41,7 +44,7 @@ function UserFeed () {
   }
 
   useEffect(() => {
-    return getCurrentUserPotentialMatches()
+      getCurrentUserPotentialMatches()
   }, [])
 
   return (

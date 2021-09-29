@@ -1,19 +1,26 @@
-import { useHistory } from 'react-router-dom'
-import { useAuth } from '../Context/AuthContext'
+import { useState, useEffect } from 'react'
+import { Redirect } from 'react-router-dom'
+import { useAPI } from '../Context/AuthContext'
 import '../Assets/NoSearchResults.css'
 
 const NoSearchResults = () => {
-  const { getSokaRequestQuery } = useAuth()
-  const history = useHistory()
+  const { getResultsUsingSokaQuery, currentSearchResults } = useAPI()
+  const [mustRedirect, setMustRedirect] = useState(false)
+
+  useEffect(() => {
+    if (currentSearchResults) {
+      setMustRedirect(true)
+    }
+  }, [currentSearchResults])
 
   const getSearchResults = async () => {
-    await getSokaRequestQuery()
-    history.push('/search-results')
+    await getResultsUsingSokaQuery([])
   }
 
   return (
     <section>
-      <div class='circle'></div>
+      {mustRedirect && <Redirect to='/search-results' />}
+      <div className='circle'></div>
       <h1 className='sorry'>
         <span>Sorry,</span>
         <br />
@@ -25,8 +32,8 @@ const NoSearchResults = () => {
         <br />
         <span>Found</span>
       </h1>
-      <button class='pushable' onClick={getSearchResults}>
-        <span class='front'>Browse all</span>
+      <button className='pushable' onClick={getSearchResults}>
+        <span className='front'>Browse all</span>
       </button>
     </section>
   )

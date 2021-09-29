@@ -1,10 +1,15 @@
+import { useAuth } from '../Context/AuthContext'
+
 import Button from '@material-ui/core/Button'
 import Rating from '@material-ui/lab/Rating'
 import Divider from '@material-ui/core/Divider'
 import Typography from '@material-ui/core/Typography'
 import Box from '@material-ui/core/Box'
 import { makeStyles } from '@material-ui/core/styles'
+import UserModal from './UserModal'
+
 import defaultProfile from '../Assets/defaultProfile.png'
+
 const useStyles = makeStyles({
   root: {
     margin: '0',
@@ -20,17 +25,11 @@ const useStyles = makeStyles({
     alignSelf: 'center',
     justifySelf: 'center'
   },
-  flex: {
-    margin: '0',
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'space-evenly',
-    alignItems: 'center'
-  },
   flex45: {
-    display: 'flex',
     width: '45%',
-    gridRow: '6 / 7'
+    height: '60%',
+    gridRow: '6 / 7',
+    placeSelf: 'center',
   },
   button: {
     borderRadius: '40px'
@@ -50,7 +49,7 @@ const useStyles = makeStyles({
     width: '100%',
     userSelect: 'none'
   },
-  divider:{
+  divider: {
     height: '2px!important',
     backgroundColor: 'rgb(139, 58, 231)!important',
     width: '60%!important',
@@ -60,7 +59,7 @@ const useStyles = makeStyles({
 
 function UserCard ({ profile }) {
   const classes = useStyles()
-
+  const { currentUser } = useAuth()
   const keepAspectRatio = {
     display: 'block',
     maxWidth: '100%',
@@ -69,14 +68,7 @@ function UserCard ({ profile }) {
     height: 'auto'
   }
 
-  const {
-    name,
-    lastname,
-    location,
-    karma,
-    experience,
-    availabledays
-  } = profile
+  const { name, lastname, location, karma, experience, availabledays } = profile
 
   return (
     <>
@@ -99,7 +91,6 @@ function UserCard ({ profile }) {
           component='legend'
           variant='h6'
           className={classes.ratingBox}
-
         >
           Karma Stars
         </Typography>
@@ -112,7 +103,7 @@ function UserCard ({ profile }) {
           style={{ color: 'rgb(139, 58, 231)' }}
         />
       </Box>
-      <Divider className={classes.divider}/>
+      <Divider className={classes.divider} />
       <Box borderColor='transparent' className={classes.infoBox}>
         <div className={classes.flex}>
           <p>Availability: {availabledays[0]}</p>
@@ -122,18 +113,26 @@ function UserCard ({ profile }) {
         </div>
       </Box>
 
-      <div className={classes.flex}>
-        <Button
-          variant='contained'
-          className={classes.flex45}
-          color="secondary"
-        >
-          Match
-        </Button>
-        {/* <Button variant='contained' color='secondary' className={classes.flex45}>
-          Message
-        </Button> */}
-      </div>
+      
+        {!currentUser ? (
+          <Button
+            variant='contained'
+            className={classes.flex45}
+            color='secondary'
+          >
+            Match
+          </Button>
+        ) : (
+          <Button
+            variant='contained'
+            color='secondary'
+            className={classes.flex45}
+          >
+            Message
+          </Button>
+        )}
+        <UserModal />
+      
     </>
   )
 }

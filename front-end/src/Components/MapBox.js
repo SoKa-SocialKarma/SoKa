@@ -13,18 +13,19 @@ const layerStyle = {
   }
 }
 
-const MapBox = () => {
+const MapBox = ({ adjustmentHeight, adjustmentWidth }) => {
   const location = useGeoLocation()
   const currentLong = Number(location.coordinates.longitude)
   const currentLat = Number(location.coordinates.latitude)
-  const { element } = useElement()
+  const { mainElement } = useElement()
 
   const [viewport, setViewport] = useState({
     latitude: location.coordinates.latitude || 40.7128,
     longitude: location.coordinates.longitude || -74.006,
     zoom: 12,
-    width: element?.clientWidth,
-    height: element?.clientHeight - 94 || 0
+    width: adjustmentWidth ? (mainElement.width - (mainElement.width*adjustmentWidth)) : mainElement.width,
+    height: adjustmentHeight ? (mainElement.height - (mainElement.height*adjustmentHeight)) : mainElement.height
+
   })
 
   const geojson = {
@@ -46,11 +47,12 @@ const MapBox = () => {
       latitude: location.coordinates.latitude || 40.7128,
       longitude: location.coordinates.longitude || -74.006,
       zoom: 12,
-      width: element?.clientWidth,
-      height: element?.clientHeight - 94
+      width: adjustmentWidth ? (mainElement.width - (mainElement.width*adjustmentWidth)) : mainElement.width,
+      height: adjustmentHeight ? (mainElement.height - (mainElement.height*adjustmentHeight)) : mainElement.height
     })
-    element?.scrollTo({ top: 20, behavior: 'smooth' })
-  }, [location, element])
+    mainElement.element && mainElement.element.scrollTo({ top: 20, behavior: 'smooth' })
+  }, [location, mainElement, adjustmentWidth, adjustmentHeight])
+
 
   return (
     <>
@@ -59,6 +61,7 @@ const MapBox = () => {
         mapStyle='mapbox://styles/tpichardo/cktjfw1vh05kc18qq97wjjwrj'
         {...viewport}
         onViewportChange={nextViewport => setViewport(nextViewport)}
+        style={{ height: '50px', width: '30px' }}
       >
         <Source id='my-data' type='geojson' data={geojson}>
           <Layer {...layerStyle} />
