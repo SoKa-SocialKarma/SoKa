@@ -34,7 +34,7 @@ const useStyles = makeStyles({
   }
 })
 
-function Profile () {
+function Profile() {
   const { currentUserData } = useAPI()
   const { id } = useParams()
   const classes = useStyles()
@@ -109,70 +109,70 @@ function Profile () {
 
               <h5>
                 Gender:
-                <ul>
-                  <li>
-                    <img src={user} alt='user' />
-                    {gender}
-                  </li>
-                </ul>
               </h5>
+              <ul>
+                <li>
+                  <img src={user} alt='user' />
+                  {gender}
+                </li>
+              </ul>
 
               <h5>
                 Location:
-                <ul>
-                  <li>
-                    <img src={pin} alt='location pin' />
-                    {location}
-                  </li>
-                </ul>
               </h5>
+              <ul>
+                <li>
+                  <img src={pin} alt='location pin' />
+                  {location}
+                </li>
+              </ul>
               <h5>
                 Availablility:
-                <ul>
-                  <li>
-                    <img
-                      src={calendar}
-                      style={{ width: '25px' }}
-                      alt='calendar'
-                    />
-                    {availabledays
-                      ? `${availabledays[0]}, ${availabledays[1]}`
-                      : ''}
-                  </li>
-                </ul>
               </h5>
+              <ul>
+                <li>
+                  <img
+                    src={calendar}
+                    style={{ width: '25px' }}
+                    alt='calendar'
+                  />
+                  {availabledays
+                    ? `${availabledays[0]}, ${availabledays[1]}`
+                    : ''}
+                </li>
+              </ul>
               <h5>
                 Experience :
-                <ul>
-                  <li>
-                    <img src={certification} alt='certifications' />
-                    {experience}
-                  </li>
-                </ul>
               </h5>
+              <ul>
+                <li>
+                  <img src={certification} alt='certifications' />
+                  {experience}
+                </li>
+              </ul>
 
               <h5>
                 Goals:
-                <ul>
-                  <li>
-                    <img src={target} alt='target' />
-
-                    {goals
-                      ? `${goals[0]}, ${goals[1]}, ${goals[2]}, ${goals[3]} `
-                      : ''}
-                  </li>
-                </ul>
               </h5>
+              <ul>
+                <li>
+                  <img src={target} alt='target' />
+
+                  {goals
+                    ? `${goals[0]}, ${goals[1]}, ${goals[2]}, ${goals[3]} `
+                    : ''}
+                </li>
+              </ul>
 
               <h5>
                 Radius:
-                <ul>
-                  <li>
-                    <img src={map} alt='map with location tags' />
-                    {radius} miles
-                  </li>
-                </ul>
               </h5>
+              <ul>
+                <li>
+                  <img src={map} alt='map with location tags' />
+                  {radius} miles
+                </li>
+              </ul>
             </div>
           </div>
 

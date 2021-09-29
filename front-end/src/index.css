@@ -321,44 +321,44 @@ a:hover {
   box-shadow: 0px 8px 60px -10px rgba(147, 171, 189, 0.6);
   background: #fff;
   border-radius: 12px;
-  color: rgb(45, 112, 133);
+  color: black;
+  font-family: montserrat;
+  /* color: rgb(45, 112, 133); */
 }
 
-.item1 > div * {
+/* .item1 > div * {
   padding: 1% 1% 1% 5%;
   margin: 0;
-  /* color: grey; */
-}
+  color: grey;
+} */
 
-.item1 > div > h5 > ul {
+.item1 > div > ul {
   margin: 0 0 0 0 !important;
   padding: 0.5% 0 0 0 !important;
 }
-.item1 > div > h5 > ul > li::marker{
-  color: white;
+
+.item1 li {
+  list-style: none;
 }
 
-.item1 > div > h5 > ul > li > img {
+.item1 > div > ul > li > img {
   padding: 0 0 0 0 !important;
   width: 25px;
-  margin: 0 10% 0 1% !important;
+  margin: 0 3% 0 1% !important;
+}
+
+.item1 h5 {
+  font-size: 22px;
+  font-weight: 400;
 }
 
 #editiconContainer {
   display: flex;
-  justify-content: space-around;
-}
-#editiconContainer > h2 {
-  width: 70%;
-}
-
-#editicon {
-  display: flex;
-  align-self: flex-end;
+  justify-content: space-between;
 }
 
 #editicon > a > img {
-  transform: scale(1.5);
+  transform: scale(01);
 }
 
 .item4 {
@@ -366,12 +366,12 @@ a:hover {
   padding: 2% 10% 2% 10%;
 }
 
-h2{
+/* h2 {
   color: black;
-}
+} */
 
-.item2 {
+/* .item2 {
   display: flex;
   justify-content: center;
   align-self: center;
-}
+} */
