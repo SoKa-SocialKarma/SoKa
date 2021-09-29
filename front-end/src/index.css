@@ -289,7 +289,8 @@ a:hover {
   left: 0;
   height: 165px;
   width: 100%;
-  background-color: rgb(15, 4, 111);
+  background-color: rgb(107, 98, 255);
+  /* background-color: rgb(15, 4, 111); */
 }
 
 .profPic {
