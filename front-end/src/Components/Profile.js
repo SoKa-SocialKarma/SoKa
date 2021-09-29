@@ -133,7 +133,6 @@ function Profile() {
                 <li>
                   <img
                     src={calendar}
-                    style={{ width: '25px' }}
                     alt='calendar'
                   />
                   {availabledays
@@ -207,7 +206,6 @@ function Profile() {
                       style={{ width: '30px' }}
                     />
                     -Assisted in lifting heavy weights safely
-
                   </li>
                 </ul>
               </div>
