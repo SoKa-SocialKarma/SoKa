@@ -323,7 +323,6 @@ a:hover {
   border-radius: 12px;
   color: black;
   font-family: montserrat;
-  /* color: rgb(45, 112, 133); */
 }
 
 /* .item1 > div * {
@@ -374,3 +373,7 @@ a:hover {
   justify-content: center;
   align-self: center;
 } */
+
+#badges li {
+  list-style: none;
+}
