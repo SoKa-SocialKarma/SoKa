@@ -347,9 +347,8 @@ a:hover {
   margin: 0 3% 0 1% !important;
 }
 
-.item1 h5 {
-  font-size: 22px;
-  font-weight: 400;
+.item1 li {
+  padding-bottom: 7px;
 }
 
 #editiconContainer {

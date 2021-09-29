@@ -15,7 +15,7 @@ import pin from '../Assets/pin.png'
 import calendar from '../Assets/calendar.png'
 import certification from '../Assets/certification.png'
 import target from '../Assets/target.png'
-import map from '../Assets/map.png'
+import distance from '../Assets/distance.png'
 import linkedin from '../Assets/linkedin.png'
 
 const useStyles = makeStyles({
@@ -95,7 +95,7 @@ function Profile() {
           <div className='item1'>
             <div className={classes.flexCenter}>
               <div id='editiconContainer'>
-                <h2>About</h2>
+                <h3>About</h3>
                 <div id='editicon'>
                   <Link to={`users/${id}/edit`}>
                     <img
@@ -146,7 +146,7 @@ function Profile() {
               </h5>
               <ul>
                 <li>
-                  <img src={certification} alt='certifications' />
+                  <img src={certification} alt='medal' />
                   {experience}
                 </li>
               </ul>
@@ -169,7 +169,7 @@ function Profile() {
               </h5>
               <ul>
                 <li>
-                  <img src={map} alt='map with location tags' />
+                  <img src={distance} alt='two location tags' />
                   {radius} miles
                 </li>
               </ul>
