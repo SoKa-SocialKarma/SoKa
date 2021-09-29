@@ -289,7 +289,8 @@ a:hover {
   left: 0;
   height: 165px;
   width: 100%;
-  background-color: rgb(107, 98, 255);
+  /* background-color: rgb(107, 98, 255); */
+  background-color:#5c55dc;
   /* background-color: rgb(15, 4, 111); */
 }
 
@@ -373,4 +374,22 @@ a:hover {
 
 #badges li {
   list-style: none;
+}
+
+#dropdown {
+  display: flex;
+  flex-direction: column;
+}
+
+#editlayout {
+  display: flex;
+align-items: center;
+  flex-direction: column;
+  margin-top: 20px;
+}
+
+#editf {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 30px;
 }

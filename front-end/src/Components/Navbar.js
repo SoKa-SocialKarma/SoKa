@@ -19,7 +19,7 @@ import ListItem from '@material-ui/core/ListItem'
 import ListItemIcon from '@material-ui/core/ListItemIcon'
 import ListItemText from '@material-ui/core/ListItemText'
 import Button from '@material-ui/core/Button'
-const drawerWidth = 180
+const drawerWidth = 140
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -144,7 +144,7 @@ export default function Navbar ({ children }) {
 
   const classes = useStyles()
   const theme = useTheme()
-  const [open, setOpen] = useState(false)
+  const [open, setOpen] = useState(true)
   const [id, setId] = useState(0)
 
   const handleDrawerOpen = () => {
@@ -273,13 +273,13 @@ export default function Navbar ({ children }) {
               <img
                 src='https://img.icons8.com/nolan/2x/handshake.png'
                 alt='matches'
-                style={{ width: '48px', height: '48px' }}
+                style={{ width: '40px', height: '40px' }}
               />
             </ListItemIcon>
             <ListItemText primary='Matches' style={{ color: '#10056F' }} />
           </ListItem>
 
-          <ListItem component={Link} to={`/users/${id}/messages`}>
+          {/* <ListItem component={Link} to={`/users/${id}/messages`}>
             <ListItemIcon>
               <img
                 src='https://img.icons8.com/nolan/2x/messages-mac.png'
@@ -288,14 +288,14 @@ export default function Navbar ({ children }) {
               />
             </ListItemIcon>
             <ListItemText primary='Inbox' style={{ color: '#10056F' }} />
-          </ListItem>
+          </ListItem> */}
 
           <ListItem component={Link} to={`/users/${id}/profile`}>
             <ListItemIcon>
               <img
                 src='https://img.icons8.com/nolan/64/lifecycle.png'
                 alt='profile'
-                style={{ width: '48px', height: '48px' }}
+                style={{ width: '40px', height: '40px' }}
               />
             </ListItemIcon>
             <ListItemText primary='Profile' style={{ color: '#10056F' }} />
@@ -305,7 +305,7 @@ export default function Navbar ({ children }) {
               <img
                 src='https://img.icons8.com/nolan/64/map-marker.png'
                 alt='mapbox-current-location'
-                style={{ width: '48px', height: '48px' }}
+                style={{ width: '40px', height: '40px' }}
               />
             </ListItemIcon>
             <ListItemText primary='Map' style={{ color: '#10056F' }} />

@@ -45,7 +45,6 @@
 //     );
 //   }, [id, history]);
 
-
 //   const handleSubmit = event => {
 
 //     event.preventDefault()
@@ -124,18 +123,14 @@
 //         </span>
 //       </form>
 
-
 //       <div>
- 
+
 //       </div>
 //     </div>
 //   )
 // }
 
 // export default EditProfile;
-
-
-
 
 // <form>
 //   <div class="form-group">
@@ -168,110 +163,176 @@
 //   </div>
 // </form>
 
+import * as React from "react";
+import Box from "@mui/material/Box";
+import TextField from "@mui/material/TextField";
+import MenuItem from "@mui/material/MenuItem";
+import FormControl from "@mui/material/FormControl";
+import Input from "@mui/material/Input";
+import InputLabel from "@mui/material/InputLabel";
+import Button from "@material-ui/core/Button";
+import InputAdornment from "@mui/material/InputAdornment";
+import user from "../Assets/user.png";
+import pin from "../Assets/pin.png";
+import calendar from "../Assets/calendar.png";
+import { styled } from "@mui/material/styles";
+import IconButton from "@mui/material/IconButton";
+import PhotoCamera from "@mui/icons-material/PhotoCamera";
+import Stack from "@mui/material/Stack";
 
-import * as React from 'react';
-import Box from '@mui/material/Box';
-import TextField from '@mui/material/TextField';
-import MenuItem from '@mui/material/MenuItem';
-
-
-const currencies = [
+const experience = [
   {
-    value: 'Beginner',
-    label: 'Beginner',
+    value: "Beginner",
+    label: "Beginner",
   },
   {
-    value: 'Intermediate',
-    label: 'Intermediate',
+    value: "Intermediate",
+    label: "Intermediate",
   },
   {
-    value: 'Advanced',
-    label: 'Advanced',
+    value: "Advanced",
+    label: "Advanced",
+  },
+];
+
+const genderO = [
+  {
+    value: "Female",
+    label: "Female",
+  },
+  {
+    value: "Male",
+    label: "Male",
+  },
+  {
+    value: "Non-binary",
+    label: "Non-binary",
+  },
+  {
+    value: "Perfer not to answer",
+    label: "Perfer not to answer",
   },
 ];
 
 export default function EditProfile() {
-  const [currency, setCurrency] = React.useState("");
+  const [exper, setExper] = React.useState("");
+  const [gender, setGender] = React.useState("");
 
   const handleChange = (event) => {
-    setCurrency(event.target.value);
+    setExper(event.target.value);
+    setGender(event.target.value);
   };
 
-
   return (
-    <Box
-      component="form"
-      sx={{
-        '& .MuiTextField-root': { m: 1, width: '55ch'},
-      }}
-      noValidate
-      autoComplete="off"
-    >
-      <div id="editform">
-      <TextField
-          id="outlined-select-currency"
-          select
-          label="Choose Experience"
-          value={currency}
-          onChange={handleChange}
-          helperText="Please select your currency"
-        >
-          {currencies.map((option) => (
-            <MenuItem key={option.value} value={option.value}>
-              {option.label}
-            </MenuItem>
-          ))}
-        </TextField>
-        <TextField
-          required
-          id="outlined-required"
-          label="Required"
-          defaultValue="Name"
-        />
-        <TextField
-          // disabled
-          id="outlined-disabled"
-          label="Optional"
-          defaultValue="Last Name"
-        />
-        {/* <TextField
-          id="outlined-password-input"
-          label="Password"
-          type="password"
-          autoComplete="current-password"
-        /> */}
-        <TextField
-          id="outlined-read-only-input"
-          label="Read Only"
-          defaultValue="Location"
-          InputProps={{
-            readOnly: true,
-          }}
-        />
-        <TextField
-          id="outlined-number"
-          label="Experience"
-          type="number"
-          InputLabelProps={{
-            shrink: true,
-          }}
-        />
-           <TextField
-          id="outlined-number"
-          label="Availability"
-          type="date"
-          InputLabelProps={{
-            shrink: true,
-          }}
-        />
-        <TextField id="outlined-search" label="Search field" type="search" />
-        <TextField
-          id="outlined-helperText"
-          label="Helper text"
-          defaultValue="Goals"
-          helperText="Some important text"
-        />
+    <div>
+      <div id="editlayout">
+        {/* <h4>Edit Your Profile</h4> */}
+        <img src="https://images.pexels.com/photos/2078265/pexels-photo-2078265.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500" alt="" style={{ width: "180px", height: "160px", borderRadius: "80px" }} />
       </div>
-    </Box>
+
+      <div id="editf">
+        <Box sx={{ "& > :not(style)": { m: 1, width: "50ch" } }}>
+          <div>
+            <FormControl variant="standard">
+              <InputLabel htmlFor="input-with-icon-adornment">Name</InputLabel>
+              <Input
+                id="input-with-icon-adornment"
+                startAdornment={
+                  <InputAdornment position="start">
+                    <img src={user} alt="name" style={{ width: "25px" }} />
+                  </InputAdornment>
+                }
+              />
+            </FormControl>
+            <FormControl variant="standard">
+              <InputLabel htmlFor="input-with-icon-adornment">Last Name</InputLabel>
+              <Input
+                id="input-with-icon-adornment"
+                startAdornment={
+                  <InputAdornment position="start">
+                    <img src={user} alt="lastname" style={{ width: "25px" }} />
+                  </InputAdornment>
+                }
+              />
+            </FormControl>
+            <FormControl variant="standard">
+              <InputLabel htmlFor="input-with-icon-adornment">Availability</InputLabel>
+              <Input
+                id="input-with-icon-adornment"
+                startAdornment={
+                  <InputAdornment position="start">
+                    <img src={calendar} alt="calender" style={{ width: "25px" }} />
+                  </InputAdornment>
+                }
+              />
+            </FormControl>
+            <FormControl variant="standard">
+              <InputLabel htmlFor="input-with-icon-adornment">Location</InputLabel>
+              <Input
+                id="input-with-icon-adornment"
+                startAdornment={
+                  <InputAdornment position="start">
+                    <img src={pin} alt="location pin" style={{ width: "25px" }} />
+                  </InputAdornment>
+                }
+              />
+            </FormControl>
+          </div>
+          <label htmlFor="icon-button-file">
+            <Input accept="image/*" type="file" />
+            <IconButton color="primary" aria-label="upload picture" component="span">
+              <PhotoCamera />
+            </IconButton>
+          </label>
+        </Box>
+
+        <Box
+          component="form"
+          sx={{
+            "& .MuiTextField-root": { m: 1, width: "40ch" },
+          }}
+          noValidate
+          autoComplete="off"
+        >
+          <div id="dropdown">
+            <TextField label="Experience Level" select variant="filled" color="primary" onChange={handleChange} value={exper} focused>
+              {/* <TextField id="outlined-select-currency value={exper} onChange={handleChange}> */}
+              {experience.map((option) => (
+                <MenuItem key={option.value} value={option.value}>
+                  {option.label}
+                </MenuItem>
+              ))}
+            </TextField>
+
+            <TextField select label="Perferred Gender" value={gender} onChange={handleChange} variant="filled" color="primary" focused>
+              {genderO.map((option) => (
+                <MenuItem key={option.value} value={option.value}>
+                  {option.label}
+                </MenuItem>
+              ))}
+            </TextField>
+            <TextField select label="Radius" value={exper} onChange={handleChange} variant="filled" color="primary" focused>
+              {experience.map((option) => (
+                <MenuItem key={option.value} value={option.value}>
+                  {option.label}
+                </MenuItem>
+              ))}
+            </TextField>
+            <TextField select label="Goals" value={exper} onChange={handleChange} variant="filled" color="primary" focused>
+              {experience.map((option) => (
+                <MenuItem key={option.value} value={option.value}>
+                  {option.label}
+                </MenuItem>
+              ))}
+            </TextField>
+          </div>
+        </Box>
+      </div>
+      <div id="editlayout">
+        <Button variant="contained" color="primary">
+          Update Profile
+        </Button>
+      </div>
+    </div>
   );
 }
