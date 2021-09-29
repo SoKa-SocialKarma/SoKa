@@ -161,7 +161,7 @@ export function AuthProvider ({ children }) {
   // Refreshing Current User Data after updating Profile
   async function getFreshUserData (userId) {
 
-    const data = await axios.get(`${API}/users/${userId}}`)
+    const data = await axios.get(`${API}/users/${userId}`)
     dispatch({
       type: ACTIONS.NEW_CURRENT_USER_DATA,
       payload: { data: data }

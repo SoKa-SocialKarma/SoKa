@@ -13,7 +13,7 @@ function EditProfile () {
   const [uploadedImage, setUploadedImage] = useState(false)
   let { id } = useParams()
   let history = useHistory()
-
+//TODO useeffect to set requestBody with currentUserData at mounted and clean afterwards
   const [requestBody, setRequestBody] = useState({
     username: currentUserData.username,
     name: currentUserData.name,
@@ -33,7 +33,7 @@ function EditProfile () {
     const date = new Date(new Date().toString().split('GMT')[0] + ' UTC')
       .toISOString()
       .split('.')[0]
-    setToday(await date)
+    setToday(await formatDate(date) ) 
   }
 
   const formatDate = target => {
@@ -47,8 +47,10 @@ function EditProfile () {
 
   const removeOldDates = (today, userAvailability) => {
     const todaySplitted = today.split('/')
+    console.log("INSIDE REMOVE OLD DATES USERAVAILABILITY :")
+    console.log(userAvailability)
 
-    return userAvailability.filter(day => {
+    return userAvailability?.filter(day => {
       const userSplitted = day.split('/')
       return (
         Number(userSplitted[0]) <= Number(todaySplitted[0]) &&
@@ -63,6 +65,8 @@ function EditProfile () {
     e.preventDefault()
 
     let day = formatDate(e.target.value)
+    console.log("INSIDE SET AVAILABILITY DAY PICKED BY USER:")
+    console.log(day)
     const oldAvailability = removeOldDates(today, requestBody.availability)
     const newAvailability = [...oldAvailability, day]
     const updatedProfile = Object.assign(
@@ -123,16 +127,16 @@ function EditProfile () {
   const handleChange = event => {
     switch (event.target.id) {
       case 'image':
-        setImage(event.target.files[0])
+        setImage(event)
         break
       case 'goals':
-        setGoals(event.target.value)
+        setGoals(event)
         break
       case 'experience':
-        setExperience(event.target.value)
+        setExperience(event)
         break
       case 'availability':
-        setAvailability(event.target.value)
+        setAvailability(event)
         break
       default:
         setRequestBody({
@@ -159,6 +163,11 @@ function EditProfile () {
     event.preventDefault()
     updateProfile(requestBody, id)
   }
+ 
+  console.log("CURRENT USER DATA AT EDITPROFILE : ")
+  console.log(currentUserData)
+  console.log("CURRENT DATE AT EDITPROFILE : ")
+  console.log(today)
 
   return (
     <div>
@@ -200,7 +209,7 @@ function EditProfile () {
         <span>
           <label htmlFor='availability'>Availability:</label>
           <input
-            type='date'
+            type='datetime-local'
             id='availability'
             value={requestBody.availability}
             onChange={handleChange}
