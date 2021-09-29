@@ -1,169 +1,11 @@
-// import { useState, useEffect } from 'react';
-// import { useParams, useHistory } from 'react-router-dom';
-// import { apiURL } from '../Util/apiURL';
-// import axios from 'axios';
+import { useState, useEffect } from 'react'
+import { useParams, useHistory } from 'react-router-dom'
+import { firestoreThisImage } from '../Util/imageStore'
+import { gender, experience, radius, goals } from '../Util/searchFields'
+import { useAPI } from '../Context/AuthContext'
+import { apiURL } from '../Util/apiURL'
+import axios from 'axios'
 
-// const API = apiURL();
-
-// function EditProfile(props) {
-//   let { id } = useParams();
-//   let history = useHistory();
-//   const [update, setUpdate] = useState({
-//     username: "",
-//     name: "",
-//     lastname: '',
-//     availability: '',
-//     goals: '',
-//     experience: '',
-//     gender: "",
-//   })
-
-//   const updateProfile = (profileInfo) => {
-//     axios
-//       .put(`${API}/users/${id}`, profileInfo)
-//       .then(
-//         () => {
-//           history.push(`/users/${id}`);
-//         },
-//         (error) => console.error(error)
-//       )
-//       .catch((c) => console.warn("catch", c));
-//   };
-
-//   const handleChange = event => {
-//     setUpdate({ ...update, [event.target.id]: event.target.value })
-
-//   }
-
-//   useEffect(() => {
-//     axios.get(`${API}/users/${id}`).then(
-//       (response) => {
-//         setUpdate(response.data[0])
-//         console.log(response.data[0])
-//       },
-//       (error) => history.push(`/404`)
-//     );
-//   }, [id, history]);
-
-//   const handleSubmit = event => {
-
-//     event.preventDefault()
-//     updateProfile(update, id)
-//     console.log(update)
-//     history.push(`/users/${id}/profile`)
-//   }
-//   return (
-//     <div >
-//       <form onSubmit={handleSubmit} id="form" >
-//         {/* <h4>Edit</h4> */}
-//         <span>
-//           <label htmlFor="username">Username:</label>
-//           <input type="text" value={update.username} id="username" onChange={handleChange} />
-//         </span>
-//         <br />
-//         <span>
-//           <label htmlFor="name">Name:</label>
-//           <input type="text" placeholder="name" value={update.name} id="name" onChange={handleChange} />
-//         </span>
-//         <br />
-//         <span>
-//           <label htmlFor='img'>Image:</label>
-//           <input
-//             type='text'
-//             id='img'
-//             value={update.img}
-//             placeholder='http://'
-//             onChange={handleChange}
-//             disabled
-//           />
-//         </span>
-//         <br />
-//         <span>
-//           <label htmlFor='availability'>Availability:</label>
-//           <input
-//             type='date'
-//             id='availability'
-//             value={update.availability}
-//             onChange={handleChange}
-//           />
-//         </span>
-//         <br />
-//         <span>
-//           <label htmlFor="gender">Gender:</label>
-//           <select name="" id="">
-//             <option value="female">Female</option>
-//             <option value="male">Male</option>
-//             <option value="other">Perferred not to answer</option>
-//           </select>
-//         </span>
-//         <br />
-//         <span>
-
-//           <label htmlFor="experience">Experience:</label>
-//           <input
-//             type='text'
-//             id='experience'
-//             value={update.experience}
-//             onChange={handleChange}
-//           />
-//         </span>
-//         <br />
-//         <span>
-//           <label htmlFor='goals'>Goals:</label>
-//           <select name="goals" id="">
-//             <option value="abs">Abs</option>
-//             <option value="chest">Chest</option>
-//             <option value="cardio">Cardio</option>
-//             <option value="back">Back</option>
-//             <option value="legs">Legs</option>
-//           </select>
-//         </span>
-//         <span>
-//           <button type='submit'>Submit</button>
-//         </span>
-//       </form>
-
-//       <div>
-
-//       </div>
-//     </div>
-//   )
-// }
-
-// export default EditProfile;
-
-// <form>
-//   <div class="form-group">
-//     <label for="exampleFormControlInput1">Email address</label>
-//     <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com"/>
-//   </div>
-//   <div class="form-group">
-//     <label for="exampleFormControlSelect1">Example select</label>
-//     <select class="form-control" id="exampleFormControlSelect1">
-//       <option>1</option>
-//       <option>2</option>
-//       <option>3</option>
-//       <option>4</option>
-//       <option>5</option>
-//     </select>
-//   </div>
-//   <div class="form-group">
-//     <label for="exampleFormControlSelect2">Example multiple select</label>
-//     <select multiple class="form-control" id="exampleFormControlSelect2">
-//       <option>1</option>
-//       <option>2</option>
-//       <option>3</option>
-//       <option>4</option>
-//       <option>5</option>
-//     </select>
-//   </div>
-//   <div class="form-group">
-//     <label for="exampleFormControlTextarea1">Example textarea</label>
-//     <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-//   </div>
-// </form>
-
-import * as React from "react";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import MenuItem from "@mui/material/MenuItem";
@@ -180,48 +22,163 @@ import IconButton from "@mui/material/IconButton";
 import PhotoCamera from "@mui/icons-material/PhotoCamera";
 import Stack from "@mui/material/Stack";
 
-const experience = [
-  {
-    value: "Beginner",
-    label: "Beginner",
-  },
-  {
-    value: "Intermediate",
-    label: "Intermediate",
-  },
-  {
-    value: "Advanced",
-    label: "Advanced",
-  },
-];
+const API = apiURL()
 
-const genderO = [
-  {
-    value: "Female",
-    label: "Female",
-  },
-  {
-    value: "Male",
-    label: "Male",
-  },
-  {
-    value: "Non-binary",
-    label: "Non-binary",
-  },
-  {
-    value: "Perfer not to answer",
-    label: "Perfer not to answer",
-  },
-];
 
-export default function EditProfile() {
-  const [exper, setExper] = React.useState("");
-  const [gender, setGender] = React.useState("");
 
-  const handleChange = (event) => {
-    setExper(event.target.value);
-    setGender(event.target.value);
-  };
+function EditProfile () {
+  const { currentUserData, getFreshUserData } = useAPI()
+  const [ uploadedImage, setUploadedImage ] = useState(false)
+  const [ placeHolders, setPlaceHolders ] = useState({})
+  const [ usersChoice, setUsersChoice ] = useState('')
+  const [ today, setToday ] = useState()
+
+  const [ requestBody, setRequestBody] = useState({})
+  let { id } = useParams()
+  let history = useHistory()
+
+  // Availability Setter Helpers
+  useEffect(() => {
+    const todaysDate = new Date(new Date().toString().split('GMT')[0] + ' UTC')
+      .toISOString()
+      .split('.')[0]
+    setToday(formatDate(todaysDate))
+  }, [])
+
+  useEffect(() => {
+    const unmountMe = setPlaceHolders(currentUserData)
+    return unmountMe
+  }, [currentUserData])
+
+  const formatDate = target => {
+    let formatted = ''
+    const shortedDay = target.slice(0, 10).split('-')
+    const month = String(Number(shortedDay[1]))
+    formatted = [month, shortedDay[2], shortedDay[0]].join('/')
+
+    return formatted
+  }
+
+  const removeOldDates = today => {
+    const todaySplitted = today.split('/').map(num => Number(num))
+
+    return currentUserData.availabledays.filter(day => {
+      const userSplitted = day.split('/').map(num => Number(num))
+      return (
+        userSplitted[0] >= todaySplitted[0] &&
+        ((userSplitted[0] === todaySplitted[0] &&
+          userSplitted[1] >= todaySplitted[1]) ||
+          userSplitted[0] >= todaySplitted[0]) &&
+        userSplitted[2] >= todaySplitted[2]
+      )
+    })
+  }
+
+  // Availability Setter
+  const setAvailability = e => {
+    e.preventDefault()
+
+    let day = formatDate(e.target.value)
+    const oldAvailability = removeOldDates(today)
+    const newAvailability = [...oldAvailability, day]
+    const updatedProfile = Object.assign(
+      { ...requestBody },
+      { availability: { days: newAvailability } }
+    )
+    setRequestBody(updatedProfile)
+    setUsersChoice(e.target.value)
+  }
+
+  // Image Setter
+  const setImage = async e => {
+    e.preventDefault()
+
+    const storedImage = await firestoreThisImage(e.target.files[0], currentUser.email, currentUserData.image.album)
+    setUploadedImage(true)
+    uploadedImage &&
+      setRequestBody(
+        Object.assign(
+          { ...requestBody },
+          {
+            image: {
+              name: storedImage.name,
+              url: storedImage.url,
+              album: storedImage.album
+            }
+          }
+        )
+      )
+  }
+
+  // Goals Setter
+  const setGoals = e => {
+    e.preventDefault()
+
+    const filteredDuplicates = currentUserData.goals.filter(
+      goal => goal !== e.target.value
+    )
+    filteredDuplicates.push(e.target.value)
+    setRequestBody(
+      Object.assign(
+        { ...requestBody },
+        { goals: { goals: filteredDuplicates } }
+      )
+    )
+  }
+
+  // Experience Setter
+  const setExperience = e => {
+    e.preventDefault()
+
+    setRequestBody(
+      Object.assign(
+        { ...requestBody },
+        { experience: { experience: [e.target.value] } }
+      )
+    )
+  }
+
+  const handleChange = event => {
+    switch (event.target.id) {
+      case 'image':
+        setImage(event)
+        break
+      case 'goals':
+        setGoals(event)
+        break
+      case 'experience':
+        setExperience(event)
+        break
+      case 'availability':
+        setAvailability(event)
+        break
+      default:
+        setRequestBody({
+          ...requestBody,
+          [event.target.id]: event.target.value
+        })
+    }
+  }
+
+  const updateProfile = profileInfo => {
+    axios
+      .put(`${API}/users/${id}`, profileInfo)
+      .then(getFreshUserData(id))
+      .then(
+        () => {
+          history.push(`/users/${id}/profile`)
+        },
+        error => console.error(error)
+      )
+      .catch(c => console.warn('catch', c))
+  }
+
+  const handleSubmit = event => {
+    event.preventDefault()
+
+    updateProfile(requestBody, id)
+  }
+
 
   return (
     <div>
@@ -233,10 +190,14 @@ export default function EditProfile() {
       <div id="editf">
         <Box sx={{ "& > :not(style)": { m: 1, width: "50ch" } }}>
           <div>
+          
             <FormControl variant="standard">
-              <InputLabel htmlFor="input-with-icon-adornment">Name</InputLabel>
+              <InputLabel htmlFor="name">Name</InputLabel>
               <Input
-                id="input-with-icon-adornment"
+                id="name"
+                placeholder={placeHolders.name}
+                value={requestBody.name || ''}
+                onChange={handleChange} 
                 startAdornment={
                   <InputAdornment position="start">
                     <img src={user} alt="name" style={{ width: "25px" }} />
@@ -244,10 +205,14 @@ export default function EditProfile() {
                 }
               />
             </FormControl>
+
             <FormControl variant="standard">
-              <InputLabel htmlFor="input-with-icon-adornment">Last Name</InputLabel>
+              <InputLabel htmlFor="lastname">Last Name</InputLabel>
               <Input
-                id="input-with-icon-adornment"
+                id="lastname"
+                placeholder={placeHolders.lastname}
+                value={requestBody.lastname || ''}
+                onChange={handleChange} 
                 startAdornment={
                   <InputAdornment position="start">
                     <img src={user} alt="lastname" style={{ width: "25px" }} />
@@ -255,10 +220,14 @@ export default function EditProfile() {
                 }
               />
             </FormControl>
+
             <FormControl variant="standard">
-              <InputLabel htmlFor="input-with-icon-adornment">Availability</InputLabel>
+              <InputLabel htmlFor="availability">Availability</InputLabel>
               <Input
-                id="input-with-icon-adornment"
+                id="availability"
+                placeholder={placeHolders.availabledays}
+           //   value={usersChoice}
+                onChange={handleChange} 
                 startAdornment={
                   <InputAdornment position="start">
                     <img src={calendar} alt="calender" style={{ width: "25px" }} />
@@ -266,10 +235,14 @@ export default function EditProfile() {
                 }
               />
             </FormControl>
+
             <FormControl variant="standard">
-              <InputLabel htmlFor="input-with-icon-adornment">Location</InputLabel>
+              <InputLabel htmlFor="location">Location</InputLabel>
               <Input
-                id="input-with-icon-adornment"
+                id="location"
+                placeholder={placeHolders.location}
+                value={requestBody.location || ''}
+                onChange={handleChange} 
                 startAdornment={
                   <InputAdornment position="start">
                     <img src={pin} alt="location pin" style={{ width: "25px" }} />
@@ -278,12 +251,14 @@ export default function EditProfile() {
               />
             </FormControl>
           </div>
+
           <label htmlFor="icon-button-file">
-            <Input accept="image/*" type="file" />
+            <Input accept="image/*" type="file" onChange={handleChange} id="image" />
             <IconButton color="primary" aria-label="upload picture" component="span">
               <PhotoCamera />
             </IconButton>
           </label>
+
         </Box>
 
         <Box
@@ -295,8 +270,10 @@ export default function EditProfile() {
           autoComplete="off"
         >
           <div id="dropdown">
-            <TextField label="Experience Level" select variant="filled" color="primary" onChange={handleChange} value={exper} focused>
-              {/* <TextField id="outlined-select-currency value={exper} onChange={handleChange}> */}
+            <TextField label="Experience Level" select variant="filled" color="primary" id="experience"
+                        placeholder={placeHolders.experience}
+                        onChange={handleChange} value={requestBody.experience || ''} focused>
+             
               {experience.map((option) => (
                 <MenuItem key={option.value} value={option.value}>
                   {option.label}
@@ -304,35 +281,48 @@ export default function EditProfile() {
               ))}
             </TextField>
 
-            <TextField select label="Perferred Gender" value={gender} onChange={handleChange} variant="filled" color="primary" focused>
-              {genderO.map((option) => (
+            <TextField select label="Preferred Gender" variant="filled" color="primary" id="gender"
+                        placeholder={placeHolders.gender}
+                        onChange={handleChange} value={requestBody.gender || ''} focused >
+              {gender.map((option) => (
                 <MenuItem key={option.value} value={option.value}>
                   {option.label}
                 </MenuItem>
               ))}
             </TextField>
-            <TextField select label="Radius" value={exper} onChange={handleChange} variant="filled" color="primary" focused>
-              {experience.map((option) => (
+
+            <TextField select label="Radius"  variant="filled" color="primary" id="radius"
+                       placeholder={placeHolders.radius}
+                       onChange={handleChange} value={requestBody.radius || ''} focused>
+              {radius.map((option) => (
                 <MenuItem key={option.value} value={option.value}>
                   {option.label}
                 </MenuItem>
               ))}
             </TextField>
-            <TextField select label="Goals" value={exper} onChange={handleChange} variant="filled" color="primary" focused>
-              {experience.map((option) => (
+
+
+            <TextField select label="Goals"  variant="filled" color="primary" id="goals"
+                       placeholder={placeHolders.goals}
+                       onChange={handleChange} value={requestBody.goals || ''} focused>
+              {goals.map((option) => (
                 <MenuItem key={option.value} value={option.value}>
                   {option.label}
                 </MenuItem>
               ))}
             </TextField>
+
           </div>
         </Box>
       </div>
+
       <div id="editlayout">
-        <Button variant="contained" color="primary">
+        <Button variant="contained" color="primary" onClick={handleSubmit}
           Update Profile
         </Button>
       </div>
+
     </div>
   );
 }
+
