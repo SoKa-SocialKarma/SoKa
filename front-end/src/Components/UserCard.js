@@ -57,7 +57,7 @@ const useStyles = makeStyles({
   }
 })
 
-function UserCard ({ profile }) {
+function UserCard({ profile }) {
   const classes = useStyles()
   const { currentUser } = useAuth()
   const keepAspectRatio = {
@@ -113,26 +113,26 @@ function UserCard ({ profile }) {
         </div>
       </Box>
 
-      
-        {!currentUser ? (
-          <Button
-            variant='contained'
-            className={classes.flex45}
-            color='secondary'
-          >
-            Match
-          </Button>
-        ) : (
-          <Button
-            variant='contained'
-            color='secondary'
-            className={classes.flex45}
-          >
-            Message
-          </Button>
-        )}
-        <UserModal />
-      
+
+      {!currentUser ? (
+        <Button
+          variant='contained'
+          className={classes.flex45}
+          color='secondary'
+        >
+          Match
+        </Button>
+      ) : (
+        <Button
+          variant='contained'
+          color='secondary'
+          className={classes.flex45}
+        >
+          Message
+        </Button>
+      )}
+      <UserModal />
+
     </>
   )
 }

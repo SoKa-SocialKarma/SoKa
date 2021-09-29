@@ -29,7 +29,7 @@ const useStyles = makeStyles((theme) => ({
 
 // const { name, lastname, location, karma, experience, availabledays } = profile;
 
-export default function UserModal({}) {
+export default function UserModal({ }) {
   const [open, setOpen] = useState(false);
 
   const classes = useStyles();
@@ -44,7 +44,7 @@ export default function UserModal({}) {
 
   return (
     <>
-      <IconButton onClick={handleOpen} className={classes.viewMoreC}>
+      <IconButton onClick={handleOpen}>
         <img src={viewMoreC} alt="view more button" />
       </IconButton>
 
