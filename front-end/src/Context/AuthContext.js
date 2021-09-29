@@ -24,6 +24,7 @@ export function useElement () {
 export const ACTIONS = {
   SET_CURRENT_USER: 'set-current-user',
   SET_CURRENT_USER_DATA: 'set-current-user-data',
+  NEW_CURRENT_USER_DATA: 'new-current-user-data',
   SET_CURRENT_SEARCH_RESULTS: 'set-current-search-results',
   SET_MAIN_ELEMENT_: 'set-main-element',
   RESET_STATE: 'reset-state'
@@ -41,6 +42,13 @@ function setGlobalState (globalState, action) {
         { ...globalState },
         { currentUserData: action.payload.data.data[0] }
       )
+
+      case ACTIONS.NEW_CURRENT_USER_DATA:
+        return Object.assign(
+          { ...globalState },
+          { currentUserData: action.payload.data.data[0] }
+        )
+
     case ACTIONS.SET_CURRENT_SEARCH_RESULTS:
       return Object.assign(
         { ...globalState },
@@ -127,7 +135,7 @@ export function AuthProvider ({ children }) {
     'location'
   ]
 
-  // API Request
+  // API Requests
   async function getResultsUsingSokaQuery (searchParams) {
     let query = `${API}/users?`
     let day = ''
@@ -150,6 +158,16 @@ export function AuthProvider ({ children }) {
     })
   }
 
+  // Refreshing Current User Data after updating Profile
+  async function getFreshUserData (userId) {
+
+    const data = await axios.get(`${API}/users/${userId}}`)
+    dispatch({
+      type: ACTIONS.NEW_CURRENT_USER_DATA,
+      payload: { data: data }
+    })
+  }
+
   const authValue = {
     currentUser: globalState.currentUser,
     signUp,
@@ -165,7 +183,8 @@ export function AuthProvider ({ children }) {
     currentUser: globalState.currentUser,
     currentUserData: globalState.currentUserData,
     currentSearchResults: globalState.currentSearchResults,
-    getResultsUsingSokaQuery
+    getResultsUsingSokaQuery,
+    getFreshUserData
   }
 
   const elementValue = {
