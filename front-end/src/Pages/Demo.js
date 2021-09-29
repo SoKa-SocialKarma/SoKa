@@ -1,11 +1,12 @@
 import { useEffect, useState } from 'react'
-import { Container } from '@material-ui/core'
-import { makeStyles } from '@material-ui/core/styles'
 
 import UserCard from '../Components/UserCard.js'
-import Paper from '@material-ui/core/Paper'
+import { Container, Paper } from '@material-ui/core'
+import { makeStyles } from '@material-ui/core/styles'
+
 import axios from 'axios'
 import { apiURL } from '../Util/apiURL.js'
+
 const API = apiURL()
 
 const useStyles = makeStyles({
@@ -30,7 +31,7 @@ function Demo () {
 
   const getDemoUsers = async () => {
     try {
-      const { data } = await axios.get(`${API}/users?limit=6`)
+      const { data } = await axios.get(`${API}/users`)
       setDemoProfiles(data)
     } catch (err) {
       console.log(err)

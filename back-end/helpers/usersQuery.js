@@ -18,17 +18,19 @@
 *     &experience=Body'
 *   
 *    qString, will verify each argument of the request query, and
-*    proceed to create a database query that will return the desired search.
+*    proceed to create a database query that will return the ids of users that
+*    matches the search parameters.
 *   
 *    @summary Will return a database query for PSQL. 
-*    Limited to 1 goal or 1 experience or 1 availability, at a time.
-*    Able to sort by argument in ascendent or descendent order with
-*    the sortBy & order parameters.
+*    Using INTERSECT to filter matching user's id against the next argument,
+*    returning a query that eventually will return a database object
+*    {ids: [1,2,3,4,5]}, the latter will run a db.tx and search for each 
+*    user id with 'SELECT * FROM users WHERE id = ids[i]'
 **/
 
 
-
 const getAllUsersQuery = ({
+  uuid,
   name,
   lastname,
   username,
@@ -39,91 +41,80 @@ const getAllUsersQuery = ({
   badges,
   goal,
   experience,
-  availability,
-  sortBy,
-  order,
-  limit
+  availability
 }) => {
-  let qString = ''
 
-  if (goal) {
-    qString = `SELECT * FROM users WHERE EXISTS (SELECT * FROM \n
-    jsonb_array_elements_Text(goals->'goals') as g(tag) WHERE g.tag ILIKE '%${goal}%') `
-  } else if (experience) {
-    qString = `SELECT * FROM users WHERE EXISTS (SELECT * FROM \n
-    jsonb_array_elements_Text(experience->'experience') as e(tag) WHERE e.tag ILIKE '%${experience}%') `
-  } else if (availability) {
-    qString = `SELECT * FROM users WHERE EXISTS (SELECT * FROM \n
-    jsonb_array_elements_Text(availability->'days') as d(tag) WHERE d.tag ILIKE '%${availability}%') `
-  } else {
-    qString = `SELECT * FROM users `
+  if (uuid){
+    return `SELECT id FROM users WHERE uuid = '${uuid}'`
   }
 
+  let qString = `WITH results AS (`
+  let amIFirst = true
+
+  if (goal){
+    qString += `${amIFirst ? '' : 'INTERSECT '}SELECT id FROM users WHERE EXISTS (SELECT * FROM 
+    jsonb_array_elements_Text(goals->'goals') AS g(tag) WHERE g.tag ILIKE '%${goal}%') `
+    amIFirst = false
+  }
+
+  if (experience){
+    qString += `${amIFirst ? '' : 'INTERSECT '}SELECT id FROM users WHERE EXISTS (SELECT * FROM 
+    jsonb_array_elements_Text(experience->'experience') AS e(tag) WHERE e.tag ILIKE '%${experience}%') `
+    amIFirst = false
+  }
+
+  if (availability) {
+    qString += `${amIFirst ? '' : 'INTERSECT '}SELECT id FROM users WHERE EXISTS (SELECT * FROM 
+    jsonb_array_elements_Text(availability->'days') AS d(tag) WHERE d.tag ILIKE '%${availability}%') `
+    amIFirst = false
+  }
+    
   if (name) {
-    qString += ` WHERE name ILIKE '%${name}%'`
+    qString += `${amIFirst ? '' : 'INTERSECT '}SELECT id FROM users WHERE name ILIKE '%${name}%'`
+    amIFirst = false
   }
+
   if (lastname) {
-    qString += `${
-      qString.includes('WHERE') ? ' AND' : ' WHERE'
-    } lastname ILIKE '%${lastname}%'`
+    qString += `${amIFirst ? '' : 'INTERSECT '}SELECT id FROM users WHERE lastname ILIKE '%${lastname}%'`
+    amIFirst = false
   }
+  
   if (username) {
-    qString += `${
-      qString.includes('WHERE') ? ' AND' : ' WHERE'
-    } username ILIKE '%${username}%'`
+    qString += `${amIFirst ? '' : 'INTERSECT '}SELECT id FROM users WHERE username ILIKE '%${username}%'`
+    amIFirst = false
   }
+
   if (location) {
-    qString += `${
-      qString.includes('WHERE') ? ' AND' : ' WHERE'
-    } location ILIKE '%${location}%'`
+    qString += `${amIFirst ? '' : 'INTERSECT '}SELECT id FROM users WHERE location ILIKE '%${location}%'`
+    amIFirst = false
   }
+
   if (gender) {
-    qString += `${
-      qString.includes('WHERE') ? ' AND' : ' WHERE'
-    } gender = '${gender}'`
+    qString += `${amIFirst ? '' : 'INTERSECT '}SELECT id FROM users WHERE gender = '${gender}'`
+    amIFirst = false
   }
+
   if (radius) {
-    qString += `${
-      qString.includes('WHERE') ? ' AND' : ' WHERE'
-    } radius = '${radius}'`
+    qString += `${amIFirst ? '' : 'INTERSECT '}SELECT id FROM users WHERE radius <= '${radius}'`
+    amIFirst = false
   }
+
   if (karma) {
-    qString += `${
-      qString.includes('WHERE') ? ' AND' : ' WHERE'
-    } karma <= ${karma}`
-  }
-  if (limit){
-    qString += `${
-      qString.includes('WHERE') ? ' AND' : ''
-    } LIMIT ${limit}`
+    qString += `${amIFirst ? '' : 'INTERSECT '}SELECT id FROM users WHERE karma <= ${karma}`
+    amIFirst = false
   }
 
   badges = badges?.toUpperCase()
   if (badges === 'TRUE' || badges === 'FALSE') {
-    qString += `${
-      qString.includes('WHERE') ? ' AND' : ' WHERE'
-    } badges=${badges}`
+    qString += `${amIFirst ? '' : 'INTERSECT '}SELECT id FROM users WHERE badges = ${badges}`
+    amIFirst = false
   }
 
-  const columns = [
-    'id',
-    'name',
-    'lastname',
-    'username',
-    'location',
-    'gender',
-    'radius',
-    'karma'
-  ]
-  sortBy = sortBy?.toLowerCase()
-  order = order?.toUpperCase()
-  if (columns.includes(sortBy)) {
-    qString += ` ORDER BY ${sortBy} ${
-      order === 'ASC' || order === 'DESC' ? order : 'ASC'
-    }`
-  }
+qString += ` ) SELECT array_agg(id) AS ids FROM results;`
 
-  return qString
+  return amIFirst ?
+  `SELECT array_agg(id) AS ids FROM users;`
+  : qString
 }
 
 const updateUsersQuery = (ids, data) => {

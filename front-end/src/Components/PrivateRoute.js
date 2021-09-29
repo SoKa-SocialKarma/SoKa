@@ -1,14 +1,14 @@
 import { Route, Redirect } from 'react-router-dom';
-import { useAuth } from '../Context/AuthContext';
+import { useAPI } from '../Context/AuthContext';
 
 const PrivateRoute = ({ component: Component, ...rest }) => {
-  const {currentUser} = useAuth();
+  const {currentUser} = useAPI();
 
   return (
     <Route
       {...rest}
       render={props => {
-        return currentUser ? <Component {...props} /> : <Redirect to='/demo' />
+        return currentUser ? <Component {...props} /> : <Redirect to='/login' />
       }}
     ></Route>
   )

@@ -11,6 +11,10 @@ const feedController = require('./controllers/feedController')
 // MIDDLEWARE
 app.use(cors())
 app.use(express.json()) // Parse incoming JSON
+// app.use((req, res, next) => {
+//   console.log(req.method, req.url, req.body)
+//   next()
+// })
 
 // ROUTES
 app.get('/', (req, res) => {

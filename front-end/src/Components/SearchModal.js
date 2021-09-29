@@ -1,15 +1,19 @@
 import { useState, useEffect } from 'react'
-import { makeStyles } from '@material-ui/core/styles'
+import { Redirect } from 'react-router-dom'
+import { useAPI } from '../Context/AuthContext'
 
 import PopularSearches from './PopularSearches'
-import SearchForm from './SearchForm'
+import searchLogo from '../Assets/searchLogo.svg'
 
-import Modal from '@material-ui/core/Modal'
-import Backdrop from '@material-ui/core/Backdrop'
-import Fade from '@material-ui/core/Fade'
-import Button from '@material-ui/core/Button'
-import Paper from '@material-ui/core/Paper'
-import Container from '@material-ui/core/Container'
+import { makeStyles } from '@material-ui/core/styles'
+import {
+  Container,
+  Backdrop,
+  IconButton,
+  Paper,
+  Fade,
+  Modal
+} from '@material-ui/core'
 
 const useStyles = makeStyles(theme => ({
   modal: {
@@ -19,8 +23,7 @@ const useStyles = makeStyles(theme => ({
   },
   paper: {
     width: '100vw',
-    transform: 'translateY(70px)',
-    border: '2px solid #000',
+    transform: 'translateY(10.1vh)',
     boxShadow: theme.shadows[5],
     padding: theme.spacing(2, 4, 3)
   },
@@ -30,19 +33,38 @@ const useStyles = makeStyles(theme => ({
     flexDirection: 'column',
     justifyContent: 'space-between',
     alignItems: 'center'
+  },
+  searchLogo: {
+    maxWidth: '100%',
+    maxHeight: '100%',
+    width: 'auto',
+    height: 'auto'
   }
 }))
 
 export default function SearchModal () {
+  const { getResultsUsingSokaQuery, currentSearchResults } = useAPI()
+
   const classes = useStyles()
   const [open, setOpen] = useState(false)
   const [today, setToday] = useState('')
+  const [mustRedirect, setMustRedirect] = useState(false)
 
-  const handleOpen = () => {
+  useEffect(() => {
+    if (currentSearchResults) {
+      setMustRedirect(true)
+    }
+  }, [currentSearchResults])
+
+  useEffect(() => {
+    getDate()
+  }, [])
+
+  const handleOpenSearchMenu = () => {
     setOpen(true)
   }
 
-  const handleClose = () => {
+  const handleCloseSearchMenu = () => {
     setOpen(false)
   }
 
@@ -50,28 +72,34 @@ export default function SearchModal () {
     const date = new Date(new Date().toString().split('GMT')[0] + ' UTC')
       .toISOString()
       .split('.')[0]
-    await setToday(date)
+    setToday(await date)
   }
 
-  useEffect(() => {
-    getDate()
-  }, [])
+  const getSearchResults = async searchParams => {
+    await getResultsUsingSokaQuery(searchParams)
+    handleCloseSearchMenu()
+  }
 
   return (
-    <div>
-      <Button onClick={handleOpen}>
+    <>
+      {mustRedirect && <Redirect to='/search-results' />}
+      <IconButton onClick={handleOpenSearchMenu} className={classes.searchLogo}>
         <img
-          src='https://img.icons8.com/external-kiranshastry-gradient-kiranshastry/64/000000/external-search-fitness-kiranshastry-gradient-kiranshastry.png'
+          src={searchLogo}
           alt='search menu'
+          style={{
+            width: '60%',
+            height: '60%'
+          }}
         />
-      </Button>
+      </IconButton>
 
       <Modal
         aria-labelledby='transition-modal-title'
         aria-describedby='transition-modal-description'
         className={classes.modal}
         open={open}
-        onClose={handleClose}
+        onClose={handleCloseSearchMenu}
         closeAfterTransition
         BackdropComponent={Backdrop}
         BackdropProps={{
@@ -81,12 +109,14 @@ export default function SearchModal () {
         <Fade in={open}>
           <Paper elevation={3} className={classes.paper}>
             <Container className={classes.container}>
-              <SearchForm />
-              <PopularSearches today={today} />
+              <PopularSearches
+                today={today}
+                getSearchResults={getSearchResults}
+              />
             </Container>
           </Paper>
         </Fade>
       </Modal>
-    </div>
+    </>
   )
 }

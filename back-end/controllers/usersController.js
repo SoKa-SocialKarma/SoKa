@@ -1,9 +1,10 @@
-/**  =====================================================  
-*                     usersController
-*    =====================================================
-**/
+/**  =====================================================
+ *                     usersController
+ *    =====================================================
+ **/
 
 const users = require('express').Router()
+
 const {
   getAllUsers,
   getUsers,
@@ -13,6 +14,7 @@ const {
 } = require('../queries/users')
 
 const { postCheck, putCheck } = require('../helpers/verifyData')
+const { filteredNestedDuplicates } = require('../helpers/noDuplicates')
 const feedController = require('./feedController')
 
 const msgInvalidQuery = () => 'Invalid data caused database to return an error.'
@@ -21,8 +23,13 @@ const catchError = value => value === 'error'
 users.use('/:id/feed', feedController)
 
 users.get('/', async (req, res) => {
-  const allUsers = await getAllUsers(req.query)
-  res.json(allUsers)
+  try {
+    const allUsers = await getAllUsers(req.query)
+    const data = await filteredNestedDuplicates(allUsers)
+    res.status(200).json(data)
+  } catch (err) {
+    res.status(404).send(err)
+  }
 })
 
 users.get('/:id', async (req, res) => {
@@ -48,6 +55,8 @@ users.post('/', postCheck, async (req, res) => {
 })
 
 users.put('/:id', putCheck, async (req, res) => {
+  console.log("put route hit")
+  console.log(req.body)
   const { id } = req.params
   try {
     const updatedUsers = await updateUsers(id, req.body)

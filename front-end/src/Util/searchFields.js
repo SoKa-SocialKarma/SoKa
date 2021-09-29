@@ -24,23 +24,23 @@ export const goals = [
     label: 'HIIT Cardio'
   },
   {
-    value: 'LITT Cardio',
-    label: 'LITT Cardio'
+    value: 'LIIT Cardio',
+    label: 'LIIT Cardio'
   }
 ]
 
 export const experience = [
   {
-    value: 'BodyBuilding',
-    label: 'BodyBuilding'
+    value: 'Beginner',
+    label: 'Beginner'
   },
   {
-    value: 'PowerLifting',
-    label: 'PowerLifting'
+    value: 'Intermediate',
+    label: 'Intermediate'
   },
   {
-    value: 'WeightLifting',
-    label: 'WeightLifting'
+    value: 'Advanced',
+    label: 'Advanced'
   }
 ]
 
@@ -64,5 +64,50 @@ export const radius = [
   {
     value: 25,
     label: '25 Miles'
+  }
+]
+
+export const gender = [
+  {
+    value: 'Male',
+    label: 'Male'
+  },
+  {
+    value: 'Female',
+    label: 'Female'
+  }
+]
+
+export const location = [
+  {
+    value: 'Bronx',
+    label: 'Bronx'
+  },
+  {
+    value: 'Queens',
+    label: 'Queens'
+  },
+  {
+    value: 'Brooklyn',
+    label: 'Brooklyn'
+  },
+  {
+    value: 'New York',
+    label: 'New York'
+  },
+  {
+    value: 'Staten Island',
+    label: 'Staten Island'
+  }
+]
+
+
+export const geoLocation = [
+  {
+    'NewYork' : [40.7128, -74.0060],
+    'Bronx' : [40.8448, -73.8648],
+    'Brooklyn': [40.6501, -73.9400],
+    'Queens': [40.7282, -73.7949],
+    'StatenIsland': [40.5795, -74.1589]
   }
 ]

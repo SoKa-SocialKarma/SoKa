@@ -2,148 +2,374 @@
   width: 100vw;
   height: 100vh;
 }
-#root > div{
+#root > div {
   width: 100vw;
   height: 100vh;
 }
-
-#root > div > main {
-  width: auto;
-}
-
 
 #root > div > main > div > div > div > fieldset {
   margin: 2px;
 }
 
+#email > input::placeholder {
+  color: rgb(169, 163, 163);
+}
 
-body{ 
-    display: flex;
-    justify-content: center;
-    background-color: darkblue;
-  }
-  #main {
-    display: flex;
-    justify-content: center;
-  }
-  #name {
-    display: flex;
-    justify-content: center;
-  }
-  
-  #search {
-    display: flex;
-    justify-content: space-between;
-  }
-  
-  /* Style page content */
-  .main {
-    margin-left: 160px; /* Same as the width of the sidebar */
-    padding: 0px 10px;
-  }
-  
-  /* Container holding the image and the text */
-  .container {
-    margin-top: 10px;
-    position: relative;
-    text-align: center;
-    color: rgb(45, 112, 133);
-    padding-right: 20px;
-    padding-left: 60px;
-  }
-  
-  /* Bottom left text */
-  .bottom-left {
-    position: absolute;
-    bottom: 8px;
-    left: 16px;
-  }
-  
-  .bottom-center {
-    position: absolute;
-    bottom: 15%;
-    text-align: center;
-    /* top: 50%; */
-    /* left: 50%; */
-    /* transform: translate(-50%, -50%); */
-  }
-  
-  .index {
-    text-align: center;
-  }
-  
-  .messages {
-    text-align: center;
-    position: relative;
-    margin: 15px;
-  }
-  
-  /* {box-sizing: border-box;} */
-  
-  .search-form {
-    width: 110%;
-    display: flex;
-    justify-content: space-between;
-    margin: auto;
-    align-items: center;
-    padding-left: 70px;
-    padding-right: 130px;
-    flex-wrap: wrap;
-  }
-  .topBar {
-    color: #44cceb;
-    width: 100%;
-  }
-  
-  .cards {
-    padding-left: 8%;
-    display: flex;
-    justify-content: center;
-    /* background-color: blue; */
-  }
-  
-  #matches {
-    text-align: center;
-  }
-  
-  .match {
-    background-color: rgb(143, 227, 255, 0.6);
-  }
-  
-  
-  
-  
-  #card {
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-    max-width: 300px;
-    margin: auto; 
-    text-align: center;
-  }
-  
-  .title {
-    color: grey;
-    font-size: 18px;
-  }
-  
-  #profile {
-    border: none;
-    outline: 0;
-    display: inline-block; 
-    padding: 8px;
-    color: white;
-    background-color: #000;
-    text-align: center;
-    cursor: pointer;
-    width: 100%; 
-    font-size: 18px;
-  }
-  
-  a {
-    text-decoration: none;
-    font-size: 22px;
-    color: black;
-  }
-  
-  button:hover, a:hover {
-    opacity: 0.7;
-  }
+#password > input::placeholder {
+  color: rgb(169, 163, 163);
+}
+
+#password-confirm > input::placeholder {
+  color: rgb(169, 163, 163);
+}
+
+.loginDashboard {
+  width: 40%;
+  margin: 10% 30% 0 30% !important;
+}
+
+.demoButton {
+  width: 12%;
+  margin: 2% 44% 0 44% !important;
+}
+
+#root > div > header > div > button {
+  margin: 0 auto 0 auto;
+}
+
+.MuiIconButton-label {
+  height: 20vh !important;
+  width: 75% !important;
+}
+
+body > div > div > div > div > div > button {
+  height: 56px !important;
+  transform: translateY(-2px) !important;
+}
+
+#root > div > header > div > div > div > button * {
+  padding: 0px;
+}
+
+#menu-goal > div,
+#menu-experience > div {
+  top: 216px !important;
+}
+
+#menu-gender > div,
+#menu-location > div,
+#menu-radius > div {
+  top: 286px !important;
+}
+
+.bts-mui-bt {
+  background-color: #6c63ff;
+  border: #edebfe;
+}
+.bts-mui-bt:hover {
+  background-color: #8883e6;
+}
+
+.loginLinks {
+  color: black;
+}
+.loginLinks:visited {
+  color: black;
+}
+
+.loginLinks:hover {
+  color: #1e2841;
+}
+
+#root > div > main > div > button {
+  color: black;
+}
+
+body {
+  display: flex;
+  justify-content: center;
+}
+#main {
+  display: flex;
+  justify-content: center;
+}
+#name {
+  display: flex;
+  justify-content: center;
+}
+
+#search {
+  display: flex;
+  justify-content: space-between;
+}
+
+.main {
+  margin-left: 160px;
+  padding: 0px 10px;
+}
+
+/* .container {
+  margin-top: 10px;
+  position: relative;
+  text-align: center;
+  color: rgb(45, 112, 133);
+  color: black;
+  padding-right: 20px;
+  padding-left: 60px;
+} */
+
+.bottom-left {
+  position: absolute;
+  bottom: 8px;
+  left: 16px;
+}
+
+.bottom-center {
+  position: absolute;
+  bottom: 15%;
+  text-align: center;
+}
+
+.index {
+  text-align: center;
+}
+
+.messages {
+  text-align: center;
+  position: relative;
+  margin: 15px;
+}
+
+.search-form {
+  width: 110%;
+  display: flex;
+  justify-content: space-between;
+  margin: auto;
+  align-items: center;
+  padding-left: 70px;
+  padding-right: 130px;
+  flex-wrap: wrap;
+}
+.topBar {
+  color: #44cceb;
+  width: 100%;
+}
+
+.cards {
+  padding-left: 8%;
+  display: flex;
+  justify-content: center;
+}
+
+#matches {
+  text-align: center;
+}
+
+.match {
+  background-color: rgb(143, 227, 255, 0.6);
+}
+
+#cardContainer {
+  grid-row: 2 / 3;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+#card {
+  margin: 0;
+  grid-row: 2/3;
+  place-self: center;
+  text-align: center;
+  font-family: montserrat;
+  padding: 2% 0 0 0;
+}
+
+#socials {
+  width: 100%;
+  display: flex;
+  align-self: center;
+  padding: 1% 40% 2% 40%;
+  justify-content: space-evenly;
+}
+
+.socialImage {
+  width: 30px;
+  height: 30px;
+}
+
+.title {
+  color: grey;
+  font-size: 18px;
+}
+
+#profile {
+  border: none;
+  outline: 0;
+  display: inline-block;
+  padding: 8px;
+  color: white;
+  background-color: #000;
+  text-align: center;
+  cursor: pointer;
+  width: 100%;
+  font-size: 18px;
+}
+
+a {
+  text-decoration: none;
+  font-size: 22px;
+  color: black;
+}
+
+button:hover,
+a:hover {
+  opacity: 0.7;
+}
+
+#chat {
+  background-color: #60a4b3;
+  width: 40%;
+  margin-left: 30%;
+  border-radius: 20px;
+}
+#sent {
+  background-color: rgb(154, 154, 250);
+  margin-left: 55%;
+}
+
+#recieved {
+  background-color: rgb(226, 219, 219);
+  width: 45%;
+  border-radius: 10px;
+}
+
+#form span {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+#bk-text {
+  text-align: center;
+  position: absolute;
+  top: 20vh;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: rgb(48, 209, 245);
+
+  text-shadow: 0px 0px 6px rgba(255, 255, 255, 0.7);
+
+  font-size: larger;
+
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+#LoginQ span {
+  display: flex;
+  justify-content: center;
+}
+
+#layout {
+  position: relative;
+  float: right;
+  padding: 50px;
+  margin-right: 90px;
+}
+
+#profHeader {
+  position: relative;
+  top: 0;
+  left: 0;
+}
+
+.profBackground {
+  position: relative;
+  top: 0;
+  left: 0;
+  height: 165px;
+  width: 100%;
+  background-color: rgb(15, 4, 111);
+}
+
+.profPic {
+  position: absolute;
+  top: 100px;
+  left: 40px;
+  border: solid 0.37em white;
+  border-radius: 50%;
+}
+
+.containerGrid {
+  padding: 1% 10% 1% 10%;
+  display: grid;
+  grid-template-columns: minmax(39%, 1fr) minmax(39%, 1fr);
+  column-gap: 2%;
+  color: black;
+}
+
+.item1,
+.item2 {
+  width: 100%;
+  height: 60vh;
+  margin: 0;
+  padding: 20px 30px 20px 30px;
+  box-shadow: 0px 8px 60px -10px rgba(147, 171, 189, 0.6);
+  background: #fff;
+  border-radius: 12px;
+  color: black;
+  font-family: montserrat;
+}
+
+/* .item1 > div * {
+  padding: 1% 1% 1% 5%;
+  margin: 0;
+  color: grey;
+} */
+
+.item1 > div > ul {
+  margin: 0 0 0 0 !important;
+  padding: 0.5% 0 0 0 !important;
+}
+
+.item1 li {
+  list-style: none;
+}
+
+.item1 > div > ul > li > img {
+  padding: 0 0 0 0 !important;
+  width: 25px;
+  margin: 0 3% 0 1% !important;
+}
+
+.item1 li {
+  padding-bottom: 7px;
+}
+
+#editiconContainer {
+  display: flex;
+  justify-content: space-between;
+}
+
+#editicon > a > img {
+  transform: scale(01);
+}
+
+.item4 {
+  width: 100%;
+  padding: 2% 10% 2% 10%;
+}
+
+/* h2 {
+  color: black;
+} */
+
+/* .item2 {
+  display: flex;
+  justify-content: center;
+  align-self: center;
+} */
+
+#badges li {
+  list-style: none;
+}

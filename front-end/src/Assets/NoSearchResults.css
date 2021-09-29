@@ -1,0 +1,80 @@
+@import url(https://fonts.googleapis.com/css?family=Lobster);
+
+section {
+    display: grid;
+    place-content: center;
+  width: 100vw;
+  height: 60vh;;
+  font-family: "Lobster", cursive;
+}
+.circle {
+    display: flex;
+    flex-direction: column;
+  margin: auto;
+  height: 300px;
+  width: 300px;
+  border-radius: 100%;
+  background: #1E2841;
+  margin-top: 150px;
+}
+
+.sorry{
+  color: #81D4FA;
+  text-align: center;
+  line-height: 50px;
+  margin-top: -350px;
+  -moz-transform: scale(1) rotate(-5deg) translateX(0px) translateY(0px)
+    skewX(1deg) skewY(1deg);
+  -webkit-transform: scale(1) rotate(-5deg) translateX(0px) translateY(0px)
+    skewX(1deg) skewY(1deg);
+  -o-transform: scale(1) rotate(-5deg) translateX(0px) translateY(0px)
+    skewX(1deg) skewY(1deg);
+  -ms-transform: scale(1) rotate(-5deg) translateX(0px) translateY(0px)
+    skewX(1deg) skewY(1deg);
+  transform: scale(1) rotate(-5deg) translateX(0px) translateY(0px) skewX(1deg)
+    skewY(1deg);
+  /*-----------------------*/
+  text-shadow: 1px 1px #0D47A1, 2px 2px #0D47A1, 3px 3px #0D47A1,
+    4px 4px #0D47A1, 5px 5px #0D47A1, 6px 6px #0D47A1, 7px 7px #0D47A1,
+    8px 8px #0D47A1, 9px 9px #0D47A1, 10px 10px #0D47A1, 11px 11px #0D47A1,
+    12px 12px #0D47A1, 13px 13px #0D47A1, 14px 14px #0D47A1, 15px 15px #0D47A1,
+    16px 16px #0D47A1, 17px 17px #0D47A1, 18px 18px #0D47A1, 19px 19px #0D47A1,
+    20px 20px #0D47A1, 21px 21px #0D47A1, 22px 22px #0D47A1, 23px 23px #0D47A1,
+    24px 24px #0D47A1, 25px 25px #0D47A1, 26px 26px 6px #0D47A1;
+}
+
+section > h1 > span:nth-child(1),
+section > h1 > span:nth-child(5),
+section > h1 > span:nth-child(9) {
+  font-size: 10rem;
+  font-family: "Lobster", cursive;
+}
+
+section > h1 > span:nth-child(3),
+section > h1 > span:nth-child(7) {
+  font-size: 4rem;
+  font-family: "Lobster", cursive;
+}
+
+.pushable {
+    transform: translateY(5vh);
+    background: hsl(340deg 100% 32%);
+    border-radius: 12px;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    outline-offset: 4px;
+  }
+  .front {
+    display: block;
+    padding: 12px 42px;
+    border-radius: 12px;
+    font-size: 1.25rem;
+    background: hsl(345deg 100% 47%);
+    color: white;
+    transform: translateY(-6px);
+  }
+
+  .pushable:active .front {
+    transform: translateY(-2px);
+  }

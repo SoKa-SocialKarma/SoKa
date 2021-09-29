@@ -1,7 +1,8 @@
 import { useRef, useState } from 'react'
-import { Form, Button, Card, Alert } from 'react-bootstrap'
-import { useAuth } from '../Context/AuthContext'
 import { Link } from 'react-router-dom'
+import { useAuth } from '../Context/AuthContext'
+
+import { Form, Button, Card, Alert } from 'react-bootstrap'
 
 const ForgotPassword = () => {
   const emailRef = useRef()
@@ -33,7 +34,7 @@ const ForgotPassword = () => {
 
   return (
     <>
-      <Card>
+      <Card className='loginDashboard'>
         <Card.Body>
           <h2 className='text-center mb-4'>Password Reset</h2>
           {error && <Alert variant='danger'>{error}</Alert>}
@@ -43,7 +44,7 @@ const ForgotPassword = () => {
               <Form.Label>Email</Form.Label>
               <Form.Control type='email' ref={emailRef} required />
             </Form.Group>
-            <Button disabled={loading} className='w-100 mt-4' type='submit'>
+            <Button disabled={loading} className='w-100 mt-4 bts-mui-bt' type='submit'>
               Reset Password
             </Button>
           </Form>
