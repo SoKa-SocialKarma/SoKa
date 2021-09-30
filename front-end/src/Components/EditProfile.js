@@ -25,6 +25,7 @@ import {
   KeyboardDatePicker
 } from '@material-ui/pickers'
 
+
 const API = apiURL()
 
 export default function EditProfile () {
@@ -34,6 +35,7 @@ export default function EditProfile () {
   const [today, setToday] = useState()
 
   const [requestBody, setRequestBody] = useState({})
+
   let { id } = useParams()
   let history = useHistory()
 
@@ -182,6 +184,7 @@ export default function EditProfile () {
           <div>
             <FormControl variant='standard'>
               <InputLabel htmlFor='name'>Name</InputLabel>
+
               <Input
                 id='name'
                 name='name'
@@ -360,8 +363,10 @@ export default function EditProfile () {
         </Box>
       </div>
 
+
       <div id='editlayout'>
         <Button variant='contained' color='primary' onClick={handleSubmit}>
+
           Update Profile
         </Button>
       </div>
