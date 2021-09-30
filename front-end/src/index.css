@@ -293,8 +293,7 @@ a:hover {
   left: 0;
   height: 165px;
   width: 100%;
-  background-color: rgb(107, 98, 255);
-  /* background-color: rgb(15, 4, 111); */
+  background-color: rgb(15, 4, 111);
 }
 
 .profPic {
@@ -316,7 +315,7 @@ a:hover {
 .item1,
 .item2 {
   width: 100%;
-  height: 60vh;
+  height: 53vh;
   margin: 0;
   padding: 20px 30px 20px 30px;
   box-shadow: 0px 8px 60px -10px rgba(147, 171, 189, 0.6);
@@ -332,6 +331,14 @@ a:hover {
   color: grey;
 } */
 
+.item1 h3 {
+  font-size: 35px;
+}
+
+.item1 h5 {
+  font-size: 25px;
+}
+
 .item1 > div > ul {
   margin: 0 0 0 0 !important;
   padding: 0.5% 0 0 0 !important;
@@ -339,6 +346,7 @@ a:hover {
 
 .item1 li {
   list-style: none;
+  font-size: 20px;
 }
 
 .item1 > div > ul > li > img {
@@ -347,7 +355,31 @@ a:hover {
   margin: 0 3% 0 1% !important;
 }
 
-.item1 li {
+.item2 li {
+  padding-bottom: 7px;
+}
+
+.item2 h3 {
+  font-size: 35px;
+}
+
+.item2 li {
+  list-style: none;
+  font-size: 20px;
+}
+
+.item2 ul {
+  margin: 0 0 0 0 !important;
+  padding: 0.5% 0 0 0 !important;
+}
+
+.item2 img {
+  padding: 0 0 0 0 !important;
+  width: 25px;
+  margin: 0 3% 0 1% !important;
+}
+
+.item2 li {
   padding-bottom: 7px;
 }
 
@@ -365,16 +397,143 @@ a:hover {
   padding: 2% 10% 2% 10%;
 }
 
-/* h2 {
-  color: black;
-} */
-
-/* .item2 {
-  display: flex;
-  justify-content: center;
-  align-self: center;
-} */
-
 #badges li {
   list-style: none;
+}
+
+#badges img {
+  padding: 0 0 0 0 !important;
+  width: 25px;
+  margin: 0 3% 0 1% !important;
+}
+
+@media screen and (max-width: 1200px) {
+  #cardContainer {
+    margin-top: 64px;
+    margin-bottom: 10px;
+  }
+
+  #socials a {
+    padding: 1% 15% 2% 15%;
+  }
+
+  .containerGrid {
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 3.6%;
+  }
+
+  .item1 {
+    height: 68.5vh;
+  }
+  .item2 {
+    height: 68.5vh;
+  }
+
+  .item4 {
+    padding-top: 20px;
+  }
+}
+
+@media screen and (max-width: 780px) {
+  #cardContainer {
+    margin-top: 80px;
+    margin-bottom: 10px;
+  }
+
+  #socials a {
+    padding: 1% 15% 2% 15%;
+  }
+
+  .containerGrid {
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 3.6%;
+  }
+  .item1 h3 {
+    font-size: 20px;
+  }
+
+  .item1 h5 {
+    font-size: 15px;
+  }
+  .item2 h3 {
+    font-size: 20px;
+  }
+
+  .item2 h5 {
+    font-size: 15px;
+  }
+
+  .item1 {
+    height: 66.5vh;
+  }
+  .item2 {
+    height: 66.5vh;
+  }
+
+  .item4 {
+    padding-top: 20px;
+  }
+}
+
+@media screen and (max-width: 680px) {
+  #cardContainer {
+    margin-top: 120px;
+    margin-bottom: 20px;
+  }
+  #socials a {
+    padding: 1% 15% 2% 15%;
+  }
+  .containerGrid {
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 2.5%;
+  }
+  .item1 h3 {
+    font-size: 20px;
+  }
+
+  .item1 h5 {
+    font-size: 15px;
+  }
+  .item2 h3 {
+    font-size: 20px;
+  }
+
+  .item2 h5 {
+    font-size: 15px;
+  }
+
+  .item1 {
+    height: 76.5vh;
+  }
+  .item2 {
+    height: 76.5vh;
+  }
+
+  .item4 {
+    padding-top: 47px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  #cardContainer {
+    margin-top: 120px;
+    margin-bottom: 20px;
+  }
+
+  #socials a {
+    padding: 1% 15% 2% 15%;
+  }
+  .containerGrid {
+    grid-template-columns: repeat(1, 1fr);
+    grid-gap: 2.5%;
+  }
+  .item1 {
+    height: 67vh;
+  }
+  .item2 {
+    height: 70vh;
+  }
+  .item4 {
+    padding-top: 47px;
+  }
 }
