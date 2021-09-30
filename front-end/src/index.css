@@ -407,7 +407,7 @@ a:hover {
   margin: 0 3% 0 1% !important;
 }
 
-@media screen and (max-width: 1200px) {
+@media screen and (max-width: 1320px) {
   #cardContainer {
     margin-top: 64px;
     margin-bottom: 10px;
