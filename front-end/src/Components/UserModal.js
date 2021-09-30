@@ -1,4 +1,6 @@
 import { useState } from "react";
+import Profile from './Profile';
+
 import {
   makeStyles,
   Backdrop,
@@ -29,7 +31,7 @@ const useStyles = makeStyles((theme) => ({
 
 // const { name, lastname, location, karma, experience, availabledays } = profile;
 
-export default function UserModal({}) {
+export default function UserModal({ }) {
   const [open, setOpen] = useState(false);
 
   const classes = useStyles();
@@ -44,7 +46,7 @@ export default function UserModal({}) {
 
   return (
     <>
-      <IconButton onClick={handleOpen} className={classes.viewMoreC}>
+      <IconButton onClick={handleOpen}>
         <img src={viewMoreC} alt="view more button" />
       </IconButton>
 
@@ -64,18 +66,9 @@ export default function UserModal({}) {
           <Paper>
             <div className={classes.paper}>
               <h4 className={classes.root}>{/* {name} {lastname} */}</h4>{" "}
-              <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi
-                accumsan odio enim. Lorem ipsum dolor sit amet, consectetur
-                adipiscing elit. Morbi accumsan odio enim. Lorem ipsum dolor sit
-                amet, consectetur adipiscing elit. Morbi accumsan odio enim.
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi
-                accumsan odio enim. Lorem ipsum dolor sit amet, consectetur
-                adipiscing elit. Morbi accumsan odio enim. Lorem ipsum dolor sit
-                amet, consectetur adipiscing elit. Morbi accumsan odio enim.
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi
-                accumsan odio enim.
-              </p>
+              <div className='modalContainer'>
+                <Profile />
+              </div>
             </div>
           </Paper>
         </Fade>
