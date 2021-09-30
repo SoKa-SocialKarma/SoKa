@@ -51,7 +51,10 @@ function Profile() {
   } = currentUserData
 
   return (
-    <div className="profileContainer">
+    <Paper>
+
+
+
       <div id='profHeader' className='profBackground'>
         <img
           className='profPic'
@@ -259,7 +262,7 @@ function Profile() {
       <div className='item4'>
         <MapBox adjustmentWidth={0.2} adjustmentHeight={0.3} />
       </div>
-    </div>
+    </Paper>
   )
 }
 export default Profile

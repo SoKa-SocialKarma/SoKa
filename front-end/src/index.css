@@ -323,12 +323,6 @@ a:hover {
   font-family: montserrat;
 }
 
-/* .item1 > div * {
-  padding: 1% 1% 1% 5%;
-  margin: 0;
-  color: grey;
-} */
-
 .item1 h3 {
   font-size: 35px;
 }
@@ -353,12 +347,12 @@ a:hover {
   margin: 0 3% 0 1% !important;
 }
 
-.item2 li {
-  padding-bottom: 7px;
-}
-
 .item2 h3 {
   font-size: 35px;
+}
+
+.item2 h5 {
+  font-size: 25px;
 }
 
 .item2 li {
@@ -377,10 +371,6 @@ a:hover {
   margin: 0 3% 0 1% !important;
 }
 
-.item2 li {
-  padding-bottom: 7px;
-}
-
 #editiconContainer {
   display: flex;
   justify-content: space-between;
@@ -393,6 +383,8 @@ a:hover {
 .item4 {
   width: 100%;
   padding: 2% 10% 2% 10%;
+  overflow: hidden;
+  margin-right: 350px;
 }
 
 #badges li {
@@ -424,9 +416,9 @@ a:hover {
 }
 
 .modalContainer {
-  -webkit-transform: scale(0.55);
-  -moz-transform: scale(0.55);
-  transform: scale(0.55);
+  -webkit-transform: scale(0.63);
+  -moz-transform: scale(0.63);
+  transform: scale(0.63);
   display: flex;
   justify-content: center;
 }
@@ -455,6 +447,8 @@ a:hover {
 
   .item4 {
     padding-top: 20px;
+    overflow: hidden;
+    margin: auto;
   }
 }
 
@@ -496,6 +490,8 @@ a:hover {
 
   .item4 {
     padding-top: 20px;
+    overflow: hidden;
+    margin: auto;
   }
 }
 
@@ -535,6 +531,7 @@ a:hover {
 
   .item4 {
     padding-top: 47px;
+    overflow: hidden;
   }
 }
 
@@ -559,5 +556,6 @@ a:hover {
   }
   .item4 {
     padding-top: 47px;
+    overflow: hidden;
   }
 }
