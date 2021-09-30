@@ -9,6 +9,17 @@ import { makeStyles } from '@material-ui/core/styles'
 import axios from 'axios'
 import { apiURL } from '../Util/apiURL.js'
 
+import styled from 'styled-components'
+import { motion } from 'framer-motion'
+
+const Section = styled.section`
+display:flex;
+height:30px;
+
+
+
+`;
+
 const API = apiURL()
 
 const useStyles = makeStyles({
@@ -16,18 +27,20 @@ const useStyles = makeStyles({
     display: 'flex',
     flexWrap: 'wrap',
     flexDirection: 'row',
+    justifyContent: 'center',
+    marginTop: '7%',
     gap: '20px'
   },
   paper: {
-    width: '48%',
-    height: '85vh',
+    width: '40%',
+    height: '70vh',
     padding: '10px',
     display: 'grid',
     gridTemplateRows: '10% 32% 13% 2% 18% 12% 8%'
   }
 })
 
-function UserMatches () {
+function UserMatches() {
   const classes = useStyles()
   const [currentUserMatches, setCurrentUserMatches] = useState([])
   const [sameUser, setSameUser] = useState(false)
@@ -46,12 +59,26 @@ function UserMatches () {
         console.log(err)
       }
     }
-    
-  return unSubscribe()
+
+    return unSubscribe()
   }, [currentUserData, id])
 
+  const topFade = {
+    hidden: { opacity: 0, y: -100 },
+    visible: { opacity: 1, y: 0, x: -40 }
+  }
   return (
     <>
+      <Section>
+        <motion.h1
+          variants={topFade}
+          initial='hidden'
+          animate='visible'
+          transition={{ duration: 1 }}
+        >
+          Ready to hustle for that muscle?
+        </motion.h1>
+      </Section>
       <Container className={classes.root}>
         {sameUser ? (
           currentUserMatches.map(profile => {
