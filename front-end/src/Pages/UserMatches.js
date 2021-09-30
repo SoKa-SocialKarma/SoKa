@@ -13,11 +13,8 @@ import styled from 'styled-components'
 import { motion } from 'framer-motion'
 
 const Section = styled.section`
-display:flex;
-height:30px;
-
-
-
+display: flex;
+height: 30px;
 `;
 
 const API = apiURL()
