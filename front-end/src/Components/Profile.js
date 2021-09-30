@@ -51,7 +51,7 @@ function Profile() {
   } = currentUserData
 
   return (
-    <Paper className={classes.root}>
+    <div className="profileContainer">
       <div id='profHeader' className='profBackground'>
         <img
           className='profPic'
@@ -62,9 +62,9 @@ function Profile() {
       </div>
 
       <div id='cardContainer'>
-        <h2 id='card'>
+        <h1 id='card'>
           {name} {lastname}
-        </h2>
+        </h1>
 
         <div id='socials'>
           <a href='https://www.instagram.com/' target='_blank' rel='noreferrer'>
@@ -180,7 +180,7 @@ function Profile() {
               <h3>Badges</h3>
               <div>
                 <h5>
-                  Great Motivator
+                  Great Motivator:
                 </h5>
                 <ul>
                   <li>
@@ -189,14 +189,14 @@ function Profile() {
                       alt=''
                       style={{ width: '30px' }}
                     />
-                    -Enthusiastic
+                    Enthusiastic:
                   </li>
                 </ul>
               </div>
 
               <div>
                 <h5>
-                  Spot On
+                  Spot On:
                 </h5>
                 <ul>
                   <li>
@@ -205,13 +205,13 @@ function Profile() {
                       alt=''
                       style={{ width: '30px' }}
                     />
-                    -Assisted in lifting heavy weights safely
+                    Assisted in lifting heavy weights safely
                   </li>
                 </ul>
               </div>
 
               <div>
-                <h5>Mobility Master</h5>
+                <h5>Mobility Master:</h5>
                 <ul>
                   <li>
                     <img
@@ -219,13 +219,13 @@ function Profile() {
                       alt=''
                       style={{ width: '30px' }}
                     />
-                    -Stretch tightented muscles before workout
+                    Stretch tightented muscles before workout
                   </li>
                 </ul>
               </div>
 
               <div>
-                <h5>Punctuality</h5>
+                <h5>Punctuality:</h5>
                 <ul>
                   <li>
                     <img
@@ -233,13 +233,13 @@ function Profile() {
                       alt=''
                       style={{ width: '30px' }}
                     />
-                    -Responds on time
+                    Responds on time:
                   </li>
                 </ul>
               </div>
 
               <div>
-                <h5>Cardiologist</h5>
+                <h5>Cardiologist:</h5>
                 <ul>
                   <li>
                     <img
@@ -247,7 +247,7 @@ function Profile() {
                       alt=''
                       style={{ width: '30px' }}
                     />
-                    -Increase BPM
+                    Increase BPM
                   </li>
                 </ul>
               </div>
@@ -259,7 +259,7 @@ function Profile() {
       <div className='item4'>
         <MapBox adjustmentWidth={0.2} adjustmentHeight={0.3} />
       </div>
-    </Paper>
+    </div>
   )
 }
 export default Profile
