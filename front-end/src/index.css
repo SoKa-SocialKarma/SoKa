@@ -7,10 +7,6 @@
   height: 100vh;
 }
 
-/* #root > div > main {
-  width: auto;
-} */
-
 #root > div > main > div > div > div > fieldset {
   margin: 2px;
 }
@@ -293,7 +289,9 @@ a:hover {
   left: 0;
   height: 165px;
   width: 100%;
-  background-color: rgb(15, 4, 111);
+  /* background-color: rgb(107, 98, 255); */
+  background-color:#5c55dc;
+  /* background-color: rgb(15, 4, 111); */
 }
 
 .profPic {
@@ -405,6 +403,24 @@ a:hover {
   padding: 0 0 0 0 !important;
   width: 25px;
   margin: 0 3% 0 1% !important;
+}
+
+#dropdown {
+  display: flex;
+  flex-direction: column;
+}
+
+#editlayout {
+  display: flex;
+align-items: center;
+  flex-direction: column;
+  margin-top: 20px;
+}
+
+#editf {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 30px;
 }
 
 @media screen and (max-width: 1320px) {
@@ -537,3 +553,5 @@ a:hover {
     padding-top: 47px;
   }
 }
+
+
