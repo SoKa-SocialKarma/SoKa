@@ -192,7 +192,7 @@ function Profile() {
                       alt=''
                       style={{ width: '30px' }}
                     />
-                    Enthusiastic:
+                    Enthusiastic
                   </li>
                 </ul>
               </div>
@@ -236,7 +236,7 @@ function Profile() {
                       alt=''
                       style={{ width: '30px' }}
                     />
-                    Responds on time:
+                    Responds on time
                   </li>
                 </ul>
               </div>
