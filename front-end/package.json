@@ -7,6 +7,9 @@
     "@emotion/styled": "^11.3.0",
     "@fontsource/inter": "^4.5.0",
     "@fontsource/roboto": "^4.5.0",
+    "@date-io/date-fns": "^1.3.13",
+    "date-fns": "^2.22.1",
+    "@material-ui/pickers": "^3.3.10",
     "@material-ui/core": "^4.12.3",
     "@material-ui/icons": "^4.11.2",
     "@material-ui/lab": "^4.0.0-alpha.60",
@@ -19,6 +22,7 @@
     "axios": "^0.21.4",
     "bootstrap": "^5.1.0",
     "firebase": "7.15.1",
+    "framer-motion": "^4.1.17",
     "node-sass": "^6.0.1",
     "react": "^17.0.2",
     "react-bootstrap": "^2.0.0-beta.6",
@@ -26,6 +30,7 @@
     "react-map-gl": "^6.1.17",
     "react-router-dom": "^5.2.1",
     "react-scripts": "4.0.3",
+    "styled-components": "^5.3.1",
     "web-vitals": "^1.0.1"
   },
   "scripts": {

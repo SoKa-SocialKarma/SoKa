@@ -75,6 +75,14 @@ export const gender = [
   {
     value: 'Female',
     label: 'Female'
+  },
+  {
+    value: 'Non-binary',
+    label: 'Non-binary'
+  },
+  {
+    value: 'Prefer not to answer',
+    label: 'Prefer not to answer'
   }
 ]
 
