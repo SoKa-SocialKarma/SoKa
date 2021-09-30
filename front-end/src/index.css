@@ -299,9 +299,7 @@ a:hover {
   left: 0;
   height: 165px;
   width: 100%;
-  /* background-color: rgb(107, 98, 255); */
-  background-color: #5c55dc;
-  /* background-color: rgb(15, 4, 111); */
+  background-color: rgba(162, 101, 236, 0.4);
 }
 
 .profPic {
@@ -368,6 +366,7 @@ a:hover {
 .item2 li {
   list-style: none;
   font-size: 20px;
+  font-style: italic;
 }
 
 .item2 ul {
