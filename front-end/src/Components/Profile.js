@@ -19,20 +19,22 @@ import distance from '../Assets/distance.png'
 import linkedin from '../Assets/linkedin.png'
 
 const useStyles = makeStyles({
-  root: {
-    height: 'auto',
-    width: 'auto',
-    marginTop: '-5%',
-    padding: 0,
-    display: 'grid',
-    gridTemplateRows: 'auto minmax(auto,10%) 1fr 1fr'
-  },
-  flexCenter: {
-    display: 'flex',
-    flexDirection: 'column',
-    fontSize: '1rem'
-  }
-})
+	root: {
+		height: 'auto',
+		width: 'auto',
+		marginTop: '-5%',
+		padding: 0,
+		display: 'grid',
+		gridTemplateRows: 'auto minmax(auto,10%) 1fr 1fr',
+		fontFamily: 'Merriweather',
+	},
+	flexCenter: {
+		display: 'flex',
+		flexDirection: 'column',
+		fontSize: '1rem',
+		fontFamily: 'Merriweather',
+	},
+});
 
 function Profile() {
   const { currentUserData } = useAPI()

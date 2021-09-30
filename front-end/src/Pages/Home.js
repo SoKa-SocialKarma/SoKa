@@ -13,8 +13,8 @@ function Home () {
     <>
       <img src={img} alt='homeimg' style={landingImage} />
       <div id='bk-text'>
-        <h1>Welcome to Social Karma!!</h1>
-        <h2>"Get what you give, while you hustle for that muscle!"</h2>
+        <h1>Welcome to Social Karma!</h1>
+        <h2 id='quote-font'>"Get what you give, while you hustle for that muscle!"</h2>
       </div>
     </>
   )

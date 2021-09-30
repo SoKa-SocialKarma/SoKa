@@ -11,51 +11,54 @@ import UserModal from './UserModal'
 import defaultProfile from '../Assets/defaultProfile.png'
 
 const useStyles = makeStyles({
-  root: {
-    margin: '0',
-    textAlign: 'center',
-    padding: '10px',
-    userSelect: 'none'
-  },
-  image: {
-    width: '75%',
-    padding: '20px',
-    margin: '0',
-    display: 'flex',
-    alignSelf: 'center',
-    justifySelf: 'center'
-  },
-  flex45: {
-    width: '45%',
-    height: '60%',
-    gridRow: '6 / 7',
-    placeSelf: 'center',
-  },
-  button: {
-    borderRadius: '40px'
-  },
-  ratingBox: {
-    display: 'grid',
-    gridRow: '3 / 4',
-    placeItems: 'center',
-    width: '100%',
-    paddingTop: '8px',
-    userSelect: 'none'
-  },
-  infoBox: {
-    display: 'grid',
-    gridRow: '5 / 6',
-    placeItems: 'center',
-    width: '100%',
-    userSelect: 'none'
-  },
-  divider: {
-    height: '2px!important',
-    backgroundColor: 'rgb(139, 58, 231)!important',
-    width: '60%!important',
-    margin: '0 20% 0 20%!important'
-  }
-})
+	root: {
+		margin: '0',
+		textAlign: 'center',
+		padding: '10px',
+		userSelect: 'none',
+		fontFamily: 'Merriweather',
+	},
+	image: {
+		width: '75%',
+		padding: '20px',
+		margin: '0',
+		display: 'flex',
+		alignSelf: 'center',
+		justifySelf: 'center',
+	},
+	flex45: {
+		width: '45%',
+		height: '60%',
+		gridRow: '6 / 7',
+		placeSelf: 'center',
+	},
+	button: {
+		borderRadius: '40px',
+	},
+	ratingBox: {
+		display: 'grid',
+		gridRow: '3 / 4',
+		placeItems: 'center',
+		width: '100%',
+		paddingTop: '8px',
+		userSelect: 'none',
+		fontFamily: 'Merriweather',
+	},
+	infoBox: {
+		display: 'grid',
+		gridRow: '5 / 6',
+		placeItems: 'center',
+		width: '100%',
+		userSelect: 'none',
+		fontFamily: 'Merriweather',
+	},
+	divider: {
+		height: '2px!important',
+		backgroundColor: 'rgb(139, 58, 231)!important',
+		width: '60%!important',
+		margin: '0 20% 0 20%!important',
+	},
+});
 
 function UserCard ({ profile }) {
   const classes = useStyles()
