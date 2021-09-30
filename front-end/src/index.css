@@ -290,7 +290,7 @@ a:hover {
   height: 165px;
   width: 100%;
   /* background-color: rgb(107, 98, 255); */
-  background-color:#5c55dc;
+  background-color: #5c55dc;
   /* background-color: rgb(15, 4, 111); */
 }
 
@@ -412,7 +412,7 @@ a:hover {
 
 #editlayout {
   display: flex;
-align-items: center;
+  align-items: center;
   flex-direction: column;
   margin-top: 20px;
 }
@@ -421,6 +421,14 @@ align-items: center;
   display: flex;
   justify-content: space-around;
   margin-top: 30px;
+}
+
+.modalContainer {
+  -webkit-transform: scale(0.55);
+  -moz-transform: scale(0.55);
+  transform: scale(0.55);
+  display: flex;
+  justify-content: center;
 }
 
 @media screen and (max-width: 1320px) {
@@ -553,5 +561,3 @@ align-items: center;
     padding-top: 47px;
   }
 }
-
-
