@@ -71,7 +71,7 @@ function UserCard({ profile }) {
     height: 'auto'
   }
 
-  const { name, lastname, location, karma, experience, availabledays } = profile
+  const { name, lastname, location, karma, experience, availabledays, image } = profile
 
   return (
     <>
@@ -80,7 +80,7 @@ function UserCard({ profile }) {
       </h4>
       <img
         className={classes.image}
-        src={defaultProfile}
+        src={image.url ? image.url : defaultProfile}
         alt='buddypic'
         style={keepAspectRatio}
       />
