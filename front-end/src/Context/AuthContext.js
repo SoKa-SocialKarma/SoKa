@@ -20,13 +20,13 @@ export function useElement () {
   return useContext(ElementContext)
 }
 
-
 export const ACTIONS = {
   SET_CURRENT_USER: 'set-current-user',
   SET_CURRENT_USER_DATA: 'set-current-user-data',
   NEW_CURRENT_USER_DATA: 'new-current-user-data',
   SET_CURRENT_SEARCH_RESULTS: 'set-current-search-results',
   SET_MAIN_ELEMENT_: 'set-main-element',
+  SET_DRAWER_ELEMENT: 'set-drawer-element',
   RESET_STATE: 'reset-state'
 }
 
@@ -43,11 +43,11 @@ function setGlobalState (globalState, action) {
         { currentUserData: action.payload.data.data[0] }
       )
 
-      case ACTIONS.NEW_CURRENT_USER_DATA:
-        return Object.assign(
-          { ...globalState },
-          { currentUserData: action.payload.data.data[0] }
-        )
+    case ACTIONS.NEW_CURRENT_USER_DATA:
+      return Object.assign(
+        { ...globalState },
+        { currentUserData: action.payload.data.data[0] }
+      )
 
     case ACTIONS.SET_CURRENT_SEARCH_RESULTS:
       return Object.assign(
@@ -58,6 +58,11 @@ function setGlobalState (globalState, action) {
       return Object.assign(
         { ...globalState },
         { mainElement: action.payload.mainElement }
+      )
+    case ACTIONS.SET_DRAWER_ELEMENT:
+      return Object.assign(
+        { ...globalState },
+        { drawerElement: action.payload.drawerElement }
       )
     case ACTIONS.RESET_STATE:
       return Object.assign(
@@ -75,7 +80,8 @@ export function AuthProvider ({ children }) {
     currentUser: null,
     currentUserData: {},
     currentSearchResults: null,
-    mainElement: {}
+    mainElement: {},
+    drawerElement: {}
   })
 
   // Login at Firebase and store user data
@@ -119,12 +125,20 @@ export function AuthProvider ({ children }) {
     return globalState.currentUser.updatePassword(password)
   }
   function elementSetter (mainElement) {
-    dispatch({ type: ACTIONS.SET_MAIN_ELEMENT, payload: { mainElement: mainElement } })
+    dispatch({
+      type: ACTIONS.SET_MAIN_ELEMENT,
+      payload: { mainElement: mainElement }
+    })
+  }
+  function drawerSetter (drawerElement) {
+    dispatch({
+      type: ACTIONS.SET_DRAWER_ELEMENT,
+      payload: { drawerElement: drawerElement }
+    })
   }
   function resetState () {
     dispatch({ type: ACTIONS.RESET_STATE })
   }
-
 
   const queryKeys = [
     'availability',
@@ -148,7 +162,7 @@ export function AuthProvider ({ children }) {
       }
 
       if (queryKeys.includes(k) && searchParams[k] !== '') {
-        query += `${k}=${k!=='availability' ? searchParams[k] : day}&`
+        query += `${k}=${k !== 'availability' ? searchParams[k] : day}&`
       }
     })
     const response = await axios.get(query.slice(0, -1))
@@ -160,7 +174,6 @@ export function AuthProvider ({ children }) {
 
   // Refreshing Current User Data after updating Profile
   async function getFreshUserData (userId) {
-
     const data = await axios.get(`${API}/users/${userId}`)
     dispatch({
       type: ACTIONS.NEW_CURRENT_USER_DATA,
@@ -189,7 +202,9 @@ export function AuthProvider ({ children }) {
 
   const elementValue = {
     elementSetter,
-    mainElement: globalState.mainElement
+    mainElement: globalState.mainElement,
+    drawerSetter,
+    drawerElement: globalState.drawerElement
   }
 
   return (
