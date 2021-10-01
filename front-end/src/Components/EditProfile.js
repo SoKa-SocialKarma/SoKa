@@ -2,23 +2,33 @@ import { useState, useEffect } from 'react'
 import { useParams, useHistory } from 'react-router-dom'
 import { firestoreThisImage } from '../Util/imageStore'
 import { gender, experience, radius, goals } from '../Util/searchFields'
+import { app } from '../firebase'
 import { useAPI } from '../Context/AuthContext'
 import { apiURL } from '../Util/apiURL'
 import axios from 'axios'
 
-import Box from '@mui/material/Box'
-import TextField from '@mui/material/TextField'
-import MenuItem from '@mui/material/MenuItem'
-import FormControl from '@mui/material/FormControl'
-import Input from '@mui/material/Input'
-import InputLabel from '@mui/material/InputLabel'
-import Button from '@material-ui/core/Button'
-import InputAdornment from '@mui/material/InputAdornment'
+import {
+  Box,
+  Paper,
+  Container,
+  TextField,
+  MenuItem,
+  FormControl,
+  Input,
+  InputLabel,
+  Button,
+  InputAdornment,
+  IconButton
+} from '@material-ui/core/'
+import PhotoCamera from '@material-ui/icons/PhotoCamera'
+import CssBaseline from '@material-ui/core/CssBaseline'
+import { makeStyles } from '@material-ui/core/styles'
+
+import defaultProfile from '../Assets/defaultProfile.png'
 import user from '../Assets/user.png'
 import pin from '../Assets/pin.png'
 import calendar from '../Assets/calendar.png'
-import IconButton from '@mui/material/IconButton'
-import PhotoCamera from '@mui/icons-material/PhotoCamera'
+
 import DateFnsUtils from '@date-io/date-fns'
 import {
   MuiPickersUtilsProvider,
@@ -26,18 +36,88 @@ import {
 } from '@material-ui/pickers'
 
 
+const db = app.firestore()
 const API = apiURL()
+
+const useStyles = makeStyles(theme => ({
+  container: {
+    height: '80vh',
+    padding: '0 2% 4% 2%',
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'space-evenly',
+    alignItems: 'space-around'
+  },
+  editProfilePictureArea: {
+    display: 'grid',
+    gridTemplateRows: '10px 1fr',
+    padding: '1%'
+  },
+  photocamera: {
+    display: 'none'
+  },
+  camera: {
+    width: '7%',
+    margin: '1.5% 30% 0 52.2%'
+  },
+  userProfilePicturePaper: {
+    display: 'grid',
+    gridRow: '2/3',
+    placeSelf: 'center',
+    width: '182px',
+    height: '160px',
+    borderRadius: '60px'
+  },
+  userProfilePicture: {
+    width: '180px',
+    height: '160px',
+    borderRadius: '80px'
+  },
+  editLayout: {
+    display: 'grid',
+    gridTemplateColumns: '1fr 1fr',
+    gap: '20%',
+    padding: '1% 10% 1% 10%'
+  },
+  twoForms: {
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'space-evenly',
+    alignItems: 'center',
+    padding: '1%'
+  },
+  date: {
+    fontSize: 8,
+    color: 'black'
+  },
+  divEdit: {
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'center'
+  },
+  buttonEdit: {
+    width: '60%',
+    padding: '1%',
+    margin: '0 20% 0 20%',
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-evenly'
+  }
+}))
 
 export default function EditProfile () {
   const { currentUser, currentUserData, getFreshUserData } = useAPI()
-  const [uploadedImage, setUploadedImage] = useState(false)
   const [placeHolders, setPlaceHolders] = useState({})
+  const [storedImage, setStoredImage] = useState(false)
+  const [uploadedImage, setUploadedImage] = useState({})
+  const [newImage, setNewImage] = useState({})
   const [today, setToday] = useState()
 
   const [requestBody, setRequestBody] = useState({})
-
+  const [requestImageBody, setRequestImageBody] = useState({})
   let { id } = useParams()
   let history = useHistory()
+  const classes = useStyles()
 
   // Availability Setter Helpers
   useEffect(() => {
@@ -76,29 +156,38 @@ export default function EditProfile () {
     setRequestBody(updatedProfile)
   }
 
+  // Image Helpers
+  useEffect(() => {
+    const unmount = db
+      .collection('UsersProfiles')
+      .doc(currentUser.email)
+      .onSnapshot(doc => {
+        setUploadedImage(doc.data().images || [])
+      })
+    return unmount
+  }, [storedImage, currentUser.email])
+
+  useEffect(() => {
+    const newImg = uploadedImage[uploadedImage.length - 1]
+    setNewImage(newImg)
+  }, [uploadedImage, setNewImage])
+
+  useEffect(() => {
+    setRequestImageBody({
+      name: newImage?.name,
+      url: newImage?.url,
+      album: newImage?.album
+    })
+  }, [newImage])
+
   // Image Setter
   const setImage = async e => {
-    e.preventDefault()
-
-    const storedImage = await firestoreThisImage(
+    const storedImageCall = await firestoreThisImage(
       e.target.files[0],
       currentUser.email,
-      currentUserData.image.album
+      placeHolders.image.album
     )
-    setUploadedImage(true)
-    uploadedImage &&
-      setRequestBody(
-        Object.assign(
-          { ...requestBody },
-          {
-            image: {
-              name: storedImage.name,
-              url: storedImage.url,
-              album: storedImage.album
-            }
-          }
-        )
-      )
+    setStoredImage(storedImageCall)
   }
 
   // Goals Setter
@@ -129,28 +218,16 @@ export default function EditProfile () {
   }
 
   const handleChange = event => {
-    switch (event.target.name) {
-      case 'image':
-        setImage(event)
-        break
-      case 'goals':
-        setGoals(event)
-        break
-      case 'experience':
-        setExperience(event)
-        break
-      default:
-        setRequestBody({
-          ...requestBody,
-          [event.target.name]: event.target.value
-        })
-    }
+    setRequestBody({
+      ...requestBody,
+      [event.target.name]: event.target.value
+    })
   }
 
   const updateProfile = profileInfo => {
     axios
       .put(`${API}/users/${id}`, profileInfo)
-      .then(getFreshUserData(id))
+      .then(() => getFreshUserData(id))
       .then(
         () => {
           history.push(`/users/${id}/profile`)
@@ -163,213 +240,212 @@ export default function EditProfile () {
   const handleSubmit = event => {
     event.preventDefault()
 
-    console.log('BODY')
-    console.log(requestBody)
-    updateProfile(requestBody, id)
+    if (requestImageBody.album !== undefined) {
+      const body = Object.assign(
+        { ...requestBody },
+        { image: requestImageBody }
+      )
+      updateProfile(body, id)
+    } else {
+      updateProfile(requestBody, id)
+    }
   }
 
   return (
-    <div>
-      <div id='editlayout'>
-        {/* <h4>Edit Your Profile</h4> */}
-        <img
-          src='https://images.pexels.com/photos/2078265/pexels-photo-2078265.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500'
-          alt=''
-          style={{ width: '180px', height: '160px', borderRadius: '80px' }}
-        />
-      </div>
+    <Container maxWidth='lg' className={classes.container}>
+      <CssBaseline />
+      <Box className={classes.editProfilePictureArea}>
+        <label htmlFor='icon-button-file'>
+          <Input
+            className={classes.photocamera}
+            onChange={setImage}
+            id='icon-button-file'
+            accept='image/*'
+            type='file'
+          />
+          <IconButton
+            className={classes.camera}
+            aria-label='upload picture'
+            component='span'
+            color='primary'
+          >
+            <PhotoCamera />
+          </IconButton>
+        </label>
+        <Paper elevation={1} className={classes.userProfilePicturePaper}>
+          <img
+            // src='https://images.pexels.com/photos/2078265/pexels-photo-2078265.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500'
+            src={
+              placeHolders.image?.url ? placeHolders.image.url : defaultProfile
+            }
+            alt='Profile-user'
+            className={classes.userProfilePicture}
+          />
+        </Paper>
+      </Box>
 
-      <div id='editf'>
-        <Box sx={{ '& > :not(style)': { m: 1, width: '50ch' } }}>
-          <div>
-            <FormControl variant='standard'>
-              <InputLabel htmlFor='name'>Name</InputLabel>
-
-              <Input
-                id='name'
-                name='name'
-                placeholder={placeHolders.name}
-                value={requestBody.name || ''}
-                onChange={handleChange}
-                startAdornment={
-                  <InputAdornment position='start'>
-                    <img src={user} alt='name' style={{ width: '25px' }} />
-                  </InputAdornment>
-                }
-              />
-            </FormControl>
-
-            <FormControl variant='standard'>
-              <InputLabel htmlFor='lastname'>Last Name</InputLabel>
-              <Input
-                id='lastname'
-                name='lastname'
-                placeholder={placeHolders.lastname}
-                value={requestBody.lastname || ''}
-                onChange={handleChange}
-                startAdornment={
-                  <InputAdornment position='start'>
-                    <img src={user} alt='lastname' style={{ width: '25px' }} />
-                  </InputAdornment>
-                }
-              />
-            </FormControl>
-
-            <div >
-              <MuiPickersUtilsProvider utils={DateFnsUtils}>
-                <KeyboardDatePicker
-                  KeyboardButtonProps={{ 'aria-label': 'change date' }}
-                  placeholder={today}
-                  onChange={setAvailability}
-                  orientation='landscape'
-                  format='MM/dd/yyyy'
-                  label='Date'
-                  id='date'
-                  fullWidth
-                  required
-                />
-              </MuiPickersUtilsProvider>
-            </div>
-
-            {/* <FormControl variant="standard">
-              <InputLabel htmlFor="availability">Availability</InputLabel>
-              <Input
-                id="availability"
-                name='availability'
-                placeholder={String(placeHolders.availabledays)}
-           //   value={usersChoice}
-                onChange={handleChange} 
-                startAdornment={
-                  <InputAdornment position="start">
-                    <img src={calendar} alt="calender" style={{ width: "25px" }} />
-                  </InputAdornment>
-                }
-              />
-            </FormControl> */}
-
-            <FormControl variant='standard'>
-              <InputLabel htmlFor='location'>Location</InputLabel>
-              <Input
-                id='location'
-                name='location'
-                placeholder={String(placeHolders.location)}
-                value={requestBody.location || ''}
-                onChange={handleChange}
-                startAdornment={
-                  <InputAdornment position='start'>
-                    <img
-                      src={pin}
-                      alt='location pin'
-                      style={{ width: '25px' }}
-                    />
-                  </InputAdornment>
-                }
-              />
-            </FormControl>
-          </div>
-
-          <label htmlFor='icon-button-file'>
+      <Box className={classes.editLayout}>
+        <Container className={classes.twoForms}>
+          <FormControl variant='standard' fullWidth>
+            <InputLabel htmlFor='name'>Name</InputLabel>
             <Input
-              accept='image/*'
-              type='file'
+              placeholder={placeHolders.name}
+              className={classes.textField}
+              value={requestBody.name || ''}
               onChange={handleChange}
-              id='image'
+              name='name'
+              id='name'
+              startAdornment={
+                <InputAdornment position='start'>
+                  <img src={user} alt='name' style={{ width: '25px' }} />
+                </InputAdornment>
+              }
             />
-            <IconButton
-              color='primary'
-              aria-label='upload picture'
-              component='span'
-            >
-              <PhotoCamera />
-            </IconButton>
-          </label>
-        </Box>
+          </FormControl>
 
-        <Box
-          component='form'
-          sx={{
-            '& .MuiTextField-root': { m: 1, width: '40ch' }
-          }}
-          noValidate
-          autoComplete='off'
+          <FormControl variant='standard' fullWidth>
+            <InputLabel htmlFor='lastname'>Last Name</InputLabel>
+            <Input
+              placeholder={placeHolders.lastname}
+              className={classes.textField}
+              value={requestBody.lastname || ''}
+              onChange={handleChange}
+              name='lastname'
+              id='lastname'
+              startAdornment={
+                <InputAdornment position='start'>
+                  <img src={user} alt='lastname' style={{ width: '25px' }} />
+                </InputAdornment>
+              }
+            />
+          </FormControl>
+
+          <MuiPickersUtilsProvider utils={DateFnsUtils}>
+            <KeyboardDatePicker
+              KeyboardButtonProps={{ 'aria-label': 'change date' }}
+              onChange={setAvailability}
+              className={classes.date}
+              placeholder={today}
+              orientation='landscape'
+              format='MM/dd/yyyy'
+              label='Date'
+              id='date'
+              fullWidth
+            />
+          </MuiPickersUtilsProvider>
+
+          <FormControl variant='standard' fullWidth>
+            <InputLabel htmlFor='location'>Location</InputLabel>
+            <Input
+              placeholder={String(placeHolders.location)}
+              value={requestBody.location || ''}
+              className={classes.textField}
+              onChange={handleChange}
+              name='location'
+              id='location'
+              startAdornment={
+                <InputAdornment position='start'>
+                  <img src={pin} alt='location pin' style={{ width: '25px' }} />
+                </InputAdornment>
+              }
+            />
+          </FormControl>
+        </Container>
+
+        <Container className={classes.twoForms}>
+          <TextField
+            value={placeHolders.experience || ''}
+            className={classes.textField}
+            onChange={setExperience}
+            label='Experience Level'
+            margin='normal'
+            variant='filled'
+            name='experience'
+            id='experience-edit'
+            fullWidth
+            select
+          >
+            {experience.map(option => (
+              <MenuItem key={option.value} value={option.value}>
+                {option.label}
+              </MenuItem>
+            ))}
+          </TextField>
+
+          <TextField
+            value={requestBody.gender || ''}
+            onChange={handleChange}
+            label='Preferred Gender'
+            margin='normal'
+            variant='filled'
+            name='gender'
+            id='gender-edit'
+            fullWidth
+            select
+          >
+            {gender.map(option => (
+              <MenuItem key={option.value} value={option.value}>
+                {option.label}
+              </MenuItem>
+            ))}
+          </TextField>
+
+          <TextField
+            value={requestBody.radius || ''}
+            onChange={handleChange}
+            margin='normal'
+            label='Radius'
+            variant='filled'
+            name='radius'
+            id='radius-edit'
+            fullWidth
+            select
+          >
+            {radius.map(option => (
+              <MenuItem key={option.value} value={option.value}>
+                {option.label}
+              </MenuItem>
+            ))}
+          </TextField>
+
+          <TextField
+            value={requestBody.goals || ''}
+            onChange={setGoals}
+            margin='normal'
+            label='Goals'
+            id='goals-edit'
+            variant='filled'
+            name='goals'
+            fullWidth
+            select
+          >
+            {goals.map(option => (
+              <MenuItem key={option.value} value={option.value}>
+                {option.label}
+              </MenuItem>
+            ))}
+          </TextField>
+        </Container>
+      </Box>
+
+      <div className={classes.buttonEdit}>
+        <Button
+          onClick={() => history.push(`/users/${placeHolders.id}/profile`)}
+          style={{ width: '40%' }}
+          variant='outlined'
+          color='secondary'
         >
-          <div id='dropdown'>
-            <TextField
-              label='Experience Level'
-              select
-              variant='filled'
-              color='primary'
-              onChange={handleChange}
-              value={placeHolders.experience}
-              name='experience'
-            >
-              {experience.map(option => (
-                <MenuItem key={option.value} value={option.value}>
-                  {option.label}
-                </MenuItem>
-              ))}
-            </TextField>
-
-            <TextField
-              select
-              label='Preferred Gender'
-              variant='filled'
-              color='primary'
-              name='gender'
-              onChange={handleChange}
-              value={requestBody.gender || ''}
-            >
-              {gender.map(option => (
-                <MenuItem key={option.value} value={option.value}>
-                  {option.label}
-                </MenuItem>
-              ))}
-            </TextField>
-
-            <TextField
-              select
-              label='Radius'
-              variant='filled'
-              color='primary'
-              name='radius'
-              onChange={handleChange}
-              value={requestBody.radius || ''}
-              focused
-            >
-              {radius.map(option => (
-                <MenuItem key={option.value} value={option.value}>
-                  {option.label}
-                </MenuItem>
-              ))}
-            </TextField>
-
-            <TextField
-              select
-              label='Goals'
-              variant='filled'
-              color='primary'
-              name='goals'
-              onChange={handleChange}
-              value={requestBody.goals || ''}
-              focused
-            >
-              {goals.map(option => (
-                <MenuItem key={option.value} value={option.value}>
-                  {option.label}
-                </MenuItem>
-              ))}
-            </TextField>
-          </div>
-        </Box>
-      </div>
-
-
-      <div id='editlayout'>
-        <Button variant='contained' color='primary' onClick={handleSubmit}>
-
+          Cancel
+        </Button>
+        <Button
+          onClick={handleSubmit}
+          style={{ width: '40%' }}
+          variant='contained'
+          color='primary'
+        >
           Update Profile
         </Button>
       </div>
-    </div>
+    </Container>
   )
 }
