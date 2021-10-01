@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from 'react'
+\import { useState, useRef, useEffect } from 'react'
 import { useElement, useAPI } from '../Context/AuthContext'
 import { Link } from 'react-router-dom'
 import SearchModal from './SearchModal'
@@ -19,132 +19,133 @@ import ListItem from '@material-ui/core/ListItem'
 import ListItemIcon from '@material-ui/core/ListItemIcon'
 import ListItemText from '@material-ui/core/ListItemText'
 import Button from '@material-ui/core/Button'
-const drawerWidth = 140
+const drawerWidth = 180
 
-const useStyles = makeStyles((theme) => ({
-	root: {
-		display: 'flex',
-	},
-	appBar: {
-		zIndex: theme.zIndex.drawer + 1,
-		transition: theme.transitions.create(['width', 'margin'], {
-			easing: theme.transitions.easing.sharp,
-			duration: theme.transitions.duration.leavingScreen,
-		}),
-	},
-	appBarShift: {
-		marginLeft: drawerWidth,
-		width: `calc(100vw - ${drawerWidth}px)`,
-		transition: theme.transitions.create(['width', 'margin'], {
-			easing: theme.transitions.easing.sharp,
-			duration: theme.transitions.duration.enteringScreen,
-		}),
-	},
-	menuButton: {
-		marginRight: 36,
-		height: '100%',
-	},
-	hide: {
-		display: 'none',
-	},
-	drawer: {
-		width: drawerWidth,
-		flexShrink: 0,
-		whiteSpace: 'nowrap',
-	},
-	drawerOpen: {
-		width: drawerWidth,
-		transition: theme.transitions.create('width', {
-			easing: theme.transitions.easing.sharp,
-			duration: theme.transitions.duration.enteringScreen,
-		}),
-	},
-	drawerClose: {
-		transition: theme.transitions.create('width', {
-			easing: theme.transitions.easing.sharp,
-			duration: theme.transitions.duration.leavingScreen,
-		}),
-		overflowX: 'hidden',
-		width: theme.spacing(7) + 1,
-		[theme.breakpoints.up('sm')]: {
-			width: theme.spacing(9) + 1,
-		},
-	},
-	toolbar: {
-		width: '100%',
-		height: '10vh',
-		display: 'flex',
-		alignItems: 'center',
-		justifyContent: 'flex-end',
-		padding: theme.spacing(0, 1),
-		// necessary for content to be below app bar
-		...theme.mixins.toolbar,
-	},
-	topCenter: {
-		width: '100vw',
-		height: '10vh',
-		display: 'flex',
-		flexDirection: 'row',
-		justifyContent: 'space-evenly',
-		alignSelf: 'center',
-	},
-	content: {
-		flexGrow: 1,
-		width: 'auto',
-		height: '100vh',
-		paddingTop: '12vh',
-		paddingBottom: '2vh',
-		overflowY: 'scroll',
-	},
-	authContainer: {
-		width: '60%',
-		display: 'flex',
-		flexDirection: 'row',
-		justifyContent: 'flex-end',
-		gap: '10px',
-	},
-	login: {
-		transform: 'translateY(10%)',
-		height: '80%',
-		width: '20%',
-		fontSize: '1rem',
-		color: 'white',
-		'&:hover': {
-			backgroundColor: '#edebfe',
-			color: '#212121',
-		},
-	},
-	menuIcon: {
-		justifySelf: 'center',
-		alignSelf: 'center',
-	},
-	iconsLeftSide: {
-		height: '46vh',
-		display: 'flex',
-		flexDirection: 'column',
-		justifyContent: 'space-evenly',
-	},
-	sokaContainer: {
-		padding: '5px 0 5px 0',
-		height: '100%',
-	},
-	sokaLogo: {
-		display: 'block',
-		maxWidth: '100%',
-		maxHeight: '100%',
-		width: 'auto',
-		height: 'auto',
-	},
-}));
+const useStyles = makeStyles(theme => ({
+  root: {
+    display: 'flex'
+  },
+  appBar: {
+    zIndex: theme.zIndex.drawer + 1,
+    transition: theme.transitions.create(['width', 'margin'], {
+      easing: theme.transitions.easing.sharp,
+      duration: theme.transitions.duration.leavingScreen
+    })
+  },
+  appBarShift: {
+    marginLeft: drawerWidth,
+    width: `calc(100vw - ${drawerWidth}px)`,
+    transition: theme.transitions.create(['width', 'margin'], {
+      easing: theme.transitions.easing.sharp,
+      duration: theme.transitions.duration.enteringScreen
+    })
+  },
+  menuButton: {
+    marginRight: 36,
+    height: '100%'
+  },
+  hide: {
+    display: 'none'
+  },
+  drawer: {
+    width: drawerWidth,
+    flexShrink: 0,
+    whiteSpace: 'nowrap'
+  },
+  drawerOpen: {
+    width: drawerWidth,
+    transition: theme.transitions.create('width', {
+      easing: theme.transitions.easing.sharp,
+      duration: theme.transitions.duration.enteringScreen
+    })
+  },
+  drawerClose: {
+    transition: theme.transitions.create('width', {
+      easing: theme.transitions.easing.sharp,
+      duration: theme.transitions.duration.leavingScreen
+    }),
+    overflowX: 'hidden',
+    width: theme.spacing(7) + 1,
+    [theme.breakpoints.up('sm')]: {
+      width: theme.spacing(9) + 1
+    }
+  },
+  toolbar: {
+    width: '100%',
+    height: '10vh',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'flex-end',
+    padding: theme.spacing(0, 1),
+    // necessary for content to be below app bar
+    ...theme.mixins.toolbar
+  },
+  topCenter: {
+    width: '100vw',
+    height: '10vh',
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-evenly',
+    alignSelf: 'center'
+  },
+  content: {
+    flexGrow: 1,
+    width: 'auto',
+    height: '100vh',
+    paddingTop: '12vh',
+    paddingBottom: '2vh',
+    overflowY: 'scroll'
+  },
+  authContainer: {
+    width: '60%',
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'flex-end',
+    gap: '10px'
+  },
+  login: {
+    transform: 'translateY(10%)',
+    height: '80%',
+    width: '20%',
+    fontSize: '1rem',
+    color: 'white',
+    '&:hover': {
+      backgroundColor: '#edebfe',
+      color: '#212121'
+    }
+  },
+  menuIcon: {
+    justifySelf: 'center',
+    alignSelf: 'center'
+  },
+  iconsLeftSide: {
+    height: '46vh',
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'space-evenly'
+  },
+  sokaContainer: {
+    padding: '5px 0 5px 0',
+    height: '100%'
+  },
+  sokaLogo: {
+    display: 'block',
+    maxWidth: '100%',
+    maxHeight: '100%',
+    width: 'auto',
+    height: 'auto'
+  }
+}))
 
 export default function Navbar ({ children }) {
   const { currentUser, currentUserData } = useAPI()
-  const { elementSetter } = useElement()
+  const { elementSetter, drawerSetter } = useElement()
   const mainElementRef = useRef()
+  const drawerElementRef = useRef()
 
   const classes = useStyles()
   const theme = useTheme()
-  const [open, setOpen] = useState(true)
+  const [open, setOpen] = useState(false)
   const [id, setId] = useState(0)
 
   const handleDrawerOpen = () => {
@@ -171,6 +172,33 @@ export default function Navbar ({ children }) {
     })
     return () => {
       window.removeEventListener('resize', handleResize)
+    }
+  },[])
+
+  const handleMouseEnter = () => {
+    setOpen(true)
+  }
+  const handleMouseLeave = () => {
+    setOpen(false)
+  }
+
+  useEffect(() => {
+    drawerElementRef.current.addEventListener('mouseenter', handleMouseEnter)
+    drawerSetter({
+      drawerElement: drawerElementRef.current
+    })
+    return () => {
+      drawerElementRef.removeEventListener('mouseenter', handleMouseEnter)
+    }
+  }, [])
+
+  useEffect(() => {
+    drawerElementRef.current.addEventListener('mouseleave', handleMouseLeave)
+    drawerSetter({
+      drawerElement: drawerElementRef.current
+    })
+    return () => {
+      drawerElementRef.removeEventListener('mouseleave', handleMouseLeave)
     }
   }, [])
 
@@ -245,6 +273,7 @@ export default function Navbar ({ children }) {
       </AppBar>
 
       <Drawer
+        ref={drawerElementRef}
         variant='permanent'
         className={clsx(classes.drawer, {
           [classes.drawerOpen]: open,
@@ -273,7 +302,7 @@ export default function Navbar ({ children }) {
               <img
                 src='https://img.icons8.com/nolan/2x/handshake.png'
                 alt='matches'
-                style={{ width: '40px', height: '40px' }}
+                style={{ width: '48px', height: '48px' }}
               />
             </ListItemIcon>
             <ListItemText primary='Matches' style={{ color: '#10056F' }} />
@@ -295,7 +324,7 @@ export default function Navbar ({ children }) {
               <img
                 src='https://img.icons8.com/nolan/64/lifecycle.png'
                 alt='profile'
-                style={{ width: '40px', height: '40px' }}
+                style={{ width: '48px', height: '48px' }}
               />
             </ListItemIcon>
             <ListItemText primary='Profile' style={{ color: '#10056F' }} />
@@ -305,7 +334,7 @@ export default function Navbar ({ children }) {
               <img
                 src='https://img.icons8.com/nolan/64/map-marker.png'
                 alt='mapbox-current-location'
-                style={{ width: '40px', height: '40px' }}
+                style={{ width: '48px', height: '48px' }}
               />
             </ListItemIcon>
             <ListItemText primary='Map' style={{ color: '#10056F' }} />
