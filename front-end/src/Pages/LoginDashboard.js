@@ -29,7 +29,7 @@ const LoginDashBoard = () => {
           <h2 className='text-center mb-4'>Profile</h2>
           {error && <Alert variant='danger'>{error}</Alert>}
           <strong>Email:</strong> {currentUser?.email}
-          <Link to={`/users/${currentUserData?.id}/update-profile`} className='btn btn-primary w-100 mt-3 bts-mui-bt'>
+          <Link to={`/users/${currentUserData?.id}/update-login-profile`} className='btn btn-primary w-100 mt-3 bts-mui-bt'>
             Update Profile
           </Link>
         </Card.Body>

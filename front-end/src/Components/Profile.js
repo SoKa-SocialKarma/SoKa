@@ -1,16 +1,17 @@
 import { Paper } from '@material-ui/core'
 import { useAPI } from '../Context/AuthContext'
-import { Link } from 'react-router-dom'
-import { useParams } from 'react-router'
+import { useRouteMatch } from 'react-router-dom'
 import MapBox from './MapBox'
 
+import IconButton from '@mui/material/IconButton'
 import { makeStyles } from '@material-ui/core/styles'
 
+import defaulProfile from '../Assets/defaultProfile.png'
 import facebook from '../Assets/facebook.png'
 import instagram from '../Assets/instagram.png'
 import twitter from '../Assets/twitter.png'
 import pencil from '../Assets/pencil.png'
-import user from '../Assets/user.png'
+import userPin from '../Assets/user.png'
 import pin from '../Assets/pin.png'
 import calendar from '../Assets/calendar.png'
 import certification from '../Assets/certification.png'
@@ -19,26 +20,29 @@ import distance from '../Assets/distance.png'
 import linkedin from '../Assets/linkedin.png'
 
 const useStyles = makeStyles({
-	root: {
-		height: 'auto',
-		width: 'auto',
-		marginTop: '-5%',
-		padding: 0,
-		display: 'grid',
-		gridTemplateRows: 'auto minmax(auto,10%) 1fr 1fr',
-		fontFamily: 'Merriweather',
-	},
-	flexCenter: {
-		display: 'flex',
-		flexDirection: 'column',
-		fontSize: '1rem',
-		fontFamily: 'Merriweather',
-	},
-});
+  root: {
+    height: 'auto',
+    width: 'auto',
+    marginTop: '-5%',
+    padding: 0,
+    display: 'grid',
+    gridTemplateRows: 'auto minmax(auto,10%) 1fr 1fr'
+  },
+  flexCenter: {
+    display: 'flex',
+    flexDirection: 'column',
+    fontSize: '1rem'
+  }
+})
 
-function Profile() {
+function Profile () {
   const { currentUserData } = useAPI()
-  const { id } = useParams()
+  const { url } = useRouteMatch()
+  const edit = url
+    .split('/')
+    .filter(page => page !== 'profile')
+    .concat('edit')
+    .join('/')
   const classes = useStyles()
 
   const {
@@ -49,27 +53,25 @@ function Profile() {
     availabledays,
     experience,
     goals,
-    radius
+    radius,
+    image
   } = currentUserData
 
   return (
-    <Paper>
-
-
-
+    <Paper className={classes.root}>
       <div id='profHeader' className='profBackground'>
         <img
           className='profPic'
-          src='https://images.pexels.com/photos/2078265/pexels-photo-2078265.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500'
-          alt=''
+          src={image?.url ? image.url : defaulProfile}
+          alt='profile-foto'
           style={{ width: '200px', height: '180px' }}
         />
       </div>
 
       <div id='cardContainer'>
-        <h1 id='card'>
+        <h2 id='card'>
           {name} {lastname}
-        </h1>
+        </h2>
 
         <div id='socials'>
           <a href='https://www.instagram.com/' target='_blank' rel='noreferrer'>
@@ -102,52 +104,41 @@ function Profile() {
               <div id='editiconContainer'>
                 <h3>About</h3>
                 <div id='editicon'>
-                  <Link to={`users/${id}/edit`}>
+                  <IconButton href={edit}>
                     <img
                       src={pencil}
                       alt='editicon'
                       style={{ width: '20px' }}
                     />
-                  </Link>
+                  </IconButton>
                 </div>
               </div>
 
-              <h5>
-                Gender:
-              </h5>
+              <h5>Gender:</h5>
               <ul>
                 <li>
-                  <img src={user} alt='user' />
+                  <img src={userPin} alt='userPin icon' />
                   {gender}
                 </li>
               </ul>
 
-              <h5>
-                Location:
-              </h5>
+              <h5>Location:</h5>
               <ul>
                 <li>
                   <img src={pin} alt='location pin' />
                   {location}
                 </li>
               </ul>
-              <h5>
-                Availablility:
-              </h5>
+              <h5>Availablility:</h5>
               <ul>
                 <li>
-                  <img
-                    src={calendar}
-                    alt='calendar'
-                  />
+                  <img src={calendar} alt='calendar' />
                   {availabledays
                     ? `${availabledays[0]}, ${availabledays[1]}`
                     : ''}
                 </li>
               </ul>
-              <h5>
-                Experience :
-              </h5>
+              <h5>Experience :</h5>
               <ul>
                 <li>
                   <img src={certification} alt='medal' />
@@ -155,9 +146,7 @@ function Profile() {
                 </li>
               </ul>
 
-              <h5>
-                Goals:
-              </h5>
+              <h5>Goals:</h5>
               <ul>
                 <li>
                   <img src={target} alt='target' />
@@ -168,9 +157,7 @@ function Profile() {
                 </li>
               </ul>
 
-              <h5>
-                Radius:
-              </h5>
+              <h5>Radius:</h5>
               <ul>
                 <li>
                   <img src={distance} alt='two location tags' />
@@ -184,9 +171,7 @@ function Profile() {
             <div className={classes.flexCenter}>
               <h3>Badges</h3>
               <div>
-                <h5>
-                  Great Motivator:
-                </h5>
+                <h5>Great Motivator</h5>
                 <ul>
                   <li>
                     <img
@@ -194,15 +179,13 @@ function Profile() {
                       alt=''
                       style={{ width: '30px' }}
                     />
-                    Enthusiastic
+                    -Enthusiastic
                   </li>
                 </ul>
               </div>
 
               <div>
-                <h5>
-                  Spot On:
-                </h5>
+                <h5>Spot On</h5>
                 <ul>
                   <li>
                     <img
@@ -210,13 +193,13 @@ function Profile() {
                       alt=''
                       style={{ width: '30px' }}
                     />
-                    Assisted in lifting heavy weights safely
+                    -Assisted in lifting heavy weights safely
                   </li>
                 </ul>
               </div>
 
               <div>
-                <h5>Mobility Master:</h5>
+                <h5>Mobility Master</h5>
                 <ul>
                   <li>
                     <img
@@ -224,13 +207,13 @@ function Profile() {
                       alt=''
                       style={{ width: '30px' }}
                     />
-                    Stretch tightented muscles before workout
+                    -Stretch tightented muscles before workout
                   </li>
                 </ul>
               </div>
 
               <div>
-                <h5>Punctuality:</h5>
+                <h5>Punctuality</h5>
                 <ul>
                   <li>
                     <img
@@ -238,13 +221,13 @@ function Profile() {
                       alt=''
                       style={{ width: '30px' }}
                     />
-                    Responds on time
+                    -Responds on time
                   </li>
                 </ul>
               </div>
 
               <div>
-                <h5>Cardiologist:</h5>
+                <h5>Cardiologist</h5>
                 <ul>
                   <li>
                     <img
@@ -252,7 +235,7 @@ function Profile() {
                       alt=''
                       style={{ width: '30px' }}
                     />
-                    Increase BPM
+                    -Increase BPM
                   </li>
                 </ul>
               </div>

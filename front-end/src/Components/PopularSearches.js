@@ -56,22 +56,22 @@ const PopularSearches = ({ today, getSearchResults }) => {
   const handleChange = event => {
     event.preventDefault()
     switch (event.target.name) {
-      case 'goal':
+      case 'goal-search':
         setUserSelectedGoal(event.target.value)
         break
-      case 'experience':
+      case 'experience-search':
         setUserSelectedExperience(event.target.value)
         break
-      case 'availability':
+      case 'availability-search':
         setUserSelectedAvailability(event.target.value)
         break
-      case 'gender':
+      case 'gender-search':
         setUserSelectedGender(event.target.value)
         break
-      case 'location':
+      case 'location-search':
         setUserSelectedLocation(event.target.value)
         break
-      case 'radius':
+      case 'radius-search':
         setUserSelectedRadius(event.target.value)
         break
       default:
@@ -104,7 +104,7 @@ const PopularSearches = ({ today, getSearchResults }) => {
           id='outlined-select-goals'
           select
           label='Goals'
-          name='goal'
+          name='goal-search'
           value={userSelectedGoal}
           onChange={handleChange}
           variant='outlined'
@@ -120,7 +120,7 @@ const PopularSearches = ({ today, getSearchResults }) => {
           id='outlined-select-experience'
           select
           label='Experience'
-          name='experience'
+          name='experience-search'
           value={userSelectedExperience}
           onChange={handleChange}
           variant='outlined'
@@ -151,7 +151,7 @@ const PopularSearches = ({ today, getSearchResults }) => {
             id='outlined-select-goals'
             select
             label='Gender'
-            name='gender'
+            name='gender-search'
             value={userSelectedGender}
             onChange={handleChange}
             variant='outlined'
@@ -168,7 +168,7 @@ const PopularSearches = ({ today, getSearchResults }) => {
             id='outlined-select-experience'
             select
             label='Borough'
-            name='location'
+            name='location-search'
             value={userSelectedLocation}
             onChange={handleChange}
             variant='outlined'
@@ -185,7 +185,7 @@ const PopularSearches = ({ today, getSearchResults }) => {
             id='outlined-select-radius'
             select
             label='Radius'
-            name='radius'
+            name='radius-search'
             value={userSelectedRadius}
             onChange={handleChange}
             variant='outlined'

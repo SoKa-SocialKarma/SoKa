@@ -50,7 +50,7 @@ function App () {
                 />
                 <PrivateRoute path='/users/:id/edit' component={EditProfile} />
                 <PrivateRoute
-                  path='/users/:id/update-profile'
+                  path='/users/:id/update-login-profile'
                   component={UpdateProfile}
                 />
                 <PrivateRoute

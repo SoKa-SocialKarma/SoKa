@@ -354,14 +354,14 @@ export default function EditProfile () {
 
         <Container className={classes.twoForms}>
           <TextField
-            value={placeHolders.experience || ''}
+            value={requestBody.experience ? requestBody.experience.experience  : ''}
             className={classes.textField}
             onChange={setExperience}
             label='Experience Level'
             margin='normal'
             variant='filled'
             name='experience'
-            id='experience-edit'
+            id='experience'
             fullWidth
             select
           >
@@ -379,7 +379,7 @@ export default function EditProfile () {
             margin='normal'
             variant='filled'
             name='gender'
-            id='gender-edit'
+            id='gender'
             fullWidth
             select
           >
@@ -397,7 +397,7 @@ export default function EditProfile () {
             label='Radius'
             variant='filled'
             name='radius'
-            id='radius-edit'
+            id='radius'
             fullWidth
             select
           >
@@ -409,11 +409,11 @@ export default function EditProfile () {
           </TextField>
 
           <TextField
-            value={requestBody.goals || ''}
+            value={requestBody.goals ? requestBody.goals.goals[requestBody.goals.goals.length -1] : ''}
             onChange={setGoals}
             margin='normal'
             label='Goals'
-            id='goals-edit'
+            id='goals'
             variant='filled'
             name='goals'
             fullWidth

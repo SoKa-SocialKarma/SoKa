@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Amaranth&family=Merriweather:wght@300&family=Overpass:ital@1&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Amaranth&family=Merriweather:wght@300&family=Overpass:ital@1&display=swap");
 
 #root {
   width: 100vw;
@@ -53,15 +53,42 @@ body > div > div > div > div > div > button {
   padding: 0px;
 }
 
-#menu-goal > div,
-#menu-experience > div {
-  top: 216px !important;
+#menu-goal-search > div,
+#menu-experience-search > div {
+  top: 24% !important;
 }
 
-#menu-gender > div,
-#menu-location > div,
+#menu-gender-search > div,
+#menu-radius-search > div,
+#menu-location-search > div {
+  top: 32% !important;
+}
+
+#menu-experience > div {
+  top: 46.5% !important;
+}
+
+#menu-gender > div {
+  top: 55.5% !important;
+}
+
 #menu-radius > div {
-  top: 286px !important;
+  top: 63.5% !important;
+}
+
+#menu-goals > div {
+  top: 71.2% !important;
+}
+
+.btn-primary {
+  color: #fff;
+  background-color: #6c63ff;
+  border-color: #8883e6;
+}
+.btn-primary:hover {
+  color: #fff;
+  background-color: #4d46dc;
+  border-color: #2f2c6a;
 }
 
 .bts-mui-bt {
@@ -392,9 +419,14 @@ a:hover {
 .item4 {
   width: 100%;
   padding: 2% 10% 2% 10%;
+}
+
+/* .item4 {
+  width: 100%;
+  padding: 2% 10% 2% 10%;
   overflow: hidden;
   margin-right: 350px;
-}
+} */
 
 #badges li {
   list-style: none;
@@ -406,22 +438,15 @@ a:hover {
   margin: 0 3% 0 1% !important;
 }
 
-#dropdown {
-  display: flex;
-  flex-direction: column;
-}
-
-#editlayout {
-  display: flex;
+#root > div > main > div > div > label > span,
+#root > div > main > div > div > label > span > span {
   align-items: center;
-  flex-direction: column;
-  margin-top: 20px;
-}
-
-#editf {
   display: flex;
-  justify-content: space-around;
-  margin-top: 30px;
+  height: 8% !important;
+}
+#root > div > main > div > div > label > span > span > svg {
+  width: 42px !important;
+  height: 42px !important;
 }
 
 .modalContainer {
