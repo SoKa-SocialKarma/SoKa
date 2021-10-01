@@ -1,4 +1,4 @@
-\import { useState, useRef, useEffect } from 'react'
+import { useState, useRef, useEffect } from 'react'
 import { useElement, useAPI } from '../Context/AuthContext'
 import { Link } from 'react-router-dom'
 import SearchModal from './SearchModal'
