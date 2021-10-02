@@ -1,5 +1,6 @@
 import { useState } from "react";
-import UsersProfile from './UsersProfile';
+import Profile from './Profile';
+
 
 import {
   makeStyles,
@@ -31,7 +32,8 @@ const useStyles = makeStyles((theme) => ({
 
 // const { name, lastname, location, karma, experience, availabledays } = profile;
 
-export default function UserModal({ }) {
+export default function UserModal({ profile }) {
+  console.log(profile)
   const [open, setOpen] = useState(false);
 
   const classes = useStyles();
@@ -67,7 +69,7 @@ export default function UserModal({ }) {
             <div className={classes.paper}>
               <h4 className={classes.root}>{/* {name} {lastname} */}</h4>{" "}
               <div className='modalContainer'>
-                <UsersProfile />
+                <Profile profile={profile} />
               </div>
             </div>
           </Paper>

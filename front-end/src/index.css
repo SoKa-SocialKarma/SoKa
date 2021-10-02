@@ -359,11 +359,11 @@ a:hover {
 }
 
 .item1 h3 {
-  font-size: 35px;
+  font-size: 30px;
 }
 
 .item1 h5 {
-  font-size: 25px;
+  font-size: 23px;
 }
 
 .item1 > div > ul {
@@ -383,11 +383,11 @@ a:hover {
 }
 
 .item2 h3 {
-  font-size: 35px;
+  font-size: 30px;
 }
 
 .item2 h5 {
-  font-size: 25px;
+  font-size: 23px;
 }
 
 .item2 li {
@@ -403,7 +403,6 @@ a:hover {
 
 .item2 img {
   padding: 0 0 0 0 !important;
-  width: 25px;
   margin: 0 3% 0 1% !important;
 }
 
@@ -418,13 +417,12 @@ a:hover {
 
 .item4 {
   width: 100%;
-  padding: 2% 10% 2% 10%;
+  padding: 0.5% 10% 0.5% 10%;
 }
 
 /* .item4 {
   width: 100%;
-  padding: 2% 10% 2% 10%;
-  overflow: hidden;
+  padding: 1% 10% 1% 10%;
   margin-right: 350px;
 } */
 
@@ -457,7 +455,13 @@ a:hover {
   justify-content: center;
 }
 
-@media screen and (max-width: 1320px) {
+.modalContainer .item4 {
+  width: 100%;
+  padding: 1% 10% 1% 10%;
+  margin-right: 350px;
+}
+
+@media screen and (max-width: 1720px) {
   #cardContainer {
     margin-top: 64px;
     margin-bottom: 10px;
@@ -588,6 +592,34 @@ a:hover {
   .item2 {
     height: 70vh;
   }
+
+  .item1 h3 {
+    font-size: 25px;
+  }
+
+  .item1 h5 {
+    font-size: 20px;
+  }
+
+  .item1 li {
+    list-style: none;
+    font-size: 17.5px;
+  }
+
+  .item2 h3 {
+    font-size: 25px;
+  }
+
+  .item2 h5 {
+    font-size: 20px;
+  }
+
+  .item2 li {
+    list-style: none;
+    font-size: 17.5px;
+    font-style: italic;
+  }
+
   .item4 {
     padding-top: 47px;
     overflow: hidden;

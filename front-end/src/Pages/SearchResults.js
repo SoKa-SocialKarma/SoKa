@@ -36,7 +36,7 @@ function SearchResults () {
             </Paper>
           )
         })}
-        {!currentSearchResults.lenght && <NoSearchResults />}
+        {!currentSearchResults.length && <NoSearchResults />}
       </Container>
     </>
   )

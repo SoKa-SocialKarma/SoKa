@@ -42,7 +42,7 @@ const useStyles = makeStyles(theme => ({
   }
 }))
 
-export default function SearchModal () {
+export default function SearchModal() {
   const { getResultsUsingSokaQuery, currentSearchResults } = useAPI()
 
   const classes = useStyles()
