@@ -4,6 +4,15 @@ import { app } from '../firebase'
 const db = app.firestore()
 const storage = app.storage()
 
+export const createAlbum = async (email) => {
+  return await db.collection('UsersProfiles')
+      .doc(email)
+      .set({
+        name: email
+      })
+
+  }
+
 const storeProfilePictureOnFirebase = async (file, email) => {
   const storageRef = storage.ref()
   const fileRef = storageRef.child(file.name)

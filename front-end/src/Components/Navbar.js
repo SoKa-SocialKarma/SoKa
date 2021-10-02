@@ -187,9 +187,6 @@ export default function Navbar ({ children }) {
     drawerSetter({
       drawerElement: drawerElementRef.current
     })
-    return () => {
-      drawerElementRef.removeEventListener('mouseenter', handleMouseEnter)
-    }
   }, [])
 
   useEffect(() => {
@@ -197,9 +194,6 @@ export default function Navbar ({ children }) {
     drawerSetter({
       drawerElement: drawerElementRef.current
     })
-    return () => {
-      drawerElementRef.removeEventListener('mouseleave', handleMouseLeave)
-    }
   }, [])
 
   useEffect(() => {

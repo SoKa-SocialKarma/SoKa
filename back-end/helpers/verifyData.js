@@ -127,6 +127,7 @@ const pendingReviewCheckFailed = pendingReview => {
 
 const postCheck = (req, res, next) => {
   const verifyUser = ({
+    uuid,
     name,
     lastname,
     username,
@@ -140,57 +141,62 @@ const postCheck = (req, res, next) => {
     experience,
     availability,
     matchRequests,
-    pendingReview
+    pendingReview,
+    isNewUserBlocked
   }) => {
     if (nameCheckFailed(name)) return notPass(name ? 'name' : 'name not found!')
     if (lastnameCheckFailed(lastname))
       return notPass(lastname ? 'lastname' : 'lastname not found!')
-    if (usernameCheckFailed(username))
-      return notPass(username ? 'username' : 'username not found!')
-    if (locationCheckFailed(location))
-      return notPass(location ? 'location' : 'location not found!')
-    if (genderCheckFailed(gender))
-      return notPass(gender ? 'gender' : 'gender not found!')
+    // if (usernameCheckFailed(username))
+    //   return notPass(username ? 'username' : 'username not found!')
+    // if (locationCheckFailed(location))
+    //   return notPass(location ? 'location' : 'location not found!')
+    // if (genderCheckFailed(gender))
+    //   return notPass(gender ? 'gender' : 'gender not found!')
     if (radiusCheckFailed(radius))
       return notPass(radius ? 'radius' : 'radius not found!')
-    if (karmaCheckFailed(karma))
-      return notPass(karma ? 'karma it must be a number' : 'karma not found!')
-    if (imageCheckFailed(image))
-      return notPass(
-        image
-          ? 'image link, it must begin with http:// or https://'
-          : 'image not found!'
-      )
-    if (badgesCheckFailed(badges))
-      return notPass(
-        badges ? 'badges it must be type Boolean' : 'badges not found!'
-      )
-    if (goalsCheckFailed(goals))
-      return notPass(goals ? 'goals it must be type JSON' : 'goals not found!')
-    if (experienceCheckFailed(experience))
-      return notPass(
-        experience ? 'experience it must be type JSON' : 'experience not found!'
-      )
-    if (availabilityCheckFailed(availability))
-      return notPass(
-        availability
-          ? 'availability it must be type JSON'
-          : 'availability not found!'
-      )
-    if (matchRequestsCheckFailed(matchRequests))
-      return notPass(
-        matchRequests
-          ? 'matchRequests it must be type JSON'
-          : 'matchRequests not found!'
-      )
-    if (pendingreviewCheckFailed(pendingReview))
-      return notPass(
-        pendingReview
-          ? 'pendingReview it must be type JSON'
-          : 'pendingReview not found!'
-      )
+    // if (karmaCheckFailed(karma))
+    //   return notPass(karma ? 'karma it must be a number' : 'karma not found!')
+    // if (imageCheckFailed(image))
+    //   return notPass(
+    //     image
+    //       ? 'image link, it must begin with http:// or https://'
+    //       : 'image not found!'
+    //   )
+    // if (badgesCheckFailed(badges))
+    //   return notPass(
+    //     badges ? 'badges it must be type Boolean' : 'badges not found!'
+    //   )
+    // if (goalsCheckFailed(goals))
+    //   return notPass(goals ? 'goals it must be type JSON' : 'goals not found!')
+    // if (experienceCheckFailed(experience))
+    //   return notPass(
+    //     experience ? 'experience it must be type JSON' : 'experience not found!'
+    //   )
+    // if (availabilityCheckFailed(availability))
+    //   return notPass(
+    //     availability
+    //       ? 'availability it must be type JSON'
+    //       : 'availability not found!'
+    //   )
+    // if (matchRequestsCheckFailed(matchRequests))
+    //   return notPass(
+    //     matchRequests
+    //       ? 'matchRequests it must be type JSON'
+    //       : 'matchRequests not found!'
+    //   )
+    // if (pendingreviewCheckFailed(pendingReview))
+    //   return notPass(
+    //     pendingReview
+    //       ? 'pendingReview it must be type JSON'
+    //       : 'pendingReview not found!'
+    //   )
 
     return pass
+  }
+
+  if (req.body.blocked) {
+   return next()
   }
 
   if (!req.body.length) {
