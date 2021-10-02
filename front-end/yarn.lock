@@ -2420,6 +2420,13 @@
   dependencies:
     "@sinonjs/commons" "^1.7.0"
 
+"@steveeeie/react-page-transition@^1.2.1":
+  "integrity" "sha512-hR0CtPtf3ZXSWPT5G9PbPc6ybI5OxwBtbYMonHYzDIePrgzOj1yCOYF2W/jzvrSBBQP1CSh9YKZFsqCLd9TMJg=="
+  "resolved" "https://registry.npmjs.org/@steveeeie/react-page-transition/-/react-page-transition-1.2.1.tgz"
+  "version" "1.2.1"
+  dependencies:
+    "react-transition-group" "^4.4.1"
+
 "@surma/rollup-plugin-off-main-thread@^1.1.1":
   "integrity" "sha512-yBMPqmd1yEJo/280PAMkychuaALyQ9Lkb5q1ck3mjJrFuEobIfhnQ4J3mbvBoISmR3SWMWV+cGB/I0lCQee79A=="
   "resolved" "https://registry.npmjs.org/@surma/rollup-plugin-off-main-thread/-/rollup-plugin-off-main-thread-1.4.2.tgz"
@@ -12689,7 +12696,7 @@
     "hey-listen" "^1.0.8"
     "tslib" "^2.1.0"
 
-"styled-components@^5.3.1", "styled-components@>= 2":
+"styled-components@^5.3.1", "styled-components@>= 2", "styled-components@>= 4.3.0":
   "integrity" "sha512-JThv2JRzyH0NOIURrk9iskdxMSAAtCfj/b2Sf1WJaCUsloQkblepy1jaCLX/bYE+mhYo3unmwVSI9I5d9ncSiQ=="
   "resolved" "https://registry.npmjs.org/styled-components/-/styled-components-5.3.1.tgz"
   "version" "5.3.1"

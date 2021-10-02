@@ -7,7 +7,7 @@ import Home from './Pages/Home'
 import LoginDashboard from './Pages/LoginDashboard'
 import Login from './Pages/Login'
 import Signp from './Pages/Signp'
-import LoginInfo from './Pages/LoginInfo'
+// import LoginInfo from './Pages/LoginInfo'
 import UpdateProfile from './Pages/UpdateProfile'
 import Show from './Pages/Show'
 import ForgotPassword from './Pages/ForgotPassword'
@@ -16,11 +16,13 @@ import UserFeed from './Pages/UserFeed'
 import Profile from './Components/Profile'
 import SearchResults from './Pages/SearchResults'
 import FourOFour from './Pages/FourOFour'
+import LoginQs from './Pages/LoginQs'
 
 import MapBox from './Components/MapBox'
 import Navbar from './Components/Navbar'
 import EditProfile from './Components/EditProfile'
 import PrivateRoute from './Components/PrivateRoute'
+
 
 function App () {
   const theme = createTheme(sokaTheme)
@@ -36,7 +38,7 @@ function App () {
                 <Route path='/map' component={MapBox} />
                 <Route path='/login' component={Login} />
                 <Route path='/signup' component={Signp} />
-                <Route path='/login-info' component={LoginInfo} />
+                {/* <Route path='/login-info' component={LoginInfo} /> */}
                 <Route path='/search-results' component={SearchResults} />
                 <Route path='/forgot-password' component={ForgotPassword} />
                 <PrivateRoute
@@ -44,10 +46,7 @@ function App () {
                   component={LoginDashboard}
                 />
                 <PrivateRoute path='/users/:id/messages' component={Show} />
-                <PrivateRoute
-                  path='/users/:id/profile'
-                  component={Profile}
-                />
+                <PrivateRoute path='/users/:id/profile' component={Profile} />
                 <PrivateRoute path='/users/:id/edit' component={EditProfile} />
                 <PrivateRoute
                   path='/users/:id/update-login-profile'
@@ -58,6 +57,7 @@ function App () {
                   component={UserMatches}
                 />
                 <PrivateRoute path='/users/:id/feed' component={UserFeed} />
+                <PrivateRoute path='/users/newUser' component={LoginQs} />
                 <Route path='*' component={FourOFour} />
               </Switch>
             </Navbar>

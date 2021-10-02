@@ -1,6 +1,6 @@
-import { useRef, useState } from 'react'
-import { useAuth } from '../Context/AuthContext'
-import { Link, useHistory } from 'react-router-dom'
+import { useRef, useState, useEffect } from 'react'
+import { useAuth, useAPI } from '../Context/AuthContext'
+import { Link, useHistory, Redirect } from 'react-router-dom'
 
 import { Form, Button, Card, Alert } from 'react-bootstrap'
 
@@ -9,9 +9,20 @@ const Signp = () => {
   const passwordRef = useRef()
   const passwordConfirmRef = useRef()
   const { signUp } = useAuth()
+  const { currentUser } = useAPI()
   const [error, setError] = useState('')
   const [loading, setLoading] = useState(false)
+  const [mustRedirect, setMustRedirect] = useState(false)
   const history = useHistory()
+
+  useEffect(() => {
+    if (currentUser) {
+      setMustRedirect(true)
+    }
+  }, [currentUser])
+
+
+
 
   async function handleSubmit (e) {
     e.preventDefault()
@@ -24,7 +35,6 @@ const Signp = () => {
       setError('')
       setLoading(true)
       await signUp(emailRef.current.value, passwordRef.current.value)
-      history.push('/matches')
     } catch (error) {
       const message = error.message
         .split(' ')
@@ -43,6 +53,7 @@ const Signp = () => {
 
   return (
     <>
+    {mustRedirect && <Redirect to={`users/newUser`} />}
       <Card className='loginDashboard'>
         <Card.Body>
           <h2 className='text-center mb-4'>Sign Up</h2>

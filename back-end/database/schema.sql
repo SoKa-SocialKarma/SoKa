@@ -5,7 +5,7 @@ CREATE DATABASE soka;
 DROP TABLE IF EXISTS users CASCADE;
 CREATE TABLE users (
     id SERIAL PRIMARY KEY,
-    uuid VARCHAR(28) UNIQUE,
+    uuid VARCHAR(28),
     name TEXT NOT NULL,
     lastname TEXT NOT NULL,
     username VARCHAR(16) UNIQUE NOT NULL,
@@ -58,6 +58,16 @@ CREATE TABLE username_friends (
     username VARCHAR(16) ,
     friends JSONB NOT NULL
 );
+
+DROP TABLE IF EXISTS username_newUserBlocked;
+CREATE TABLE username_newUserBlocked (
+    id SERIAL PRIMARY KEY,
+    uuid VARCHAR(28),
+    blocked BOOLEAN NOT NULL
+);
+
+
+
 
 
 -- DROP TABLE IF EXISTS chats_record;
