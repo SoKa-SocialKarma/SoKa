@@ -35,7 +35,7 @@ const useStyles = makeStyles({
   }
 })
 
-function Profile () {
+function Profile() {
   const { currentUserData } = useAPI()
   const { url } = useRouteMatch()
   const edit = url
@@ -69,9 +69,9 @@ function Profile () {
       </div>
 
       <div id='cardContainer'>
-        <h2 id='card'>
+        <h1 id='card'>
           {name} {lastname}
-        </h2>
+        </h1>
 
         <div id='socials'>
           <a href='https://www.instagram.com/' target='_blank' rel='noreferrer'>
