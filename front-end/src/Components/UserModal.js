@@ -1,5 +1,5 @@
 import { useState } from "react";
-import Profile from './Profile';
+import UsersProfile from './UsersProfile';
 
 import {
   makeStyles,
@@ -67,7 +67,7 @@ export default function UserModal({ }) {
             <div className={classes.paper}>
               <h4 className={classes.root}>{/* {name} {lastname} */}</h4>{" "}
               <div className='modalContainer'>
-                <Profile />
+                <UsersProfile />
               </div>
             </div>
           </Paper>
