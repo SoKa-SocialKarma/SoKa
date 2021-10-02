@@ -457,7 +457,7 @@ a:hover {
   justify-content: center;
 }
 
-@media screen and (max-width: 1320px) {
+@media screen and (max-width: 1720px) {
   #cardContainer {
     margin-top: 64px;
     margin-bottom: 10px;
