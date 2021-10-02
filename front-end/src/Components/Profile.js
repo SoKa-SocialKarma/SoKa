@@ -35,7 +35,8 @@ const useStyles = makeStyles({
   }
 })
 
-function Profile() {
+function Profile(profile) {
+  console.log(profile.profile)
   const { currentUserData } = useAPI()
   const { url } = useRouteMatch()
   const edit = url
@@ -54,9 +55,11 @@ function Profile() {
     experience,
     goals,
     radius,
-    image
+    image,
+    id
   } = currentUserData
-
+  console.log(currentUserData)
+  console.log(window.location.href)
   return (
     <Paper className={classes.root}>
       <div id='profHeader' className='profBackground'>
@@ -69,10 +72,14 @@ function Profile() {
       </div>
 
       <div id='cardContainer'>
-        <h1 id='card'>
-          {name} {lastname}
-        </h1>
-
+        {window.location.href === `http://localhost:3000/users/${id}/profile` &&
+          <h1 id='card'>
+            {name} {lastname}
+          </h1>}
+        {window.location.href === `http://localhost:3000/users/${id}/feed/matches` &&
+          <h1 id='card'>
+            {profile.profile.name} {profile.profile.lastname}
+          </h1>}
         <div id='socials'>
           <a href='https://www.instagram.com/' target='_blank' rel='noreferrer'>
             <img
@@ -103,15 +110,16 @@ function Profile() {
             <div className={classes.flexCenter}>
               <div id='editiconContainer'>
                 <h3>About</h3>
-                <div id='editicon'>
-                  <IconButton href={edit}>
-                    <img
-                      src={pencil}
-                      alt='editicon'
-                      style={{ width: '20px' }}
-                    />
-                  </IconButton>
-                </div>
+                {window.location.href === `http://localhost:3000/users/${id}/profile` &&
+                  <div id='editicon'>
+                    <IconButton href={edit}>
+                      <img
+                        src={pencil}
+                        alt='editicon'
+                        style={{ width: '20px' }}
+                      />
+                    </IconButton>
+                  </div>}
               </div>
 
               <h5>Gender:</h5>
@@ -177,7 +185,7 @@ function Profile() {
                     <img
                       src='https://cdn-icons-png.flaticon.com/512/2928/2928144.png'
                       alt=''
-                      style={{ width: '30px' }}
+                      style={{ width: '45px' }}
                     />
                     -Enthusiastic
                   </li>
@@ -191,7 +199,7 @@ function Profile() {
                     <img
                       src='https://cdn-icons-png.flaticon.com/512/4053/4053735.png'
                       alt=''
-                      style={{ width: '30px' }}
+                      style={{ width: '45px' }}
                     />
                     -Assisted in lifting heavy weights safely
                   </li>
@@ -205,7 +213,7 @@ function Profile() {
                     <img
                       src='https://cdn-icons-png.flaticon.com/512/2843/2843974.png'
                       alt=''
-                      style={{ width: '30px' }}
+                      style={{ width: '45px' }}
                     />
                     -Stretch tightented muscles before workout
                   </li>
@@ -219,7 +227,7 @@ function Profile() {
                     <img
                       src='https://cdn-icons-png.flaticon.com/512/2090/2090622.png'
                       alt=''
-                      style={{ width: '30px' }}
+                      style={{ width: '45px' }}
                     />
                     -Responds on time
                   </li>
@@ -233,7 +241,7 @@ function Profile() {
                     <img
                       src='https://cdn-icons-png.flaticon.com/512/2237/2237680.png'
                       alt=''
-                      style={{ width: '30px' }}
+                      style={{ width: '45px' }}
                     />
                     -Increase BPM
                   </li>
