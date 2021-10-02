@@ -50,22 +50,31 @@ const getUsers = async ids => {
   }
 }
 
-// , username, location, gender, karma, image, badges, goals,  availability, matchRequests, pendingReview)
 const createUsers = async users => {
-  console.log('INSIDE CREATE USERS')
-  console.log(users)
+
   try {
     if (!users.length) {
       return await db.one(
         `INSERT INTO users \n
-        (uuid, name, lastname, experience, radius)
-        VALUES ($1,$2,$3,$4,$5) RETURNING *`,
+        (uuid, name, lastname, username, location, gender, radius, karma, image,\n
+        badges, goals, experience, availability, matchRequests, pendingReview)
+        VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15) RETURNING *`,
         [
           users.uuid,
           users.name,
           users.lastname,
-          users.experience.experience,
-          users.radius
+          users.username,
+          users.location,
+          users.gender,
+          users.radius,
+          users.karma,
+          users.image,
+          users.badges,
+          users.goals,
+          users.experience,
+          users.availability,
+          users.matchRequests,
+          users.pendingReview
         ]
       )
     }
@@ -74,15 +83,26 @@ const createUsers = async users => {
       const queries = users.map(user =>
         db.one(
           `INSERT INTO users \n
-          (uuid, name, lastname, experience, radius)
-          VALUES ($1,$2,$3,$4,$5) RETURNING *`,
-          [
-            users.uuid,
-            users.name,
-            users.lastname,
-            users.experience,
-            users.radius
-          ]
+        (uuid, name, lastname, username, location, gender, radius, karma, image,\n
+        badges, goals, experience, availability, matchRequests, pendingReview)
+        VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15) RETURNING *`,
+        [
+          users.uuid,
+          users.name,
+          users.lastname,
+          users.username,
+          users.location,
+          users.gender,
+          users.radius,
+          users.karma,
+          users.image,
+          users.badges,
+          users.goals,
+          users.experience,
+          users.availability,
+          users.matchRequests,
+          users.pendingReview
+        ]
         )
       )
       return t.batch(queries)
@@ -121,11 +141,14 @@ const deleteUsers = async ids => {
 
 const blockNewUser = async user => {
   try {
-    return await db.one('INSERT INTO username_newuserblocked (uuid, blocked) VALUES ($1,$2) RETURNING *;', [ user.uuid, user.blocked ] )
+    return await db.one(
+      'INSERT INTO username_newuserblocked (uuid, blocked) VALUES ($1,$2) RETURNING *;', 
+      [ user.uuid, user.toggle ? !user.blocked : user.blocked ] )
   } catch (err) {
     return 'error'
   }
 }
+
 
 module.exports = {
   getAllUsers,
@@ -134,4 +157,5 @@ module.exports = {
   updateUsers,
   deleteUsers,
   blockNewUser
+
 }

@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { useHistory } from 'react-router-dom'
+import { Redirect } from 'react-router-dom'
 import { useAPI } from '../Context/AuthContext'
 import { apiURL } from '../Util/apiURL'
 import axios from 'axios'
@@ -24,11 +24,16 @@ const theme = createTheme()
 const API = apiURL()
 
 export default function LoginQs () {
-  const { currentUser, currentUserData, getNewUserData } = useAPI()
   const [newUserBody, setNewUserBody] = useState({})
+  const [ selectedEx, setSelectedEx ] = useState('')
   const [id, setId] = useState('')
-
-  const history = useHistory()
+  const {
+    currentUser,
+    currentUserData,
+    getNewUserData,
+    unblockNewUser,
+    createFirebaseAlbum
+  } = useAPI()
 
   useEffect(() => {
     setNewUserBody({ uuid: currentUser.uid })
@@ -41,24 +46,43 @@ export default function LoginQs () {
   }, [currentUserData.id])
 
   const createNewProfile = newUserBody => {
-    axios
+    return axios
       .post(`${API}/users`, newUserBody)
+      .then(() => unblockNewUser(currentUser.uid))
       .then(() => getNewUserData(currentUser))
-      .then(
-        () => {
-          history.push(`/users/${id}/feed`)
-        },
-        error => console.error(error)
-      )
-      .catch(c => console.warn('catch', c))
+      .then(() => createFirebaseAlbum(currentUser))
+      .catch(err => console.log(err))
   }
 
   // Experience Setter
   const setExperience = e => {
     e.preventDefault()
-	const reg = new RegExp(`"${e.target.value}"`)
-	console.log(reg.source)
-    setNewUserBody(Object.assign({ ...newUserBody }, { experience: {"experience":[reg.source]}}))
+	setSelectedEx(e.target.value)
+
+    const userExp = new RegExp(`["${e.target.value}"]`)
+    const experience = `{"experience":${userExp.source}}`
+    const image = '{"name":"","url":"","album":""}'
+    const goals = '{"goals":[]}'
+    const availability = '{"days":[]}'
+    const matchRequests = '{"matchRequests":[],"acceptedMatchesHistory":[]}'
+    const pendingReview =
+      '{"pendingReview":false,"reviewing":{"id":0,"username":""}}'
+
+    setNewUserBody(
+      Object.assign(
+        { ...newUserBody },
+        { username: '' },
+        { location: 'New York' },
+        { karma: 5 },
+        { image: image },
+        { badges: false },
+        { goals: goals },
+        { experience: experience },
+        { availability: availability },
+        { matchRequests: matchRequests },
+        { pendingReview: pendingReview }
+      )
+    )
   }
 
   const handleChange = e => {
@@ -72,12 +96,13 @@ export default function LoginQs () {
 
   const handleSubmit = e => {
     e.preventDefault()
-    console.log(newUserBody)
+
     createNewProfile(newUserBody)
   }
 
   return (
     <ThemeProvider theme={theme}>
+      {id && <Redirect to={`/users/${id}/feed`} />}
       <Container component='main' maxWidth='xs'>
         <CssBaseline />
         <Box
@@ -121,11 +146,7 @@ export default function LoginQs () {
               <Grid item xs={12}>
                 <InputLabel id='experience'>Experience</InputLabel>
                 <Select
-                  value={
-                    newUserBody.experience
-                      ? newUserBody.experience.experience
-                      : ''
-                  }
+                  value={selectedEx}
                   onChange={setExperience}
                   label='experience'
                   fullWidth

@@ -1,6 +1,6 @@
 import { useRef, useState, useEffect } from 'react'
 import { useAuth, useAPI } from '../Context/AuthContext'
-import { Link, useHistory, Redirect } from 'react-router-dom'
+import { Link, Redirect } from 'react-router-dom'
 
 import { Form, Button, Card, Alert } from 'react-bootstrap'
 
@@ -13,15 +13,13 @@ const Signp = () => {
   const [error, setError] = useState('')
   const [loading, setLoading] = useState(false)
   const [mustRedirect, setMustRedirect] = useState(false)
-  const history = useHistory()
+
 
   useEffect(() => {
     if (currentUser) {
       setMustRedirect(true)
     }
   }, [currentUser])
-
-
 
 
   async function handleSubmit (e) {

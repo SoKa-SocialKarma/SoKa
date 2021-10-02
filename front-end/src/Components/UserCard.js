@@ -109,8 +109,8 @@ function UserCard({ profile }) {
       <Divider className={classes.divider} />
       <Box borderColor='transparent' className={classes.infoBox}>
         <div className={classes.flex}>
-          <p>Availability: {availabledays[0]}</p>
-          <p>Location : {location}</p>
+          <p>Availability: {availabledays ? availabledays[0] : ''}</p>
+          <p>Location : {location ? location : ''}</p>
           <p>Experience: {experience}</p>
           {/* <p>Goals: {goals}</p> */}
         </div>

@@ -2,6 +2,7 @@ import React, { useContext, useState, useEffect, useReducer } from 'react'
 import { auth } from '../firebase'
 import { apiURL } from '../Util/apiURL'
 import axios from 'axios'
+import {createAlbum} from '../Util/imageStore'
 
 const AuthContext = React.createContext()
 const APIContext = React.createContext()
@@ -103,7 +104,7 @@ export function AuthProvider ({ children }) {
             payload: { data: data }
           })
         } else {
-          const data = await axios.post(`${API}/users?isNewUserBlocked=true`, {
+          const data = await axios.post(`${API}/users/`, {
             uuid: user.uid,
             blocked: true
           })
@@ -120,9 +121,6 @@ export function AuthProvider ({ children }) {
     return unsubscribe
   }, [])
 
-  //     const data = axios.get(`${API}/users?uuid=${currentUser?.uid}`)
-  //     const userData = data.data[0]
-  //     const result = await Promise.all([data, userData])
 
   // Login Functions from FIREBASE
   function signUp (email, password) {
@@ -208,6 +206,21 @@ export function AuthProvider ({ children }) {
       payload: { data: data }
     })
   }
+  async function unblockNewUser (userUUID) {
+    const data = await axios.post(`${API}/users/`, {
+      uuid: userUUID,
+      blocked: true,
+      toggle: true
+    })
+    dispatch({
+      type: ACTIONS.BLOCK_CURRENT_NEWUSER,
+      payload: { data: data }
+    })
+
+  }
+  async function createFirebaseAlbum (user) {
+    createAlbum(user.email) 
+  }
 
   const authValue = {
     currentUser: globalState.currentUser,
@@ -228,7 +241,9 @@ export function AuthProvider ({ children }) {
     currentSearchResults: globalState.currentSearchResults,
     getResultsUsingSokaQuery,
     getFreshUserData,
-    getNewUserData
+    getNewUserData,
+    unblockNewUser,
+    createFirebaseAlbum
   }
 
   const elementValue = {

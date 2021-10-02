@@ -169,10 +169,10 @@ const postCheck = (req, res, next) => {
     //   )
     // if (goalsCheckFailed(goals))
     //   return notPass(goals ? 'goals it must be type JSON' : 'goals not found!')
-    if (experienceCheckFailed(experience))
-      return notPass(
-        experience ? 'experience it must be type JSON' : 'experience not found!'
-      )
+    // if (experienceCheckFailed(experience))
+    //   return notPass(
+    //     experience ? 'experience it must be type JSON' : 'experience not found!'
+    //   )
     // if (availabilityCheckFailed(availability))
     //   return notPass(
     //     availability
@@ -195,17 +195,12 @@ const postCheck = (req, res, next) => {
     return pass
   }
 
-  console.log('INSIDE POST CHECK')
-  console.log(req.body)
-
   if (req.body.blocked) {
    return next()
   }
-console.log('pass next')
 
   if (!req.body.length) {
     const result = verifyUser(req.body)
-    console.log(result)
     return result.pass ? next() : res.status(400).json({ error: result.error })
   }
 

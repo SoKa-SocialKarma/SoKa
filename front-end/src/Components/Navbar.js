@@ -187,10 +187,6 @@ export default function Navbar ({ children }) {
     drawerSetter({
       drawerElement: drawerElementRef.current
     })
-    // Don't need to remove event listener because Navbar never unmounts
-    // return () => {
-    //   drawerElementRef.removeEventListener('mouseenter', handleMouseLeave)
-    // }
   }, [])
 
   useEffect(() => {
@@ -198,10 +194,6 @@ export default function Navbar ({ children }) {
     drawerSetter({
       drawerElement: drawerElementRef.current
     })
-    // Don't need to remove event listener because Navbar never unmounts
-    // return () => {
-    //   drawerElementRef.removeEventListener('mouseleave', handleMouseLeave)
-    // }
   }, [])
 
   useEffect(() => {
