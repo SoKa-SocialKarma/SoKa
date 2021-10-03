@@ -35,7 +35,7 @@ const useStyles = makeStyles({
   }
 })
 
-function Profile(profile) {
+function Profile (profile) {
   console.log(profile.profile)
   const { currentUserData } = useAPI()
   const { url } = useRouteMatch()
@@ -72,14 +72,19 @@ function Profile(profile) {
       </div>
 
       <div id='cardContainer'>
-        {window.location.href === `http://localhost:3000/users/${id}/profile` &&
+        {window.location.href ===
+          `http://localhost:3000/users/${id}/profile` && (
           <h1 id='card'>
             {name} {lastname}
-          </h1>}
-        {window.location.href === `http://localhost:3000/users/${id}/feed/matches` &&
+          </h1>
+        )}
+        {window.location.href ===
+          `http://localhost:3000/users/${id}/feed/matches` && (
           <h1 id='card'>
             {profile.profile.name} {profile.profile.lastname}
-          </h1>}
+          </h1>
+        )}
+
         <div id='socials'>
           <a href='https://www.instagram.com/' target='_blank' rel='noreferrer'>
             <img
@@ -110,7 +115,8 @@ function Profile(profile) {
             <div className={classes.flexCenter}>
               <div id='editiconContainer'>
                 <h3>About</h3>
-                {window.location.href === `http://localhost:3000/users/${id}/profile` &&
+                {window.location.href ===
+                  `http://localhost:3000/users/${id}/profile` && (
                   <div id='editicon'>
                     <IconButton href={edit}>
                       <img
@@ -119,59 +125,157 @@ function Profile(profile) {
                         style={{ width: '20px' }}
                       />
                     </IconButton>
-                  </div>}
+                  </div>
+                )}
               </div>
 
               <h5>Gender:</h5>
-              <ul>
-                <li>
-                  <img src={userPin} alt='userPin icon' />
-                  {gender}
-                </li>
-              </ul>
+              {window.location.href ===
+                `http://localhost:3000/users/${id}/profile` && (
+                <ul>
+                  <li>
+                    <img src={userPin} alt='userPin icon' />
+                    {gender}
+                  </li>
+                </ul>
+              )}
+              {(window.location.href ===
+                `http://localhost:3000/users/${id}/feed/matches` ||
+                window.location.href ===
+                  `http://localhost:3000/search-results`) && (
+                <ul>
+                  <li>
+                    <img src={userPin} alt='userPin icon' />
+                    {profile.profile.gender}
+                  </li>
+                </ul>
+              )}
 
               <h5>Location:</h5>
-              <ul>
-                <li>
-                  <img src={pin} alt='location pin' />
-                  {location}
-                </li>
-              </ul>
+              {window.location.href ===
+                `http://localhost:3000/users/${id}/profile` && (
+                <ul>
+                  <li>
+                    <img src={pin} alt='location pin' />
+                    {location}
+                  </li>
+                </ul>
+              )}
+
+              {(window.location.href ===
+                `http://localhost:3000/users/${id}/feed/matches` ||
+                window.location.href ===
+                  `http://localhost:3000/search-results`) && (
+                <ul>
+                  <li>
+                    <img src={pin} alt='location pin' />
+                    {profile.profile.location}
+                  </li>
+                </ul>
+              )}
               <h5>Availablility:</h5>
-              <ul>
-                <li>
-                  <img src={calendar} alt='calendar' />
-                  {availabledays
-                    ? `${availabledays[0]}, ${availabledays[1]}`
-                    : ''}
-                </li>
-              </ul>
+              {window.location.href ===
+                `http://localhost:3000/users/${id}/profile` && (
+                <ul>
+                  <li>
+                    <img src={calendar} alt='calendar' />
+                    {availabledays
+                      ? `${availabledays[0]}, ${availabledays[1]}`
+                      : ''}
+                  </li>
+                </ul>
+              )}
+
+              {(window.location.href ===
+                `http://localhost:3000/users/${id}/feed/matches` ||
+                window.location.href ===
+                  `http://localhost:3000/search-results`) && (
+                <ul>
+                  <li>
+                    <img src={calendar} alt='calendar' />
+                    {profile.profile.availabledays
+                      ? `${profile.profile.availabledays[0]}, ${profile.profile.availabledays[1]}`
+                      : ''}
+                  </li>
+                </ul>
+              )}
+
               <h5>Experience :</h5>
-              <ul>
-                <li>
-                  <img src={certification} alt='medal' />
-                  {experience}
-                </li>
-              </ul>
+
+              {window.location.href ===
+                `http://localhost:3000/users/${id}/profile` && (
+                <ul>
+                  <li>
+                    <img src={certification} alt='medal' />
+                    {experience}
+                  </li>
+                </ul>
+              )}
+
+              {(window.location.href ===
+                `http://localhost:3000/users/${id}/feed/matches` ||
+                window.location.href ===
+                  `http://localhost:3000/search-results`) && (
+                <ul>
+                  <li>
+                    <img src={certification} alt='medal' />
+                    {profile.profile.experience}
+                  </li>
+                </ul>
+              )}
 
               <h5>Goals:</h5>
-              <ul>
-                <li>
-                  <img src={target} alt='target' />
+              {window.location.href ===
+                `http://localhost:3000/users/${id}/profile` && (
+                <ul>
+                  <li>
+                    <img src={target} alt='target' />
+                    {goals
+                      ? `${goals[0]}, ${goals[1]}, ${goals[2]}, ${goals[3]} `
+                      : ''}
+                  </li>
+                </ul>
+              )}
 
-                  {goals
-                    ? `${goals[0]}, ${goals[1]}, ${goals[2]}, ${goals[3]} `
-                    : ''}
-                </li>
-              </ul>
+              {(window.location.href ===
+                `http://localhost:3000/users/${id}/feed/matches` ||
+                window.location.href ===
+                  `http://localhost:3000/search-results`) && (
+                <ul>
+                  <li>
+                    <img src={target} alt='target' />
+                    {goals
+                      ? `${goals[0]}, ${goals[1]}, ${goals[2]}, ${goals[3]} `
+                      : ''}
+                    {profile.profile.goals
+                      ? `${profile.profile.goals[0]}, ${profile.profile.goals[1]}, ${profile.profile.goals[2]}, ${profile.profile.goals[3]} `
+                      : ''}
+                  </li>
+                </ul>
+              )}
 
               <h5>Radius:</h5>
-              <ul>
-                <li>
-                  <img src={distance} alt='two location tags' />
-                  {radius} miles
-                </li>
-              </ul>
+              {window.location.href ===
+                `http://localhost:3000/users/${id}/profile` && (
+                <ul>
+                  <li>
+                    <img src={distance} alt='two location tags' />
+                    {radius} miles
+                  </li>
+                </ul>
+              )}
+
+              {(window.location.href ===
+                `http://localhost:3000/users/${id}/feed/matches` ||
+                window.location.href ===
+                  `http://localhost:3000/search-results`) && (
+                <ul>
+                  <li>
+                    <img src={distance} alt='two location tags' />
+                    {profile.profile.radius} miles
+                  </li>
+                </ul>
+              )}
             </div>
           </div>
 
