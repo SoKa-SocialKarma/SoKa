@@ -1,6 +1,9 @@
 import { useEffect, useState } from 'react'
 import { useParams, Redirect } from 'react-router'
 import { useAPI } from '../Context/AuthContext'
+import { toast } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
+// import 'react-toastify/dist/ReactToastify.css';
 
 import UserCard from '../Components/UserCard.js'
 import { Container, Paper } from '@material-ui/core'
@@ -13,9 +16,9 @@ import styled from 'styled-components'
 import { motion } from 'framer-motion'
 
 const Section = styled.section`
-display: flex;
-height: 30px;
-`;
+  display: flex;
+  height: 30px;
+`
 
 const API = apiURL()
 
@@ -25,7 +28,7 @@ const useStyles = makeStyles({
     flexWrap: 'wrap',
     flexDirection: 'row',
     justifyContent: 'center',
-    marginTop: '7%',
+    marginTop: '2%',
     gap: '20px'
   },
   paper: {
@@ -37,7 +40,24 @@ const useStyles = makeStyles({
   }
 })
 
-function UserMatches() {
+toast.configure()
+
+function UserMatches () {
+  const notify = () =>
+    toast(
+      'You have 3 new match requests',
+      {
+        position: 'top-right',
+        // autoClose: false,
+        autoClose: 8000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined
+      },
+      toast('Rate previous match to unlock badges')
+    )
   const classes = useStyles()
   const [currentUserMatches, setCurrentUserMatches] = useState([])
   const [sameUser, setSameUser] = useState(false)
@@ -76,12 +96,23 @@ function UserMatches() {
           Ready to hustle for that muscle?
         </motion.h1>
       </Section>
+      <br />
+      <br />
+      <Section>
+        <div>
+          <button onClick={notify}>Notifications (2)</button>
+        </div>
+      </Section>
       <Container className={classes.root}>
         {sameUser ? (
           currentUserMatches.map(profile => {
             return (
-              <Paper className={classes.paper} key={`${profile.id}-mui-matches`}>
+              <Paper
+                className={classes.paper}
+                key={`${profile.id}-mui-matches`}
+              >
                 <UserCard profile={profile} key={profile.id} />
+                {/* new component to show card view  */}
               </Paper>
             )
           })
