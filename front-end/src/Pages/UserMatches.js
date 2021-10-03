@@ -1,7 +1,6 @@
-import { useEffect, useState } from "react";
-import { useParams, Redirect } from "react-router";
-import { useAPI } from "../Context/AuthContext";
-
+import { useEffect, useState } from 'react'
+import { useParams, Redirect } from 'react-router'
+import { useAPI } from '../Context/AuthContext'
 import UserCard from "../Components/UserCard.js";
 import { Container, Paper } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
@@ -15,18 +14,18 @@ import { motion } from "framer-motion";
 const Section = styled.section`
   display: flex;
   height: 30px;
-`;
+`
 
 const API = apiURL();
 
 const useStyles = makeStyles({
   root: {
-    display: "flex",
-    flexWrap: "wrap",
-    flexDirection: "row",
-    justifyContent: "center",
-    marginTop: "2%",
-    gap: "20px",
+    display: 'flex',
+    flexWrap: 'wrap',
+    flexDirection: 'row',
+    justifyContent: 'center',
+    marginTop: '2%',
+    gap: '20px'
   },
   paper: {
     width: "40%",
@@ -37,7 +36,6 @@ const useStyles = makeStyles({
   },
 });
 
-// toast.configure();
 
 function UserMatches() {
   const classes = useStyles();
@@ -77,7 +75,10 @@ function UserMatches() {
         {sameUser ? (
           currentUserMatches.map((profile) => {
             return (
-              <Paper className={classes.paper} key={`${profile.id}-mui-matches`}>
+              <Paper
+                className={classes.paper}
+                key={`${profile.id}-mui-matches`}
+              >
                 <UserCard profile={profile} key={profile.id} />
                 {/* new component to show card view  */}
               </Paper>

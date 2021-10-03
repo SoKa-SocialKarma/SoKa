@@ -205,9 +205,6 @@ toast.configure()
     drawerSetter({
       drawerElement: drawerElementRef.current
     })
-    return () => {
-      drawerElementRef.current.removeEventListener('mouseenter', handleMouseEnter)
-    }
   }, [])
 
   useEffect(() => {
@@ -215,9 +212,6 @@ toast.configure()
     drawerSetter({
       drawerElement: drawerElementRef.current
     })
-    return () => {
-      drawerElementRef.removeEventListener('mouseleave', handleMouseLeave)
-    }
   }, [])
 
   useEffect(() => {

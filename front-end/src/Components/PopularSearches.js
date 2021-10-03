@@ -135,7 +135,7 @@ const PopularSearches = ({ today, getSearchResults }) => {
         <TextField
           id='datetime-local'
           label='Day'
-          name='availability'
+          name='availability-search'
           type='datetime-local'
           className={classes.optionMenu}
           value={userSelectedAvailability}

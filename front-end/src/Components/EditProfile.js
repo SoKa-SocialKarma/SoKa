@@ -131,7 +131,9 @@ export default function EditProfile () {
 
   const removeOldDates = today => {
     const todaySplitted = today.split('/').map(num => Number(num))
-
+    if(!currentUserData.availabledays){
+      return []
+    }
     return currentUserData.availabledays.filter(day => {
       const userSplitted = day.split('/').map(num => Number(num))
       return (
@@ -204,6 +206,7 @@ export default function EditProfile () {
         { goals: { goals: filteredDuplicates } }
       )
     )
+      
   }
 
   // Experience Setter
@@ -250,7 +253,7 @@ export default function EditProfile () {
       updateProfile(requestBody, id)
     }
   }
-
+console.log(requestBody)
   return (
     <Container maxWidth='lg' className={classes.container}>
       <CssBaseline />
