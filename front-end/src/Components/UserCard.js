@@ -131,7 +131,7 @@ function UserCard({ profile }) {
           color='secondary'
           className={classes.flex45}
         >
-          Message
+          Match
         </Button>
       )}
       <UserModal profile={profile} />
