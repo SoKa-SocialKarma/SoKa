@@ -64,7 +64,7 @@ function UserMatches() {
   };
   return (
     <>
-      <Section>
+      <Section id='all-font'>
         <motion.h1 variants={topFade} initial="hidden" animate="visible" transition={{ duration: 1 }}>
           Ready to hustle for that muscle?
         </motion.h1>
