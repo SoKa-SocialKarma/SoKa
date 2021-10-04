@@ -17,6 +17,7 @@ import Profile from './Components/Profile'
 import SearchResults from './Pages/SearchResults'
 import FourOFour from './Pages/FourOFour'
 import LoginQs from './Pages/LoginQs'
+import ReviewPairUp from './Pages/ReviewPairUp'
 
 import MapBox from './Components/MapBox'
 import Navbar from './Components/Navbar'
@@ -48,6 +49,7 @@ function App () {
                 <PrivateRoute path='/users/:id/messages' component={Show} />
                 <PrivateRoute path='/users/:id/profile' component={Profile} />
                 <PrivateRoute path='/users/:id/edit' component={EditProfile} />
+                <PrivateRoute path='/users/:id/reviewing-session' component={ReviewPairUp} />
                 <PrivateRoute
                   path='/users/:id/update-login-profile'
                   component={UpdateProfile}
