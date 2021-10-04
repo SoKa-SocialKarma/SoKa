@@ -10,6 +10,7 @@ CREATE TABLE users (
     lastname TEXT NOT NULL,
     username VARCHAR(16),
     location TEXT,
+    coordinates JSONB,
     gender TEXT,
     radius INT DEFAULT 5,
     CHECK (radius >=0 AND radius <=30),

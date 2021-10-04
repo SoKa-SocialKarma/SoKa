@@ -137,16 +137,6 @@ body {
   padding: 0px 10px;
 }
 
-/* .container {
-  margin-top: 10px;
-  position: relative;
-  text-align: center;
-  color: rgb(45, 112, 133);
-  color: black;
-  padding-right: 20px;
-  padding-left: 60px;
-} */
-
 .bottom-left {
   position: absolute;
   bottom: 8px;
@@ -280,18 +270,7 @@ a:hover {
 }
 
 #bk-text {
-  /* text-align: center; */
-  /* position: absolute; */
-  /* top: 19vh; */
-  /* left: 50%; */
-  /* transform: translate(-50%, -50%); */
-  /* color: rgb(48, 209, 245); */
   color: black;
-
-  /* text-shadow: 0px 0px 6px rgba(255, 255, 255, 0.7); */
-
-  /* font-size: larger; */
-
   font-family: Amaranth;
 }
 
@@ -420,12 +399,6 @@ a:hover {
   width: 100%;
   padding: 0.5% 10% 0.5% 10%;
 }
-
-/* .item4 {
-  width: 100%;
-  padding: 1% 10% 1% 10%;
-  margin-right: 350px;
-} */
 
 #badges li {
   list-style: none;
