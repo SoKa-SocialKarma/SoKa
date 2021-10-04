@@ -1,7 +1,6 @@
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
 import homeimg001 from '../Assets/homeimg001.svg';
-import homeimg002 from '../Assets/homeimg002.svg';
 // import { useElement } from '../Context/AuthContext'
 
 function Home() {
@@ -48,12 +47,14 @@ function Home() {
   `;
 
   const Image = styled.img`
-  height: 400px;
-  margin-bottom: 30px;
+  height: 490px;
 `;
 
   const ColumnRight = styled.div`
-    padding: 1rem 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 60px
   `;
 
   const fadeLeft = {
@@ -83,7 +84,6 @@ function Home() {
         </ColumnLeft>
         <ColumnRight>
           <Image src={homeimg001} alt='two people exercising' />
-          <Image src={homeimg002} alt='two people exercising' />
         </ColumnRight>
       </Container>
     </Section >
