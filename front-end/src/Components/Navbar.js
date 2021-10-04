@@ -23,123 +23,124 @@ import ListItem from '@material-ui/core/ListItem'
 import ListItemIcon from '@material-ui/core/ListItemIcon'
 import ListItemText from '@material-ui/core/ListItemText'
 import Button from '@material-ui/core/Button'
+import { yellow } from '@material-ui/core/colors'
 const drawerWidth = 180
 
-const useStyles = makeStyles(theme => ({
-  root: {
-    display: 'flex'
-  },
-  appBar: {
-    zIndex: theme.zIndex.drawer + 1,
-    transition: theme.transitions.create(['width', 'margin'], {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.leavingScreen
-    })
-  },
-  appBarShift: {
-    marginLeft: drawerWidth,
-    width: `calc(100vw - ${drawerWidth}px)`,
-    transition: theme.transitions.create(['width', 'margin'], {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.enteringScreen
-    })
-  },
-  menuButton: {
-    marginRight: 36,
-    height: '100%'
-  },
-  hide: {
-    display: 'none'
-  },
-  drawer: {
-    width: drawerWidth,
-    flexShrink: 0,
-    whiteSpace: 'nowrap'
-  },
-  drawerOpen: {
-    width: drawerWidth,
-    transition: theme.transitions.create('width', {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.enteringScreen
-    })
-  },
-  drawerClose: {
-    transition: theme.transitions.create('width', {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.leavingScreen
-    }),
-    overflowX: 'hidden',
-    width: theme.spacing(7) + 1,
-    [theme.breakpoints.up('sm')]: {
-      width: theme.spacing(9) + 1
-    }
-  },
-  toolbar: {
-    width: '100%',
-    height: '10vh',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'flex-end',
-    padding: theme.spacing(0, 1),
-    // necessary for content to be below app bar
-    ...theme.mixins.toolbar
-  },
-  topCenter: {
-    width: '100vw',
-    height: '10vh',
-    display: 'flex',
-    flexDirection: 'row',
-    justifyContent: 'space-evenly',
-    alignSelf: 'center'
-  },
-  content: {
-    flexGrow: 1,
-    width: 'auto',
-    height: '100vh',
-    paddingTop: '12vh',
-    paddingBottom: '2vh',
-    overflowY: 'scroll'
-  },
-  authContainer: {
-    width: '60%',
-    display: 'flex',
-    flexDirection: 'row',
-    justifyContent: 'flex-end',
-    gap: '10px'
-  },
-  login: {
-    transform: 'translateY(10%)',
-    height: '80%',
-    width: '20%',
-    fontSize: '1rem',
-    color: 'white',
-    '&:hover': {
-      backgroundColor: '#edebfe',
-      color: '#212121'
-    }
-  },
-  menuIcon: {
-    justifySelf: 'center',
-    alignSelf: 'center'
-  },
-  iconsLeftSide: {
-    height: '46vh',
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'space-evenly'
-  },
-  sokaContainer: {
-    padding: '5px 0 5px 0',
-    height: '100%'
-  },
-  sokaLogo: {
-    display: 'block',
-    maxWidth: '100%',
-    maxHeight: '100%',
-    width: 'auto',
-    height: 'auto'
-  }
-}))
+const useStyles = makeStyles((theme) => ({
+	root: {
+		display: 'flex',
+	},
+	appBar: {
+		zIndex: theme.zIndex.drawer + 1,
+		transition: theme.transitions.create(['width', 'margin'], {
+			easing: theme.transitions.easing.sharp,
+			duration: theme.transitions.duration.leavingScreen,
+		}),
+	},
+	appBarShift: {
+		marginLeft: drawerWidth,
+		width: `calc(100vw - ${drawerWidth}px)`,
+		transition: theme.transitions.create(['width', 'margin'], {
+			easing: theme.transitions.easing.sharp,
+			duration: theme.transitions.duration.enteringScreen,
+		}),
+	},
+	menuButton: {
+		marginRight: 36,
+		height: '100%',
+	},
+	hide: {
+		display: 'none',
+	},
+	drawer: {
+		width: drawerWidth,
+		flexShrink: 0,
+		whiteSpace: 'nowrap',
+	},
+	drawerOpen: {
+		width: drawerWidth,
+		transition: theme.transitions.create('width', {
+			easing: theme.transitions.easing.sharp,
+			duration: theme.transitions.duration.enteringScreen,
+		}),
+	},
+	drawerClose: {
+		transition: theme.transitions.create('width', {
+			easing: theme.transitions.easing.sharp,
+			duration: theme.transitions.duration.leavingScreen,
+		}),
+		overflowX: 'hidden',
+		width: theme.spacing(7) + 1,
+		[theme.breakpoints.up('sm')]: {
+			width: theme.spacing(9) + 1,
+		},
+	},
+	toolbar: {
+		width: '100%',
+		height: '10vh',
+		display: 'flex',
+		alignItems: 'center',
+		justifyContent: 'flex-end',
+		padding: theme.spacing(0, 1),
+		// necessary for content to be below app bar
+		...theme.mixins.toolbar,
+	},
+	topCenter: {
+		width: '100vw',
+		height: '10vh',
+		display: 'flex',
+		flexDirection: 'row',
+		justifyContent: 'space-evenly',
+		alignSelf: 'center',
+	},
+	content: {
+		flexGrow: 1,
+		width: 'auto',
+		height: '100vh',
+		paddingTop: '12vh',
+		paddingBottom: '2vh',
+		overflowY: 'scroll',
+	},
+	authContainer: {
+		width: '60%',
+		display: 'flex',
+		flexDirection: 'row',
+		justifyContent: 'flex-end',
+		gap: '10px',
+	},
+	login: {
+		transform: 'translateY(10%)',
+		height: '80%',
+		width: '20%',
+		fontSize: '1rem',
+		color: 'white',
+		'&:hover': {
+			backgroundColor: '#edebfe',
+			color: '#212121',
+		},
+	},
+	menuIcon: {
+		justifySelf: 'center',
+		alignSelf: 'center',
+	},
+	iconsLeftSide: {
+		height: '46vh',
+		display: 'flex',
+		flexDirection: 'column',
+		justifyContent: 'space-evenly',
+	},
+	sokaContainer: {
+		padding: '5px 0 5px 0',
+		height: '100%',
+	},
+	sokaLogo: {
+		display: 'block',
+		maxWidth: '100%',
+		maxHeight: '100%',
+		width: 'auto',
+		height: 'auto',
+	},
+}));
 
 export default function Navbar ({ children }) {
 //toast
@@ -258,7 +259,7 @@ toast.configure()
               <SearchModal />
 
               <IconButton onClick={notify}>
-              <img src={notificationIcon} alt=""    style={{ width: '36px', height: '36px' }}/>
+              <img src={notificationIcon} alt="bell" style={{ width: '36px', height: '36px' }} />
               </IconButton>
 
 
