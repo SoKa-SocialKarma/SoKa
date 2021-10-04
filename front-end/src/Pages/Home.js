@@ -56,13 +56,30 @@ function Home() {
     padding: 1rem 2rem;
   `;
 
+  const fadeLeft = {
+    hidden: { opacity: 0, x: -100 },
+    visible: { opacity: 1, x: 0 }
+  }
+
 
   return (
     <Section>
       <Container>
         <ColumnLeft id='bk-text'>
-          <h1>Welcome to Social Karma!</h1>
-          <p id='quote-font'>"Get what you give, while you hustle for that muscle!"</p>
+          <motion.h1
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 2 }}
+          >
+            Welcome to Social Karma!</motion.h1>
+          <motion.p
+            variants={fadeLeft}
+            initial='hidden'
+            animate='visible'
+            transition={{ duration: 3 }}
+            id='quote-font'>
+            "Get what you give, while you hustle for that muscle!"
+          </motion.p>
         </ColumnLeft>
         <ColumnRight>
           <Image src={homeimg001} alt='two people exercising' />
