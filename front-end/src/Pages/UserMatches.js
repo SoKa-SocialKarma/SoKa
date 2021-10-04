@@ -49,7 +49,7 @@ function UserMatches() {
       try {
         const { data } = await axios.get(`${API}/users/${currentUserData.id}/feed/matches`);
         setCurrentUserMatches(data);
-        setSameUser(id === currentUserData.id);
+        setSameUser(id == currentUserData.id);
       } catch (err) {
         console.log(err);
       }
