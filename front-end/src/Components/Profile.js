@@ -222,7 +222,7 @@ function Profile(profile) {
                 <ul>
                   <li>
                     <img src="https://cdn-icons-png.flaticon.com/512/2928/2928144.png" alt="" style={{ width: "45px" }} />
-                    -Enthusiastic
+                    Enthusiastic
                   </li>
                 </ul>
               </div>
@@ -232,7 +232,7 @@ function Profile(profile) {
                 <ul>
                   <li>
                     <img src="https://cdn-icons-png.flaticon.com/512/4053/4053735.png" alt="" style={{ width: "45px" }} />
-                    -Assisted in lifting heavy weights safely
+                    Assisted in lifting heavy weights safely
                   </li>
                 </ul>
               </div>
@@ -242,7 +242,7 @@ function Profile(profile) {
                 <ul>
                   <li>
                     <img src="https://cdn-icons-png.flaticon.com/512/2843/2843974.png" alt="" style={{ width: "45px" }} />
-                    -Stretch tightented muscles before workout
+                    Stretch tightented muscles before workout
                   </li>
                 </ul>
               </div>
@@ -252,7 +252,7 @@ function Profile(profile) {
                 <ul>
                   <li>
                     <img src="https://cdn-icons-png.flaticon.com/512/2090/2090622.png" alt="" style={{ width: "45px" }} />
-                    -Responds on time
+                    Responds on time
                   </li>
                 </ul>
               </div>
@@ -262,7 +262,7 @@ function Profile(profile) {
                 <ul>
                   <li>
                     <img src="https://cdn-icons-png.flaticon.com/512/2237/2237680.png" alt="" style={{ width: "45px" }} />
-                    -Increase BPM
+                    Increase BPM
                   </li>
                 </ul>
               </div>
