@@ -253,7 +253,7 @@ export default function EditProfile () {
       updateProfile(requestBody, id)
     }
   }
-console.log(requestBody)
+
   return (
     <Container maxWidth='lg' className={classes.container}>
       <CssBaseline />

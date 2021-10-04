@@ -64,6 +64,7 @@ export default function LoginQs () {
     const image = '{"name":"","url":"","album":""}'
     const goals = '{"goals":[]}'
     const availability = '{"days":[]}'
+    const coordinates = '{"latitude":40.7128,"longitude":-74.006}'
     const matchRequests = '{"matchRequests":[],"acceptedMatchesHistory":[]}'
     const pendingReview =
       '{"pendingReview":false,"reviewing":{"id":0,"username":""}}'
@@ -73,6 +74,7 @@ export default function LoginQs () {
         { ...newUserBody },
         { username: '' },
         { location: 'New York' },
+        {coordinates: coordinates},
         { karma: 5 },
         { image: image },
         { badges: false },

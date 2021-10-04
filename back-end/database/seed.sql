@@ -14,7 +14,7 @@ VALUES
 '{"days":["9/23/2021","10/14/2021","12/01/2021"]}',
 '{"matchRequests":[4,5],"acceptedMatchesHistory":[2,3,6]}',
 '{"pendingReview":true,"reviewing":{"id":6,"username":"Suzzzy5"}}'),
-('-f771-4ff8-9163-90d377b50d81',
+('Eri1iUj2w9YOkrpWUVKdVhQrlX62',
 'Talia','Pichardo','T-money',
 'New York, NY',
 '{"coordinates":{"latitude":40.8417,"longitude":-73.9394}}',
@@ -193,16 +193,16 @@ VALUES
 INSERT INTO badges
 (id, badge_name, image, info)
 VALUES
-(1,'Great Motivator','{"name":"","url":"https://cdn-icons-png.flaticon.com/512/2928/2928144.png","album":""}',
-'{"info":"Enthusiastic"}'),
-(2,'Spot On','{"name":"","url":"https://cdn-icons-png.flaticon.com/512/4053/4053735.png","album":""}',
-'{"info":"Assisted in lifting heavy weights safely"}'),
-(3,'Mobility Master','{"name":"","url":"https://cdn-icons-png.flaticon.com/512/2843/2843974.png","album":""}',
-'{"info":"Helped stretch tightented muscles before workout"}'),
-(4,'Punctual','{"name":"","url":"https://cdn-icons-png.flaticon.com/512/2090/2090622.png","album":""}',
-'{"info":"Responds to all messages and shows up on time"}'),
-(5,'Cardiologist','{"name":"","url":"https://cdn-icons-png.flaticon.com/512/2237/2237680.png","album":""}',
-'{"info":"Helped increase BPM"}');
+(1,'Great Motivator','{"name":"great-motivator.png","url":"https://firebasestorage.googleapis.com/v0/b/soka-socialkarma.appspot.com/o/great-motivator.png?alt=media&token=6d2ca561-b4d5-4e46-b13b-1b25e2601c42","album":"badges"}',
+'{"info":"-Enthusiastic"}'),
+(2,'Spot On','{"name":"spot-on.png","url":"https://firebasestorage.googleapis.com/v0/b/soka-socialkarma.appspot.com/o/spot-on.png?alt=media&token=ef62fc3b-f389-4e1b-9899-78601b79d243","album":"badges"}',
+'{"info":"-Assisted in lifting heavy weights safely"}'),
+(3,'Mobility Master','{"name":"mobility-master","url":"https://firebasestorage.googleapis.com/v0/b/soka-socialkarma.appspot.com/o/mobility-master.png?alt=media&token=1c557f43-db9d-459b-bd77-97412cc26a8d","album":"badges"}',
+'{"info":"-Stretch tightented muscles before workout"}'),
+(4,'Punctuality','{"name":"punctuality","url":"https://firebasestorage.googleapis.com/v0/b/soka-socialkarma.appspot.com/o/punctuality.png?alt=media&token=2b0ecfe2-6d76-4b22-b8ef-e04d79e0cd39","album":"badges"}',
+'{"info":"-Responds on time"}'),
+(5,'Cardiologist','{"name":"cardiologist","url":"https://firebasestorage.googleapis.com/v0/b/soka-socialkarma.appspot.com/o/cardiologist.png?alt=media&token=bcd2e086-1444-4ea4-9714-33dfcb6ce3d8","album":"badges"}',
+'{"info":"-Increase BPM"}');
 
 
 
