@@ -4,7 +4,7 @@ const {
   updateUsersQuery
 } = require('../helpers/usersQuery.js')
 
-const columns = `id, name, lastname, coordinates, username, location, gender, radius, 
+const columns = `id, name, lastname, coordinates->'coordinates' AS coordinates, username, location, gender, radius, 
 karma, image, badges, goals->'goals' AS goals, experience->'experience' AS experience, availability->'days' AS availableDays,
 matchrequests AS requests, pendingreview AS toDoReview`
 
