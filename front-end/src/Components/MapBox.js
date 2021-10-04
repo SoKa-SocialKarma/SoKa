@@ -56,8 +56,10 @@ const MapBox = ({ adjustmentHeight, adjustmentWidth }) => {
 
   return (
     <>
-      {window.location.href === 'http://localhost:3000/search-results' &&
-        <ReactMapGL
+      {(window.location.href === 'http://localhost:3000/search-results' ||
+        window.location.href === `http://localhost:3000/users/14/profile` ||
+        window.location.href === `http://localhost:3000/users/14/feed/matches`) &&
+        (<ReactMapGL
           mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_TOKEN}
           mapStyle='mapbox://styles/tpichardo/cktjfw1vh05kc18qq97wjjwrj'
           {...viewport}
@@ -67,35 +69,7 @@ const MapBox = ({ adjustmentHeight, adjustmentWidth }) => {
           <Source id='my-data' type='geojson' data={geojson}>
             <Layer {...layerStyle} />
           </Source>
-        </ReactMapGL>
-      }
-
-      {window.location.href === `http://localhost:3000/users/14/profile` &&
-        <ReactMapGL
-          mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_TOKEN}
-          mapStyle='mapbox://styles/tpichardo/cktjfw1vh05kc18qq97wjjwrj'
-          {...viewport}
-          onViewportChange={nextViewport => setViewport(nextViewport)}
-          style={{ height: '50px', width: '30px' }}
-        >
-          <Source id='my-data' type='geojson' data={geojson}>
-            <Layer {...layerStyle} />
-          </Source>
-        </ReactMapGL>
-      }
-
-      {window.location.href === `http://localhost:3000/users/14/feed/matches` &&
-        <ReactMapGL
-          mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_TOKEN}
-          mapStyle='mapbox://styles/tpichardo/cktjfw1vh05kc18qq97wjjwrj'
-          {...viewport}
-          onViewportChange={nextViewport => setViewport(nextViewport)}
-          style={{ height: '50px', width: '30px' }}
-        >
-          <Source id='my-data' type='geojson' data={geojson}>
-            <Layer {...layerStyle} />
-          </Source>
-        </ReactMapGL>
+        </ReactMapGL>)
       }
 
       {window.location.href === 'http://localhost:3000/map' &&
