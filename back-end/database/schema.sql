@@ -5,11 +5,11 @@ CREATE DATABASE soka;
 DROP TABLE IF EXISTS users CASCADE;
 CREATE TABLE users (
     id SERIAL PRIMARY KEY,
-    uuid VARCHAR(28) UNIQUE,
+    uuid VARCHAR(28),
     name TEXT NOT NULL,
     lastname TEXT NOT NULL,
-    username VARCHAR(16) UNIQUE NOT NULL,
-    location TEXT NOT NULL,
+    username VARCHAR(16),
+    location TEXT,
     gender TEXT,
     radius INT DEFAULT 5,
     CHECK (radius >=0 AND radius <=30),
@@ -17,9 +17,9 @@ CREATE TABLE users (
     CHECK (karma >=1 AND karma <=5),
     image JSONB,
     badges BOOLEAN DEFAULT false,
-    goals JSONB NOT NULL,
+    goals JSONB,
     experience JSONB,
-    availability JSONB NOT NULL,
+    availability JSONB,
     matchRequests JSONB,
     pendingReview JSONB
 );
@@ -58,6 +58,16 @@ CREATE TABLE username_friends (
     username VARCHAR(16) ,
     friends JSONB NOT NULL
 );
+
+DROP TABLE IF EXISTS username_newUserBlocked;
+CREATE TABLE username_newUserBlocked (
+    id SERIAL PRIMARY KEY,
+    uuid VARCHAR(28),
+    blocked BOOLEAN NOT NULL
+);
+
+
+
 
 
 -- DROP TABLE IF EXISTS chats_record;

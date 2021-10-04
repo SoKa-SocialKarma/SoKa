@@ -3,7 +3,11 @@ import { useElement, useAPI } from '../Context/AuthContext'
 import { Link } from 'react-router-dom'
 import SearchModal from './SearchModal'
 import sokablue2 from '../Assets/sokablue2.png'
+import notificationIcon from '../Assets/bell.png'
 import clsx from 'clsx'
+
+import {  toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css'
 
 import { makeStyles, useTheme } from '@material-ui/core/styles'
 import Drawer from '@material-ui/core/Drawer'
@@ -138,6 +142,20 @@ const useStyles = makeStyles(theme => ({
 }))
 
 export default function Navbar ({ children }) {
+//toast
+const notify = () => toast("You have 3 new match requests", {
+  position: "top-right",
+  // autoClose: false,
+autoClose: 8000,
+hideProgressBar: false,
+closeOnClick: true,
+pauseOnHover: true,
+draggable: true,
+progress: undefined,
+},
+toast ('Rate previous match to unlock badges'));
+
+toast.configure()
   const { currentUser, currentUserData } = useAPI()
   const { elementSetter, drawerSetter } = useElement()
   const mainElementRef = useRef()
@@ -187,9 +205,6 @@ export default function Navbar ({ children }) {
     drawerSetter({
       drawerElement: drawerElementRef.current
     })
-    return () => {
-      drawerElementRef.removeEventListener('mouseenter', handleMouseEnter)
-    }
   }, [])
 
   useEffect(() => {
@@ -197,9 +212,6 @@ export default function Navbar ({ children }) {
     drawerSetter({
       drawerElement: drawerElementRef.current
     })
-    return () => {
-      drawerElementRef.removeEventListener('mouseleave', handleMouseLeave)
-    }
   }, [])
 
   useEffect(() => {
@@ -244,6 +256,12 @@ export default function Navbar ({ children }) {
             </IconButton>
             <div className={classes.authContainer}>
               <SearchModal />
+
+              <IconButton onClick={notify}>
+              <img src={notificationIcon} alt=""    style={{ width: '36px', height: '36px' }}/>
+              </IconButton>
+
+
               {!currentUser ? (
                 <Button component={Link} to='/login' className={classes.login}>
                   Login

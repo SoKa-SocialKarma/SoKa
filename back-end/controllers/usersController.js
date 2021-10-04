@@ -10,7 +10,8 @@ const {
   getUsers,
   createUsers,
   updateUsers,
-  deleteUsers
+  deleteUsers,
+  blockNewUser
 } = require('../queries/users')
 
 const { postCheck, putCheck } = require('../helpers/verifyData')
@@ -44,13 +45,20 @@ users.get('/:id', async (req, res) => {
 })
 
 users.post('/', postCheck, async (req, res) => {
-  try {
-    const newUser = await createUsers(req.body)
-    if (catchError(newUser)) throw msgInvalidQuery()
-
-    res.json(newUser.length ? newUser : [newUser])
-  } catch (err) {
-    res.status(400).json({ error: err })
+  if (req.body.blocked) {
+    try {
+      const newUserBlocked = await blockNewUser(req.body)
+      res.json(newUserBlocked.length ? newUserBlocked : [newUserBlocked])
+    } catch (err) {
+      res.status(400).json({ error: err })
+    }
+  } else {
+    try {
+      const newUser = await createUsers(req.body)
+      res.json(newUser.length ? newUser : [newUser])
+    } catch (err) {
+      res.status(400).json({ error: err })
+    }
   }
 })
 
