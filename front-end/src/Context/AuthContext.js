@@ -67,7 +67,7 @@ function setGlobalState(globalState, action) {
     case ACTIONS.SET_CURRENT_REVIEWEE_DATA:
       return Object.assign(
         { ...globalState },
-        { currentRevieweeData: action.payload.data.data[0] }
+        { currentRevieweeData: action.payload.data.data ? action.payload.data.data[0] : {} }
       )
 
     case ACTIONS.SET_CURRENT_SEARCH_RESULTS:
@@ -88,7 +88,7 @@ function setGlobalState(globalState, action) {
     case ACTIONS.RESET_STATE:
       return Object.assign(
         { ...globalState },
-        { currentUser: null, currentUserData: {}, currentSearchResults: [] }
+        { currentUser: null, currentUserData: {}, currentSearchResults: [], currentRevieweeData: {} }
       )
     default:
       return globalState
@@ -158,37 +158,38 @@ export function AuthProvider({ children }) {
       const getCurrentUserData = async user => {
         const data = await axios.get(`${API}/users?uuid=${user.uid}`)
         if (data.data !== 'No data found with the current id.!') {
-          getCurrentRevieweeData(data.data[0].todoreview.reviewing.id)
           dispatch({
             type: ACTIONS.SET_CURRENT_USER_DATA,
             payload: { data: data }
           })
+          await getCurrentRevieweeData(data.data[0].todoreview.reviewing.id)
         } else {
           const data = await axios.post(`${API}/users/`, {
             uuid: user.uid,
             blocked: true
           })
-          getCurrentRevieweeData(0)
           dispatch({
             type: ACTIONS.BLOCK_CURRENT_NEWUSER,
             payload: { data: data }
           })
+          await getCurrentRevieweeData(0)
         }
       }
 
       async function getCurrentRevieweeData(id) {
-        if (id === 0) {
+        if (!id) {
           const data = [{}]
           dispatch({
             type: ACTIONS.SET_CURRENT_REVIEWEE_DATA,
             payload: { data: data }
           })
+        } else {
+          const data = await axios.get(`${API}/users/${id}`)
+          dispatch({
+            type: ACTIONS.SET_CURRENT_REVIEWEE_DATA,
+            payload: { data: data }
+          })
         }
-        const data = await axios.get(`${API}/users/${id}`)
-        dispatch({
-          type: ACTIONS.SET_CURRENT_REVIEWEE_DATA,
-          payload: { data: data }
-        })
       }
 
       user && getCurrentUserData(user)

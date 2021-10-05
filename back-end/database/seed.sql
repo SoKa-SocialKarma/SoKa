@@ -169,15 +169,15 @@ VALUES
 INSERT INTO badges
 (badge_name, image, info)
 VALUES
-('Great Motivator','{"name":"great-motivator.png","url":"https://firebasestorage.googleapis.com/v0/b/soka-socialkarma.appspot.com/o/great-motivator.png?alt=media&token=6d2ca561-b4d5-4e46-b13b-1b25e2601c42","album":"badges"}',
+('Great Motivator','{"name":"GreatMotivator","url":"https://firebasestorage.googleapis.com/v0/b/soka-socialkarma.appspot.com/o/great-motivator.png?alt=media&token=6d2ca561-b4d5-4e46-b13b-1b25e2601c42","album":"badges"}',
 '{"info":"-Enthusiastic"}'),
-('Spot On','{"name":"spot-on.png","url":"https://firebasestorage.googleapis.com/v0/b/soka-socialkarma.appspot.com/o/spot-on.png?alt=media&token=ef62fc3b-f389-4e1b-9899-78601b79d243","album":"badges"}',
+('Spot On','{"name":"SpotOn","url":"https://firebasestorage.googleapis.com/v0/b/soka-socialkarma.appspot.com/o/spot-on.png?alt=media&token=ef62fc3b-f389-4e1b-9899-78601b79d243","album":"badges"}',
 '{"info":"-Assisted in lifting heavy weights safely"}'),
-('Mobility Master','{"name":"mobility-master","url":"https://firebasestorage.googleapis.com/v0/b/soka-socialkarma.appspot.com/o/mobility-master.png?alt=media&token=1c557f43-db9d-459b-bd77-97412cc26a8d","album":"badges"}',
+('Mobility Master','{"name":"MobilityMaster","url":"https://firebasestorage.googleapis.com/v0/b/soka-socialkarma.appspot.com/o/mobility-master.png?alt=media&token=1c557f43-db9d-459b-bd77-97412cc26a8d","album":"badges"}',
 '{"info":"-Stretch tightented muscles before workout"}'),
-('Punctuality','{"name":"punctuality","url":"https://firebasestorage.googleapis.com/v0/b/soka-socialkarma.appspot.com/o/punctuality.png?alt=media&token=2b0ecfe2-6d76-4b22-b8ef-e04d79e0cd39","album":"badges"}',
+('Punctuality','{"name":"Punctuality","url":"https://firebasestorage.googleapis.com/v0/b/soka-socialkarma.appspot.com/o/punctuality.png?alt=media&token=2b0ecfe2-6d76-4b22-b8ef-e04d79e0cd39","album":"badges"}',
 '{"info":"-Responds on time"}'),
-('Cardiologist','{"name":"cardiologist","url":"https://firebasestorage.googleapis.com/v0/b/soka-socialkarma.appspot.com/o/cardiologist.png?alt=media&token=bcd2e086-1444-4ea4-9714-33dfcb6ce3d8","album":"badges"}',
+('Cardiologist','{"name":"Cardiologist","url":"https://firebasestorage.googleapis.com/v0/b/soka-socialkarma.appspot.com/o/cardiologist.png?alt=media&token=bcd2e086-1444-4ea4-9714-33dfcb6ce3d8","album":"badges"}',
 '{"info":"-Increase BPM"}');
 
 
