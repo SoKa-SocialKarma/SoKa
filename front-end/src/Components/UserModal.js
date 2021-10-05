@@ -33,7 +33,9 @@ const useStyles = makeStyles((theme) => ({
 // const { name, lastname, location, karma, experience, availabledays } = profile;
 
 export default function UserModal({ profile }) {
-  console.log(profile)
+  // console.log("MODAL PROFILE")
+  // console.log(profile)
+
   const [open, setOpen] = useState(false);
 
   const classes = useStyles();

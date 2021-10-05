@@ -439,6 +439,99 @@ a:hover {
   margin-right: 350px;
 }
 
+.badge {
+  width: 30%;
+  padding: 2% 4% 2% 4%;
+  margin: 1%;
+}
+
+#GreatMotivator[animation="0"] {
+  animation: fade-in 1.2s cubic-bezier(0.39, 0.575, 0.565, 1) both;
+}
+
+#GreatMotivator[animation="1"] {
+  animation: slide-top 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+  background-color: #001440;
+  color: white;
+}
+#SpotOn[animation="0"] {
+  animation: fade-in 1.2s cubic-bezier(0.39, 0.575, 0.565, 1) both;
+}
+
+#SpotOn[animation="1"] {
+  animation: slide-top 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+  background-color: #001440;
+  color: white;
+}
+#MobilityMaster[animation="0"] {
+  animation: fade-in 1.2s cubic-bezier(0.39, 0.575, 0.565, 1) both;
+}
+#MobilityMaster[animation="1"] {
+  animation: slide-top 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+  background-color: #001440;
+  color: white;
+}
+#Punctuality[animation="0"] {
+  animation: fade-in 1.2s cubic-bezier(0.39, 0.575, 0.565, 1) both;
+}
+#Punctuality[animation="1"] {
+  animation: slide-top 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+  background-color: #001440;
+  color: white;
+}
+#Cardiologist[animation="0"] {
+  animation: fade-in 1.2s cubic-bezier(0.39, 0.575, 0.565, 1) both;
+}
+#Cardiologist[animation="1"] {
+  animation: slide-top 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+  background-color: #000b4a;
+  color: white;
+}
+
+.tracking-in-contract {
+	        animation: tracking-in-contract 1.5s cubic-bezier(0.215, 0.610, 0.355, 1.000) both;
+}
+#weloveyou{
+  font-size: 2rem;
+  font-family: Shrikhand;
+}
+
+/*           ANIMATIONS          */
+/* ============================= */
+
+@keyframes slide-top {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(-15px);
+  }
+}
+
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes tracking-in-contract {
+  0% {
+    letter-spacing: 1em;
+    opacity: 0;
+  }
+  40% {
+    opacity: 0.5;
+  }
+  100% {
+    letter-spacing: normal;
+    opacity: 1;
+  }
+}
+/* ============================= */
+
 @media screen and (max-width: 1720px) {
   #cardContainer {
     margin-top: 64px;

@@ -4,11 +4,15 @@ const {
   updateUsersQuery
 } = require('../helpers/usersQuery.js')
 
-const columns = `id, name, lastname, username, location, gender, radius, 
+const columns = `id, name, lastname, coordinates->'coordinates' AS coordinates, username, location, gender, radius, 
 karma, image, badges, goals->'goals' AS goals, experience->'experience' AS experience, availability->'days' AS availableDays,
 matchrequests AS requests, pendingreview AS toDoReview`
 
 const getAllUsers = async sokaQuery => {
+
+  if (sokaQuery.sokabadges){
+    return await db.many(`SELECT * FROM badges;`)
+  }
   try {
     const usersSearchList =
       '' + Object.values(await db.one(getAllUsersQuery(sokaQuery)))
@@ -56,15 +60,16 @@ const createUsers = async users => {
     if (!users.length) {
       return await db.one(
         `INSERT INTO users \n
-        (uuid, name, lastname, username, location, gender, radius, karma, image,\n
+        (uuid, name, lastname, username, location, coordinates, gender, radius, karma, image,\n
         badges, goals, experience, availability, matchRequests, pendingReview)
-        VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15) RETURNING *`,
+        VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15,$16) RETURNING *`,
         [
           users.uuid,
           users.name,
           users.lastname,
           users.username,
           users.location,
+          users.coordinates,
           users.gender,
           users.radius,
           users.karma,
@@ -83,15 +88,16 @@ const createUsers = async users => {
       const queries = users.map(user =>
         db.one(
           `INSERT INTO users \n
-        (uuid, name, lastname, username, location, gender, radius, karma, image,\n
+        (uuid, name, lastname, username, location, coordinates, gender, radius, karma, image,\n
         badges, goals, experience, availability, matchRequests, pendingReview)
-        VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15) RETURNING *`,
+        VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15,$16) RETURNING *`,
         [
           users.uuid,
           users.name,
           users.lastname,
           users.username,
           users.location,
+          users.coordinates,
           users.gender,
           users.radius,
           users.karma,
@@ -157,5 +163,4 @@ module.exports = {
   updateUsers,
   deleteUsers,
   blockNewUser
-
 }

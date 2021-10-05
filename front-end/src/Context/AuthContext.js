@@ -2,7 +2,7 @@ import React, { useContext, useState, useEffect, useReducer } from 'react'
 import { auth } from '../firebase'
 import { apiURL } from '../Util/apiURL'
 import axios from 'axios'
-import {createAlbum} from '../Util/imageStore'
+import { createAlbum } from '../Util/imageStore'
 
 const AuthContext = React.createContext()
 const APIContext = React.createContext()
@@ -23,11 +23,13 @@ export function useElement () {
 
 export const ACTIONS = {
   SET_CURRENT_USER: 'set-current-user',
+  SET_SOKA_BADGES: 'set-soka-badges',
   SET_CURRENT_USER_DATA: 'set-current-user-data',
   NEW_CURRENT_USER_DATA: 'new-current-user-data',
   SET_CURRENT_SEARCH_RESULTS: 'set-current-search-results',
   BLOCK_CURRENT_NEWUSER: 'block-current-newuser',
-  SET_MAIN_ELEMENT_: 'set-main-element',
+  SET_CURRENT_REVIEWEE_DATA: 'set-current-reviewee-data',
+  SET_MAIN_ELEMENT: 'set-main-element',
   SET_DRAWER_ELEMENT: 'set-drawer-element',
   RESET_STATE: 'reset-state'
 }
@@ -39,6 +41,11 @@ function setGlobalState (globalState, action) {
         { ...globalState },
         { currentUser: action.payload.user }
       )
+      case ACTIONS.SET_SOKA_BADGES:
+        return Object.assign(
+          { ...globalState },
+          { sokaBadges: action.payload.data.data }
+        )
     case ACTIONS.SET_CURRENT_USER_DATA:
       return Object.assign(
         { ...globalState },
@@ -55,6 +62,12 @@ function setGlobalState (globalState, action) {
       return Object.assign(
         { ...globalState },
         { currentUserData: action.payload.data.data[0] }
+      )
+
+    case ACTIONS.SET_CURRENT_REVIEWEE_DATA:
+      return Object.assign(
+        { ...globalState },
+        { currentRevieweeData: action.payload.data.data ? action.payload.data.data[0] : {}}
       )
 
     case ACTIONS.SET_CURRENT_SEARCH_RESULTS:
@@ -75,7 +88,7 @@ function setGlobalState (globalState, action) {
     case ACTIONS.RESET_STATE:
       return Object.assign(
         { ...globalState },
-        { currentUser: null, currentUserData: {}, currentSearchResults: [] }
+        { currentUser: null, currentUserData: {}, currentSearchResults: [], currentRevieweeData: {}}
       )
     default:
       return globalState
@@ -88,39 +101,12 @@ export function AuthProvider ({ children }) {
     currentUser: null,
     currentUserData: {},
     currentSearchResults: null,
+    currentRevieweeData: {},
     mainElement: {},
     drawerElement: {},
-    newUserBlocked: false
+    newUserBlocked: false,
+    sokaBadges:[]
   })
-
-  // Login at Firebase and store user data
-  useEffect(() => {
-    const unsubscribe = auth.onAuthStateChanged(user => {
-      const getCurrentUserData = async user => {
-        const data = await axios.get(`${API}/users?uuid=${user.uid}`)
-        if (data.data !== 'No data found with the current id.!') {
-          dispatch({
-            type: ACTIONS.SET_CURRENT_USER_DATA,
-            payload: { data: data }
-          })
-        } else {
-          const data = await axios.post(`${API}/users/`, {
-            uuid: user.uid,
-            blocked: true
-          })
-          dispatch({
-            type: ACTIONS.BLOCK_CURRENT_NEWUSER,
-            payload: { data: data }
-          })
-        }
-      }
-      user && getCurrentUserData(user)
-      dispatch({ type: ACTIONS.SET_CURRENT_USER, payload: { user: user } })
-      setLoading(false)
-    })
-    return unsubscribe
-  }, [])
-
 
   // Login Functions from FIREBASE
   function signUp (email, password) {
@@ -166,6 +152,55 @@ export function AuthProvider ({ children }) {
     'location'
   ]
 
+  // Login at Firebase and store currentUserData & currentRevieweeData
+  useEffect(() => {
+    const unsubscribe = auth.onAuthStateChanged(user => {
+      const getCurrentUserData = async user => {
+        const data = await axios.get(`${API}/users?uuid=${user.uid}`)
+        if (data.data !== 'No data found with the current id.!') {
+          dispatch({
+            type: ACTIONS.SET_CURRENT_USER_DATA,
+            payload: { data: data }
+          })
+          await getCurrentRevieweeData(data.data[0].todoreview.reviewing.id)
+        } else {
+          const data = await axios.post(`${API}/users/`, {
+            uuid: user.uid,
+            blocked: true
+          })
+          dispatch({
+            type: ACTIONS.BLOCK_CURRENT_NEWUSER,
+            payload: { data: data }
+          })
+          await getCurrentRevieweeData(0)
+        }
+      }
+
+      async function getCurrentRevieweeData (id) {
+        if (!id) {
+          const data = [{}]
+          dispatch({
+            type: ACTIONS.SET_CURRENT_REVIEWEE_DATA,
+            payload: { data: data }
+          })
+        }else{
+        const data = await axios.get(`${API}/users/${id}`)
+        dispatch({
+          type: ACTIONS.SET_CURRENT_REVIEWEE_DATA,
+          payload: { data: data }
+        })
+      }
+      }
+
+      user && getCurrentUserData(user)
+      user&& getSokaBadges()
+      dispatch({ type: ACTIONS.SET_CURRENT_USER, payload: { user: user } })
+      setLoading(false)
+    })
+    return unsubscribe
+  }, [])
+
+  
   // API Requests
   async function getResultsUsingSokaQuery (searchParams) {
     let query = `${API}/users?`
@@ -206,6 +241,8 @@ export function AuthProvider ({ children }) {
       payload: { data: data }
     })
   }
+
+  // Unblocking User after answering Questionary
   async function unblockNewUser (userUUID) {
     const data = await axios.post(`${API}/users/`, {
       uuid: userUUID,
@@ -216,12 +253,23 @@ export function AuthProvider ({ children }) {
       type: ACTIONS.BLOCK_CURRENT_NEWUSER,
       payload: { data: data }
     })
-
   }
+
+  // Getting Soka Badges
+  async function getSokaBadges () {
+    const data = await axios.get(`${API}/users?sokabadges=true`)
+    dispatch({
+      type: ACTIONS.SET_SOKA_BADGES,
+      payload: { data: data }
+    })
+  }
+
   async function createFirebaseAlbum (user) {
-    createAlbum(user.email) 
+    createAlbum(user.email)
   }
 
+
+  // Exporting Functions and Variables 
   const authValue = {
     currentUser: globalState.currentUser,
     newUserBlocked: globalState.newUserBlocked,
@@ -239,6 +287,8 @@ export function AuthProvider ({ children }) {
     newUserBlocked: globalState.newUserBlocked,
     currentUserData: globalState.currentUserData,
     currentSearchResults: globalState.currentSearchResults,
+    currentRevieweeData: globalState.currentRevieweeData,
+    sokaBadges: globalState.sokaBadges,
     getResultsUsingSokaQuery,
     getFreshUserData,
     getNewUserData,
