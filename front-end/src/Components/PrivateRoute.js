@@ -7,8 +7,8 @@ const PrivateRoute = ({ component: Component, ...rest }) => {
   const goToNewUser = Boolean(currentUser) && newUserBlocked
   const goToLogin = Boolean(Boolean(currentUser) === false)
 
-  // const pendingReview = false
-  const pendingReview = currentUser ? currentUserData.todoreview.pendingReview : false
+  const pendingReview = false
+  // const pendingReview = currentUser ? currentUserData.todoreview.pendingReview : false
 
   return (
     <Route
