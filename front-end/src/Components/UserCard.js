@@ -112,7 +112,6 @@ function UserCard({ profile }) {
           <p>Availability: {availabledays ? availabledays[0] : ''}</p>
           <p>Location : {location ? location : ''}</p>
           <p>Experience: {experience}</p>
-          {/* <p>Goals: {goals}</p> */}
         </div>
       </Box>
 
