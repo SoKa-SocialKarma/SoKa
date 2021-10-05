@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react'
 import { useAPI } from '../Context/AuthContext'
 
 import { useElement } from '../Context/AuthContext'
-import { sokaURL } from '../Util/apiURL'
 import useGeoLocation from '../Hooks/useGeoLocation'
 import ReactMapGL, { Source, Layer, Marker } from 'react-map-gl'
 import axios from 'axios'
@@ -12,7 +11,7 @@ import 'mapbox-gl/dist/mapbox-gl.css'
 import mapboxgl from "mapbox-gl"; // This is a dependency of react-map-gl even if you didn't explicitly install it
 // eslint-disable-next-line import/no-webpack-loader-syntax
 mapboxgl.workerClass = require("worker-loader!mapbox-gl/dist/mapbox-gl-csp-worker").default;
-const API = sokaURL()
+
 
 
 const layerStyle = {
@@ -24,7 +23,7 @@ const layerStyle = {
   }
 }
 
-const BEAPI = apiURL()
+const API = apiURL()
 
 const MapBox = ({ adjustmentHeight, adjustmentWidth }) => {
   const { currentUserData } = useAPI()
@@ -36,7 +35,7 @@ const MapBox = ({ adjustmentHeight, adjustmentWidth }) => {
 
   const getUserCoordinates = async () => {
     try {
-      const { data } = await axios.get(`${BEAPI}/users`)
+      const { data } = await axios.get(`${API}/users`)
       setUserCoordinates(data)
     } catch (err) {
       console.log(err)
@@ -89,12 +88,12 @@ const MapBox = ({ adjustmentHeight, adjustmentWidth }) => {
 
   return (
     <>
-      {(window.location.href === `${API}/search-results` ||
-        window.location.href ===
-        `${API}/users/${currentUserData ? currentUserData.id : '14'
+      {(window.location.pathname === `/search-results` ||
+        window.location.pathname ===
+        `/users/${currentUserData ? currentUserData.id : '14'
         }/profile` ||
-        window.location.href ===
-        `${API}/users/${currentUserData ? currentUserData.id : '14'
+        window.location.pathname ===
+        `/users/${currentUserData ? currentUserData.id : '14'
         }/feed/matches`) && (
           <ReactMapGL
             mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_TOKEN}
@@ -109,7 +108,7 @@ const MapBox = ({ adjustmentHeight, adjustmentWidth }) => {
           </ReactMapGL>
         )}
 
-      {window.location.href === `${API}/map` && (
+      {window.location.pathname === `/map` && (
         <ReactMapGL
           mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_TOKEN}
           mapStyle='mapbox://styles/tpichardo/cktjfw1vh05kc18qq97wjjwrj'
