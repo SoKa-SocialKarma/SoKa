@@ -4,6 +4,8 @@ import { labels } from '../Util/searchFields'
 import GoodExperience from '../Components/GoodExperience'
 import BadExperience from '../Components/BadExperience'
 import Badges from '../Components/Badges'
+import WeLoveYou from '../Components/WeLoveYou'
+
 
 import { Avatar, Container, Typography } from '@material-ui/core/'
 import Rating from '@mui/material/Rating'
@@ -17,10 +19,10 @@ const useStyles = makeStyles(theme => ({
     height: 'fit-content',
     padding: '4% 2% 4% 2%',
     display: 'grid',
-    gridTemplateRows: '1fr 1fr'
+    gridTemplateRows: '32vh auto'
   },
   boxOne: {
-    height: '86%',
+    height: '100%',
     display: 'grid',
     gridRow: '1/2',
     gridTemplateRows: '10% 18% 20% 18% 20%'
@@ -163,7 +165,10 @@ const ReviewPairUp = () => {
           {showGood && <GoodExperience karma={karma} />}
           {showBad && <BadExperience karma={karma} />}
         </Container>
-        <Box className={classes.boxTwo}>{showGood && <Badges />}</Box>
+        <Box className={classes.boxTwo}>
+          {showGood && <Badges />}
+          {showBad && <WeLoveYou />}
+        </Box>
       </Container>
     </>
   )
