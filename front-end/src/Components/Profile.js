@@ -36,7 +36,6 @@ const useStyles = makeStyles({
 });
 
 function Profile(profile) {
-	console.log(profile.profile);
 	const { currentUserData } = useAPI();
 	const { url } = useRouteMatch();
 	const edit = url
@@ -46,10 +45,19 @@ function Profile(profile) {
 		.join('/');
 	const classes = useStyles();
 
-	const { name, lastname, gender, location, availabledays, experience, goals, radius, image, id } =
-		currentUserData;
-	console.log(currentUserData);
-	console.log(window.location.href);
+	const {
+		name,
+		lastname,
+		gender,
+		location,
+		availabledays,
+		experience,
+		goals,
+		radius,
+		image,
+		id
+	} = currentUserData;
+
 	return (
 		<Paper className={classes.root}>
 			<div id='profHeader' className='profBackground'>
@@ -69,10 +77,10 @@ function Profile(profile) {
 				)}
 				{(window.location.href === `http://localhost:3000/users/${id}/feed/matches` ||
 					window.location.href === `http://localhost:3000/search-results`) && (
-					<h1 id='card'>
-						{profile.profile.name} {profile.profile.lastname}
-					</h1>
-				)}
+						<h1 id='card'>
+							{profile.profile.name} {profile.profile.lastname}
+						</h1>
+					)}
 				<div id='socials'>
 					<a href='https://www.instagram.com/' target='_blank' rel='noreferrer'>
 						<img src={instagram} alt='instagram login' className='socialImage' />
@@ -116,13 +124,13 @@ function Profile(profile) {
 
 							{(window.location.href === `http://localhost:3000/users/${id}/feed/matches` ||
 								window.location.href === `http://localhost:3000/search-results`) && (
-								<ul>
-									<li>
-										<img src={userPin} alt='userPin icon' />
-										{profile.profile.gender}
-									</li>
-								</ul>
-							)}
+									<ul>
+										<li>
+											<img src={userPin} alt='userPin icon' />
+											{profile.profile.gender}
+										</li>
+									</ul>
+								)}
 							<h5>Location:</h5>
 							{window.location.href === `http://localhost:3000/users/${id}/profile` && (
 								<ul>
@@ -135,13 +143,13 @@ function Profile(profile) {
 
 							{(window.location.href === `http://localhost:3000/users/${id}/feed/matches` ||
 								window.location.href === `http://localhost:3000/search-results`) && (
-								<ul>
-									<li>
-										<img src={pin} alt='location pin' />
-										{profile.profile.location}
-									</li>
-								</ul>
-							)}
+									<ul>
+										<li>
+											<img src={pin} alt='location pin' />
+											{profile.profile.location}
+										</li>
+									</ul>
+								)}
 
 							<h5>Availablility:</h5>
 							{window.location.href === `http://localhost:3000/users/${id}/profile` && (
@@ -155,15 +163,15 @@ function Profile(profile) {
 
 							{(window.location.href === `http://localhost:3000/users/${id}/feed/matches` ||
 								window.location.href === `http://localhost:3000/search-results`) && (
-								<ul>
-									<li>
-										<img src={calendar} alt='calendar' />
-										{profile.profile.availabledays
-											? `${profile.profile.availabledays[0]}, ${profile.profile.availabledays[1]}`
-											: ''}
-									</li>
-								</ul>
-							)}
+									<ul>
+										<li>
+											<img src={calendar} alt='calendar' />
+											{profile.profile.availabledays
+												? `${profile.profile.availabledays[0]}, ${profile.profile.availabledays[1]}`
+												: ''}
+										</li>
+									</ul>
+								)}
 
 							<h5>Experience :</h5>
 							{window.location.href === `http://localhost:3000/users/${id}/profile` && (
@@ -177,13 +185,13 @@ function Profile(profile) {
 
 							{(window.location.href === `http://localhost:3000/users/${id}/feed/matches` ||
 								window.location.href === `http://localhost:3000/search-results`) && (
-								<ul>
-									<li>
-										<img src={certification} alt='medal' />
-										{profile.profile.experience}
-									</li>
-								</ul>
-							)}
+									<ul>
+										<li>
+											<img src={certification} alt='medal' />
+											{profile.profile.experience}
+										</li>
+									</ul>
+								)}
 
 							<h5>Goals:</h5>
 							{window.location.href === `http://localhost:3000/users/${id}/profile` && (
@@ -198,16 +206,16 @@ function Profile(profile) {
 
 							{(window.location.href === `http://localhost:3000/users/${id}/feed/matches` ||
 								window.location.href === `http://localhost:3000/search-results`) && (
-								<ul>
-									<li>
-										<img src={target} alt='target' />
+									<ul>
+										<li>
+											<img src={target} alt='target' />
 
-										{profile.profile.goals
-											? `${profile.profile.goals[0]}, ${profile.profile.goals[1]}, ${profile.profile.goals[2]}, ${profile.profile.goals[3]} `
-											: ''}
-									</li>
-								</ul>
-							)}
+											{profile.profile.goals
+												? `${profile.profile.goals[0]}, ${profile.profile.goals[1]}, ${profile.profile.goals[2]}, ${profile.profile.goals[3]} `
+												: ''}
+										</li>
+									</ul>
+								)}
 
 							<h5>Radius:</h5>
 							{window.location.href === `http://localhost:3000/users/${id}/profile` && (
@@ -221,13 +229,13 @@ function Profile(profile) {
 
 							{(window.location.href === `http://localhost:3000/users/${id}/feed/matches` ||
 								window.location.href === `http://localhost:3000/search-results`) && (
-								<ul>
-									<li>
-										<img src={distance} alt='two location tags' />
-										{profile.profile.radius} miles
-									</li>
-								</ul>
-							)}
+									<ul>
+										<li>
+											<img src={distance} alt='two location tags' />
+											{profile.profile.radius} miles
+										</li>
+									</ul>
+								)}
 						</div>
 					</div>
 
