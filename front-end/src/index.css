@@ -488,6 +488,14 @@ a:hover {
   color: white;
 }
 
+.tracking-in-contract {
+	        animation: tracking-in-contract 1.5s cubic-bezier(0.215, 0.610, 0.355, 1.000) both;
+}
+#weloveyou{
+  font-size: 2rem;
+  font-family: Shrikhand;
+}
+
 /*           ANIMATIONS          */
 /* ============================= */
 
@@ -505,6 +513,20 @@ a:hover {
     opacity: 0;
   }
   100% {
+    opacity: 1;
+  }
+}
+
+@keyframes tracking-in-contract {
+  0% {
+    letter-spacing: 1em;
+    opacity: 0;
+  }
+  40% {
+    opacity: 0.5;
+  }
+  100% {
+    letter-spacing: normal;
     opacity: 1;
   }
 }

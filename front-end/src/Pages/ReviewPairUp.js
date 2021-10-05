@@ -4,7 +4,7 @@ import { labels } from '../Util/searchFields'
 import GoodExperience from '../Components/GoodExperience'
 import BadExperience from '../Components/BadExperience'
 import Badges from '../Components/Badges'
-import weStillLoveYou from '../Assets/weStillLoveYou.svg'
+import WeLoveYou from '../Components/WeLoveYou'
 
 
 import { Avatar, Container, Typography } from '@material-ui/core/'
@@ -70,11 +70,7 @@ const useStyles = makeStyles(theme => ({
     placeSelf: 'center',
     padding: '1.5% 1% 2% 1%',
     fontSize: '1.2rem'
-  },
-  ouch:{
-    width: '100%',
-    height: '50%',
-  },
+  }
 }))
 
 const ReviewPairUp = () => {
@@ -171,7 +167,7 @@ const ReviewPairUp = () => {
         </Container>
         <Box className={classes.boxTwo}>
           {showGood && <Badges />}
-          {showBad && <img src={weStillLoveYou} alt='bad-experience' className={classes.ouch}/>}
+          {showBad && <WeLoveYou />}
         </Box>
       </Container>
     </>
