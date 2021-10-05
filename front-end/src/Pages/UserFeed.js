@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react'
-// import { useParams } from 'react-router'
 
 import UserCard from '../Components/UserCard.js'
 import { Container, Paper } from '@material-ui/core'
@@ -26,13 +25,12 @@ const useStyles = makeStyles({
   }
 })
 
-function UserFeed () {
+function UserFeed() {
   const classes = useStyles()
   const [
     currentUserPotentialMatchesProfiles,
     setCurrentUserPotentialMatchesProfiles
   ] = useState([])
-  //   const { id } = useParams()
 
   const getCurrentUserPotentialMatches = async () => {
     try {
@@ -44,7 +42,7 @@ function UserFeed () {
   }
 
   useEffect(() => {
-      getCurrentUserPotentialMatches()
+    getCurrentUserPotentialMatches()
   }, [])
 
   return (
