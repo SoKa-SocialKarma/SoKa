@@ -73,6 +73,7 @@ function UserCard({ profile }) {
 
   const { name, lastname, location, karma, experience, availabledays, image } = profile
 
+
   return (
     <>
       <h4 className={classes.root}>
