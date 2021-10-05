@@ -71,7 +71,7 @@ function Profile(profile) {
 				/>
 				)}
 				{(window.location.pathname === `/users/${id}/feed/matches` ||
-					window.location.pathname === `/search-results` || window.location.pathname === `/users/${id}/feed`) && (
+					window.location.pathname === `/search-results` || window.location.pathname === `/users/14/feed`) && (
 						<img
 					className='profPic'
 					src={profile.profile.image.url ? profile.profile.image.url : defaulProfile}
@@ -89,7 +89,7 @@ function Profile(profile) {
 					</h1>
 				)}
 				{(window.location.pathname === `/users/${id}/feed/matches`||
-				window.location.pathname === `/search-results` || window.location.pathname === `/users/${id}/feed`) && (
+				window.location.pathname === `/search-results` || window.location.pathname === `/users/14/feed`) && (
 					<h1 id='card'>
 						{profile.profile.name} {profile.profile.lastname}
 					</h1>
@@ -136,7 +136,7 @@ function Profile(profile) {
 							)}
 
 							{(window.location.pathname === `/users/${id}/feed/matches` ||
-								window.location.pathname === `/search-results` || window.location.pathname === `/users/${id}/feed`) && (
+								window.location.pathname === `/search-results` || window.location.pathname === `/users/14/feed`) && (
 								<ul>
 									<li>
 										<img src={userPin} alt='userPin icon' />
@@ -155,7 +155,7 @@ function Profile(profile) {
 							)}
 
 							{(window.location.pathname === `/users/${id}/feed/matches` ||
-								window.location.pathname === `/search-results` || window.location.pathname === `/users/${id}/feed` ) && (
+								window.location.pathname === `/search-results` || window.location.pathname === `/users/14/feed` ) && (
 								<ul>
 									<li>
 										<img src={pin} alt='location pin' />
@@ -175,7 +175,7 @@ function Profile(profile) {
 							)}
 
 							{(window.location.pathname === `/users/${id}/feed/matches` ||
-								window.location.pathname === `/search-results` || window.location.pathname === `/users/${id}/feed`) && (
+								window.location.pathname === `/search-results` || window.location.pathname === `/users/14/feed`) && (
 								<ul>
 									<li>
 										<img src={calendar} alt='calendar' />
@@ -197,7 +197,7 @@ function Profile(profile) {
 							)}
 
 							{(window.location.pathname === `/users/${id}/feed/matches` ||
-								window.location.pathname === `/search-results` || window.location.pathname === `/users/${id}/feed`) && (
+								window.location.pathname === `/search-results` || window.location.pathname === `/users/14/feed`) && (
 								<ul>
 									<li>
 										<img src={certification} alt='medal' />
@@ -218,7 +218,7 @@ function Profile(profile) {
 							)}
 
 							{(window.location.pathname === `/users/${id}/feed/matches` ||
-								window.location.pathname === `/search-results` || window.location.pathname === `/users/${id}/feed`) && (
+								window.location.pathname === `/search-results` || window.location.pathname === `/users/14/feed`) && (
 								<ul>
 									<li>
 										<img src={target} alt='target' />
@@ -241,7 +241,7 @@ function Profile(profile) {
 							)}
 
 							{(window.location.pathname === `/users/${id}/feed/matches` ||
-								window.location.pathname === `/search-results` || window.location.pathname === `/users/${id}/feed`) && (
+								window.location.pathname === `/search-results` || window.location.pathname === `/users/14/feed`) && (
 								<ul>
 									<li>
 										<img src={distance} alt='two location tags' />
