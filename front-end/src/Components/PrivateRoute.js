@@ -8,7 +8,7 @@ const PrivateRoute = ({ component: Component, ...rest }) => {
   const goToLogin = Boolean(Boolean(currentUser) === false)
 
   // const pendingReview = false
-  const pendingReview = currentUserData ? currentUserData.todoreview.pendingReview : false
+  const pendingReview = currentUser ? currentUserData.todoreview.pendingReview : false
 
   return (
     <Route
@@ -22,7 +22,9 @@ const PrivateRoute = ({ component: Component, ...rest }) => {
           return <Redirect to='/users/newUser' />
         } else if(pendingReview && Component.componentName !== 'ReviewPairUp'){
             return <Redirect to={`/users/${currentUserData.id}/reviewing-session`} />
-        }else if (goToNewUser && Component.componentName === 'ReviewPairUp') {
+        }else if (pendingReview && Component.componentName === 'ReviewPairUp') {
+          return <Component {...props} />
+        }else if ((pendingReview || goToNewUser) && Component.componentName === 'LoginDashBoard') {
           return <Component {...props} />
         }else {
           return <Component {...props} />
