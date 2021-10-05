@@ -4,6 +4,7 @@ import useGeoLocation from '../Hooks/useGeoLocation'
 import ReactMapGL, { Source, Layer, Marker } from 'react-map-gl'
 import axios from 'axios'
 import { apiURL } from '../Util/apiURL.js'
+import mapMarker from '../Assets/mapbox-marker.png'
 import 'mapbox-gl/dist/mapbox-gl.css'
 
 const layerStyle = {
@@ -107,7 +108,9 @@ const MapBox = ({ adjustmentHeight, adjustmentWidth }) => {
                   latitude={coordinates.coordinates.latitude}
                   longitude={coordinates.coordinates.longitude}
                 >
-                  <div>LOCATION</div>
+                  <div>
+                    <img src={mapMarker} alt="location marker on map" />
+                  </div>
                 </Marker>
               )
             })
