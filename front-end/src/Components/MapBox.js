@@ -5,6 +5,9 @@ import { useElement } from '../Context/AuthContext'
 import { sokaURL } from '../Util/apiURL'
 import useGeoLocation from '../Hooks/useGeoLocation'
 import ReactMapGL, { Source, Layer, Marker } from 'react-map-gl'
+import axios from 'axios'
+import { apiURL } from '../Util/apiURL.js'
+import mapMarker from '../Assets/mapbox-marker.png'
 import 'mapbox-gl/dist/mapbox-gl.css'
 import mapboxgl from "mapbox-gl"; // This is a dependency of react-map-gl even if you didn't explicitly install it
 // eslint-disable-next-line import/no-webpack-loader-syntax
@@ -21,12 +24,24 @@ const layerStyle = {
   }
 }
 
+const BEAPI = apiURL()
+
 const MapBox = ({ adjustmentHeight, adjustmentWidth }) => {
   const { currentUserData } = useAPI()
   const location = useGeoLocation()
   const currentLong = Number(location.coordinates.longitude)
   const currentLat = Number(location.coordinates.latitude)
   const { mainElement } = useElement()
+  const [userCoordinates, setUserCoordinates] = useState([])
+
+  const getUserCoordinates = async () => {
+    try {
+      const { data } = await axios.get(`${BEAPI}/users`)
+      setUserCoordinates(data)
+    } catch (err) {
+      console.log(err)
+    }
+  }
 
   const [viewport, setViewport] = useState({
     latitude: location.coordinates.latitude || 40.7128,
@@ -54,6 +69,8 @@ const MapBox = ({ adjustmentHeight, adjustmentWidth }) => {
   }
 
   useEffect(() => {
+    //get user coordinates
+    getUserCoordinates()
     // When the location changes, I want to set the viewport to my current location
     setViewport({
       latitude: location.coordinates.latitude || 40.7128,
@@ -74,25 +91,23 @@ const MapBox = ({ adjustmentHeight, adjustmentWidth }) => {
     <>
       {(window.location.href === `${API}/search-results` ||
         window.location.href ===
-          `${API}/users/${
-            currentUserData ? currentUserData.id : '14'
-          }/profile` ||
+        `${API}/users/${currentUserData ? currentUserData.id : '14'
+        }/profile` ||
         window.location.href ===
-          `${API}/users/${
-            currentUserData ? currentUserData.id : '14'
-          }/feed/matches`) && (
-        <ReactMapGL
-          mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_TOKEN}
-          mapStyle='mapbox://styles/tpichardo/cktjfw1vh05kc18qq97wjjwrj'
-          {...viewport}
-          onViewportChange={nextViewport => setViewport(nextViewport)}
-          style={{ height: '50px', width: '30px' }}
-        >
-          <Source id='my-data' type='geojson' data={geojson}>
-            <Layer {...layerStyle} />
-          </Source>
-        </ReactMapGL>
-      )}
+        `${API}/users/${currentUserData ? currentUserData.id : '14'
+        }/feed/matches`) && (
+          <ReactMapGL
+            mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_TOKEN}
+            mapStyle='mapbox://styles/tpichardo/cktjfw1vh05kc18qq97wjjwrj'
+            {...viewport}
+            onViewportChange={nextViewport => setViewport(nextViewport)}
+            style={{ height: '50px', width: '30px' }}
+          >
+            <Source id='my-data' type='geojson' data={geojson}>
+              <Layer {...layerStyle} />
+            </Source>
+          </ReactMapGL>
+        )}
 
       {window.location.href === `${API}/map` && (
         <ReactMapGL
@@ -105,9 +120,21 @@ const MapBox = ({ adjustmentHeight, adjustmentWidth }) => {
           <Source id='my-data' type='geojson' data={geojson}>
             <Layer {...layerStyle} />
           </Source>
-          <Marker key={1} latitude={40.7812} longitude={-73.9665}>
-            <div>LOCATION</div>
-          </Marker>
+          {
+            userCoordinates.map(coordinates => {
+              return (
+                <Marker
+                  key={coordinates.id}
+                  latitude={coordinates.coordinates.latitude}
+                  longitude={coordinates.coordinates.longitude}
+                >
+                  <div>
+                    <img src={mapMarker} alt="location marker on map" />
+                  </div>
+                </Marker>
+              )
+            })
+          }
         </ReactMapGL>
       )}
     </>
