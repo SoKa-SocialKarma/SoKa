@@ -1,18 +1,8 @@
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
 import homeimg001 from '../Assets/homeimg001.svg';
-// import { useElement } from '../Context/AuthContext'
 
 function Home() {
-  // const { mainElement } = useElement()
-
-  // const landingImage = {
-  //   width: mainElement.element?.clientWidth,
-  //   height: mainElement.element?.clientHeight - 200 || 0
-  //   height: '400px',
-  //   marginBottom: '30px'
-  // }
-
   const Section = styled.section`
   height: 100vh;
   display: flex;

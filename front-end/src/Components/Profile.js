@@ -36,7 +36,6 @@ const useStyles = makeStyles({
 });
 
 function Profile(profile) {
-	console.log(profile.profile);
 	const { currentUserData } = useAPI();
 	const { url } = useRouteMatch();
 	const edit = url
@@ -46,10 +45,19 @@ function Profile(profile) {
 		.join('/');
 	const classes = useStyles();
 
-	const { name, lastname, gender, location, availabledays, experience, goals, radius, image, id } =
-		currentUserData;
-	console.log(currentUserData);
-	console.log(window.location.href);
+	const {
+		name,
+		lastname,
+		gender,
+		location,
+		availabledays,
+		experience,
+		goals,
+		radius,
+		image,
+		id
+	} = currentUserData;
+
 	return (
 		<Paper className={classes.root}>
 			<div id='profHeader' className='profBackground'>
@@ -215,12 +223,12 @@ function Profile(profile) {
 									<li>
 										<img src={target} alt='target' />
 
-										{profile.profile.goals
-											? `${profile.profile.goals[0]}, ${profile.profile.goals[1]}, ${profile.profile.goals[2]}, ${profile.profile.goals[3]} `
-											: ''}
-									</li>
-								</ul>
-							)}
+											{profile.profile.goals
+												? `${profile.profile.goals[0]}, ${profile.profile.goals[1]}, ${profile.profile.goals[2]}, ${profile.profile.goals[3]} `
+												: ''}
+										</li>
+									</ul>
+								)}
 
 							<h5>Radius:</h5>
 							{window.location.pathname === `/users/${id}/profile` && (

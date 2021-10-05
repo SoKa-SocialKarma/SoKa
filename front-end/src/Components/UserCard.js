@@ -73,6 +73,7 @@ function UserCard({ profile }) {
 
   const { name, lastname, location, karma, experience, availabledays, image } = profile
 
+
   return (
     <>
       <h4 className={classes.root}>
@@ -112,7 +113,6 @@ function UserCard({ profile }) {
           <p>Availability: {availabledays ? availabledays[0] : ''}</p>
           <p>Location : {location ? location : ''}</p>
           <p>Experience: {experience}</p>
-          {/* <p>Goals: {goals}</p> */}
         </div>
       </Box>
 
