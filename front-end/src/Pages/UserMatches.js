@@ -45,6 +45,8 @@ function UserMatches() {
   const { id } = useParams();
 
   useEffect(() => {
+
+    
     const unSubscribe = async () => {
       try {
         const { data } = await axios.get(`${API}/users/${currentUserData.id}/feed/matches`);

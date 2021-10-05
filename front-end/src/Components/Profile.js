@@ -61,12 +61,25 @@ function Profile(profile) {
 	return (
 		<Paper className={classes.root}>
 			<div id='profHeader' className='profBackground'>
-				<img
+			{window.location.href === `http://localhost:3000/users/${id}/profile` && (
+					<img
 					className='profPic'
+					// src={image.url}
 					src={image?.url ? image.url : defaulProfile}
 					alt='profile-foto'
 					style={{ width: '200px', height: '180px' }}
 				/>
+				)}
+				{(window.location.href === `http://localhost:3000/users/${id}/feed/matches` ||
+					window.location.href === `http://localhost:3000/search-results`) && (
+						<img
+					className='profPic'
+					src={profile.profile.image.url ? profile.profile.image.url : defaulProfile}
+					alt='profile-foto'
+					style={{ width: '200px', height: '180px' }}
+				/>
+				)}
+			
 			</div>
 
 			<div id='cardContainer'>
