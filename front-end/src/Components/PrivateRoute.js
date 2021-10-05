@@ -20,11 +20,11 @@ const PrivateRoute = ({ component: Component, ...rest }) => {
           return <Component {...props} />
         } else if (goToNewUser && Component.componentName !== 'LoginQs') {
           return <Redirect to='/users/newUser' />
-        } else if(pendingReview && Component.componentName !== 'ReviewPairUp'){
+        } else if ((pendingReview || goToNewUser) && Component.componentName === 'LoginDashBoard') {
+          return <Component {...props} />
+        }else if(pendingReview && Component.componentName !== 'ReviewPairUp'){
             return <Redirect to={`/users/${currentUserData.id}/reviewing-session`} />
         }else if (pendingReview && Component.componentName === 'ReviewPairUp') {
-          return <Component {...props} />
-        }else if ((pendingReview || goToNewUser) && Component.componentName === 'LoginDashBoard') {
           return <Component {...props} />
         }else {
           return <Component {...props} />
