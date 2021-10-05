@@ -11,13 +11,13 @@ const ElementContext = React.createContext()
 const API = apiURL()
 
 // Custom Hooks
-export function useAuth () {
+export function useAuth() {
   return useContext(AuthContext)
 }
-export function useAPI () {
+export function useAPI() {
   return useContext(APIContext)
 }
-export function useElement () {
+export function useElement() {
   return useContext(ElementContext)
 }
 
@@ -34,18 +34,18 @@ export const ACTIONS = {
   RESET_STATE: 'reset-state'
 }
 
-function setGlobalState (globalState, action) {
+function setGlobalState(globalState, action) {
   switch (action.type) {
     case ACTIONS.SET_CURRENT_USER:
       return Object.assign(
         { ...globalState },
         { currentUser: action.payload.user }
       )
-      case ACTIONS.SET_SOKA_BADGES:
-        return Object.assign(
-          { ...globalState },
-          { sokaBadges: action.payload.data.data }
-        )
+    case ACTIONS.SET_SOKA_BADGES:
+      return Object.assign(
+        { ...globalState },
+        { sokaBadges: action.payload.data.data }
+      )
     case ACTIONS.SET_CURRENT_USER_DATA:
       return Object.assign(
         { ...globalState },
@@ -67,7 +67,7 @@ function setGlobalState (globalState, action) {
     case ACTIONS.SET_CURRENT_REVIEWEE_DATA:
       return Object.assign(
         { ...globalState },
-        { currentRevieweeData: action.payload.data.data ? action.payload.data.data[0] : {}}
+        { currentRevieweeData: action.payload.data.data ? action.payload.data.data[0] : {} }
       )
 
     case ACTIONS.SET_CURRENT_SEARCH_RESULTS:
@@ -88,14 +88,14 @@ function setGlobalState (globalState, action) {
     case ACTIONS.RESET_STATE:
       return Object.assign(
         { ...globalState },
-        { currentUser: null, currentUserData: {}, currentSearchResults: [], currentRevieweeData: {}}
+        { currentUser: null, currentUserData: {}, currentSearchResults: [], currentRevieweeData: {} }
       )
     default:
       return globalState
   }
 }
 
-export function AuthProvider ({ children }) {
+export function AuthProvider({ children }) {
   const [loading, setLoading] = useState(true)
   const [globalState, dispatch] = useReducer(setGlobalState, {
     currentUser: null,
@@ -105,41 +105,41 @@ export function AuthProvider ({ children }) {
     mainElement: {},
     drawerElement: {},
     newUserBlocked: false,
-    sokaBadges:[]
+    sokaBadges: []
   })
 
   // Login Functions from FIREBASE
-  function signUp (email, password) {
+  function signUp(email, password) {
     return auth.createUserWithEmailAndPassword(email, password)
   }
-  function logIn (email, password) {
+  function logIn(email, password) {
     return auth.signInWithEmailAndPassword(email, password)
   }
-  function logOut () {
+  function logOut() {
     return auth.signOut()
   }
-  function resetPassword (email) {
+  function resetPassword(email) {
     return auth.sendPasswordResetEmail(email)
   }
-  function updateEmail (email) {
+  function updateEmail(email) {
     return globalState.currentUser.updateEmail(email)
   }
-  function updatePassword (password) {
+  function updatePassword(password) {
     return globalState.currentUser.updatePassword(password)
   }
-  function elementSetter (mainElement) {
+  function elementSetter(mainElement) {
     dispatch({
       type: ACTIONS.SET_MAIN_ELEMENT,
       payload: { mainElement: mainElement }
     })
   }
-  function drawerSetter (drawerElement) {
+  function drawerSetter(drawerElement) {
     dispatch({
       type: ACTIONS.SET_DRAWER_ELEMENT,
       payload: { drawerElement: drawerElement }
     })
   }
-  function resetState () {
+  function resetState() {
     dispatch({ type: ACTIONS.RESET_STATE })
   }
 
@@ -176,33 +176,33 @@ export function AuthProvider ({ children }) {
         }
       }
 
-      async function getCurrentRevieweeData (id) {
+      async function getCurrentRevieweeData(id) {
         if (!id) {
           const data = [{}]
           dispatch({
             type: ACTIONS.SET_CURRENT_REVIEWEE_DATA,
             payload: { data: data }
           })
-        }else{
-        const data = await axios.get(`${API}/users/${id}`)
-        dispatch({
-          type: ACTIONS.SET_CURRENT_REVIEWEE_DATA,
-          payload: { data: data }
-        })
-      }
+        } else {
+          const data = await axios.get(`${API}/users/${id}`)
+          dispatch({
+            type: ACTIONS.SET_CURRENT_REVIEWEE_DATA,
+            payload: { data: data }
+          })
+        }
       }
 
       user && getCurrentUserData(user)
-      user&& getSokaBadges()
+      user && getSokaBadges()
       dispatch({ type: ACTIONS.SET_CURRENT_USER, payload: { user: user } })
       setLoading(false)
     })
     return unsubscribe
   }, [])
 
-  
+
   // API Requests
-  async function getResultsUsingSokaQuery (searchParams) {
+  async function getResultsUsingSokaQuery(searchParams) {
     let query = `${API}/users?`
     let day = ''
 
@@ -225,7 +225,7 @@ export function AuthProvider ({ children }) {
   }
 
   // Refreshing Current User Data after updating Profile
-  async function getFreshUserData (userId) {
+  async function getFreshUserData(userId) {
     const data = await axios.get(`${API}/users/${userId}`)
     dispatch({
       type: ACTIONS.NEW_CURRENT_USER_DATA,
@@ -234,7 +234,7 @@ export function AuthProvider ({ children }) {
   }
 
   // Getting newUserData after answering Questionary
-  async function getNewUserData (user) {
+  async function getNewUserData(user) {
     const data = await axios.get(`${API}/users?uuid=${user.uid}`)
     dispatch({
       type: ACTIONS.NEW_CURRENT_USER_DATA,
@@ -243,7 +243,7 @@ export function AuthProvider ({ children }) {
   }
 
   // Unblocking User after answering Questionary
-  async function unblockNewUser (userUUID) {
+  async function unblockNewUser(userUUID) {
     const data = await axios.post(`${API}/users/`, {
       uuid: userUUID,
       blocked: true,
@@ -256,7 +256,7 @@ export function AuthProvider ({ children }) {
   }
 
   // Getting Soka Badges
-  async function getSokaBadges () {
+  async function getSokaBadges() {
     const data = await axios.get(`${API}/users?sokabadges=true`)
     dispatch({
       type: ACTIONS.SET_SOKA_BADGES,
@@ -264,7 +264,7 @@ export function AuthProvider ({ children }) {
     })
   }
 
-  async function createFirebaseAlbum (user) {
+  async function createFirebaseAlbum(user) {
     createAlbum(user.email)
   }
 
