@@ -67,6 +67,8 @@ const MapBox = ({ adjustmentHeight, adjustmentWidth }) => {
     ]
   }
 
+
+
   useEffect(() => {
     //get user coordinates
     getUserCoordinates()

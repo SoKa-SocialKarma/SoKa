@@ -61,25 +61,25 @@ function Profile(profile) {
 	return (
 		<Paper className={classes.root}>
 			<div id='profHeader' className='profBackground'>
-			{window.location.pathname === `/users/${id}/profile` && (
+				{window.location.pathname === `/users/${id}/profile` && (
 					<img
-					className='profPic'
-					// src={image.url}
-					src={image?.url ? image.url : defaulProfile}
-					alt='profile-foto'
-					style={{ width: '200px', height: '180px' }}
-				/>
+						className='profPic'
+						// src={image.url}
+						src={image?.url ? image.url : defaulProfile}
+						alt='profile-foto'
+						style={{ width: '200px', height: '180px' }}
+					/>
 				)}
 				{(window.location.pathname === `/users/${id}/feed/matches` ||
 					window.location.pathname === `/search-results` || window.location.pathname === `/users/${id}/feed`) && (
 						<img
-					className='profPic'
-					src={profile.profile.image.url ? profile.profile.image.url : defaulProfile}
-					alt='profile-foto'
-					style={{ width: '200px', height: '180px' }}
-				/>
-				)}
-			
+							className='profPic'
+							src={profile.profile.image.url ? profile.profile.image.url : defaulProfile}
+							alt='profile-foto'
+							style={{ width: '200px', height: '180px' }}
+						/>
+					)}
+
 			</div>
 
 			<div id='cardContainer'>
@@ -88,12 +88,12 @@ function Profile(profile) {
 						{name} {lastname}
 					</h1>
 				)}
-				{(window.location.pathname === `/users/${id}/feed/matches`||
-				window.location.pathname === `/search-results` || window.location.pathname === `/users/${id}/feed`) && (
-					<h1 id='card'>
-						{profile.profile.name} {profile.profile.lastname}
-					</h1>
-				)}
+				{(window.location.pathname === `/users/${id}/feed/matches` ||
+					window.location.pathname === `/search-results` || window.location.pathname === `/users/${id}/feed`) && (
+						<h1 id='card'>
+							{profile.profile.name} {profile.profile.lastname}
+						</h1>
+					)}
 				<div id='socials'>
 					<a href='https://www.instagram.com/' target='_blank' rel='noreferrer'>
 						<img src={instagram} alt='instagram login' className='socialImage' />
@@ -137,13 +137,13 @@ function Profile(profile) {
 
 							{(window.location.pathname === `/users/${id}/feed/matches` ||
 								window.location.pathname === `/search-results` || window.location.pathname === `/users/${id}/feed`) && (
-								<ul>
-									<li>
-										<img src={userPin} alt='userPin icon' />
-										{profile.profile.gender}
-									</li>
-								</ul>
-							)}
+									<ul>
+										<li>
+											<img src={userPin} alt='userPin icon' />
+											{profile.profile.gender}
+										</li>
+									</ul>
+								)}
 							<h5>Location:</h5>
 							{window.location.pathname === `/users/${id}/profile` && (
 								<ul>
@@ -155,14 +155,14 @@ function Profile(profile) {
 							)}
 
 							{(window.location.pathname === `/users/${id}/feed/matches` ||
-								window.location.pathname === `/search-results` || window.location.pathname === `/users/${id}/feed` ) && (
-								<ul>
-									<li>
-										<img src={pin} alt='location pin' />
-										{profile.profile.location}
-									</li>
-								</ul>
-							)}
+								window.location.pathname === `/search-results` || window.location.pathname === `/users/${id}/feed`) && (
+									<ul>
+										<li>
+											<img src={pin} alt='location pin' />
+											{profile.profile.location}
+										</li>
+									</ul>
+								)}
 
 							<h5>Availablility:</h5>
 							{window.location.pathname === `/users/${id}/profile` && (
@@ -176,15 +176,15 @@ function Profile(profile) {
 
 							{(window.location.pathname === `/users/${id}/feed/matches` ||
 								window.location.pathname === `/search-results` || window.location.pathname === `/users/${id}/feed`) && (
-								<ul>
-									<li>
-										<img src={calendar} alt='calendar' />
-										{profile.profile.availabledays
-											? `${profile.profile.availabledays[0]}, ${profile.profile.availabledays[1]}`
-											: ''}
-									</li>
-								</ul>
-							)}
+									<ul>
+										<li>
+											<img src={calendar} alt='calendar' />
+											{profile.profile.availabledays
+												? `${profile.profile.availabledays[0]}, ${profile.profile.availabledays[1]}`
+												: ''}
+										</li>
+									</ul>
+								)}
 
 							<h5>Experience :</h5>
 							{window.location.pathname === `/users/${id}/profile` && (
@@ -198,13 +198,13 @@ function Profile(profile) {
 
 							{(window.location.pathname === `/users/${id}/feed/matches` ||
 								window.location.pathname === `/search-results` || window.location.pathname === `/users/${id}/feed`) && (
-								<ul>
-									<li>
-										<img src={certification} alt='medal' />
-										{profile.profile.experience}
-									</li>
-								</ul>
-							)}
+									<ul>
+										<li>
+											<img src={certification} alt='medal' />
+											{profile.profile.experience}
+										</li>
+									</ul>
+								)}
 
 							<h5>Goals:</h5>
 							{window.location.pathname === `/users/${id}/profile` && (
@@ -219,9 +219,9 @@ function Profile(profile) {
 
 							{(window.location.pathname === `/users/${id}/feed/matches` ||
 								window.location.pathname === `/search-results` || window.location.pathname === `/users/${id}/feed`) && (
-								<ul>
-									<li>
-										<img src={target} alt='target' />
+									<ul>
+										<li>
+											<img src={target} alt='target' />
 
 											{profile.profile.goals
 												? `${profile.profile.goals[0]}, ${profile.profile.goals[1]}, ${profile.profile.goals[2]}, ${profile.profile.goals[3]} `
@@ -242,13 +242,13 @@ function Profile(profile) {
 
 							{(window.location.pathname === `/users/${id}/feed/matches` ||
 								window.location.pathname === `/search-results` || window.location.pathname === `/users/${id}/feed`) && (
-								<ul>
-									<li>
-										<img src={distance} alt='two location tags' />
-										{profile.profile.radius} miles
-									</li>
-								</ul>
-							)}
+									<ul>
+										<li>
+											<img src={distance} alt='two location tags' />
+											{profile.profile.radius} miles
+										</li>
+									</ul>
+								)}
 						</div>
 					</div>
 
@@ -328,7 +328,6 @@ function Profile(profile) {
 					</div>
 				</div>
 			</div>
-
 			<div className='item4'>
 				<MapBox adjustmentWidth={0.2} adjustmentHeight={0.3} />
 			</div>
@@ -336,3 +335,22 @@ function Profile(profile) {
 	);
 }
 export default Profile;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
