@@ -24,13 +24,13 @@ export function useElement() {
 export const ACTIONS = {
   SET_CURRENT_USER: 'set-current-user',
   SET_SOKA_BADGES: 'set-soka-badges',
+  SET_SOKA_USERS: 'set-soka-users',
   SET_CURRENT_USER_DATA: 'set-current-user-data',
   NEW_CURRENT_USER_DATA: 'new-current-user-data',
   SET_CURRENT_SEARCH_RESULTS: 'set-current-search-results',
   BLOCK_CURRENT_NEWUSER: 'block-current-newuser',
   SET_CURRENT_REVIEWEE_DATA: 'set-current-reviewee-data',
   SET_MAIN_ELEMENT: 'set-main-element',
-  SET_DRAWER_ELEMENT: 'set-drawer-element',
   RESET_STATE: 'reset-state'
 }
 
@@ -45,6 +45,11 @@ function setGlobalState(globalState, action) {
       return Object.assign(
         { ...globalState },
         { sokaBadges: action.payload.data.data }
+      )
+    case ACTIONS.SET_SOKA_USERS:
+      return Object.assign(
+        { ...globalState },
+        { sokaUsers: action.payload.data.data }
       )
     case ACTIONS.SET_CURRENT_USER_DATA:
       return Object.assign(
@@ -85,11 +90,6 @@ function setGlobalState(globalState, action) {
         { ...globalState },
         { mainElement: action.payload.mainElement }
       )
-    case ACTIONS.SET_DRAWER_ELEMENT:
-      return Object.assign(
-        { ...globalState },
-        { drawerElement: action.payload.drawerElement }
-      )
     case ACTIONS.RESET_STATE:
       return Object.assign(
         { ...globalState },
@@ -114,8 +114,8 @@ export function AuthProvider({ children }) {
     currentSearchResults: null,
     currentRevieweeData: {},
     mainElement: {},
-    drawerElement: {},
     newUserBlocked: false,
+    sokaUsers: [],
     sokaBadges: []
   })
 
@@ -274,6 +274,14 @@ export function AuthProvider({ children }) {
       payload: { data: data }
     })
   }
+  // Getting SokaUsers
+  async function getSokaUsers() {
+    const data = await axios.get(`${API}/users/`)
+    dispatch({
+      type: ACTIONS.SET_SOKA_USERS,
+      payload: { data: data }
+    })
+  }
 
 
   // Creating Album for newUser at Firebase
@@ -318,10 +326,12 @@ export function AuthProvider({ children }) {
     currentSearchResults: globalState.currentSearchResults,
     currentRevieweeData: globalState.currentRevieweeData,
     sokaBadges: globalState.sokaBadges,
+    sokaUsers: globalState.sokaUsers,
     updateCurrentRevieweeData,
     getResultsUsingSokaQuery,
     getFreshUserData,
     getNewUserData,
+    getSokaUsers,
     unblockNewUser,
     createFirebaseAlbum
   }
@@ -329,8 +339,6 @@ export function AuthProvider({ children }) {
   const elementValue = {
     elementSetter,
     mainElement: globalState.mainElement,
-    drawerSetter,
-    drawerElement: globalState.drawerElement
   }
 
   return (
