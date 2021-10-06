@@ -1,15 +1,7 @@
 import { useState } from "react";
-import Profile from './Profile';
+import Profile from "./Profile";
 
-
-import {
-  makeStyles,
-  Backdrop,
-  IconButton,
-  Paper,
-  Fade,
-  Modal,
-} from "@material-ui/core";
+import { makeStyles, Backdrop, Paper, Fade, Modal } from "@material-ui/core";
 import viewMoreC from "../Assets/viewMoreC.png";
 
 const useStyles = makeStyles((theme) => ({
@@ -45,10 +37,9 @@ export default function UserModal({ profile }) {
 
   return (
     <>
-      <IconButton onClick={handleOpen}>
+      <div onClick={handleOpen} id="modalB">
         <img src={viewMoreC} alt="view more button" />
-      </IconButton>
-
+      </div>
       <Modal
         aria-labelledby="transition-modal-title"
         aria-describedby="transition-modal-description"
@@ -65,7 +56,7 @@ export default function UserModal({ profile }) {
           <Paper>
             <div className={classes.paper}>
               <h4 className={classes.root}>{/* {name} {lastname} */}</h4>{" "}
-              <div className='modalContainer'>
+              <div className="modalContainer">
                 <Profile profile={profile} />
               </div>
             </div>

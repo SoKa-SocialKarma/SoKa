@@ -328,10 +328,10 @@ function Profile(profile) {
 					</div>
 				</div>
 			</div>
-
 			<div className='item4'>
 				<MapBox adjustmentWidth={0.2} adjustmentHeight={0.3} />
 			</div>
+
 		</Paper>
 	);
 }
