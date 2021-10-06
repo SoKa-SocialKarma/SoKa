@@ -532,6 +532,18 @@ a:hover {
 }
 /* ============================= */
 
+#wrapper{
+  width: 25%;
+}
+#wrapper > strong > button{
+  width: 100%!important;
+}
+#wrapper > strong > button>*{
+  font-weight: 800;
+  text-transform: capitalize;
+  font-size: larger;
+}
+
 @media screen and (max-width: 1720px) {
   #cardContainer {
     margin-top: 64px;

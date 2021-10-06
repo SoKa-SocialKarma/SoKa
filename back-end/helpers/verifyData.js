@@ -196,7 +196,7 @@ const postCheck = (req, res, next) => {
   }
 
   if (req.body.blocked) {
-   return next()
+    return next()
   }
 
   if (!req.body.length) {
@@ -270,15 +270,15 @@ const putCheck = (req, res, next) => {
       if (radiusCheckFailed(radius)) return notPass('radius')
       count++
     }
-    if (keys.includes('karma')) {
-      if (karmaCheckFailed(karma)) return notPass('karma')
-      count++
-    }
-    if (keys.includes('image')) {
-      if (imageCheckFailed(image))
-        return notPass('image link, it should begin with http:// or https://')
-      count++
-    }
+    // if (keys.includes('karma')) {
+    //   if (karmaCheckFailed(karma)) return notPass('karma')
+    //   count++
+    // }
+    // if (keys.includes('image')) {
+    //   if (imageCheckFailed(image))
+    //     return notPass('image link, it should begin with http:// or https://')
+    //   count++
+    // }
     if (keys.includes('goals')) {
       if (goalsCheckFailed(goals)) return notPass('goals')
       count++
@@ -296,14 +296,14 @@ const putCheck = (req, res, next) => {
         return notPass('matchRequests')
       count++
     }
-    if (keys.includes('pendingReview')) {
-      if (pendingReviewCheckFailed(pendingReview))
-        return notPass('pendingReview')
-      count++
-    }
+    // if (keys.includes('pendingReview')) {
+    //   if (pendingReviewCheckFailed(pendingReview))
+    //     return notPass('pendingReview')
+    //   count++
+    // }
     return count > 0
-      ? pass
-      : notPass('Missing data, required data not found :(')
+      ? notPass('Missing data, required data not found :(')
+      : pass
   }
 
   const { id } = req.params
