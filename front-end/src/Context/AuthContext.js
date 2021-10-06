@@ -11,13 +11,13 @@ const ElementContext = React.createContext()
 const API = apiURL()
 
 // Custom Hooks
-export function useAuth () {
+export function useAuth() {
   return useContext(AuthContext)
 }
-export function useAPI () {
+export function useAPI() {
   return useContext(APIContext)
 }
-export function useElement () {
+export function useElement() {
   return useContext(ElementContext)
 }
 
@@ -34,7 +34,7 @@ export const ACTIONS = {
   RESET_STATE: 'reset-state'
 }
 
-function setGlobalState (globalState, action) {
+function setGlobalState(globalState, action) {
   switch (action.type) {
     case ACTIONS.SET_CURRENT_USER:
       return Object.assign(
@@ -72,6 +72,7 @@ function setGlobalState (globalState, action) {
             ? action.payload.data.data[0]
             : {}
         }
+
       )
 
     case ACTIONS.SET_CURRENT_SEARCH_RESULTS:
@@ -98,13 +99,14 @@ function setGlobalState (globalState, action) {
           currentSearchResults: [],
           currentRevieweeData: {}
         }
+
       )
     default:
       return globalState
   }
 }
 
-export function AuthProvider ({ children }) {
+export function AuthProvider({ children }) {
   const [loading, setLoading] = useState(true)
   const [globalState, dispatch] = useReducer(setGlobalState, {
     currentUser: {},
@@ -118,37 +120,37 @@ export function AuthProvider ({ children }) {
   })
 
   // Login Functions from FIREBASE
-  function signUp (email, password) {
+  function signUp(email, password) {
     return auth.createUserWithEmailAndPassword(email, password)
   }
-  function logIn (email, password) {
+  function logIn(email, password) {
     return auth.signInWithEmailAndPassword(email, password)
   }
-  function logOut () {
+  function logOut() {
     return auth.signOut()
   }
-  function resetPassword (email) {
+  function resetPassword(email) {
     return auth.sendPasswordResetEmail(email)
   }
-  function updateEmail (email) {
+  function updateEmail(email) {
     return globalState.currentUser.updateEmail(email)
   }
-  function updatePassword (password) {
+  function updatePassword(password) {
     return globalState.currentUser.updatePassword(password)
   }
-  function elementSetter (mainElement) {
+  function elementSetter(mainElement) {
     dispatch({
       type: ACTIONS.SET_MAIN_ELEMENT,
       payload: { mainElement: mainElement }
     })
   }
-  function drawerSetter (drawerElement) {
+  function drawerSetter(drawerElement) {
     dispatch({
       type: ACTIONS.SET_DRAWER_ELEMENT,
       payload: { drawerElement: drawerElement }
     })
   }
-  function resetState () {
+  function resetState() {
     dispatch({ type: ACTIONS.RESET_STATE })
   }
 
@@ -185,7 +187,7 @@ export function AuthProvider ({ children }) {
         }
       }
 
-      async function getCurrentRevieweeData (id) {
+      async function getCurrentRevieweeData(id) {
         if (!id) {
           const data = [{}]
           dispatch({
@@ -209,8 +211,9 @@ export function AuthProvider ({ children }) {
     return unsubscribe
   }, [])
 
+
   // API Requests
-  async function getResultsUsingSokaQuery (searchParams) {
+  async function getResultsUsingSokaQuery(searchParams) {
     let query = `${API}/users?`
     let day = ''
 
@@ -233,7 +236,7 @@ export function AuthProvider ({ children }) {
   }
 
   // Refreshing Current User Data after updating Profile
-  async function getFreshUserData (userId) {
+  async function getFreshUserData(userId) {
     const data = await axios.get(`${API}/users/${userId}`)
     dispatch({
       type: ACTIONS.NEW_CURRENT_USER_DATA,
@@ -242,7 +245,7 @@ export function AuthProvider ({ children }) {
   }
 
   // Getting newUserData after answering Questionary
-  async function getNewUserData (user) {
+  async function getNewUserData(user) {
     const data = await axios.get(`${API}/users?uuid=${user.uid}`)
     dispatch({
       type: ACTIONS.NEW_CURRENT_USER_DATA,
@@ -251,7 +254,7 @@ export function AuthProvider ({ children }) {
   }
 
   // Unblocking User after answering Questionary
-  async function unblockNewUser (userUUID) {
+  async function unblockNewUser(userUUID) {
     const data = await axios.post(`${API}/users/`, {
       uuid: userUUID,
       blocked: true,
@@ -264,7 +267,7 @@ export function AuthProvider ({ children }) {
   }
 
   // Getting Soka Badges
-  async function getSokaBadges () {
+  async function getSokaBadges() {
     const data = await axios.get(`${API}/users?sokabadges=true`)
     dispatch({
       type: ACTIONS.SET_SOKA_BADGES,
@@ -272,10 +275,12 @@ export function AuthProvider ({ children }) {
     })
   }
 
+
   // Creating Album for newUser at Firebase
   async function createFirebaseAlbum (user) {
     createAlbum(user.email)
   }
+  
   // updating CurrentRevieweeData
   async function updateCurrentRevieweeData (id) {
     if (!id) {

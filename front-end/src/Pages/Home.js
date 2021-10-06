@@ -1,8 +1,9 @@
-import styled from 'styled-components'
-import { motion } from 'framer-motion'
-import homeimg001 from '../Assets/homeimg001.svg'
+import styled from 'styled-components';
+import { motion } from 'framer-motion';
+import homeimg001 from '../Assets/homeimg001.svg';
 
-function Home () {
+function Home() {
+
   const Section = styled.section`
     height: 100vh;
     display: flex;
