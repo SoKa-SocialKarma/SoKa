@@ -130,7 +130,7 @@ const MapBox = ({ adjustmentHeight, adjustmentWidth }) => {
                   longitude={coordinates.coordinates.longitude}
                 >
                   <div>
-                    <img src={mapMarker} alt="location marker on map" />
+                    <img src={mapMarker} alt="location marker on map" style={{ height: '65px' }} />
                   </div>
                 </Marker>
               )
