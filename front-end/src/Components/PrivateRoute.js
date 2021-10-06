@@ -2,13 +2,31 @@ import { Route, Redirect } from 'react-router-dom'
 import { useAPI } from '../Context/AuthContext'
 
 const PrivateRoute = ({ component: Component, ...rest }) => {
-  const { currentUser, newUserBlocked, currentUserData } = useAPI()
+  const {
+    currentUser,
+    newUserBlocked,
+    currentRevieweeData,
+    currentUserData
+  } = useAPI()
+
+  function isEmpty (obj) {
+    return Object.keys(obj).length === 0
+  }
 
   const goToNewUser = Boolean(currentUser) && newUserBlocked
   const goToLogin = Boolean(Boolean(currentUser) === false)
 
-  const pendingReview = false
-  // const pendingReview = currentUser ? currentUserData.todoreview.pendingReview : false
+  let pendingReview = false
+
+  if (isEmpty(currentUserData) && isEmpty(currentRevieweeData)) {
+    pendingReview = false
+  } else if (isEmpty(currentUser) && isEmpty(currentRevieweeData)) {
+    pendingReview = false
+  } else if (currentUserData && !isEmpty(currentRevieweeData)) {
+    pendingReview = currentRevieweeData.todoreview.pendingReview
+  } else {
+    pendingReview = currentUserData.todoreview.pendingReview
+  }
 
   return (
     <Route
@@ -16,17 +34,28 @@ const PrivateRoute = ({ component: Component, ...rest }) => {
       render={props => {
         if (goToLogin) {
           return <Redirect to='/login' />
+        } else if (
+          (pendingReview || goToNewUser) &&
+          Component.componentName === 'LoginDashBoard'
+        ) {
+          return <Component {...props} />
         } else if (goToNewUser && Component.componentName === 'LoginQs') {
           return <Component {...props} />
         } else if (goToNewUser && Component.componentName !== 'LoginQs') {
           return <Redirect to='/users/newUser' />
-        } else if ((pendingReview || goToNewUser) && Component.componentName === 'LoginDashBoard') {
+        } else if (
+          pendingReview &&
+          Component.componentName !== 'ReviewPairUp'
+        ) {
+          return (
+            <Redirect to={`/users/${currentUserData.id}/reviewing-session`} />
+          )
+        } else if (
+          pendingReview &&
+          Component.componentName === 'ReviewPairUp'
+        ) {
           return <Component {...props} />
-        }else if(pendingReview && Component.componentName !== 'ReviewPairUp'){
-            return <Redirect to={`/users/${currentUserData.id}/reviewing-session`} />
-        }else if (pendingReview && Component.componentName === 'ReviewPairUp') {
-          return <Component {...props} />
-        }else {
+        } else {
           return <Component {...props} />
         }
       }}

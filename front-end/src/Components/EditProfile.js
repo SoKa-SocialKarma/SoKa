@@ -9,7 +9,7 @@ import axios from 'axios'
 
 import {
   Box,
-  Paper,
+  Avatar,
   Container,
   TextField,
   MenuItem,
@@ -41,8 +41,8 @@ const API = apiURL()
 
 const useStyles = makeStyles(theme => ({
   container: {
-    height: '80vh',
-    padding: '0 2% 4% 2%',
+    height: '90vh',
+    padding: '4% 2% 6% 2%',
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'space-evenly',
@@ -64,14 +64,25 @@ const useStyles = makeStyles(theme => ({
     display: 'grid',
     gridRow: '2/3',
     placeSelf: 'center',
-    width: '182px',
-    height: '160px',
-    borderRadius: '60px'
+    // width: '182px',
+    // height: '160px',
+    // borderRadius: '60px',
+
+    position: 'relative',
+    border: 'solid 0.25rem rgba(162, 101, 236, 0.4)',
+    borderRadius: '50%',
+    width: '10rem',
+    height: '10rem',
+    // display: 'grid',
+    // placeSelf: 'center',
+    margin: ' 0 0 5% 0'
+
   },
   userProfilePicture: {
     width: '180px',
     height: '160px',
     borderRadius: '80px'
+    
   },
   editLayout: {
     display: 'grid',
@@ -275,7 +286,13 @@ export default function EditProfile () {
             <PhotoCamera />
           </IconButton>
         </label>
-        <Paper elevation={1} className={classes.userProfilePicturePaper}>
+        <Avatar
+            alt='Profile-user'
+            src={placeHolders.image?.url ? placeHolders.image.url : defaultProfile}
+            className={classes.userProfilePicturePaper}
+          />
+
+        {/* <Paper elevation={1} className={classes.userProfilePicturePaper}>
           <img
             // src='https://images.pexels.com/photos/2078265/pexels-photo-2078265.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500'
             src={
@@ -284,7 +301,7 @@ export default function EditProfile () {
             alt='Profile-user'
             className={classes.userProfilePicture}
           />
-        </Paper>
+        </Paper> */}
       </Box>
 
       <Box className={classes.editLayout}>

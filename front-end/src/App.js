@@ -7,7 +7,6 @@ import Home from './Pages/Home'
 import LoginDashboard from './Pages/LoginDashboard'
 import Login from './Pages/Login'
 import Signp from './Pages/Signp'
-// import LoginInfo from './Pages/LoginInfo'
 import UpdateProfile from './Pages/UpdateProfile'
 import Show from './Pages/Show'
 import ForgotPassword from './Pages/ForgotPassword'
@@ -39,7 +38,6 @@ function App () {
                 <Route path='/map' component={MapBox} />
                 <Route path='/login' component={Login} />
                 <Route path='/signup' component={Signp} />
-                {/* <Route path='/login-info' component={LoginInfo} /> */}
                 <Route path='/search-results' component={SearchResults} />
                 <Route path='/forgot-password' component={ForgotPassword} />
                 <PrivateRoute
