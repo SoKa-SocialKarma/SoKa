@@ -23,7 +23,6 @@ import ListItem from '@material-ui/core/ListItem'
 import ListItemIcon from '@material-ui/core/ListItemIcon'
 import ListItemText from '@material-ui/core/ListItemText'
 import Button from '@material-ui/core/Button'
-import { yellow } from '@material-ui/core/colors'
 const drawerWidth = 180
 
 const useStyles = makeStyles((theme) => ({
@@ -157,10 +156,10 @@ progress: undefined,
 toast ('Rate previous match to unlock badges'));
 
 toast.configure()
-  const { currentUser, currentUserData } = useAPI()
-  const { elementSetter, drawerSetter } = useElement()
+  const { currentUser, currentUserData, getSokaUsers } = useAPI()
+  const { elementSetter } = useElement()
   const mainElementRef = useRef()
-  const drawerElementRef = useRef()
+
 
   const classes = useStyles()
   const theme = useTheme()
@@ -202,22 +201,12 @@ toast.configure()
   }
 
   useEffect(() => {
-    drawerElementRef.current.addEventListener('mouseenter', handleMouseEnter)
-    drawerSetter({
-      drawerElement: drawerElementRef.current
-    })
-  }, [])
-
-  useEffect(() => {
-    drawerElementRef.current.addEventListener('mouseleave', handleMouseLeave)
-    drawerSetter({
-      drawerElement: drawerElementRef.current
-    })
-  }, [])
-
-  useEffect(() => {
     currentUserData.id ? setId(currentUserData.id) : setId(0)
   }, [currentUserData])
+
+  useEffect(() => {
+    getSokaUsers()
+  },[])
 
   return (
     <div className={classes.root}>
@@ -292,7 +281,8 @@ toast.configure()
       </AppBar>
 
       <Drawer
-        ref={drawerElementRef}
+        onMouseEnter={handleMouseEnter}
+        onMouseLeave={handleMouseLeave}
         variant='permanent'
         className={clsx(classes.drawer, {
           [classes.drawerOpen]: open,

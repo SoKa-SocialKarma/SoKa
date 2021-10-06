@@ -4,8 +4,6 @@ import { useAPI } from '../Context/AuthContext'
 import { useElement } from '../Context/AuthContext'
 import useGeoLocation from '../Hooks/useGeoLocation'
 import ReactMapGL, { Source, Layer, Marker } from 'react-map-gl'
-import axios from 'axios'
-import { apiURL } from '../Util/apiURL.js'
 import mapMarker from '../Assets/mapbox-marker.png'
 import 'mapbox-gl/dist/mapbox-gl.css'
 import mapboxgl from "mapbox-gl"; // This is a dependency of react-map-gl even if you didn't explicitly install it
@@ -23,29 +21,18 @@ const layerStyle = {
   }
 }
 
-const API = apiURL()
 
 const MapBox = ({ adjustmentHeight, adjustmentWidth }) => {
-  const { currentUserData } = useAPI()
+  const { currentUserData, sokaUsers } = useAPI()
   const location = useGeoLocation()
   const currentLong = Number(location.coordinates.longitude)
   const currentLat = Number(location.coordinates.latitude)
   const { mainElement } = useElement()
-  const [userCoordinates, setUserCoordinates] = useState([])
-
-  const getUserCoordinates = async () => {
-    try {
-      const { data } = await axios.get(`${API}/users`)
-      setUserCoordinates(data)
-    } catch (err) {
-      console.log(err)
-    }
-  }
 
   const [viewport, setViewport] = useState({
     latitude: location.coordinates.latitude || 40.7128,
     longitude: location.coordinates.longitude || -74.006,
-    zoom: 12,
+    zoom: 11.2,
     width: adjustmentWidth
       ? mainElement.width - mainElement.width * adjustmentWidth
       : mainElement.width,
@@ -67,14 +54,13 @@ const MapBox = ({ adjustmentHeight, adjustmentWidth }) => {
     ]
   }
 
+
   useEffect(() => {
-    //get user coordinates
-    getUserCoordinates()
     // When the location changes, I want to set the viewport to my current location
     setViewport({
       latitude: location.coordinates.latitude || 40.7128,
       longitude: location.coordinates.longitude || -74.006,
-      zoom: 12,
+      zoom: 11.2,
       width: adjustmentWidth
         ? mainElement.width - mainElement.width * adjustmentWidth
         : mainElement.width,
@@ -108,7 +94,7 @@ const MapBox = ({ adjustmentHeight, adjustmentWidth }) => {
           </ReactMapGL>
         )}
 
-      {window.location.pathname === `/map` && (
+      {window.location.pathname === `/map` &&  (
         <ReactMapGL
           mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_TOKEN}
           mapStyle='mapbox://styles/tpichardo/cktjfw1vh05kc18qq97wjjwrj'
@@ -120,12 +106,13 @@ const MapBox = ({ adjustmentHeight, adjustmentWidth }) => {
             <Layer {...layerStyle} />
           </Source>
           {
-            userCoordinates.map(coordinates => {
+            sokaUsers.map(sokaUser => {
+
               return (
                 <Marker
-                  key={coordinates.id}
-                  latitude={coordinates.coordinates.latitude}
-                  longitude={coordinates.coordinates.longitude}
+                  key={sokaUser.id}
+                  latitude={(sokaUser.coordinates && sokaUser.coordinates.latitude) || 40.7128}
+                  longitude={(sokaUser.coordinates && sokaUser.coordinates.longitude) || -74.006}
                 >
                   <div>
                     <img src={mapMarker} alt="location marker on map" />
