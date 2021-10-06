@@ -1,25 +1,31 @@
 import { useState, useEffect } from 'react'
+import { useParams, useHistory } from 'react-router-dom'
 import { useAPI } from '../Context/AuthContext'
 import { labels } from '../Util/searchFields'
 import GoodExperience from '../Components/GoodExperience'
 import BadExperience from '../Components/BadExperience'
 import Badges from '../Components/Badges'
 import WeLoveYou from '../Components/WeLoveYou'
+import Sparkles from '../Components/Sparkles'
 
-
-import { Avatar, Container, Typography } from '@material-ui/core/'
+import { Avatar, Container, Typography, Button } from '@material-ui/core/'
 import Rating from '@mui/material/Rating'
 import Box from '@mui/material/Box'
 import StarIcon from '@mui/icons-material/Star'
 import { makeStyles } from '@material-ui/core/styles'
 import defaultProfile from '../Assets/defaultProfile.png'
+import { apiURL } from '../Util/apiURL'
+import axios from 'axios'
+
+const API = apiURL()
+
 
 const useStyles = makeStyles(theme => ({
   container: {
     height: 'fit-content',
     padding: '4% 2% 4% 2%',
     display: 'grid',
-    gridTemplateRows: '32vh auto'
+    gridTemplateRows: '34vh auto auto'
   },
   boxOne: {
     height: '100%',
@@ -30,7 +36,7 @@ const useStyles = makeStyles(theme => ({
   boxTwo: {
     height: '50%',
     display: 'grid',
-    gridRow: '2/3'
+    gridRow: '3/4'
   },
   avatar: {
     position: 'relative',
@@ -70,22 +76,39 @@ const useStyles = makeStyles(theme => ({
     placeSelf: 'center',
     padding: '1.5% 1% 2% 1%',
     fontSize: '1.2rem'
+  },
+  giveKarma: {
+    width: '70%',
+    display: 'grid',
+    gridRow: '2/3',
+    placeSelf: 'center'
+  },
+  karmaButtonContainer: {
+    display: 'flex',
+    justifyContent: 'space-around'
   }
 }))
 
 const ReviewPairUp = () => {
   const classes = useStyles()
-  const { currentRevieweeData } = useAPI()
+  const { currentRevieweeData, getFreshUserData, updateCurrentRevieweeData } = useAPI()
+  const [ body, setBody ] = useState({})
   const [reviewee, setReviewee] = useState()
+  const [revieweeImage, setRevieweeImage] = useState(defaultProfile)
+  const [revieweeId, setRevieweeId] = useState()
   const [showGood, setShowGood] = useState(false)
   const [showBad, setShowBad] = useState(false)
 
   const [karma, setKarma] = useState(2.5)
   const [hover, setHover] = useState(-1)
+  const history = useHistory()
+  const { id } = useParams()
 
   useEffect(() => {
     setReviewee(currentRevieweeData)
-  }, [currentRevieweeData])
+    setRevieweeImage(reviewee ? reviewee.image.url : defaultProfile)
+    setRevieweeId(currentRevieweeData ? currentRevieweeData.id : reviewee.id)
+  }, [currentRevieweeData, reviewee])
 
   useEffect(() => {
     if (karma > 3) {
@@ -98,13 +121,43 @@ const ReviewPairUp = () => {
     }
   }, [karma])
 
+  useEffect(() => {
+    const newKarma = (Number(currentRevieweeData ? currentRevieweeData.karma : reviewee.karma) + karma) / 2
+    setBody({karma: Number(newKarma.toFixed(2)) })
+  },[karma])
+
+
+  const updateRevieweeKarma = () =>{
+    axios.put(`${API}/users/${revieweeId}`, body).catch(c => console.warn('catch', c))
+  }
+
+  const updateUser = () =>{
+    const userUpdate = {"pendingReview":{"pendingReview":false,"reviewing":{"id":0,"username":"-"}}}
+     axios
+    .put(`${API}/users/${id}`, userUpdate)
+    .then(() => getFreshUserData(id))
+    .then(()=>updateCurrentRevieweeData(0))
+    .then(
+      () => {
+        history.push(`/users/${id}/feed`)
+      },
+      error => console.error(error)
+      )
+      .catch(c => console.warn('catch', c))
+  }
+
+  const giveKarma = () => {
+    updateRevieweeKarma()
+    updateUser() 
+  }
+
   return (
     <>
       <Container maxWidth='lg' className={classes.container}>
         <Container className={classes.boxOne}>
           <Avatar
             alt='user-tobe-reviewed'
-            src={defaultProfile}
+            src={revieweeImage}
             className={classes.avatar}
           />
           <Typography
@@ -113,7 +166,7 @@ const ReviewPairUp = () => {
             variant='h5'
             component='div'
           >
-            How was your experience with {reviewee ? reviewee.name : ''}{' '}
+            How was your experience with {reviewee ? reviewee.name : ''}
             {reviewee ? reviewee.lastname : ''}?
           </Typography>
 
@@ -164,6 +217,13 @@ const ReviewPairUp = () => {
 
           {showGood && <GoodExperience karma={karma} />}
           {showBad && <BadExperience karma={karma} />}
+        </Container>
+        <Container className={classes.giveKarma}>
+          <Container className={classes.karmaButtonContainer}>
+            <Sparkles>
+              <Button variant='outlined' onClick={giveKarma}>Give Karma</Button>
+            </Sparkles>
+          </Container>
         </Container>
         <Box className={classes.boxTwo}>
           {showGood && <Badges />}

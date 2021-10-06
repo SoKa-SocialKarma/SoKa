@@ -71,7 +71,7 @@ function Profile(profile) {
 					/>
 				)}
 				{(window.location.pathname === `/users/${id}/feed/matches` ||
-					window.location.pathname === `/search-results` || window.location.pathname === `/users/${id}/feed`) && (
+					window.location.pathname === `/search-results` || window.location.pathname === `/users/14/feed`) && (
 						<img
 							className='profPic'
 							src={profile.profile.image.url ? profile.profile.image.url : defaulProfile}

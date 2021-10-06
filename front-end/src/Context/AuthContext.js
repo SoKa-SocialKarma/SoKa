@@ -67,7 +67,12 @@ function setGlobalState(globalState, action) {
     case ACTIONS.SET_CURRENT_REVIEWEE_DATA:
       return Object.assign(
         { ...globalState },
-        { currentRevieweeData: action.payload.data.data ? action.payload.data.data[0] : {} }
+        {
+          currentRevieweeData: action.payload.data.data
+            ? action.payload.data.data[0]
+            : {}
+        }
+
       )
 
     case ACTIONS.SET_CURRENT_SEARCH_RESULTS:
@@ -88,7 +93,13 @@ function setGlobalState(globalState, action) {
     case ACTIONS.RESET_STATE:
       return Object.assign(
         { ...globalState },
-        { currentUser: null, currentUserData: {}, currentSearchResults: [], currentRevieweeData: {} }
+        {
+          currentUser: null,
+          currentUserData: {},
+          currentSearchResults: [],
+          currentRevieweeData: {}
+        }
+
       )
     default:
       return globalState
@@ -98,7 +109,7 @@ function setGlobalState(globalState, action) {
 export function AuthProvider({ children }) {
   const [loading, setLoading] = useState(true)
   const [globalState, dispatch] = useReducer(setGlobalState, {
-    currentUser: null,
+    currentUser: {},
     currentUserData: {},
     currentSearchResults: null,
     currentRevieweeData: {},
@@ -158,12 +169,13 @@ export function AuthProvider({ children }) {
       const getCurrentUserData = async user => {
         const data = await axios.get(`${API}/users?uuid=${user.uid}`)
         if (data.data !== 'No data found with the current id.!') {
+          await getCurrentRevieweeData(data.data[0].todoreview.reviewing.id)
           dispatch({
             type: ACTIONS.SET_CURRENT_USER_DATA,
             payload: { data: data }
           })
-          await getCurrentRevieweeData(data.data[0].todoreview.reviewing.id)
         } else {
+          await getCurrentRevieweeData(0)
           const data = await axios.post(`${API}/users/`, {
             uuid: user.uid,
             blocked: true
@@ -172,7 +184,6 @@ export function AuthProvider({ children }) {
             type: ACTIONS.BLOCK_CURRENT_NEWUSER,
             payload: { data: data }
           })
-          await getCurrentRevieweeData(0)
         }
       }
 
@@ -264,12 +275,30 @@ export function AuthProvider({ children }) {
     })
   }
 
-  async function createFirebaseAlbum(user) {
+
+  // Creating Album for newUser at Firebase
+  async function createFirebaseAlbum (user) {
     createAlbum(user.email)
   }
+  
+  // updating CurrentRevieweeData
+  async function updateCurrentRevieweeData (id) {
+    if (!id) {
+      const data = [{}]
+      dispatch({
+        type: ACTIONS.SET_CURRENT_REVIEWEE_DATA,
+        payload: { data: data }
+      })
+    } else {
+      const data = await axios.get(`${API}/users/${id}`)
+      dispatch({
+        type: ACTIONS.SET_CURRENT_REVIEWEE_DATA,
+        payload: { data: data }
+      })
+    }
+  }
 
-
-  // Exporting Functions and Variables 
+  // Exporting Functions and Variables
   const authValue = {
     currentUser: globalState.currentUser,
     newUserBlocked: globalState.newUserBlocked,
@@ -289,6 +318,7 @@ export function AuthProvider({ children }) {
     currentSearchResults: globalState.currentSearchResults,
     currentRevieweeData: globalState.currentRevieweeData,
     sokaBadges: globalState.sokaBadges,
+    updateCurrentRevieweeData,
     getResultsUsingSokaQuery,
     getFreshUserData,
     getNewUserData,
