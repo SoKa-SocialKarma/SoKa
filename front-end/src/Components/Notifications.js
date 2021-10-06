@@ -11,7 +11,6 @@ export default function Reviews() {
   const getProfile = async () => {
     try {
       const { data } = await axios.get(`${API}/users/14`);
-      console.log(data[0].requests);
       setProfile(data[0]);
       setMatch(data[0].requests);
       setPending(data[0].todoreview);

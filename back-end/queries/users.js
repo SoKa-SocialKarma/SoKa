@@ -155,7 +155,6 @@ const blockNewUser = async user => {
   }
 }
 
-
 module.exports = {
   getAllUsers,
   getUsers,

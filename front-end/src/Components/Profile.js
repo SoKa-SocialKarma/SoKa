@@ -36,7 +36,7 @@ const useStyles = makeStyles({
 });
 
 function Profile(profile) {
-	console.log(profile.profile);
+
 	const { currentUserData } = useAPI();
 	const { url } = useRouteMatch();
 	const edit = url
@@ -48,8 +48,6 @@ function Profile(profile) {
 
 	const { name, lastname, gender, location, availabledays, experience, goals, radius, image, id } =
 		currentUserData;
-	console.log(currentUserData);
-	console.log(window.location.href);
 	return (
 		<Paper className={classes.root}>
 			<div id='profHeader' className='profBackground'>

@@ -10,8 +10,8 @@ const useStyles = makeStyles(theme => ({
     height: '100%',
     display: 'flex',
     flexWrap: 'wrap',
-    padding: theme.spacing(1),
-    gap: theme.spacing(1.5)
+    padding: '1.5% 1% 2% 1%',
+    gap: theme.spacing(1)
   }
 }))
 
