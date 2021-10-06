@@ -54,7 +54,6 @@ const MapBox = ({ adjustmentHeight, adjustmentWidth }) => {
     ]
   }
 
-
   useEffect(() => {
     // When the location changes, I want to set the viewport to my current location
     setViewport({
@@ -115,7 +114,7 @@ const MapBox = ({ adjustmentHeight, adjustmentWidth }) => {
                   longitude={(sokaUser.coordinates && sokaUser.coordinates.longitude) || -74.006}
                 >
                   <div>
-                    <img src={mapMarker} alt="location marker on map" />
+                    <img src={mapMarker} alt="location marker on map" style={{ height: '65px' }} />
                   </div>
                 </Marker>
               )

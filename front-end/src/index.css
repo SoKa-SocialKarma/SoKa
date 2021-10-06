@@ -711,3 +711,9 @@ a:hover {
     overflow: hidden;
   }
 }
+
+#modalB {
+  display: flex;
+  justify-content: center;
+/* align-items: center; */
+}

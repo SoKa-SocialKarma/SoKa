@@ -61,25 +61,25 @@ function Profile(profile) {
 	return (
 		<Paper className={classes.root}>
 			<div id='profHeader' className='profBackground'>
-			{window.location.pathname === `/users/${id}/profile` && (
+				{window.location.pathname === `/users/${id}/profile` && (
 					<img
-					className='profPic'
-					// src={image.url}
-					src={image?.url ? image.url : defaulProfile}
-					alt='profile-foto'
-					style={{ width: '200px', height: '180px' }}
-				/>
+						className='profPic'
+						// src={image.url}
+						src={image?.url ? image.url : defaulProfile}
+						alt='profile-foto'
+						style={{ width: '200px', height: '180px' }}
+					/>
 				)}
 				{(window.location.pathname === `/users/${id}/feed/matches` ||
 					window.location.pathname === `/search-results` || window.location.pathname === `/users/${id}/feed`) && (
 						<img
-					className='profPic'
-					src={profile.profile.image.url ? profile.profile.image.url : defaulProfile}
-					alt='profile-foto'
-					style={{ width: '200px', height: '180px' }}
-				/>
-				)}
-			
+							className='profPic'
+							src={profile.profile.image.url ? profile.profile.image.url : defaulProfile}
+							alt='profile-foto'
+							style={{ width: '200px', height: '180px' }}
+						/>
+					)}
+
 			</div>
 
 			<div id='cardContainer'>
@@ -88,12 +88,14 @@ function Profile(profile) {
 						{name} {lastname}
 					</h1>
 				)}
+
 				{(window.location.pathname === `/users/${id}/feed/matches`||
 				window.location.pathname === `/search-results` || window.location.pathname === `/users/${id}/feed`) && (
 					<h1 id='card'>
 						{profile.profile.name} {profile.profile.lastname}
 					</h1>
 				)}
+
 				<div id='socials'>
 					<a href='https://www.instagram.com/' target='_blank' rel='noreferrer'>
 						<img src={instagram} alt='instagram login' className='socialImage' />
@@ -137,6 +139,7 @@ function Profile(profile) {
 
 							{(window.location.pathname === `/users/${id}/feed/matches` ||
 								window.location.pathname === `/search-results` || window.location.pathname === `/users/${id}/feed`) && (
+
 								<ul>
 									<li>
 										<img src={userPin} alt='userPin icon' />
@@ -144,6 +147,7 @@ function Profile(profile) {
 									</li>
 								</ul>
 							)}
+
 							<h5>Location:</h5>
 							{window.location.pathname === `/users/${id}/profile` && (
 								<ul>
@@ -155,6 +159,7 @@ function Profile(profile) {
 							)}
 
 							{(window.location.pathname === `/users/${id}/feed/matches` ||
+
 								window.location.pathname === `/search-results` || window.location.pathname === `/users/${id}/feed` ) && (
 								<ul>
 									<li>
@@ -163,6 +168,7 @@ function Profile(profile) {
 									</li>
 								</ul>
 							)}
+
 
 							<h5>Availablility:</h5>
 							{window.location.pathname === `/users/${id}/profile` && (
@@ -176,6 +182,7 @@ function Profile(profile) {
 
 							{(window.location.pathname === `/users/${id}/feed/matches` ||
 								window.location.pathname === `/search-results` || window.location.pathname === `/users/${id}/feed`) && (
+
 								<ul>
 									<li>
 										<img src={calendar} alt='calendar' />
@@ -185,6 +192,7 @@ function Profile(profile) {
 									</li>
 								</ul>
 							)}
+
 
 							<h5>Experience :</h5>
 							{window.location.pathname === `/users/${id}/profile` && (
@@ -198,6 +206,7 @@ function Profile(profile) {
 
 							{(window.location.pathname === `/users/${id}/feed/matches` ||
 								window.location.pathname === `/search-results` || window.location.pathname === `/users/${id}/feed`) && (
+
 								<ul>
 									<li>
 										<img src={certification} alt='medal' />
@@ -205,6 +214,7 @@ function Profile(profile) {
 									</li>
 								</ul>
 							)}
+
 
 							<h5>Goals:</h5>
 							{window.location.pathname === `/users/${id}/profile` && (
@@ -219,9 +229,11 @@ function Profile(profile) {
 
 							{(window.location.pathname === `/users/${id}/feed/matches` ||
 								window.location.pathname === `/search-results` || window.location.pathname === `/users/${id}/feed`) && (
+
 								<ul>
 									<li>
 										<img src={target} alt='target' />
+
 
 											{profile.profile.goals
 												? `${profile.profile.goals[0]}, ${profile.profile.goals[1]}, ${profile.profile.goals[2]}, ${profile.profile.goals[3]} `
@@ -242,6 +254,7 @@ function Profile(profile) {
 
 							{(window.location.pathname === `/users/${id}/feed/matches` ||
 								window.location.pathname === `/search-results` || window.location.pathname === `/users/${id}/feed`) && (
+
 								<ul>
 									<li>
 										<img src={distance} alt='two location tags' />
@@ -249,6 +262,7 @@ function Profile(profile) {
 									</li>
 								</ul>
 							)}
+
 						</div>
 					</div>
 
@@ -328,11 +342,12 @@ function Profile(profile) {
 					</div>
 				</div>
 			</div>
-
 			<div className='item4'>
 				<MapBox adjustmentWidth={profile.profile ? 0.02 : 0.2} adjustmentHeight={profile.profile ? 0.45 : 0.3} />
 			</div>
+
 		</Paper>
 	);
 }
 export default Profile;
+
