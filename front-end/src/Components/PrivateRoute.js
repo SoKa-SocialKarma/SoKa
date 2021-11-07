@@ -23,10 +23,11 @@ const PrivateRoute = ({ component: Component, ...rest }) => {
   } else if (isEmpty(currentUser) && isEmpty(currentRevieweeData)) {
     pendingReview = false
   } else if (currentUserData && !isEmpty(currentRevieweeData)) {
-    pendingReview = currentRevieweeData.todoreview.pendingReview
+    pendingReview = true
   } else {
     pendingReview = currentUserData.todoreview.pendingReview
   }
+
 
   return (
     <Route

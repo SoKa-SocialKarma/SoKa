@@ -66,7 +66,7 @@ users.put('/:id', putCheck, async (req, res) => {
   const { id } = req.params
   try {
     const updatedUsers = await updateUsers(id, req.body)
-    if (catchError(updatedUsers)) throw msgInvalidQuery()
+    // if (catchError(updatedUsers)) throw msgInvalidQuery()
     res.json(updatedUsers.length ? updatedUsers : [updatedUsers])
   } catch (err) {
     res.status(400).json({ error: err })

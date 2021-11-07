@@ -236,7 +236,7 @@ function Profile(profile) {
 
 
 											{profile.profile.goals
-												? `${profile.profile.goals[0]}, ${profile.profile.goals[1]}, ${profile.profile.goals[2]}, ${profile.profile.goals[3]} `
+												? `${profile.profile.goals[0]}, ${profile.profile.goals[1]}`
 												: ''}
 										</li>
 									</ul>

@@ -576,6 +576,23 @@ a:hover {
   
 }
 
+.Toastify__toast-container--top-right {
+  margin-top: 5%;
+}
+
+:root{
+--toastify-color-progress-light:linear-gradient(
+  to right,
+  #0c0460,
+  #2b1fb3,
+  #4526de,
+  #5856d6,
+  #586cda,
+  #b49de3
+);
+}
+
+
 @media screen and (max-width: 780px) {
   #cardContainer {
     margin-top: 80px;

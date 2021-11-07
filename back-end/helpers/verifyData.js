@@ -247,63 +247,73 @@ const putCheck = (req, res, next) => {
     let count = 0
 
     if (keys.includes('name')) {
-      if (nameCheckFailed(name)) return notPass('name')
+      if (nameCheckFailed(name)){ 
+      return notPass('name')}
       count++
     }
     if (keys.includes('lastname')) {
-      if (lastnameCheckFailed(lastname)) return notPass('lastname')
+      if (lastnameCheckFailed(lastname)) {
+      return notPass('lastname')}
       count++
     }
     if (keys.includes('username')) {
-      if (usernameCheckFailed(username)) return notPass('username')
+      if (usernameCheckFailed(username)){ 
+      return notPass('username')}
       count++
     }
     if (keys.includes('location')) {
-      if (locationCheckFailed(location)) return notPass('location')
+      if (locationCheckFailed(location)){ 
+      return notPass('location')}
       count++
     }
     if (keys.includes('gender')) {
-      if (genderCheckFailed(gender)) return notPass('gender')
+      if (genderCheckFailed(gender)){ 
+      return notPass('gender')}
       count++
     }
     if (keys.includes('radius')) {
-      if (radiusCheckFailed(radius)) return notPass('radius')
+      if (radiusCheckFailed(radius)){ 
+      return notPass('radius')}
       count++
     }
-    // if (keys.includes('karma')) {
-    //   if (karmaCheckFailed(karma)) return notPass('karma')
-    //   count++
-    // }
-    // if (keys.includes('image')) {
-    //   if (imageCheckFailed(image))
-    //     return notPass('image link, it should begin with http:// or https://')
-    //   count++
-    // }
+    if (keys.includes('karma')) {
+      // if (karmaCheckFailed(karma)){ 
+      // return notPass('karma')}
+      count++
+    }
+    if (keys.includes('image')) {
+      if (imageCheckFailed(image)){
+        return notPass('image link, it should begin with http:// or https://')}
+      count++
+    }
     if (keys.includes('goals')) {
-      if (goalsCheckFailed(goals)) return notPass('goals')
+      if (goalsCheckFailed(goals)){ 
+      return notPass('goals')}
       count++
     }
     if (keys.includes('experience')) {
-      if (experienceCheckFailed(experience)) return notPass('experience')
+      if (experienceCheckFailed(experience)){ 
+      return notPass('experience')}
       count++
     }
     if (keys.includes('availability')) {
-      if (availabilityCheckFailed(availability)) return notPass('availability')
+      if (availabilityCheckFailed(availability)) {
+      return notPass('availability')}
       count++
     }
     if (keys.includes('matchRequests')) {
-      if (matchRequestsCheckFailed(matchRequests))
-        return notPass('matchRequests')
+      if (matchRequestsCheckFailed(matchRequests)){
+        return notPass('matchRequests')}
       count++
     }
-    // if (keys.includes('pendingReview')) {
-    //   if (pendingReviewCheckFailed(pendingReview))
-    //     return notPass('pendingReview')
-    //   count++
-    // }
+    if (keys.includes('pendingReview')) {
+      // if (pendingReviewCheckFailed(pendingReview)){
+      //   return notPass('pendingReview')}
+      count++
+    }
     return count > 0
-      ? notPass('Missing data, required data not found :(')
-      : pass
+    ? pass
+    : notPass('Missing data, required data not found :(')
   }
 
   const { id } = req.params

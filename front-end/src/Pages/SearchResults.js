@@ -1,4 +1,5 @@
 import { useAPI } from '../Context/AuthContext'
+import {Redirect} from 'react-router-dom'
 
 import UserCard from '../Components/UserCard.js'
 import NoSearchResults from '../Components/NoSearchResults.js'
@@ -28,7 +29,8 @@ function SearchResults () {
 
   return (
     <>
-      <Container className={classes.root}>
+    {currentSearchResults === null ? <Redirect to='/' />
+      :<Container className={classes.root}>
         {currentSearchResults?.map(profile => {
           return (
             <Paper className={classes.paper}>
@@ -38,6 +40,7 @@ function SearchResults () {
         })}
         {!currentSearchResults.length && <NoSearchResults />}
       </Container>
+    }
     </>
   )
 }

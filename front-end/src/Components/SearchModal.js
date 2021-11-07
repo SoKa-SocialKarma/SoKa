@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import { Redirect } from 'react-router-dom'
 import { useAPI } from '../Context/AuthContext'
-
+import {useHistory} from 'react-router-dom'
 import PopularSearches from './PopularSearches'
 import searchLogo from '../Assets/searchLogo.svg'
 
@@ -46,6 +46,7 @@ export default function SearchModal() {
   const { getResultsUsingSokaQuery, currentSearchResults } = useAPI()
 
   const classes = useStyles()
+  let history = useHistory()
   const [open, setOpen] = useState(false)
   const [today, setToday] = useState('')
   const [mustRedirect, setMustRedirect] = useState(false)
@@ -68,16 +69,18 @@ export default function SearchModal() {
     setOpen(false)
   }
 
-  const getDate = async () => {
+  const getDate =  () => {
     const date = new Date(new Date().toString().split('GMT')[0] + ' UTC')
       .toISOString()
       .split('.')[0]
-    setToday(await date)
+    setToday(date)
   }
 
-  const getSearchResults = async searchParams => {
-    await getResultsUsingSokaQuery(searchParams)
-    handleCloseSearchMenu()
+  const getSearchResults = searchParams => {
+    getResultsUsingSokaQuery(searchParams)
+    .then(()=>history.push('/search-results'))
+    .then(()=>handleCloseSearchMenu())
+    .catch(err => console.log(err))
   }
 
   return (

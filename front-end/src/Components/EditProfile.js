@@ -233,6 +233,7 @@ export default function EditProfile () {
   }
 
   const updateProfile = profileInfo => {
+
     axios
       .put(`${API}/users/${id}`, profileInfo)
       .then(() => getFreshUserData(id))

@@ -79,7 +79,7 @@ const PopularSearches = ({ today, getSearchResults }) => {
     }
   }
 
-  const handleSubmit = async event => {
+  const handleSubmit = event => {
     event.preventDefault()
 
     const searchParams = {
@@ -90,8 +90,7 @@ const PopularSearches = ({ today, getSearchResults }) => {
       location: userSelectedLocation,
       radius: userSelectedRadius
     }
-
-    await getSearchResults(searchParams)
+    getSearchResults(searchParams)
   }
 
   return (

@@ -6,7 +6,7 @@ import sokablue2 from '../Assets/sokablue2.png'
 import notificationIcon from '../Assets/bell.png'
 import clsx from 'clsx'
 
-import {  toast } from 'react-toastify';
+import {  Slide, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css'
 
 import { makeStyles, useTheme } from '@material-ui/core/styles'
@@ -141,19 +141,21 @@ const useStyles = makeStyles((theme) => ({
 	},
 }));
 
-export default function Navbar ({ children }) {
-//toast
-const notify = () => toast("You have 3 new match requests", {
+const toastConfig = {
   position: "top-right",
-  // autoClose: false,
-autoClose: 8000,
+autoClose: 2500,
 hideProgressBar: false,
 closeOnClick: true,
 pauseOnHover: true,
 draggable: true,
 progress: undefined,
-},
-toast ('Rate previous match to unlock badges'));
+transition: Slide
+}
+
+export default function Navbar ({ children }) {
+//toast
+const notify = () => toast("You have 2 new match requests",toastConfig,
+toast ('Rate previous match to unlock badges',toastConfig));
 
 toast.configure()
   const { currentUser, currentUserData, getSokaUsers } = useAPI()
