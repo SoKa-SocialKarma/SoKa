@@ -27,7 +27,6 @@ import { makeStyles } from '@material-ui/core/styles'
 import defaultProfile from '../Assets/defaultProfile.png'
 import user from '../Assets/user.png'
 import pin from '../Assets/pin.png'
-import calendar from '../Assets/calendar.png'
 
 import DateFnsUtils from '@date-io/date-fns'
 import {
@@ -76,7 +75,7 @@ const useStyles = makeStyles(theme => ({
     width: '180px',
     height: '160px',
     borderRadius: '80px'
-    
+
   },
   editLayout: {
     display: 'grid',
@@ -110,7 +109,7 @@ const useStyles = makeStyles(theme => ({
   }
 }))
 
-export default function EditProfile () {
+export default function EditProfile() {
   const { currentUser, currentUserData, getFreshUserData } = useAPI()
   const [placeHolders, setPlaceHolders] = useState({})
   const [storedImage, setStoredImage] = useState(false)
@@ -136,7 +135,7 @@ export default function EditProfile () {
 
   const removeOldDates = today => {
     const todaySplitted = today.split('/').map(num => Number(num))
-    if(!currentUserData.availabledays){
+    if (!currentUserData.availabledays) {
       return []
     }
     return currentUserData.availabledays.filter(day => {
@@ -211,7 +210,7 @@ export default function EditProfile () {
         { goals: { goals: filteredDuplicates } }
       )
     )
-      
+
   }
 
   // Experience Setter
@@ -282,10 +281,10 @@ export default function EditProfile () {
           </IconButton>
         </label>
         <Avatar
-            alt='Profile-user'
-            src={placeHolders.image?.url ? placeHolders.image.url : defaultProfile}
-            className={classes.userProfilePicturePaper}
-          />
+          alt='Profile-user'
+          src={placeHolders.image?.url ? placeHolders.image.url : defaultProfile}
+          className={classes.userProfilePicturePaper}
+        />
       </Box>
 
       <Box className={classes.editLayout}>
@@ -358,7 +357,7 @@ export default function EditProfile () {
 
         <Container className={classes.twoForms}>
           <TextField
-            value={requestBody.experience ? requestBody.experience.experience  : ''}
+            value={requestBody.experience ? requestBody.experience.experience : ''}
             className={classes.textField}
             onChange={setExperience}
             label='Experience Level'
@@ -413,7 +412,7 @@ export default function EditProfile () {
           </TextField>
 
           <TextField
-            value={requestBody.goals ? requestBody.goals.goals[requestBody.goals.goals.length -1] : ''}
+            value={requestBody.goals ? requestBody.goals.goals[requestBody.goals.goals.length - 1] : ''}
             onChange={setGoals}
             margin='normal'
             label='Goals'

@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { Box, Container, Button } from '@material-ui/core/'
 import { makeStyles } from '@material-ui/core/styles'
-import { alignPropType } from 'react-bootstrap/esm/types'
+// import { alignPropType } from 'react-bootstrap/esm/types'
 
 const useStyles = makeStyles(theme => ({
   options: {
